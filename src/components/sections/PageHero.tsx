@@ -10,7 +10,7 @@ interface PageHeroProps {
 
 export function PageHero({ badge, title, subtitle }: PageHeroProps) {
   return (
-    <section className="relative flex min-h-[50vh] items-end overflow-hidden bg-bg px-5 pb-16 pt-32 md:px-8 md:pt-40">
+    <section className="relative flex min-h-[50vh] items-end overflow-hidden bg-transparent px-5 pb-16 pt-32 md:px-8 md:pt-40">
       {/* Background effects */}
       <div className="absolute inset-0">
         <div className="absolute left-1/2 top-1/2 h-[500px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-primary/8 via-primary-light/4 to-transparent blur-[100px]" />
