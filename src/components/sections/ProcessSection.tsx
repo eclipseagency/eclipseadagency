@@ -13,79 +13,110 @@ function ProcessStep({
 }: {
   step: (typeof processSteps)[number];
   index: number;
-  state: "inactive" | "active" | "past";
+  state: "dimmed" | "active" | "visited";
 }) {
   const isEven = index % 2 === 0;
 
   return (
     <div
       className={cn(
-        "flex flex-col gap-6 md:flex-row md:items-center md:gap-16 transition-all duration-700 ease-out",
-        !isEven && "md:flex-row-reverse",
-        state === "inactive" && "opacity-[0.15] translate-y-6",
-        state === "active" && "opacity-100 translate-y-0",
-        state === "past" && "opacity-50 translate-y-0"
+        "group flex flex-col gap-4 md:flex-row md:items-center md:gap-16",
+        "transition-all duration-[800ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)]",
+        !isEven && "md:flex-row-reverse"
       )}
+      style={{
+        opacity: state === "active" ? 1 : state === "visited" ? 0.45 : 0.12,
+        transform:
+          state === "dimmed" ? "translateY(12px)" : "translateY(0px)",
+      }}
     >
+      {/* Mobile circle */}
+      <div
+        className={cn(
+          "flex md:hidden h-11 w-11 shrink-0 items-center justify-center rounded-full font-heading text-sm font-bold order-first",
+          "transition-all duration-[800ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)]",
+          state === "active"
+            ? "border-[1.5px] border-primary bg-primary/10 text-primary shadow-[0_0_20px_rgba(255,107,53,0.3)] scale-105"
+            : state === "visited"
+              ? "border border-primary/30 bg-bg-elevated text-primary/50 scale-100"
+              : "border border-white/[0.07] bg-bg-elevated text-white/20 scale-95"
+        )}
+      >
+        {step.number}
+      </div>
+
       {/* Content */}
-      <div className={cn("flex-1", !isEven && "md:text-right")}>
+      <div className={cn("flex-1 space-y-2", !isEven && "md:text-right")}>
         <span
           className={cn(
-            "mb-2 block font-heading text-sm font-bold uppercase tracking-[0.2em] transition-colors duration-700",
-            state === "active" ? "text-primary" : "text-primary/50"
+            "block font-heading text-xs font-bold uppercase tracking-[0.2em]",
+            "transition-colors duration-[800ms]",
+            state === "active" ? "text-primary" : "text-primary/30"
           )}
         >
           Step {step.number}
         </span>
         <h3
           className={cn(
-            "mb-3 font-heading text-2xl font-bold md:text-3xl transition-colors duration-700",
-            state === "active" ? "text-text" : "text-text/60"
+            "font-heading text-2xl font-bold md:text-3xl",
+            "transition-colors duration-[800ms]",
+            state === "active" ? "text-white" : "text-white/50"
           )}
         >
           {step.title}
         </h3>
         <p
           className={cn(
-            "leading-relaxed transition-colors duration-700",
-            state === "active" ? "text-text-secondary" : "text-text-muted/60"
+            "max-w-md leading-relaxed text-[15px]",
+            "transition-colors duration-[800ms]",
+            !isEven && "md:ml-auto",
+            state === "active" ? "text-[#999]" : "text-white/20"
           )}
         >
           {step.description}
         </p>
       </div>
 
-      {/* Node circle — desktop */}
+      {/* Desktop circle node */}
       <div className="relative hidden md:flex items-center justify-center">
+        {/* Outer glow ring — only visible on active */}
         <div
           className={cn(
-            "flex h-16 w-16 items-center justify-center rounded-full font-heading text-lg font-bold transition-all duration-700 ease-out",
+            "absolute inset-0 rounded-full transition-all duration-[800ms]",
             state === "active"
-              ? "border-2 border-primary bg-primary/15 text-primary scale-110 shadow-[0_0_24px_rgba(255,107,53,0.35)]"
-              : state === "past"
-                ? "border-2 border-primary/40 bg-bg-elevated text-primary/60 scale-100"
-                : "border border-white/10 bg-bg-elevated text-text-muted/40 scale-90"
+              ? "scale-[1.5] opacity-100"
+              : "scale-100 opacity-0"
           )}
+          style={{
+            background:
+              state === "active"
+                ? "radial-gradient(circle, rgba(255,107,53,0.12) 0%, transparent 70%)"
+                : "none",
+          }}
+        />
+        {/* Circle */}
+        <div
+          className={cn(
+            "relative z-10 flex h-[60px] w-[60px] items-center justify-center rounded-full font-heading text-base font-bold",
+            "transition-all duration-[800ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)]",
+            state === "active"
+              ? "border-[1.5px] border-primary bg-primary/[0.08] text-primary scale-110"
+              : state === "visited"
+                ? "border border-primary/25 bg-bg-elevated text-primary/40 scale-100"
+                : "border border-white/[0.06] bg-bg-elevated text-white/15 scale-[0.88]"
+          )}
+          style={{
+            boxShadow:
+              state === "active"
+                ? "0 0 28px rgba(255,107,53,0.3), 0 0 8px rgba(255,107,53,0.15) inset"
+                : "none",
+          }}
         >
           {step.number}
         </div>
       </div>
 
-      {/* Mobile circle — shown inline on small screens */}
-      <div
-        className={cn(
-          "flex md:hidden h-12 w-12 items-center justify-center rounded-full font-heading text-base font-bold transition-all duration-700 ease-out order-first",
-          state === "active"
-            ? "border-2 border-primary bg-primary/15 text-primary shadow-[0_0_20px_rgba(255,107,53,0.3)]"
-            : state === "past"
-              ? "border-2 border-primary/40 bg-bg-elevated text-primary/60"
-              : "border border-white/10 bg-bg-elevated text-text-muted/40"
-        )}
-      >
-        {step.number}
-      </div>
-
-      {/* Spacer for alignment */}
+      {/* Spacer */}
       <div className="hidden flex-1 md:block" />
     </div>
   );
@@ -94,6 +125,8 @@ function ProcessStep({
 export function ProcessSection() {
   const [activeIndex, setActiveIndex] = useState(-1);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number>(0);
 
   const setStepRef = useCallback(
     (index: number) => (el: HTMLDivElement | null) => {
@@ -102,34 +135,52 @@ export function ProcessSection() {
     []
   );
 
+  // Bidirectional: find the step closest to viewport center on every scroll
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
+    function updateActiveStep() {
+      const viewportCenter = window.innerHeight / 2;
+      let closestIndex = -1;
+      let closestDistance = Infinity;
 
-    stepRefs.current.forEach((el, index) => {
-      if (!el) return;
+      stepRefs.current.forEach((el, index) => {
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const elCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(elCenter - viewportCenter);
 
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveIndex((prev) => Math.max(prev, index));
+        // Only consider steps that are at least partially in viewport
+        if (rect.bottom > 0 && rect.top < window.innerHeight) {
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = index;
           }
-        },
-        {
-          threshold: 0.4,
-          rootMargin: "-10% 0px -30% 0px",
         }
-      );
+      });
 
-      observer.observe(el);
-      observers.push(observer);
-    });
+      setActiveIndex(closestIndex);
+    }
 
-    return () => observers.forEach((o) => o.disconnect());
+    function onScroll() {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(updateActiveStep);
+    }
+
+    // Initial check
+    updateActiveStep();
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
-  // Animate the vertical connecting line based on progress
+  // Line progress: fills to the active node position
   const lineProgress =
-    activeIndex < 0 ? 0 : ((activeIndex + 1) / processSteps.length) * 100;
+    activeIndex < 0 ? 0 : ((activeIndex + 0.5) / processSteps.length) * 100;
 
   return (
     <SectionWrapper dark>
@@ -139,21 +190,22 @@ export function ProcessSection() {
         subtitle="A proven five-step process that ensures every project moves from concept to launch with precision and creative excellence."
       />
 
-      <div className="relative">
-        {/* Connecting line — background track */}
-        <div className="absolute left-6 top-0 hidden h-full w-px bg-white/[0.06] md:left-1/2 md:block" />
+      <div className="relative" ref={containerRef}>
+        {/* Timeline track */}
+        <div className="absolute left-[21px] top-0 hidden h-full w-px bg-white/[0.04] md:left-1/2 md:-translate-x-px md:block" />
 
-        {/* Connecting line — animated orange fill */}
+        {/* Animated fill line */}
         <div
-          className="absolute left-6 top-0 hidden w-px md:left-1/2 md:block transition-all duration-1000 ease-out"
+          className="absolute left-[21px] top-0 hidden w-px md:left-1/2 md:-translate-x-px md:block"
           style={{
             height: `${lineProgress}%`,
             background:
-              "linear-gradient(to bottom, #ff6b35, rgba(255, 107, 53, 0.3))",
+              "linear-gradient(to bottom, rgba(255,107,53,0.6), rgba(255,107,53,0.15))",
+            transition: "height 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
           }}
         />
 
-        <div className="space-y-12 md:space-y-16">
+        <div className="space-y-14 md:space-y-20">
           {processSteps.map((step, i) => (
             <div key={step.number} ref={setStepRef(i)}>
               <ProcessStep
@@ -162,9 +214,9 @@ export function ProcessSection() {
                 state={
                   i === activeIndex
                     ? "active"
-                    : i < activeIndex
-                      ? "past"
-                      : "inactive"
+                    : activeIndex >= 0 && i < activeIndex
+                      ? "visited"
+                      : "dimmed"
                 }
               />
             </div>
