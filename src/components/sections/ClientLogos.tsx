@@ -8,7 +8,7 @@ export function ClientLogos() {
   return (
     <SectionWrapper className="py-14 md:py-20">
       <p className="mb-10 text-center text-sm font-bold uppercase tracking-[0.2em] text-text-muted">
-        Trusted by Leading Brands
+        Our Partners
       </p>
       <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-16">
         {clientLogos.map((client) => (

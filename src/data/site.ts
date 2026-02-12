@@ -376,14 +376,10 @@ export const blogPosts = [
 ];
 
 export const clientLogos = [
-  { name: "Meridian Studios", image: "/images/clients/client-01.svg" },
-  { name: "Nova Technologies", image: "/images/clients/client-02.svg" },
-  { name: "Pulse Fitness", image: "/images/clients/client-03.svg" },
-  { name: "Verde Organic", image: "/images/clients/client-04.svg" },
-  { name: "Skyline Properties", image: "/images/clients/client-05.svg" },
-  { name: "Artisan Roasters", image: "/images/clients/client-06.svg" },
-  { name: "Echo Music", image: "/images/clients/client-07.svg" },
-  { name: "Atlas Voyages", image: "/images/clients/client-08.svg" },
+  { name: "HubSpot Certified Partner", image: "/images/clients/partner-01.png" },
+  { name: "Google Partner", image: "/images/clients/partner-02.png" },
+  { name: "Semrush Certified Agency Partner", image: "/images/clients/partner-03.png" },
+  { name: "Adjust Solutions Partner", image: "/images/clients/partner-04.png" },
 ];
 
 export const footerContent = {
