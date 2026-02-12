@@ -22,35 +22,57 @@ export function Button({
   disabled,
   onClick,
 }: ButtonProps) {
-  const baseClasses =
-    "inline-flex items-center justify-center font-bold uppercase tracking-[0.1em] transition-all duration-200 rounded-full";
+  const isGhost = variant === "ghost";
+
+  const baseClasses = isGhost
+    ? "inline-flex items-center justify-center font-bold uppercase tracking-[0.15em] transition-colors duration-300"
+    : "btn-hud inline-flex items-center justify-center font-bold uppercase tracking-[0.15em] transition-all duration-300";
 
   const variants = {
-    primary: "btn-gradient text-white",
-    outline:
-      "border border-glass-border text-text hover:border-primary hover:text-primary bg-transparent",
+    primary: "btn-hud-primary",
+    outline: "btn-hud-outline",
     ghost: "text-text-secondary hover:text-primary bg-transparent",
   };
 
   const sizes = {
-    sm: "px-5 py-2 text-xs",
-    md: "px-7 py-3 text-sm",
-    lg: "px-9 py-4 text-sm",
+    sm: "px-6 py-2.5 text-[11px] gap-2.5",
+    md: "px-8 py-3 text-xs gap-3",
+    lg: "px-10 py-3.5 text-[13px] gap-3.5",
   };
 
-  const classes = cn(baseClasses, variants[variant], sizes[size], disabled && "opacity-50 pointer-events-none", className);
+  const classes = cn(
+    baseClasses,
+    variants[variant],
+    sizes[size],
+    disabled && "opacity-50 pointer-events-none",
+    className
+  );
+
+  const content = isGhost ? (
+    children
+  ) : (
+    <>
+      <span className="btn-hud-chevron btn-hud-chevron-l" aria-hidden>
+        &#x2039;&#x2039;
+      </span>
+      <span className="relative z-10">{children}</span>
+      <span className="btn-hud-chevron btn-hud-chevron-r" aria-hidden>
+        &#x203A;&#x203A;
+      </span>
+    </>
+  );
 
   if (href) {
     return (
       <Link href={href} className={classes}>
-        {children}
+        {content}
       </Link>
     );
   }
 
   return (
     <button type={type} className={classes} disabled={disabled} onClick={onClick}>
-      {children}
+      {content}
     </button>
   );
 }
