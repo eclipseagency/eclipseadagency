@@ -213,54 +213,14 @@ body {
   animation: spin-slow 25s linear infinite;
 }
 
-/* ── Pulse glow ── */
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px var(--color-primary-glow); }
-  50% { box-shadow: 0 0 40px var(--color-primary-glow), 0 0 60px rgba(255, 107, 53, 0.15); }
+/* ── Testimonials section — scoped glow (only place glow is allowed) ── */
+.testimonials-glow-scope .tw-card {
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
-.animate-pulse-glow {
-  animation: pulse-glow 3s ease-in-out infinite;
-}
-
-/* ── Twinkle ── */
-@keyframes twinkle {
-  0%, 100% { opacity: 0.2; }
-  50% { opacity: 1; }
-}
-
-.animate-twinkle {
-  animation: twinkle 3s ease-in-out infinite;
-}
-
-/* ── Sunlight glow rays ── */
-@keyframes sunray-1 {
-  0%   { opacity: 0; transform: rotate(var(--ray-angle)) scaleX(1); }
-  12%  { opacity: var(--ray-peak); }
-  50%  { opacity: calc(var(--ray-peak) * 0.55); transform: rotate(calc(var(--ray-angle) + 2deg)) scaleX(1.08); }
-  88%  { opacity: var(--ray-peak); }
-  100% { opacity: 0; transform: rotate(var(--ray-angle)) scaleX(1); }
-}
-
-@keyframes sunray-2 {
-  0%   { opacity: 0; transform: rotate(var(--ray-angle)) scaleX(1); }
-  18%  { opacity: var(--ray-peak); }
-  55%  { opacity: calc(var(--ray-peak) * 0.45); transform: rotate(calc(var(--ray-angle) - 1.5deg)) scaleX(1.12); }
-  82%  { opacity: var(--ray-peak); }
-  100% { opacity: 0; transform: rotate(var(--ray-angle)) scaleX(1); }
-}
-
-@keyframes sunray-3 {
-  0%   { opacity: 0; transform: rotate(var(--ray-angle)) scaleX(1); }
-  22%  { opacity: var(--ray-peak); }
-  60%  { opacity: calc(var(--ray-peak) * 0.5); transform: rotate(calc(var(--ray-angle) + 1.8deg)) scaleX(1.06); }
-  85%  { opacity: var(--ray-peak); }
-  100% { opacity: 0; transform: rotate(var(--ray-angle)) scaleX(1); }
-}
-
-@keyframes sunray-ambient {
-  0%, 100% { opacity: 0.5; }
-  50%      { opacity: 0.8; }
+.testimonials-glow-scope .tw-card:hover {
+  border-color: rgba(255, 107, 53, 0.12);
+  box-shadow: 0 0 24px rgba(255, 107, 53, 0.05), 0 0 0 1px rgba(255, 107, 53, 0.06);
 }
 
 /* ── Scrollbar ── */

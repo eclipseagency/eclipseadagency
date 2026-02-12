@@ -6,10 +6,8 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 export function CtaBanner() {
   return (
     <SectionWrapper className="relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="h-[400px] w-[600px] rounded-full bg-primary/10 blur-[120px]" />
-      </div>
+      {/* Background — flat dark, no glow */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-bg-elevated/30 to-transparent" />
 
       <div className="relative text-center">
         <h2 className="font-heading text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
