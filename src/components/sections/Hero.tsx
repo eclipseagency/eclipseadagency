@@ -112,11 +112,11 @@ export function Hero() {
             <div className="absolute -bottom-1.5 left-1/2 h-2 w-2 rounded-full bg-primary-light shadow-[0_0_8px_rgba(247,147,30,0.6)]" />
           </div>
 
-          {/* Astronaut */}
+          {/* Hero graphic */}
           <div className="animate-float">
             <Image
-              src="/images/hero-astronaut.svg"
-              alt="Creative astronaut illustration"
+              src="/images/hero-graphic.png"
+              alt="Eclipse Ad Agency graphic"
               width={400}
               height={400}
               priority
