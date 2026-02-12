@@ -7,6 +7,7 @@ import {
   FacebookIcon,
   TikTokIcon,
   BehanceIcon,
+  PinterestIcon,
   MailIcon,
   PhoneIcon,
   MapPinIcon,
@@ -18,6 +19,7 @@ const socialIcons = [
   { Icon: TikTokIcon, href: siteConfig.social.tiktok, label: "TikTok" },
   { Icon: FacebookIcon, href: siteConfig.social.facebook, label: "Facebook" },
   { Icon: BehanceIcon, href: siteConfig.social.behance, label: "Behance" },
+  { Icon: PinterestIcon, href: siteConfig.social.pinterest, label: "Pinterest" },
 ];
 
 export function Footer() {
@@ -28,7 +30,7 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="mb-5 inline-block">
-              <Image src="/images/logo.svg" alt={siteConfig.name} width={140} height={36} />
+              <Image src="/images/logo.png" alt={siteConfig.name} width={140} height={36} />
             </Link>
             <p className="mb-6 text-sm leading-relaxed text-text-secondary">
               {footerContent.description}

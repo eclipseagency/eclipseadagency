@@ -39,7 +39,7 @@ export function Header() {
         {/* Logo */}
         <Link href="/" className="relative z-10 flex items-center gap-2">
           <Image
-            src="/images/logo.svg"
+            src="/images/logo.png"
             alt={siteConfig.name}
             width={160}
             height={40}
