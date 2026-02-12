@@ -6,34 +6,12 @@ import { heroContent } from "@/data/site";
 import { Button } from "@/components/ui/Button";
 import { ChevronDownIcon } from "@/components/ui/Icons";
 
-function StarField() {
-  return (
-    <div className="absolute inset-0 overflow-hidden">
-      {Array.from({ length: 20 }).map((_, i) => (
-        <div
-          key={i}
-          className="absolute h-[2px] w-[2px] rounded-full bg-white animate-twinkle"
-          style={{
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 5}s`,
-            animationDuration: `${2 + Math.random() * 3}s`,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
 export function Hero() {
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden bg-transparent px-5 pt-24 md:px-8">
-      {/* Background effects */}
+      {/* Background — flat dark gradient, no glow */}
       <div className="absolute inset-0">
-        {/* Aurora gradient */}
-        <div className="absolute left-1/2 top-1/3 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-primary/10 via-primary-light/5 to-transparent blur-[120px]" />
-        <div className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-primary/5 blur-[100px]" />
-        <StarField />
+        <div className="absolute inset-0 bg-gradient-to-b from-bg-elevated/60 via-transparent to-transparent" />
       </div>
 
       <div className="relative mx-auto grid max-w-[1400px] items-center gap-12 lg:grid-cols-2 lg:gap-20">
@@ -108,8 +86,8 @@ export function Hero() {
         >
           {/* Eclipse ring */}
           <div className="absolute h-[420px] w-[420px] rounded-full border border-primary/20 animate-spin-slow md:h-[500px] md:w-[500px]">
-            <div className="absolute -top-1.5 left-1/2 h-3 w-3 rounded-full bg-primary shadow-[0_0_12px_rgba(255,107,53,0.6)]" />
-            <div className="absolute -bottom-1.5 left-1/2 h-2 w-2 rounded-full bg-primary-light shadow-[0_0_8px_rgba(247,147,30,0.6)]" />
+            <div className="absolute -top-1.5 left-1/2 h-3 w-3 rounded-full bg-primary" />
+            <div className="absolute -bottom-1.5 left-1/2 h-2 w-2 rounded-full bg-primary-light" />
           </div>
 
           {/* Hero graphic */}
@@ -120,12 +98,9 @@ export function Hero() {
               width={400}
               height={400}
               priority
-              className="relative z-10 drop-shadow-[0_0_40px_rgba(255,107,53,0.2)]"
+              className="relative z-10"
             />
           </div>
-
-          {/* Glow orb */}
-          <div className="absolute h-32 w-32 rounded-full bg-primary/20 blur-[60px] animate-pulse-glow" />
         </motion.div>
       </div>
 

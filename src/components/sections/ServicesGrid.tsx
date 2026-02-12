@@ -22,7 +22,7 @@ export function ServicesGrid() {
             href={`/services#${service.id}`}
             className="group rounded-2xl border border-border bg-bg-card p-8 transition-all duration-300 hover:border-border-hover hover:bg-white/[0.06]"
           >
-            <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl border border-primary/20 bg-primary/10 text-primary transition-all group-hover:shadow-[0_0_20px_rgba(255,107,53,0.2)]">
+            <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl border border-primary/20 bg-primary/10 text-primary transition-all">
               <ServiceIcon icon={service.icon} size={26} />
             </div>
             <h3 className="mb-3 font-heading text-xl font-bold">{service.title}</h3>

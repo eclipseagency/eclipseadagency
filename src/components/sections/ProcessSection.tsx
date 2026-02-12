@@ -36,7 +36,7 @@ function ProcessStep({
           "flex md:hidden h-11 w-11 shrink-0 items-center justify-center rounded-full font-heading text-sm font-bold order-first",
           "transition-all duration-[800ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)]",
           state === "active"
-            ? "border-[1.5px] border-primary bg-primary/10 text-primary shadow-[0_0_20px_rgba(255,107,53,0.3)] scale-105"
+            ? "border-[1.5px] border-primary bg-primary/10 text-primary scale-105"
             : state === "visited"
               ? "border border-primary/30 bg-bg-elevated text-primary/50 scale-100"
               : "border border-white/[0.07] bg-bg-elevated text-white/20 scale-95"
@@ -79,22 +79,6 @@ function ProcessStep({
 
       {/* Desktop circle node */}
       <div className="relative hidden md:flex items-center justify-center">
-        {/* Outer glow ring — only visible on active */}
-        <div
-          className={cn(
-            "absolute inset-0 rounded-full transition-all duration-[800ms]",
-            state === "active"
-              ? "scale-[1.5] opacity-100"
-              : "scale-100 opacity-0"
-          )}
-          style={{
-            background:
-              state === "active"
-                ? "radial-gradient(circle, rgba(255,107,53,0.12) 0%, transparent 70%)"
-                : "none",
-          }}
-        />
-        {/* Circle */}
         <div
           className={cn(
             "relative z-10 flex h-[60px] w-[60px] items-center justify-center rounded-full font-heading text-base font-bold",
@@ -105,12 +89,6 @@ function ProcessStep({
                 ? "border border-primary/25 bg-bg-elevated text-primary/40 scale-100"
                 : "border border-white/[0.06] bg-bg-elevated text-white/15 scale-[0.88]"
           )}
-          style={{
-            boxShadow:
-              state === "active"
-                ? "0 0 28px rgba(255,107,53,0.3), 0 0 8px rgba(255,107,53,0.15) inset"
-                : "none",
-          }}
         >
           {step.number}
         </div>
