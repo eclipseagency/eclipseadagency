@@ -27,7 +27,7 @@ function StarField() {
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden bg-bg px-5 pt-24 md:px-8">
+    <section className="relative flex min-h-screen items-center overflow-hidden bg-transparent px-5 pt-24 md:px-8">
       {/* Background effects */}
       <div className="absolute inset-0">
         {/* Aurora gradient */}

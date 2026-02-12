@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { WireframeBackground } from "@/components/ui/WireframeBackground";
 import { siteConfig } from "@/data/site";
 import "./globals.css";
 
@@ -36,8 +37,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="min-h-screen bg-bg font-body text-text antialiased">
+        <WireframeBackground />
         <Header />
-        <main>{children}</main>
+        <main className="relative z-10">{children}</main>
         <Footer />
       </body>
     </html>
