@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <rect width="800" height="600" fill="#0a0a0a"/>
+  <rect x="20" y="20" width="760" height="560" rx="8" fill="#111" stroke="#222" stroke-width="1"/>
+  <!-- Decorative accent bar -->
+  <rect x="20" y="20" width="760" height="4" rx="2" fill="#ff6b35" opacity="0.7"/>
+  <!-- Project number -->
+  <text x="60" y="100" font-family="Arial,Helvetica,sans-serif" font-weight="700"
+        font-size="72" fill="#ff6b35" opacity="0.15">05</text>
+  <!-- Project name -->
+  <text x="400" y="290" font-family="Arial,Helvetica,sans-serif" font-weight="700"
+        font-size="32" fill="#ffffff" text-anchor="middle">Video Production</text>
+  <text x="400" y="330" font-family="Arial,Helvetica,sans-serif"
+        font-size="16" fill="#999" text-anchor="middle">Project 05 — Portfolio</text>
+  <!-- Decorative grid dots -->
+  <g fill="#ff6b35" opacity="0.08">
+    <circle cx="200" cy="450" r="40"/><circle cx="400" cy="450" r="40"/>
+    <circle cx="600" cy="450" r="40"/>
+  </g>
+</svg>
