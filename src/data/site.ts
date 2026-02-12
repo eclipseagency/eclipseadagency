@@ -252,6 +252,7 @@ export const testimonials = [
     name: "Sarah Al-Rashid",
     title: "CEO, Meridian Studios",
     avatar: "/images/testimonials/avatar-01.svg",
+    rating: 5,
   },
   {
     quote:
@@ -259,6 +260,7 @@ export const testimonials = [
     name: "Omar Khalil",
     title: "Marketing Director, Nova Technologies",
     avatar: "/images/testimonials/avatar-02.svg",
+    rating: 5,
   },
   {
     quote:
@@ -266,6 +268,7 @@ export const testimonials = [
     name: "Lina Fahad",
     title: "Founder, Artisan Roasters",
     avatar: "/images/testimonials/avatar-03.svg",
+    rating: 5,
   },
   {
     quote:
@@ -273,6 +276,23 @@ export const testimonials = [
     name: "Ahmed Nasser",
     title: "CTO, Pulse Fitness",
     avatar: "/images/testimonials/avatar-04.svg",
+    rating: 5,
+  },
+  {
+    quote:
+      "From concept to execution, the Eclipse team was professional, fast, and incredibly creative. Our campaign ROI exceeded every benchmark we set.",
+    name: "Reem Al-Dosari",
+    title: "Brand Manager, Oasis Interiors",
+    avatar: "/images/testimonials/avatar-05.svg",
+    rating: 5,
+  },
+  {
+    quote:
+      "Eclipse brought our app vision to life with stunning UI and flawless performance. They truly care about the end-user experience.",
+    name: "Faisal Harbi",
+    title: "Product Lead, Velo Mobility",
+    avatar: "/images/testimonials/avatar-06.svg",
+    rating: 4,
   },
 ];
 
