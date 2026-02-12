@@ -49,15 +49,11 @@ export const imageManifest: ImageEntry[] = [
   { src: "/images/testimonials/avatar-03.svg", alt: "Lina Fahad", width: 80, height: 80, usedOn: "Testimonials section" },
   { src: "/images/testimonials/avatar-04.svg", alt: "Ahmed Nasser", width: 80, height: 80, usedOn: "Testimonials section" },
 
-  // ── Clients ──
-  { src: "/images/clients/client-01.svg", alt: "Meridian Studios logo", width: 160, height: 60, usedOn: "Client logos strip" },
-  { src: "/images/clients/client-02.svg", alt: "Nova Technologies logo", width: 160, height: 60, usedOn: "Client logos strip" },
-  { src: "/images/clients/client-03.svg", alt: "Pulse Fitness logo", width: 160, height: 60, usedOn: "Client logos strip" },
-  { src: "/images/clients/client-04.svg", alt: "Verde Organic logo", width: 160, height: 60, usedOn: "Client logos strip" },
-  { src: "/images/clients/client-05.svg", alt: "Skyline Properties logo", width: 160, height: 60, usedOn: "Client logos strip" },
-  { src: "/images/clients/client-06.svg", alt: "Artisan Roasters logo", width: 160, height: 60, usedOn: "Client logos strip" },
-  { src: "/images/clients/client-07.svg", alt: "Echo Music logo", width: 160, height: 60, usedOn: "Client logos strip" },
-  { src: "/images/clients/client-08.svg", alt: "Atlas Voyages logo", width: 160, height: 60, usedOn: "Client logos strip" },
+  // ── Partners ──
+  { src: "/images/clients/partner-01.png", alt: "HubSpot Certified Partner", width: 160, height: 60, usedOn: "Partners strip" },
+  { src: "/images/clients/partner-02.png", alt: "Google Partner", width: 160, height: 60, usedOn: "Partners strip" },
+  { src: "/images/clients/partner-03.png", alt: "Semrush Certified Agency Partner", width: 160, height: 60, usedOn: "Partners strip" },
+  { src: "/images/clients/partner-04.png", alt: "Adjust Solutions Partner", width: 160, height: 60, usedOn: "Partners strip" },
 
   // ── Misc ──
   { src: "/images/og-image.svg", alt: "Eclipse Agency open graph image", width: 1200, height: 630, usedOn: "SEO meta tags" },
