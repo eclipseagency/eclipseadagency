@@ -24,13 +24,14 @@ export function Testimonials() {
             <QuoteIcon size={36} className="mb-5 text-primary/30" />
             <p className="mb-8 text-base leading-relaxed text-text-secondary">{t.quote}</p>
             <div className="flex items-center gap-4">
-              <div className="relative h-12 w-12 overflow-hidden rounded-full border border-glass-border">
+              <div className="h-12 w-12 overflow-hidden rounded-full border border-glass-border">
                 <Image
                   src={t.avatar}
                   alt={t.name}
-                  fill
-                  sizes="48px"
-                  className="object-cover"
+                  width={48}
+                  height={48}
+                  unoptimized
+                  className="h-full w-full object-cover"
                 />
               </div>
               <div>

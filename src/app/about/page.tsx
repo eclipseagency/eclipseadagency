@@ -88,13 +88,14 @@ export default function AboutPage() {
               key={member.name}
               className="group rounded-2xl border border-border bg-bg-card overflow-hidden"
             >
-              <div className="relative aspect-square overflow-hidden">
+              <div className="aspect-square overflow-hidden">
                 <Image
                   src={member.image}
                   alt={member.name}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  width={400}
+                  height={400}
+                  unoptimized
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
               <div className="p-5 text-center">

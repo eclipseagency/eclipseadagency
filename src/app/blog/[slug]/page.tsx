@@ -58,13 +58,14 @@ export default async function BlogPostPage({ params }: Props) {
 
       <section className="px-5 pb-20 md:px-8">
         <div className="mx-auto max-w-3xl">
-          <div className="relative mb-12 aspect-[16/9] overflow-hidden rounded-2xl border border-border">
+          <div className="mb-12 aspect-[16/9] overflow-hidden rounded-2xl border border-border">
             <Image
               src={post.image}
               alt={post.title}
-              fill
-              sizes="(max-width: 768px) 100vw, 768px"
-              className="object-cover"
+              width={800}
+              height={450}
+              unoptimized
+              className="h-full w-full object-cover"
               priority
             />
           </div>

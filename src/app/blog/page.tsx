@@ -30,13 +30,14 @@ export default function BlogPage() {
               href={`/blog/${post.slug}`}
               className="group rounded-2xl border border-border bg-bg-card overflow-hidden transition-all duration-300 hover:border-border-hover"
             >
-              <div className="relative aspect-[16/9] overflow-hidden">
+              <div className="aspect-[16/9] overflow-hidden">
                 <Image
                   src={post.image}
                   alt={post.title}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  width={800}
+                  height={450}
+                  unoptimized
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
               <div className="p-6">
