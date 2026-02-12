@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import { testimonials } from "@/data/site";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { SunlightGlow } from "@/components/ui/SunlightGlow";
 import { QuoteIcon } from "@/components/ui/Icons";
 import { cn } from "@/lib/utils";
 
@@ -144,6 +145,7 @@ export function Testimonials() {
 
   return (
     <SectionWrapper dark>
+      <SunlightGlow />
       {/* ── Header ── */}
       <div className="mb-16 text-center md:mb-20">
         <span className="mb-4 inline-block rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.15em] text-primary">

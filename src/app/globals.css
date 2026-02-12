@@ -70,25 +70,115 @@ body {
   background-clip: text;
 }
 
-/* ── Gradient button ── */
-.btn-gradient {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
-  border-radius: 50px;
-  color: #fff;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 6px 18px var(--color-primary-glow);
+/* ── Sci-fi HUD button ── */
+.btn-hud {
+  --corner: 11px;
+  --border-w: 1.5px;
+  position: relative;
+  z-index: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
-.btn-gradient:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 28px var(--color-primary-glow);
+/* Border layer — full octagonal shape in orange */
+.btn-hud::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(
+    var(--corner) 0%, calc(100% - var(--corner)) 0%,
+    100% var(--corner), 100% calc(100% - var(--corner)),
+    calc(100% - var(--corner)) 100%, var(--corner) 100%,
+    0% calc(100% - var(--corner)), 0% var(--corner)
+  );
+  z-index: -2;
+  transition: background 0.35s ease, opacity 0.35s ease;
 }
 
-.btn-gradient:active {
-  transform: translateY(0);
+/* Fill layer — dark interior inset by border width */
+.btn-hud::after {
+  content: "";
+  position: absolute;
+  inset: var(--border-w);
+  clip-path: polygon(
+    calc(var(--corner) - 1px) 0%, calc(100% - var(--corner) + 1px) 0%,
+    100% calc(var(--corner) - 1px), 100% calc(100% - var(--corner) + 1px),
+    calc(100% - var(--corner) + 1px) 100%, calc(var(--corner) - 1px) 100%,
+    0% calc(100% - var(--corner) + 1px), 0% calc(var(--corner) - 1px)
+  );
+  z-index: -1;
+  transition: background 0.35s ease;
+}
+
+/* Chevron decorations */
+.btn-hud-chevron {
+  font-size: 0.7em;
+  letter-spacing: -0.05em;
+  opacity: 0.5;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  line-height: 1;
+}
+
+.btn-hud:hover .btn-hud-chevron-l {
+  opacity: 0.9;
+  transform: translateX(-2px);
+}
+
+.btn-hud:hover .btn-hud-chevron-r {
+  opacity: 0.9;
+  transform: translateX(2px);
+}
+
+/* ── Primary variant ── */
+.btn-hud-primary::before {
+  background: linear-gradient(135deg, #ff6b35, #f7931e);
+}
+
+.btn-hud-primary::after {
+  background: rgba(255, 107, 53, 0.06);
+}
+
+.btn-hud-primary {
+  color: #ff6b35;
+}
+
+.btn-hud-primary:hover {
+  filter: drop-shadow(0 0 18px rgba(255, 107, 53, 0.3));
+}
+
+.btn-hud-primary:hover::after {
+  background: rgba(255, 107, 53, 0.14);
+}
+
+.btn-hud-primary:active {
+  filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.2));
+}
+
+/* ── Outline variant ── */
+.btn-hud-outline::before {
+  background: rgba(255, 107, 53, 0.45);
+}
+
+.btn-hud-outline::after {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.btn-hud-outline {
+  color: var(--color-text);
+}
+
+.btn-hud-outline:hover {
+  color: #ff6b35;
+  filter: drop-shadow(0 0 14px rgba(255, 107, 53, 0.2));
+}
+
+.btn-hud-outline:hover::before {
+  background: #ff6b35;
+}
+
+.btn-hud-outline:hover::after {
+  background: rgba(255, 107, 53, 0.1);
 }
 
 /* ── Section reveal animation ── */
