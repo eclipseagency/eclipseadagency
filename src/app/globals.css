@@ -144,35 +144,33 @@ body {
 }
 
 /* ── Sunlight glow rays ── */
-@keyframes sunray-drift-1 {
-  0%   { opacity: 0; transform: translateX(-8%) rotate(-18deg) scaleY(1); }
-  15%  { opacity: 0.6; }
-  50%  { opacity: 0.35; transform: translateX(4%) rotate(-15deg) scaleY(1.05); }
-  85%  { opacity: 0.55; }
-  100% { opacity: 0; transform: translateX(-8%) rotate(-18deg) scaleY(1); }
+@keyframes sunray-1 {
+  0%   { opacity: 0; transform: rotate(var(--ray-angle)) scaleX(1); }
+  12%  { opacity: var(--ray-peak); }
+  50%  { opacity: calc(var(--ray-peak) * 0.55); transform: rotate(calc(var(--ray-angle) + 2deg)) scaleX(1.08); }
+  88%  { opacity: var(--ray-peak); }
+  100% { opacity: 0; transform: rotate(var(--ray-angle)) scaleX(1); }
 }
 
-@keyframes sunray-drift-2 {
-  0%   { opacity: 0; transform: translateX(5%) rotate(-12deg) scaleY(1); }
-  20%  { opacity: 0.45; }
-  55%  { opacity: 0.25; transform: translateX(-3%) rotate(-9deg) scaleY(1.08); }
-  80%  { opacity: 0.5; }
-  100% { opacity: 0; transform: translateX(5%) rotate(-12deg) scaleY(1); }
+@keyframes sunray-2 {
+  0%   { opacity: 0; transform: rotate(var(--ray-angle)) scaleX(1); }
+  18%  { opacity: var(--ray-peak); }
+  55%  { opacity: calc(var(--ray-peak) * 0.45); transform: rotate(calc(var(--ray-angle) - 1.5deg)) scaleX(1.12); }
+  82%  { opacity: var(--ray-peak); }
+  100% { opacity: 0; transform: rotate(var(--ray-angle)) scaleX(1); }
 }
 
-@keyframes sunray-drift-3 {
-  0%   { opacity: 0; transform: translateX(0%) rotate(-22deg) scaleY(1); }
-  25%  { opacity: 0.4; }
-  60%  { opacity: 0.2; transform: translateX(6%) rotate(-19deg) scaleY(1.04); }
-  90%  { opacity: 0.35; }
-  100% { opacity: 0; transform: translateX(0%) rotate(-22deg) scaleY(1); }
+@keyframes sunray-3 {
+  0%   { opacity: 0; transform: rotate(var(--ray-angle)) scaleX(1); }
+  22%  { opacity: var(--ray-peak); }
+  60%  { opacity: calc(var(--ray-peak) * 0.5); transform: rotate(calc(var(--ray-angle) + 1.8deg)) scaleX(1.06); }
+  85%  { opacity: var(--ray-peak); }
+  100% { opacity: 0; transform: rotate(var(--ray-angle)) scaleX(1); }
 }
 
-@keyframes sunray-drift-4 {
-  0%   { opacity: 0; transform: translateX(2%) rotate(-8deg) scaleY(1); }
-  30%  { opacity: 0.3; }
-  65%  { opacity: 0.15; transform: translateX(-5%) rotate(-6deg) scaleY(1.06); }
-  100% { opacity: 0; transform: translateX(2%) rotate(-8deg) scaleY(1); }
+@keyframes sunray-ambient {
+  0%, 100% { opacity: 0.5; }
+  50%      { opacity: 0.8; }
 }
 
 /* ── Scrollbar ── */
