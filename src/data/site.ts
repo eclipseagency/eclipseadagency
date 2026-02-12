@@ -4,7 +4,7 @@ export const siteConfig = {
   description:
     "Eclipse is a full-service creative agency specializing in branding, digital marketing, web development, production, 3D design, and animation. We turn bold ideas into unforgettable brand experiences.",
   url: "https://eclipseadagency.com",
-  ogImage: "/images/og-image.jpg",
+  ogImage: "/images/og-image.svg",
   email: "hello@eclipseadagency.com",
   phone: "+1 (555) 420-8800",
   address: "Creative District, Suite 900, Riyadh, Saudi Arabia",
@@ -184,7 +184,7 @@ export const portfolioItems = [
     title: "Meridian Studios",
     category: "Branding",
     description: "Complete visual identity for a creative production house.",
-    image: "/images/portfolio/project-01.jpg",
+    image: "/images/portfolio/project-01.svg",
     tags: ["Logo", "Brand Guidelines", "Stationery"],
   },
   {
@@ -192,7 +192,7 @@ export const portfolioItems = [
     title: "Pulse Fitness",
     category: "Web & Apps",
     description: "Mobile-first web platform for a premium fitness brand.",
-    image: "/images/portfolio/project-02.jpg",
+    image: "/images/portfolio/project-02.svg",
     tags: ["Web Design", "Mobile App", "UI/UX"],
   },
   {
@@ -200,7 +200,7 @@ export const portfolioItems = [
     title: "Verde Organic",
     category: "Branding",
     description: "Sustainable packaging and brand identity for organic food line.",
-    image: "/images/portfolio/project-03.jpg",
+    image: "/images/portfolio/project-03.svg",
     tags: ["Packaging", "Logo", "Brand Identity"],
   },
   {
@@ -208,7 +208,7 @@ export const portfolioItems = [
     title: "Skyline Properties",
     category: "Production",
     description: "Cinematic property showcase for luxury real estate.",
-    image: "/images/portfolio/project-04.jpg",
+    image: "/images/portfolio/project-04.svg",
     tags: ["Video Production", "Aerial", "Photography"],
   },
   {
@@ -216,7 +216,7 @@ export const portfolioItems = [
     title: "Nova Technologies",
     category: "Digital Marketing",
     description: "Multi-channel digital launch for a SaaS platform.",
-    image: "/images/portfolio/project-05.jpg",
+    image: "/images/portfolio/project-05.svg",
     tags: ["Social Media", "SEO", "Content Strategy"],
   },
   {
@@ -224,7 +224,7 @@ export const portfolioItems = [
     title: "Artisan Roasters",
     category: "3D Creations",
     description: "Photorealistic product renders for a specialty coffee brand.",
-    image: "/images/portfolio/project-06.jpg",
+    image: "/images/portfolio/project-06.svg",
     tags: ["3D Rendering", "Product Viz", "Animation"],
   },
   {
@@ -232,7 +232,7 @@ export const portfolioItems = [
     title: "Echo Music",
     category: "Animation",
     description: "Animated brand reveal and social content for a music label.",
-    image: "/images/portfolio/project-07.jpg",
+    image: "/images/portfolio/project-07.svg",
     tags: ["Motion Graphics", "Logo Animation", "Social"],
   },
   {
@@ -240,7 +240,7 @@ export const portfolioItems = [
     title: "Atlas Voyages",
     category: "Web & Apps",
     description: "Responsive travel booking platform with immersive UI.",
-    image: "/images/portfolio/project-08.jpg",
+    image: "/images/portfolio/project-08.svg",
     tags: ["Web App", "UI/UX", "E-Commerce"],
   },
 ];
@@ -251,28 +251,28 @@ export const testimonials = [
       "Eclipse transformed our brand from invisible to unforgettable. Their creative team understood our vision from day one and delivered beyond expectations.",
     name: "Sarah Al-Rashid",
     title: "CEO, Meridian Studios",
-    avatar: "/images/testimonials/avatar-01.jpg",
+    avatar: "/images/testimonials/avatar-01.svg",
   },
   {
     quote:
       "The digital marketing strategy they built for us generated a 340% increase in leads within the first quarter. Data-driven and brilliantly creative.",
     name: "Omar Khalil",
     title: "Marketing Director, Nova Technologies",
-    avatar: "/images/testimonials/avatar-02.jpg",
+    avatar: "/images/testimonials/avatar-02.svg",
   },
   {
     quote:
       "Working with Eclipse on our 3D product renders was a game-changer. The quality and attention to detail elevated our entire brand perception.",
     name: "Lina Fahad",
     title: "Founder, Artisan Roasters",
-    avatar: "/images/testimonials/avatar-03.jpg",
+    avatar: "/images/testimonials/avatar-03.svg",
   },
   {
     quote:
       "They don't just build websites — they build experiences. Our conversion rate doubled after the redesign. Truly exceptional work.",
     name: "Ahmed Nasser",
     title: "CTO, Pulse Fitness",
-    avatar: "/images/testimonials/avatar-04.jpg",
+    avatar: "/images/testimonials/avatar-04.svg",
   },
 ];
 
@@ -305,10 +305,10 @@ export const aboutContent = {
     },
   ],
   team: [
-    { name: "Khalid Al-Mansoori", role: "Founder & Creative Director", image: "/images/team/team-01.jpg" },
-    { name: "Dana Reeves", role: "Head of Strategy", image: "/images/team/team-02.jpg" },
-    { name: "Yusuf Ibrahim", role: "Lead Developer", image: "/images/team/team-03.jpg" },
-    { name: "Nora Al-Fahd", role: "Art Director", image: "/images/team/team-04.jpg" },
+    { name: "Khalid Al-Mansoori", role: "Founder & Creative Director", image: "/images/team/team-01.svg" },
+    { name: "Dana Reeves", role: "Head of Strategy", image: "/images/team/team-02.svg" },
+    { name: "Yusuf Ibrahim", role: "Lead Developer", image: "/images/team/team-03.svg" },
+    { name: "Nora Al-Fahd", role: "Art Director", image: "/images/team/team-04.svg" },
   ],
 };
 
@@ -320,7 +320,7 @@ export const blogPosts = [
       "Artificial intelligence is no longer a buzzword — it's the backbone of modern campaigns. Here's what marketers need to know.",
     category: "Digital Marketing",
     date: "2025-01-15",
-    image: "/images/blog/blog-01.jpg",
+    image: "/images/blog/blog-01.svg",
     readTime: "5 min",
   },
   {
@@ -330,7 +330,7 @@ export const blogPosts = [
       "Beyond a logo: the essential elements every brand needs to build recognition, trust, and lasting loyalty.",
     category: "Branding",
     date: "2025-01-08",
-    image: "/images/blog/blog-02.jpg",
+    image: "/images/blog/blog-02.svg",
     readTime: "7 min",
   },
   {
@@ -340,7 +340,7 @@ export const blogPosts = [
       "Short-form, long-form, live — video is the language of engagement. Learn how to make it work for your brand.",
     category: "Content Strategy",
     date: "2024-12-20",
-    image: "/images/blog/blog-03.jpg",
+    image: "/images/blog/blog-03.svg",
     readTime: "4 min",
   },
   {
@@ -350,7 +350,7 @@ export const blogPosts = [
       "Every millisecond counts. How page speed directly impacts conversion rates and search rankings.",
     category: "Web Development",
     date: "2024-12-12",
-    image: "/images/blog/blog-04.jpg",
+    image: "/images/blog/blog-04.svg",
     readTime: "6 min",
   },
   {
@@ -360,7 +360,7 @@ export const blogPosts = [
       "Interactive 3D renders are replacing flat product photos. Here's why the shift matters for online retail.",
     category: "3D & Innovation",
     date: "2024-11-28",
-    image: "/images/blog/blog-05.jpg",
+    image: "/images/blog/blog-05.svg",
     readTime: "5 min",
   },
   {
@@ -370,7 +370,7 @@ export const blogPosts = [
       "Understanding cultural nuances, platform preferences, and content styles that resonate with Saudi audiences.",
     category: "Social Media",
     date: "2024-11-15",
-    image: "/images/blog/blog-06.jpg",
+    image: "/images/blog/blog-06.svg",
     readTime: "8 min",
   },
 ];
