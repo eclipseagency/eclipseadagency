@@ -1,6 +1,7 @@
 "use client";
 
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { SunlightGlow } from "@/components/ui/SunlightGlow";
 import { cn } from "@/lib/utils";
 
 interface SectionWrapperProps {
@@ -18,12 +19,13 @@ export function SectionWrapper({ children, className, id, dark }: SectionWrapper
       ref={ref}
       id={id}
       className={cn(
-        "reveal py-20 md:py-28 lg:py-32 px-5 md:px-8",
+        "reveal relative py-20 md:py-28 lg:py-32 px-5 md:px-8",
         dark && "bg-bg-elevated",
         className
       )}
     >
-      <div className="mx-auto max-w-[1400px]">{children}</div>
+      {dark && <SunlightGlow />}
+      <div className="relative z-10 mx-auto max-w-[1400px]">{children}</div>
     </section>
   );
 }
