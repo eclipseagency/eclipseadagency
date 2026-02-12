@@ -223,6 +223,36 @@ body {
   box-shadow: 0 0 24px rgba(255, 107, 53, 0.05), 0 0 0 1px rgba(255, 107, 53, 0.06);
 }
 
+/* ── Sunlight glow rays (scoped to testimonials only) ── */
+@keyframes sunray-1 {
+  0%   { opacity: 0; transform: rotate(var(--ray-angle)) scaleX(1); }
+  12%  { opacity: var(--ray-peak); }
+  50%  { opacity: calc(var(--ray-peak) * 0.55); transform: rotate(calc(var(--ray-angle) + 2deg)) scaleX(1.08); }
+  88%  { opacity: var(--ray-peak); }
+  100% { opacity: 0; transform: rotate(var(--ray-angle)) scaleX(1); }
+}
+
+@keyframes sunray-2 {
+  0%   { opacity: 0; transform: rotate(var(--ray-angle)) scaleX(1); }
+  18%  { opacity: var(--ray-peak); }
+  55%  { opacity: calc(var(--ray-peak) * 0.45); transform: rotate(calc(var(--ray-angle) - 1.5deg)) scaleX(1.12); }
+  82%  { opacity: var(--ray-peak); }
+  100% { opacity: 0; transform: rotate(var(--ray-angle)) scaleX(1); }
+}
+
+@keyframes sunray-3 {
+  0%   { opacity: 0; transform: rotate(var(--ray-angle)) scaleX(1); }
+  22%  { opacity: var(--ray-peak); }
+  60%  { opacity: calc(var(--ray-peak) * 0.5); transform: rotate(calc(var(--ray-angle) + 1.8deg)) scaleX(1.06); }
+  85%  { opacity: var(--ray-peak); }
+  100% { opacity: 0; transform: rotate(var(--ray-angle)) scaleX(1); }
+}
+
+@keyframes sunray-ambient {
+  0%, 100% { opacity: 0.5; }
+  50%      { opacity: 0.8; }
+}
+
 /* ── Scrollbar ── */
 ::-webkit-scrollbar {
   width: 8px;

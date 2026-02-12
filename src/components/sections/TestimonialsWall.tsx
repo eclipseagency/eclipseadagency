@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { SunlightGlow } from "@/components/ui/SunlightGlow";
 import { wallCards, type TestimonialItem } from "@/data/testimonials";
 
 /* ── Inline SVG icons (project pattern — no external icon lib) ── */
@@ -127,7 +128,10 @@ export function TestimonialsWall() {
       ref={sectionRef}
       className="testimonials-glow-scope reveal relative overflow-hidden bg-bg-elevated px-5 py-20 md:px-8 md:py-28 lg:py-32"
     >
-      {/* ── Scoped ambient glow (ONLY place glow is allowed) ── */}
+      {/* ── Sunlight glow rays (ONLY place glow is allowed) ── */}
+      <SunlightGlow />
+
+      {/* ── Scoped ambient glow blobs ── */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div
           className="absolute rounded-full"
