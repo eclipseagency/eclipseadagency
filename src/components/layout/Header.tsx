@@ -41,9 +41,9 @@ export function Header() {
           <Image
             src="/images/logo.png"
             alt={siteConfig.name}
-            width={160}
-            height={40}
-            className={cn("transition-all duration-300", scrolled ? "h-8 w-auto" : "h-10 w-auto")}
+            width={220}
+            height={56}
+            className={cn("transition-all duration-300", scrolled ? "h-12 w-auto" : "h-14 w-auto")}
             priority
           />
         </Link>
