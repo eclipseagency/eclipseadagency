@@ -4,7 +4,6 @@ import { PageHero } from "@/components/sections/PageHero";
 import { aboutContent } from "@/data/site";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { ClientLogos } from "@/components/sections/ClientLogos";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 
 export const metadata: Metadata = {
@@ -107,7 +106,6 @@ export default function AboutPage() {
         </div>
       </SectionWrapper>
 
-      <ClientLogos />
       <CtaBanner />
     </>
   );
