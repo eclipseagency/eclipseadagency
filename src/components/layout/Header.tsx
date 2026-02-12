@@ -31,8 +31,8 @@ export function Header() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-black/80 backdrop-blur-xl py-3 border-b border-white/10"
-          : "bg-transparent py-5"
+          ? "bg-black py-3 border-b border-white/10"
+          : "bg-black py-5"
       )}
     >
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-5 md:px-8">
