@@ -30,7 +30,7 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="mb-5 inline-block">
-              <Image src="/images/logo.png" alt={siteConfig.name} width={140} height={36} />
+              <Image src="/images/logo.png" alt={siteConfig.name} width={200} height={52} />
             </Link>
             <p className="mb-6 text-sm leading-relaxed text-text-secondary">
               {footerContent.description}
