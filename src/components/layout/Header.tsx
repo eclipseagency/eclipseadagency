@@ -31,7 +31,7 @@ export function Header() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "glass py-3"
+          ? "bg-bg py-3"
           : "bg-bg py-5"
       )}
     >
