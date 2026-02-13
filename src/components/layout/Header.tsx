@@ -73,7 +73,7 @@ export function Header() {
                   />
                 </button>
                 {dropdownOpen && (
-                  <div className="glass absolute left-0 top-full mt-1 min-w-[200px] rounded-xl p-2">
+                  <div className="absolute left-0 top-full mt-1 min-w-[200px] rounded-xl border border-white/[0.06] bg-black p-2">
                     {item.children.map((child) => (
                       <Link
                         key={child.label}
@@ -120,7 +120,7 @@ export function Header() {
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <div className="glass fixed inset-0 top-0 flex flex-col items-center justify-center gap-6 lg:hidden">
+        <div className="fixed inset-0 top-0 flex flex-col items-center justify-center gap-6 bg-black lg:hidden">
           {siteConfig.nav.map((item) =>
             item.children ? (
               <div key={item.label} className="flex flex-col items-center gap-3">
