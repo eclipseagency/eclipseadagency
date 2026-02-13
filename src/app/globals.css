@@ -140,7 +140,7 @@ body {
 }
 
 .btn-hud-primary {
-  color: #ff6b35;
+  color: #fff;
 }
 
 .btn-hud-primary:hover {
@@ -165,11 +165,11 @@ body {
 }
 
 .btn-hud-outline {
-  color: var(--color-text);
+  color: #fff;
 }
 
 .btn-hud-outline:hover {
-  color: #ff6b35;
+  color: #fff;
   filter: drop-shadow(0 0 14px rgba(255, 107, 53, 0.2));
 }
 
