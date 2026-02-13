@@ -35,20 +35,6 @@ export function Footer() {
             <p className="mb-6 text-sm leading-relaxed text-text-secondary">
               {footerContent.description}
             </p>
-            <div className="flex gap-3">
-              {socialIcons.map(({ Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-glass-border text-text-muted transition-all hover:border-primary hover:text-primary"
-                >
-                  <Icon size={16} />
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Services */}
@@ -112,6 +98,20 @@ export function Footer() {
                 <span>{siteConfig.address}</span>
               </li>
             </ul>
+            <div className="mt-6 flex gap-3">
+              {socialIcons.map(({ Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-glass-border text-text-muted transition-all hover:border-primary hover:text-primary"
+                >
+                  <Icon size={16} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
