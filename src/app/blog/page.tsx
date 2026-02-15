@@ -20,6 +20,7 @@ export default function BlogPage() {
         badge="Blog"
         title="Insights & Ideas"
         subtitle="Expert perspectives on branding, marketing, design, and technology — written by our team for yours."
+        image="https://eclipseadagency.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-19-at-2.16.17-PM.jpeg"
       />
 
       <SectionWrapper>
