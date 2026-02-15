@@ -164,15 +164,6 @@ export default function AboutPage() {
 
       {/* ── Mission & Vision ── */}
       <SectionWrapper dark>
-        <div className="mb-10 overflow-hidden rounded-2xl border border-border">
-          <Image
-            src={profileImages[1].src}
-            alt={profileImages[1].alt}
-            width={1536}
-            height={1025}
-            className="h-[280px] w-full object-cover md:h-[380px]"
-          />
-        </div>
         <div className="grid gap-8 md:grid-cols-2">
           <div className="rounded-2xl border border-border bg-bg-card p-8 md:p-10">
             <span className="mb-4 inline-block text-xs font-bold uppercase tracking-[0.2em] text-primary">
