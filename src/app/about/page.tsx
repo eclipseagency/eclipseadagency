@@ -118,26 +118,6 @@ export default function AboutPage() {
         subtitle="We are a team of strategists, designers, developers, and storytellers united by a passion for building brands that matter."
       />
 
-      {/* ── Team / Office Photos ── */}
-      <SectionWrapper>
-        <div className="grid gap-6 md:grid-cols-2">
-          {profileImages.map((img) => (
-            <div
-              key={img.src}
-              className="overflow-hidden rounded-2xl border border-border"
-            >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                width={1536}
-                height={1025}
-                className="h-full w-full object-cover"
-              />
-            </div>
-          ))}
-        </div>
-      </SectionWrapper>
-
       {/* ── Showreel 2024 ── */}
       <SectionWrapper dark>
         <SectionHeader badge="Showreel" title="Showreel 2024" />
@@ -155,6 +135,15 @@ export default function AboutPage() {
 
       {/* ── Mission & Vision ── */}
       <SectionWrapper>
+        <div className="mb-10 overflow-hidden rounded-2xl border border-border">
+          <Image
+            src={profileImages[1].src}
+            alt={profileImages[1].alt}
+            width={1536}
+            height={1025}
+            className="h-[280px] w-full object-cover md:h-[380px]"
+          />
+        </div>
         <div className="grid gap-8 md:grid-cols-2">
           <div className="rounded-2xl border border-border bg-bg-card p-8 md:p-10">
             <span className="mb-4 inline-block text-xs font-bold uppercase tracking-[0.2em] text-primary">
@@ -181,15 +170,26 @@ export default function AboutPage() {
           badge="Our Story"
           title="From Bold Idea to Creative Powerhouse"
         />
-        <div className="mx-auto max-w-3xl space-y-6">
-          {aboutContent.story.map((paragraph, i) => (
-            <p
-              key={i}
-              className="text-base leading-relaxed text-text-secondary md:text-lg"
-            >
-              {paragraph}
-            </p>
-          ))}
+        <div className="grid items-start gap-10 md:grid-cols-2">
+          <div className="overflow-hidden rounded-2xl border border-border">
+            <Image
+              src={profileImages[0].src}
+              alt={profileImages[0].alt}
+              width={1536}
+              height={1025}
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <div className="space-y-6">
+            {aboutContent.story.map((paragraph, i) => (
+              <p
+                key={i}
+                className="text-base leading-relaxed text-text-secondary md:text-lg"
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
         </div>
       </SectionWrapper>
 
