@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WireframeBackground } from "@/components/ui/WireframeBackground";
+import { CustomCursor } from "@/components/ui/CustomCursor";
 import { siteConfig } from "@/data/site";
 import "./globals.css";
 
@@ -36,7 +37,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-bg font-body text-text antialiased">
+      <body className="min-h-screen cursor-none bg-bg font-body text-text antialiased">
+        <CustomCursor />
         <WireframeBackground />
         <Header />
         <main className="relative z-10">{children}</main>

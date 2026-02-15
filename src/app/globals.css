@@ -279,6 +279,34 @@ select option:checked {
   color: #fff;
 }
 
+/* ── Custom cursor ── */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+
+  .eclipse-cursor {
+    transition: opacity 0.3s ease;
+  }
+
+  .eclipse-cursor svg {
+    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+                filter 0.3s ease;
+    filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.3));
+  }
+
+  .eclipse-cursor.cursor-hover svg {
+    filter: drop-shadow(0 0 14px rgba(255, 107, 53, 0.5));
+  }
+}
+
+/* Show default cursor on touch devices */
+@media (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+}
+
 /* ── Scrollbar ── */
 ::-webkit-scrollbar {
   width: 8px;
