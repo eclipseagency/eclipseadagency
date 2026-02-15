@@ -16,6 +16,7 @@ export default function PortfolioPage() {
         badge="Portfolio"
         title="Our Creative Work"
         subtitle="A curated selection of projects that showcase our creative range and the results we deliver for our clients."
+        image="https://eclipseadagency.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-19-at-2.16.25-PM.jpeg"
       />
       <PortfolioGrid showCta={false} />
       <CtaBanner />

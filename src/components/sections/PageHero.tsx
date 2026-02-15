@@ -1,39 +1,53 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface PageHeroProps {
   badge: string;
   title: string;
   subtitle?: string;
+  image?: string;
 }
 
-export function PageHero({ badge, title, subtitle }: PageHeroProps) {
+export function PageHero({ badge, title, subtitle, image }: PageHeroProps) {
   return (
-    <section className="relative flex min-h-[60vh] items-end overflow-hidden bg-transparent px-5 pb-20 pt-32 md:px-8 md:pt-40">
-      {/* ── Layer 0: Deep base gradient ── */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0d0d0d] via-bg to-bg" />
+    <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden px-5 pb-20 pt-32 md:px-8 md:pt-40">
+      {/* ── Layer 0: Background image ── */}
+      {image && (
+        <div className="absolute inset-0">
+          <Image
+            src={image}
+            alt=""
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+        </div>
+      )}
 
-      {/* ── Layer 1: Ambient glow orbs ── */}
+      {/* ── Layer 1: Dark overlays for depth & contrast ── */}
+      <div className="absolute inset-0 bg-black/60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/80 via-transparent to-[#0a0a0a]/90" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/40 via-transparent to-[#0a0a0a]/40" />
+
+      {/* ── Layer 2: Ambient glow orbs ── */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Primary warm glow — top-left */}
         <motion.div
-          className="absolute -left-[10%] -top-[20%] h-[500px] w-[500px] rounded-full bg-primary/[0.07] blur-[120px] md:h-[700px] md:w-[700px]"
-          animate={{ scale: [1, 1.15, 1], opacity: [0.07, 0.1, 0.07] }}
+          className="absolute -left-[10%] -top-[20%] h-[500px] w-[500px] rounded-full bg-primary/[0.06] blur-[120px] md:h-[700px] md:w-[700px]"
+          animate={{ scale: [1, 1.15, 1], opacity: [0.06, 0.09, 0.06] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
-        {/* Secondary accent glow — bottom-right */}
         <motion.div
-          className="absolute -bottom-[15%] -right-[8%] h-[400px] w-[400px] rounded-full bg-primary-light/[0.05] blur-[100px] md:h-[600px] md:w-[600px]"
-          animate={{ scale: [1, 1.2, 1], opacity: [0.05, 0.08, 0.05] }}
+          className="absolute -bottom-[15%] -right-[8%] h-[400px] w-[400px] rounded-full bg-primary-light/[0.04] blur-[100px] md:h-[600px] md:w-[600px]"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.04, 0.07, 0.04] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 3 }}
         />
-        {/* Subtle cool accent — center-right */}
-        <div className="absolute right-[20%] top-[30%] h-[300px] w-[300px] rounded-full bg-white/[0.015] blur-[80px]" />
       </div>
 
-      {/* ── Layer 2: Fine grid pattern ── */}
-      <div className="absolute inset-0 opacity-[0.03]">
+      {/* ── Layer 3: Fine grid pattern ── */}
+      <div className="absolute inset-0 opacity-[0.025]">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
             <pattern id="hero-grid" width="60" height="60" patternUnits="userSpaceOnUse">
@@ -53,7 +67,7 @@ export function PageHero({ badge, title, subtitle }: PageHeroProps) {
         </svg>
       </div>
 
-      {/* ── Layer 3: Geometric wireframe shapes ── */}
+      {/* ── Layer 4: Geometric wireframe shapes ── */}
       <div className="absolute inset-0">
         <svg
           className="absolute inset-0 h-full w-full"
@@ -74,7 +88,6 @@ export function PageHero({ badge, title, subtitle }: PageHeroProps) {
           </defs>
 
           <g mask="url(#hero-geo-mask)" stroke="#ff6b35" fill="none" strokeWidth="0.6">
-            {/* Left angular mesh */}
             <path d="M0 0 L80 120 L0 220" opacity="0.10" />
             <path d="M0 0 L160 50 L80 120" opacity="0.08" />
             <path d="M80 120 L200 100 L160 200" opacity="0.07" />
@@ -91,11 +104,9 @@ export function PageHero({ badge, title, subtitle }: PageHeroProps) {
             <path d="M0 520 L80 560 L0 600" opacity="0.07" />
             <path d="M80 560 L260 500 L180 600" opacity="0.06" />
 
-            {/* Left diamond accents */}
             <path d="M100 60 L130 80 L100 100 L70 80 Z" opacity="0.06" />
             <path d="M30 350 L55 370 L30 390 L5 370 Z" opacity="0.05" />
 
-            {/* Right angular mesh */}
             <path d="M1440 0 L1360 120 L1440 220" opacity="0.10" />
             <path d="M1440 0 L1280 50 L1360 120" opacity="0.08" />
             <path d="M1360 120 L1240 100 L1280 200" opacity="0.07" />
@@ -112,21 +123,17 @@ export function PageHero({ badge, title, subtitle }: PageHeroProps) {
             <path d="M1440 520 L1360 560 L1440 600" opacity="0.07" />
             <path d="M1360 560 L1180 500 L1260 600" opacity="0.06" />
 
-            {/* Right diamond accents */}
             <path d="M1340 60 L1370 80 L1340 100 L1310 80 Z" opacity="0.06" />
             <path d="M1410 350 L1435 370 L1410 390 L1385 370 Z" opacity="0.05" />
 
-            {/* Top edge connectors */}
             <path d="M300 0 L240 130 L400 80" opacity="0.04" />
             <path d="M400 80 L520 0 L480 100" opacity="0.04" />
             <path d="M1140 0 L1200 130 L1040 80" opacity="0.04" />
             <path d="M1040 80 L920 0 L960 100" opacity="0.04" />
 
-            {/* Bottom edge connectors */}
             <path d="M180 600 L260 500 L360 600" opacity="0.04" />
             <path d="M1260 600 L1180 500 L1080 600" opacity="0.04" />
 
-            {/* Sparse center hints */}
             <path d="M480 100 L600 40 L580 160" opacity="0.025" />
             <path d="M960 100 L840 40 L860 160" opacity="0.025" />
             <path d="M580 160 L720 100 L860 160" opacity="0.02" />
@@ -134,16 +141,14 @@ export function PageHero({ badge, title, subtitle }: PageHeroProps) {
         </svg>
       </div>
 
-      {/* ── Layer 4: Horizontal accent lines ── */}
+      {/* ── Layer 5: Horizontal accent lines ── */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Top thin line */}
         <motion.div
           className="absolute left-0 right-0 top-[25%] h-px bg-gradient-to-r from-transparent via-primary/[0.08] to-transparent"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
         />
-        {/* Bottom separator */}
         <motion.div
           className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/[0.12] to-transparent"
           initial={{ scaleX: 0 }}
@@ -152,19 +157,19 @@ export function PageHero({ badge, title, subtitle }: PageHeroProps) {
         />
       </div>
 
-      {/* ── Layer 5: Film grain / noise texture ── */}
+      {/* ── Layer 6: Film grain / noise texture ── */}
       <div className="page-hero-noise absolute inset-0" />
 
-      {/* ── Layer 6: Bottom vignette for depth ── */}
-      <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent" />
+      {/* ── Layer 7: Bottom vignette ── */}
+      <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/20 to-transparent" />
 
       {/* ── Content ── */}
-      <div className="relative mx-auto w-full max-w-[1400px]">
+      <div className="relative mx-auto w-full max-w-[1400px] text-center">
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-4 inline-block rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.15em] text-primary"
+          className="mb-5 inline-block rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.15em] text-primary"
         >
           {badge}
         </motion.span>
@@ -172,7 +177,7 @@ export function PageHero({ badge, title, subtitle }: PageHeroProps) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-heading text-4xl font-bold leading-tight md:text-5xl lg:text-[56px]"
+          className="mx-auto max-w-4xl font-heading text-4xl font-bold leading-tight md:text-5xl lg:text-[56px]"
         >
           {title}
         </motion.h1>
@@ -181,7 +186,7 @@ export function PageHero({ badge, title, subtitle }: PageHeroProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-5 max-w-2xl text-base text-text-secondary md:text-lg"
+            className="mx-auto mt-5 max-w-2xl text-base text-text-secondary md:text-lg"
           >
             {subtitle}
           </motion.p>
