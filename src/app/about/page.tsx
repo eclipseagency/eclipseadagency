@@ -6,6 +6,8 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { ImageCarousel } from "@/components/ui/ImageCarousel";
+import { PortfolioGrid } from "@/components/ui/PortfolioGrid";
+import type { PortfolioProject } from "@/components/ui/PortfolioGrid";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -38,6 +40,73 @@ const projectImages = [
   "https://eclipseadagency.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-19-at-2.16.22-PM.jpeg",
   "https://eclipseadagency.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-19-at-2.16.17-PM.jpeg",
   "https://eclipseadagency.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-19-at-2.16.00-PM.jpeg",
+];
+
+const portfolioProjects: PortfolioProject[] = [
+  {
+    title: "Noon Studio",
+    description:
+      "The branding for Noon Studio reflects a modern and vibrant identity, featuring bold patterns, dynamic shapes, and a harmonious color palette that embodies creativity and innovation.",
+    image:
+      "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-4.png",
+    href: "https://eclipseadagency.com/branding/noon-studio/",
+  },
+  {
+    title: "Sparkle",
+    description:
+      'Crafted a bold, modern identity for Sparkle, featuring vibrant patterns and immersive design elements that bring their tagline, "Where Magic Happens," to life.',
+    image:
+      "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-5.png",
+    href: "https://eclipseadagency.com/branding/sparkle/",
+  },
+  {
+    title: "Volume",
+    description:
+      "The branding for Volume merges sophistication and style, showcasing elegant typography and luxurious design elements that perfectly complement the product's refined essence.",
+    image:
+      "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-6.png",
+    href: "https://eclipseadagency.com/branding/volume/",
+  },
+  {
+    title: "Sunny Beans",
+    description:
+      "The branding for Sunny Beans radiates warmth and joy, featuring earthy tones, playful patterns, and a sun-inspired logo that captures the spirit of community and a love for coffee.",
+    image:
+      "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-7.png",
+    href: "https://eclipseadagency.com/branding/sunny-beans/",
+  },
+  {
+    title: "Grano de Café",
+    description:
+      "The branding for Grano de Café captures the authentic essence of Colombian coffee with a rich, earthy color palette and traditional design elements, emphasizing quality and heritage.",
+    image:
+      "https://eclipseadagency.com/wp-content/uploads/2024/12/Grano-de-cafe-cover-12.png",
+    href: "https://eclipseadagency.com/branding/grano-de-cafe/",
+  },
+  {
+    title: "For Cup",
+    description:
+      "The branding for For Cup blends modern minimalism with a playful edge, featuring clean typography and bold iconography that reflects a fresh and contemporary take on coffee culture.",
+    image:
+      "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-1.png",
+    href: "https://eclipseadagency.com/branding/forcup/",
+  },
+  {
+    title: "Qatf",
+    description:
+      "A fresh, modern brand identity emphasizing premium agricultural products with clean visuals and an organic aesthetic.",
+    image:
+      "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-2.png",
+    href: "https://eclipseadagency.com/branding/qatf/",
+  },
+  {
+    title: "Waf",
+    description:
+      "A bold, professional brand design showcasing innovation and excellence in business services with sleek, vibrant visuals.",
+    image:
+      "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-3.png",
+    href: "https://eclipseadagency.com/branding/waf/",
+  },
 ];
 
 export default function AboutPage() {
@@ -143,32 +212,10 @@ export default function AboutPage() {
         </div>
       </SectionWrapper>
 
-      {/* ── Featured Project: Noon Studio ── */}
+      {/* ── Portfolio ── */}
       <SectionWrapper dark>
-        <SectionHeader badge="Featured Project" title="Noon Studio" />
-        <div className="mx-auto max-w-4xl">
-          <div className="group overflow-hidden rounded-2xl border border-border bg-bg-card">
-            <div className="overflow-hidden">
-              <Image
-                src="https://eclipseadagency.com/wp-content/uploads/2024/12/cover-4.png"
-                alt="Noon Studio branding project"
-                width={1200}
-                height={700}
-                className="w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              />
-            </div>
-            <div className="p-8 md:p-10">
-              <h3 className="mb-3 font-heading text-2xl font-bold md:text-3xl">
-                Noon Studio
-              </h3>
-              <p className="max-w-2xl text-base leading-relaxed text-text-secondary md:text-lg">
-                The branding for Noon Studio reflects a modern and vibrant
-                identity, featuring bold patterns, dynamic shapes, and a
-                harmonious color palette that embodies creativity and innovation.
-              </p>
-            </div>
-          </div>
-        </div>
+        <SectionHeader badge="Portfolio" title="Our Branding Work" />
+        <PortfolioGrid projects={portfolioProjects} />
       </SectionWrapper>
 
       {/* ── Values ── */}
