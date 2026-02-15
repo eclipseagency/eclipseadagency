@@ -5,6 +5,7 @@ import { aboutContent } from "@/data/site";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { CtaBanner } from "@/components/sections/CtaBanner";
+import { MissionVision } from "@/components/sections/MissionVision";
 import { ImageCarousel } from "@/components/ui/ImageCarousel";
 import { PortfolioGrid } from "@/components/ui/PortfolioGrid";
 import type { PortfolioProject } from "@/components/ui/PortfolioGrid";
@@ -164,24 +165,10 @@ export default function AboutPage() {
 
       {/* ── Mission & Vision ── */}
       <SectionWrapper dark>
-        <div className="grid gap-8 md:grid-cols-2">
-          <div className="rounded-2xl border border-border bg-bg-card p-8 md:p-10">
-            <span className="mb-4 inline-block text-xs font-bold uppercase tracking-[0.2em] text-primary">
-              Our Mission
-            </span>
-            <p className="text-lg leading-relaxed text-text-secondary">
-              {aboutContent.mission}
-            </p>
-          </div>
-          <div className="rounded-2xl border border-border bg-bg-card p-8 md:p-10">
-            <span className="mb-4 inline-block text-xs font-bold uppercase tracking-[0.2em] text-primary">
-              Our Vision
-            </span>
-            <p className="text-lg leading-relaxed text-text-secondary">
-              {aboutContent.vision}
-            </p>
-          </div>
-        </div>
+        <MissionVision
+          mission={aboutContent.mission}
+          vision={aboutContent.vision}
+        />
       </SectionWrapper>
 
       {/* ── Motion Reel ── */}
