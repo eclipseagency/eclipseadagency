@@ -118,52 +118,6 @@ export default function AboutPage() {
         subtitle="We are a team of strategists, designers, developers, and storytellers united by a passion for building brands that matter."
       />
 
-      {/* ── Showreel 2024 ── */}
-      <SectionWrapper dark>
-        <SectionHeader badge="Showreel" title="Showreel 2024" />
-        <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-border">
-          <div className="relative" style={{ paddingTop: "56.25%" }}>
-            <iframe
-              src="https://player.vimeo.com/video/1051203598?h=a43672f073&badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&background=1"
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-              className="absolute inset-0 h-full w-full"
-              title="Eclipse Agency — Showreel 2024"
-            />
-          </div>
-        </div>
-      </SectionWrapper>
-
-      {/* ── Mission & Vision ── */}
-      <SectionWrapper>
-        <div className="mb-10 overflow-hidden rounded-2xl border border-border">
-          <Image
-            src={profileImages[1].src}
-            alt={profileImages[1].alt}
-            width={1536}
-            height={1025}
-            className="h-[280px] w-full object-cover md:h-[380px]"
-          />
-        </div>
-        <div className="grid gap-8 md:grid-cols-2">
-          <div className="rounded-2xl border border-border bg-bg-card p-8 md:p-10">
-            <span className="mb-4 inline-block text-xs font-bold uppercase tracking-[0.2em] text-primary">
-              Our Mission
-            </span>
-            <p className="text-lg leading-relaxed text-text-secondary">
-              {aboutContent.mission}
-            </p>
-          </div>
-          <div className="rounded-2xl border border-border bg-bg-card p-8 md:p-10">
-            <span className="mb-4 inline-block text-xs font-bold uppercase tracking-[0.2em] text-primary">
-              Our Vision
-            </span>
-            <p className="text-lg leading-relaxed text-text-secondary">
-              {aboutContent.vision}
-            </p>
-          </div>
-        </div>
-      </SectionWrapper>
-
       {/* ── Story ── */}
       <SectionWrapper dark>
         <SectionHeader
@@ -189,6 +143,52 @@ export default function AboutPage() {
                 {paragraph}
               </p>
             ))}
+          </div>
+        </div>
+      </SectionWrapper>
+
+      {/* ── Showreel 2024 ── */}
+      <SectionWrapper>
+        <SectionHeader badge="Showreel" title="Showreel 2024" />
+        <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-border">
+          <div className="relative" style={{ paddingTop: "56.25%" }}>
+            <iframe
+              src="https://player.vimeo.com/video/1051203598?h=a43672f073&badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&background=1"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+              className="absolute inset-0 h-full w-full"
+              title="Eclipse Agency — Showreel 2024"
+            />
+          </div>
+        </div>
+      </SectionWrapper>
+
+      {/* ── Mission & Vision ── */}
+      <SectionWrapper dark>
+        <div className="mb-10 overflow-hidden rounded-2xl border border-border">
+          <Image
+            src={profileImages[1].src}
+            alt={profileImages[1].alt}
+            width={1536}
+            height={1025}
+            className="h-[280px] w-full object-cover md:h-[380px]"
+          />
+        </div>
+        <div className="grid gap-8 md:grid-cols-2">
+          <div className="rounded-2xl border border-border bg-bg-card p-8 md:p-10">
+            <span className="mb-4 inline-block text-xs font-bold uppercase tracking-[0.2em] text-primary">
+              Our Mission
+            </span>
+            <p className="text-lg leading-relaxed text-text-secondary">
+              {aboutContent.mission}
+            </p>
+          </div>
+          <div className="rounded-2xl border border-border bg-bg-card p-8 md:p-10">
+            <span className="mb-4 inline-block text-xs font-bold uppercase tracking-[0.2em] text-primary">
+              Our Vision
+            </span>
+            <p className="text-lg leading-relaxed text-text-secondary">
+              {aboutContent.vision}
+            </p>
           </div>
         </div>
       </SectionWrapper>
