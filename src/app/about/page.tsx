@@ -5,6 +5,7 @@ import { aboutContent } from "@/data/site";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { CtaBanner } from "@/components/sections/CtaBanner";
+import { ImageCarousel } from "@/components/ui/ImageCarousel";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -197,22 +198,12 @@ export default function AboutPage() {
       {/* ── Project Gallery ── */}
       <SectionWrapper dark>
         <SectionHeader badge="Our Work" title="Projects Gallery" />
-        <div className="columns-1 gap-5 sm:columns-2 lg:columns-3">
-          {projectImages.map((src, i) => (
-            <div
-              key={i}
-              className="mb-5 overflow-hidden rounded-2xl border border-border"
-            >
-              <Image
-                src={src}
-                alt={`Eclipse Agency project ${i + 1}`}
-                width={800}
-                height={600}
-                className="w-full object-cover transition-transform duration-500 hover:scale-[1.03]"
-              />
-            </div>
-          ))}
-        </div>
+        <ImageCarousel
+          images={projectImages.map((src, i) => ({
+            src,
+            alt: `Eclipse Agency project ${i + 1}`,
+          }))}
+        />
       </SectionWrapper>
 
       {/* ── Team ── */}
