@@ -10,12 +10,51 @@ interface PageHeroProps {
 
 export function PageHero({ badge, title, subtitle }: PageHeroProps) {
   return (
-    <section className="relative flex min-h-[50vh] items-end overflow-hidden bg-transparent px-5 pb-16 pt-32 md:px-8 md:pt-40">
-      {/* Background — flat dark gradient + geometric shapes */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-bg-elevated/50 via-transparent to-transparent" />
+    <section className="relative flex min-h-[60vh] items-end overflow-hidden bg-transparent px-5 pb-20 pt-32 md:px-8 md:pt-40">
+      {/* ── Layer 0: Deep base gradient ── */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0d0d0d] via-bg to-bg" />
 
-        {/* Subtle geometric wireframe shapes */}
+      {/* ── Layer 1: Ambient glow orbs ── */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Primary warm glow — top-left */}
+        <motion.div
+          className="absolute -left-[10%] -top-[20%] h-[500px] w-[500px] rounded-full bg-primary/[0.07] blur-[120px] md:h-[700px] md:w-[700px]"
+          animate={{ scale: [1, 1.15, 1], opacity: [0.07, 0.1, 0.07] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        {/* Secondary accent glow — bottom-right */}
+        <motion.div
+          className="absolute -bottom-[15%] -right-[8%] h-[400px] w-[400px] rounded-full bg-primary-light/[0.05] blur-[100px] md:h-[600px] md:w-[600px]"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.05, 0.08, 0.05] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+        />
+        {/* Subtle cool accent — center-right */}
+        <div className="absolute right-[20%] top-[30%] h-[300px] w-[300px] rounded-full bg-white/[0.015] blur-[80px]" />
+      </div>
+
+      {/* ── Layer 2: Fine grid pattern ── */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <pattern id="hero-grid" width="60" height="60" patternUnits="userSpaceOnUse">
+              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" strokeWidth="0.5" />
+            </pattern>
+            <linearGradient id="hero-grid-fade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="white" stopOpacity="0" />
+              <stop offset="30%" stopColor="white" stopOpacity="1" />
+              <stop offset="70%" stopColor="white" stopOpacity="1" />
+              <stop offset="100%" stopColor="white" stopOpacity="0" />
+            </linearGradient>
+            <mask id="hero-grid-mask">
+              <rect width="100%" height="100%" fill="url(#hero-grid-fade)" />
+            </mask>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#hero-grid)" mask="url(#hero-grid-mask)" />
+        </svg>
+      </div>
+
+      {/* ── Layer 3: Geometric wireframe shapes ── */}
+      <div className="absolute inset-0">
         <svg
           className="absolute inset-0 h-full w-full"
           viewBox="0 0 1440 600"
@@ -87,7 +126,7 @@ export function PageHero({ badge, title, subtitle }: PageHeroProps) {
             <path d="M180 600 L260 500 L360 600" opacity="0.04" />
             <path d="M1260 600 L1180 500 L1080 600" opacity="0.04" />
 
-            {/* Sparse center hints (very faint) */}
+            {/* Sparse center hints */}
             <path d="M480 100 L600 40 L580 160" opacity="0.025" />
             <path d="M960 100 L840 40 L860 160" opacity="0.025" />
             <path d="M580 160 L720 100 L860 160" opacity="0.02" />
@@ -95,6 +134,31 @@ export function PageHero({ badge, title, subtitle }: PageHeroProps) {
         </svg>
       </div>
 
+      {/* ── Layer 4: Horizontal accent lines ── */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Top thin line */}
+        <motion.div
+          className="absolute left-0 right-0 top-[25%] h-px bg-gradient-to-r from-transparent via-primary/[0.08] to-transparent"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
+        />
+        {/* Bottom separator */}
+        <motion.div
+          className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/[0.12] to-transparent"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
+        />
+      </div>
+
+      {/* ── Layer 5: Film grain / noise texture ── */}
+      <div className="page-hero-noise absolute inset-0" />
+
+      {/* ── Layer 6: Bottom vignette for depth ── */}
+      <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent" />
+
+      {/* ── Content ── */}
       <div className="relative mx-auto w-full max-w-[1400px]">
         <motion.span
           initial={{ opacity: 0, y: 20 }}
