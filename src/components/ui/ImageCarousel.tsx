@@ -50,7 +50,12 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
             key={i}
             className="w-[80%] flex-shrink-0 snap-center sm:w-[45%] lg:w-[32%]"
           >
-            <div className="overflow-hidden rounded-2xl border border-border">
+            <a
+              href={img.src}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block overflow-hidden rounded-2xl border border-border"
+            >
               <Image
                 src={img.src}
                 alt={img.alt}
@@ -58,7 +63,7 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
                 height={600}
                 className="w-full object-cover transition-transform duration-500 hover:scale-[1.03]"
               />
-            </div>
+            </a>
           </div>
         ))}
       </div>
