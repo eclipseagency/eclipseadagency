@@ -42,7 +42,7 @@ export default async function BlogPostPage({ params }: Props) {
           </Link>
 
           <div className="mb-4 flex items-center gap-3 text-xs text-text-muted">
-            <span className="rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 font-bold uppercase tracking-wider text-primary">
+            <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
               {post.category}
             </span>
             <span>{formatDate(post.date)}</span>
@@ -58,7 +58,7 @@ export default async function BlogPostPage({ params }: Props) {
 
       <section className="px-5 pb-20 md:px-8">
         <div className="mx-auto max-w-3xl">
-          <div className="mb-12 aspect-[16/9] overflow-hidden rounded-2xl border border-border">
+          <div className="mb-12 aspect-[16/9] overflow-hidden rounded-2xl border border-white/10">
             <Image
               src={post.image}
               alt={post.title}

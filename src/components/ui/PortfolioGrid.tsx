@@ -21,7 +21,7 @@ export function PortfolioGrid({ projects }: PortfolioGridProps) {
           href={project.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative block aspect-[4/3] overflow-hidden rounded-2xl border border-border"
+          className="group relative block aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 transition-all duration-300 hover:border-primary/50"
         >
           {/* Cover image */}
           <Image

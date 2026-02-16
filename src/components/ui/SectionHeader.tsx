@@ -12,11 +12,11 @@ export function SectionHeader({ badge, title, subtitle, centered = true, classNa
   return (
     <div className={cn("mb-14 md:mb-20", centered && "text-center", className)}>
       {badge && (
-        <span className="mb-4 inline-block rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.15em] text-primary">
+        <span className="mb-4 inline-block text-primary text-sm font-semibold uppercase tracking-wider">
           {badge}
         </span>
       )}
-      <h2 className="font-heading text-3xl font-bold leading-tight md:text-4xl lg:text-[42px]">
+      <h2 className="text-3xl font-bold leading-tight tracking-tight md:text-4xl lg:text-5xl">
         {title}
       </h2>
       {subtitle && (

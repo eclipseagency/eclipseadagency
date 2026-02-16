@@ -29,7 +29,7 @@ export default function BlogPage() {
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="group rounded-2xl border border-border bg-bg-card overflow-hidden transition-all duration-300 hover:border-border-hover"
+              className="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden transition-all duration-300 hover:border-primary/50"
             >
               <div className="aspect-[16/9] overflow-hidden">
                 <Image
@@ -43,7 +43,7 @@ export default function BlogPage() {
               </div>
               <div className="p-6">
                 <div className="mb-3 flex items-center gap-3 text-xs text-text-muted">
-                  <span className="rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 font-bold uppercase tracking-wider text-primary">
+                  <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
                     {post.category}
                   </span>
                   <span>{formatDate(post.date)}</span>
