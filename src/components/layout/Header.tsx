@@ -29,9 +29,9 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[rgba(8,10,15,0.92)]",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-xl bg-bg/80",
         scrolled
-          ? "py-3 border-b border-white/[0.07]"
+          ? "py-3 border-b border-white/5"
           : "py-5"
       )}
     >
@@ -73,7 +73,7 @@ export function Header() {
                   />
                 </button>
                 {dropdownOpen && (
-                  <div className="absolute left-0 top-full mt-1 min-w-[200px] rounded-xl border border-white/[0.06] bg-[#0a0c11] p-2">
+                  <div className="absolute left-0 top-full mt-1 min-w-[200px] rounded-xl border border-white/10 bg-bg/95 backdrop-blur-xl p-2">
                     {item.children.map((child) => (
                       <Link
                         key={child.label}
@@ -120,7 +120,7 @@ export function Header() {
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <div className="fixed inset-0 top-0 flex flex-col items-center justify-center gap-6 bg-[#080a0f] lg:hidden">
+        <div className="fixed inset-0 top-0 flex flex-col items-center justify-center gap-6 bg-bg/95 backdrop-blur-xl lg:hidden">
           {siteConfig.nav.map((item) =>
             item.children ? (
               <div key={item.label} className="flex flex-col items-center gap-3">

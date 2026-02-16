@@ -36,11 +36,12 @@ export function Hero() {
       ref={sectionRef}
       className="relative min-h-screen overflow-x-hidden px-5 pt-32 pb-16 md:px-8 md:pt-36 md:pb-20"
     >
-      {/* ── BG: clean dark gradient ── */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#060612] via-bg to-bg" />
+      {/* ── BG ── */}
+      <div className="absolute inset-0 bg-bg" />
 
-      {/* ── Single subtle ambient glow ── */}
-      <div className="absolute right-[5%] top-[15%] h-[500px] w-[500px] rounded-full bg-primary/[0.03] blur-[140px]" />
+      {/* ── Ambient glow blobs ── */}
+      <div className="absolute -left-[10%] top-[10%] h-[500px] w-[500px] rounded-full bg-primary/5 blur-[140px] opacity-30" />
+      <div className="absolute right-[5%] top-[20%] h-[400px] w-[400px] rounded-full bg-secondary/5 blur-[140px] opacity-20" />
 
       {/* ── Film grain ── */}
       <div className="page-hero-noise absolute inset-0" />
@@ -69,7 +70,7 @@ export function Hero() {
           >
             {heroContent.heading[0]}
             <br />
-            <span className="gradient-text">{heroContent.heading[1]}</span>
+            <span className="gradient-text-animated">{heroContent.heading[1]}</span>
           </motion.h1>
 
           <motion.p
@@ -144,7 +145,7 @@ export function Hero() {
               width={520}
               height={520}
               priority
-              className="relative z-10 h-auto w-[240px] drop-shadow-[0_0_50px_rgba(255,107,53,0.12)] sm:w-[300px] md:w-[380px] lg:w-[460px]"
+              className="relative z-10 h-auto w-[240px] drop-shadow-[0_0_50px_rgba(6,182,212,0.15)] sm:w-[300px] md:w-[380px] lg:w-[460px]"
             />
           </motion.div>
         </motion.div>

@@ -22,22 +22,22 @@ export function Button({
   disabled,
   onClick,
 }: ButtonProps) {
-  const isGhost = variant === "ghost";
-
-  const baseClasses = isGhost
-    ? "inline-flex items-center justify-center font-bold uppercase tracking-[0.15em] transition-colors duration-300"
-    : "btn-hud inline-flex items-center justify-center font-bold uppercase tracking-[0.15em] transition-all duration-300";
+  const baseClasses =
+    "inline-flex items-center justify-center gap-2 font-semibold transition-all duration-300";
 
   const variants = {
-    primary: "btn-hud-primary",
-    outline: "btn-hud-outline",
-    ghost: "text-text-secondary hover:text-primary bg-transparent",
+    primary:
+      "rounded-xl bg-primary text-black hover:bg-primary-light hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:scale-105",
+    outline:
+      "rounded-xl border border-white/20 text-white hover:bg-white/5 hover:border-primary/50",
+    ghost:
+      "text-text-secondary hover:text-primary bg-transparent",
   };
 
   const sizes = {
-    sm: "px-6 py-2.5 text-[11px] gap-2.5",
-    md: "px-8 py-3 text-xs gap-3",
-    lg: "px-10 py-3.5 text-[13px] gap-3.5",
+    sm: "px-5 py-2 text-xs",
+    md: "px-6 py-2.5 text-sm",
+    lg: "px-8 py-3 text-sm",
   };
 
   const classes = cn(
@@ -48,31 +48,17 @@ export function Button({
     className
   );
 
-  const content = isGhost ? (
-    children
-  ) : (
-    <>
-      <span className="btn-hud-chevron btn-hud-chevron-l" aria-hidden>
-        &#x2039;&#x2039;
-      </span>
-      <span className="relative z-10">{children}</span>
-      <span className="btn-hud-chevron btn-hud-chevron-r" aria-hidden>
-        &#x203A;&#x203A;
-      </span>
-    </>
-  );
-
   if (href) {
     return (
       <Link href={href} className={classes}>
-        {content}
+        {children}
       </Link>
     );
   }
 
   return (
     <button type={type} className={classes} disabled={disabled} onClick={onClick}>
-      {content}
+      {children}
     </button>
   );
 }

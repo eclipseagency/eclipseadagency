@@ -10,9 +10,9 @@ export function CtaBanner() {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-bg-elevated/30 to-transparent" />
 
       <div className="relative text-center">
-        <h2 className="font-heading text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
+        <h2 className="text-3xl font-bold leading-tight tracking-tight md:text-4xl lg:text-5xl">
           Ready to Step Into the{" "}
-          <span className="gradient-text">Spotlight?</span>
+          <span className="gradient-text-animated">Spotlight?</span>
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-text-secondary md:text-lg">
           Let&apos;s collaborate to build something extraordinary. Tell us about your project

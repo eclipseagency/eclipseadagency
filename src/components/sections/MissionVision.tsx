@@ -20,7 +20,7 @@ export function MissionVision({ mission, vision }: MissionVisionProps) {
             transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
           >
             {/* Orbiting dot */}
-            <div className="absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rounded-full bg-primary/40 shadow-[0_0_12px_rgba(255,107,53,0.4)]" />
+            <div className="absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rounded-full bg-primary/40 shadow-[0_0_12px_rgba(6,182,212,0.4)]" />
           </motion.div>
         </div>
 
@@ -31,7 +31,7 @@ export function MissionVision({ mission, vision }: MissionVisionProps) {
             animate={{ rotate: -360 }}
             transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
           >
-            <div className="absolute -bottom-1 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-primary/30 shadow-[0_0_8px_rgba(255,107,53,0.3)]" />
+            <div className="absolute -bottom-1 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-primary/30 shadow-[0_0_8px_rgba(6,182,212,0.3)]" />
           </motion.div>
         </div>
 
@@ -69,10 +69,10 @@ export function MissionVision({ mission, vision }: MissionVisionProps) {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6 }}
       >
-        <span className="mb-4 inline-block rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.15em] text-primary">
+        <span className="mb-4 inline-block text-primary text-sm font-semibold uppercase tracking-wider">
           Who We Are
         </span>
-        <h2 className="font-heading text-3xl font-bold md:text-4xl lg:text-[42px]">
+        <h2 className="text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
           Mission & Vision
         </h2>
       </motion.div>
@@ -92,7 +92,7 @@ export function MissionVision({ mission, vision }: MissionVisionProps) {
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/30 via-transparent to-primary-light/20 opacity-60 transition-opacity duration-500 group-hover:opacity-100" />
           </div>
 
-          <div className="relative rounded-2xl bg-bg-elevated/80 p-8 backdrop-blur-sm md:p-10">
+          <div className="relative rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-md md:p-10">
             {/* Icon */}
             <div className="mb-6 flex items-center gap-4">
               <div className="relative flex h-14 w-14 items-center justify-center">
@@ -150,7 +150,7 @@ export function MissionVision({ mission, vision }: MissionVisionProps) {
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-bl from-primary-light/30 via-transparent to-primary/20 opacity-60 transition-opacity duration-500 group-hover:opacity-100" />
           </div>
 
-          <div className="relative rounded-2xl bg-bg-elevated/80 p-8 backdrop-blur-sm md:p-10">
+          <div className="relative rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-md md:p-10">
             {/* Icon */}
             <div className="mb-6 flex items-center gap-4">
               <div className="relative flex h-14 w-14 items-center justify-center">
