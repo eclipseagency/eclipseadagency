@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { portfolioItems } from "@/data/site";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -10,6 +11,19 @@ interface PortfolioGridProps {
   limit?: number;
   showCta?: boolean;
 }
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.07,
+      duration: 0.6,
+      ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
+    },
+  }),
+};
 
 export function PortfolioGrid({ limit, showCta = true }: PortfolioGridProps) {
   const items = limit ? portfolioItems.slice(0, limit) : portfolioItems;
@@ -22,13 +36,18 @@ export function PortfolioGrid({ limit, showCta = true }: PortfolioGridProps) {
         subtitle="A selection of our recent work across branding, digital, web development, production, and more."
       />
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {items.map((item) => (
-          <div
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {items.map((item, i) => (
+          <motion.div
             key={item.id}
-            className="group relative overflow-hidden rounded-2xl border border-border bg-bg-card"
+            custom={i}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            className="glass-card group relative overflow-hidden"
           >
-            <div className="relative aspect-[4/3] overflow-hidden">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-t-[1.25rem]">
               <Image
                 src={item.image}
                 alt={item.title}
@@ -43,7 +62,7 @@ export function PortfolioGrid({ limit, showCta = true }: PortfolioGridProps) {
               </div>
             </div>
             <div className="p-5">
-              <span className="mb-2 inline-block text-xs font-bold uppercase tracking-[0.1em] text-primary">
+              <span className="mb-2 inline-block text-xs font-semibold uppercase tracking-[0.1em] text-primary">
                 {item.category}
               </span>
               <h3 className="font-heading text-lg font-bold">{item.title}</h3>
@@ -51,23 +70,29 @@ export function PortfolioGrid({ limit, showCta = true }: PortfolioGridProps) {
                 {item.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-glass-border px-2.5 py-0.5 text-[10px] uppercase tracking-wider text-text-muted"
+                    className="rounded-full border border-white/[0.06] px-2.5 py-0.5 text-[10px] uppercase tracking-wider text-text-muted"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
 
       {showCta && (
-        <div className="mt-14 text-center">
+        <motion.div
+          className="mt-14 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+        >
           <Button href="/portfolio" variant="outline" size="lg">
             View All Projects
           </Button>
-        </div>
+        </motion.div>
       )}
     </SectionWrapper>
   );

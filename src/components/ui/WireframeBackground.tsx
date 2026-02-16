@@ -1,121 +1,101 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+
 export function WireframeBackground() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animationId: number;
+    let time = 0;
+
+    // Blob configuration - large, soft gradient orbs
+    const blobs = [
+      { x: 0.15, y: 0.2, r: 0.35, color: "255,107,53", speed: 0.0003, phase: 0, opacity: 0.12 },
+      { x: 0.75, y: 0.15, r: 0.3, color: "247,147,30", speed: 0.00025, phase: 2, opacity: 0.08 },
+      { x: 0.5, y: 0.7, r: 0.4, color: "255,107,53", speed: 0.00035, phase: 4, opacity: 0.1 },
+      { x: 0.85, y: 0.6, r: 0.28, color: "255,140,60", speed: 0.0002, phase: 1, opacity: 0.07 },
+      { x: 0.3, y: 0.85, r: 0.32, color: "247,147,30", speed: 0.0003, phase: 3, opacity: 0.09 },
+      { x: 0.1, y: 0.55, r: 0.25, color: "255,80,40", speed: 0.00028, phase: 5, opacity: 0.06 },
+    ];
+
+    function resize() {
+      if (!canvas) return;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function draw() {
+      if (!canvas || !ctx) return;
+      const w = canvas.width;
+      const h = canvas.height;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Draw each blob
+      for (const blob of blobs) {
+        const bx = (blob.x + Math.sin(time * blob.speed + blob.phase) * 0.08) * w;
+        const by = (blob.y + Math.cos(time * blob.speed * 0.7 + blob.phase) * 0.06) * h;
+        const br = blob.r * Math.max(w, h);
+
+        const gradient = ctx.createRadialGradient(bx, by, 0, bx, by, br);
+        gradient.addColorStop(0, `rgba(${blob.color},${blob.opacity})`);
+        gradient.addColorStop(0.5, `rgba(${blob.color},${blob.opacity * 0.4})`);
+        gradient.addColorStop(1, `rgba(${blob.color},0)`);
+
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, w, h);
+      }
+
+      time++;
+      animationId = requestAnimationFrame(draw);
+    }
+
+    resize();
+    draw();
+    window.addEventListener("resize", resize);
+
+    return () => {
+      window.removeEventListener("resize", resize);
+      cancelAnimationFrame(animationId);
+    };
+  }, []);
+
   return (
     <div className="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
-      <svg
-        className="h-full w-full"
-        viewBox="0 0 1440 900"
-        preserveAspectRatio="xMidYMid slice"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      {/* Animated gradient blobs */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 h-full w-full"
+        style={{ filter: "blur(80px)" }}
+      />
+
+      {/* Frosted glass overlay */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backdropFilter: "blur(100px) saturate(1.5)",
+          WebkitBackdropFilter: "blur(100px) saturate(1.5)",
+          background: "rgba(10,10,10,0.75)",
+        }}
+      />
+
+      {/* Subtle noise texture */}
+      <div className="page-hero-noise absolute inset-0" />
+
+      {/* Fine dot grid pattern */}
+      <svg className="absolute inset-0 h-full w-full opacity-[0.03]" aria-hidden="true">
         <defs>
-          {/* Radial mask to fade center so content stays readable */}
-          <radialGradient id="wire-fade" cx="50%" cy="50%" r="60%">
-            <stop offset="0%" stopColor="white" stopOpacity="0" />
-            <stop offset="45%" stopColor="white" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="white" stopOpacity="1" />
-          </radialGradient>
-          <mask id="wire-mask">
-            <rect width="1440" height="900" fill="url(#wire-fade)" />
-          </mask>
+          <pattern id="dot-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.5" fill="white" />
+          </pattern>
         </defs>
-
-        <g mask="url(#wire-mask)" stroke="#ff6b35" fill="none" strokeWidth="0.7">
-          {/* === Left side wireframe mesh === */}
-          {/* Large angular shapes - left */}
-          <path d="M0 0 L120 180 L0 320" opacity="0.12" />
-          <path d="M0 0 L200 80 L120 180" opacity="0.1" />
-          <path d="M200 80 L320 20 L280 160" opacity="0.08" />
-          <path d="M120 180 L280 160 L200 300" opacity="0.1" />
-          <path d="M0 320 L120 180 L200 300" opacity="0.09" />
-          <path d="M200 300 L80 440 L0 320" opacity="0.11" />
-          <path d="M200 300 L280 160 L380 280" opacity="0.08" />
-          <path d="M80 440 L200 300 L260 460" opacity="0.1" />
-          <path d="M0 500 L80 440 L0 320" opacity="0.09" />
-          <path d="M0 500 L80 440 L160 560" opacity="0.11" />
-          <path d="M80 440 L260 460 L160 560" opacity="0.08" />
-          <path d="M260 460 L380 280 L420 420" opacity="0.07" />
-          <path d="M260 460 L420 420 L360 560" opacity="0.09" />
-          <path d="M160 560 L260 460 L360 560" opacity="0.1" />
-          <path d="M0 680 L160 560 L80 750" opacity="0.09" />
-          <path d="M160 560 L360 560 L280 700" opacity="0.08" />
-          <path d="M0 680 L80 750 L0 900" opacity="0.1" />
-          <path d="M80 750 L280 700 L200 860" opacity="0.09" />
-          <path d="M0 900 L80 750 L200 860" opacity="0.11" />
-          <path d="M200 860 L280 700 L400 800" opacity="0.08" />
-          <path d="M200 860 L400 800 L320 900" opacity="0.09" />
-
-          {/* Mid-left connectors */}
-          <path d="M320 20 L480 60 L420 160" opacity="0.06" />
-          <path d="M280 160 L420 160 L380 280" opacity="0.07" />
-          <path d="M420 160 L480 60 L560 180" opacity="0.05" />
-          <path d="M380 280 L420 160 L560 180" opacity="0.06" />
-          <path d="M420 420 L560 180 L580 360" opacity="0.05" />
-          <path d="M420 420 L580 360 L520 500" opacity="0.06" />
-          <path d="M360 560 L520 500 L480 640" opacity="0.05" />
-          <path d="M280 700 L360 560 L480 640" opacity="0.06" />
-          <path d="M400 800 L480 640 L560 760" opacity="0.05" />
-          <path d="M400 800 L560 760 L500 900" opacity="0.06" />
-
-          {/* === Right side wireframe mesh === */}
-          <path d="M1440 0 L1320 180 L1440 320" opacity="0.12" />
-          <path d="M1440 0 L1240 80 L1320 180" opacity="0.1" />
-          <path d="M1240 80 L1120 20 L1160 160" opacity="0.08" />
-          <path d="M1320 180 L1160 160 L1240 300" opacity="0.1" />
-          <path d="M1440 320 L1320 180 L1240 300" opacity="0.09" />
-          <path d="M1240 300 L1360 440 L1440 320" opacity="0.11" />
-          <path d="M1240 300 L1160 160 L1060 280" opacity="0.08" />
-          <path d="M1360 440 L1240 300 L1180 460" opacity="0.1" />
-          <path d="M1440 500 L1360 440 L1440 320" opacity="0.09" />
-          <path d="M1440 500 L1360 440 L1280 560" opacity="0.11" />
-          <path d="M1360 440 L1180 460 L1280 560" opacity="0.08" />
-          <path d="M1180 460 L1060 280 L1020 420" opacity="0.07" />
-          <path d="M1180 460 L1020 420 L1080 560" opacity="0.09" />
-          <path d="M1280 560 L1180 460 L1080 560" opacity="0.1" />
-          <path d="M1440 680 L1280 560 L1360 750" opacity="0.09" />
-          <path d="M1280 560 L1080 560 L1160 700" opacity="0.08" />
-          <path d="M1440 680 L1360 750 L1440 900" opacity="0.1" />
-          <path d="M1360 750 L1160 700 L1240 860" opacity="0.09" />
-          <path d="M1440 900 L1360 750 L1240 860" opacity="0.11" />
-          <path d="M1240 860 L1160 700 L1040 800" opacity="0.08" />
-          <path d="M1240 860 L1040 800 L1120 900" opacity="0.09" />
-
-          {/* Mid-right connectors */}
-          <path d="M1120 20 L960 60 L1020 160" opacity="0.06" />
-          <path d="M1160 160 L1020 160 L1060 280" opacity="0.07" />
-          <path d="M1020 160 L960 60 L880 180" opacity="0.05" />
-          <path d="M1060 280 L1020 160 L880 180" opacity="0.06" />
-          <path d="M1020 420 L880 180 L860 360" opacity="0.05" />
-          <path d="M1020 420 L860 360 L920 500" opacity="0.06" />
-          <path d="M1080 560 L920 500 L960 640" opacity="0.05" />
-          <path d="M1160 700 L1080 560 L960 640" opacity="0.06" />
-          <path d="M1040 800 L960 640 L880 760" opacity="0.05" />
-          <path d="M1040 800 L880 760 L940 900" opacity="0.06" />
-
-          {/* === Top edge shapes === */}
-          <path d="M480 60 L620 0 L560 180" opacity="0.06" />
-          <path d="M620 0 L780 0 L680 120" opacity="0.05" />
-          <path d="M780 0 L960 60 L880 180" opacity="0.06" />
-          <path d="M780 0 L820 0 L680 120" opacity="0.04" />
-
-          {/* === Bottom edge shapes === */}
-          <path d="M500 900 L620 780 L660 900" opacity="0.06" />
-          <path d="M660 900 L780 820 L820 900" opacity="0.05" />
-          <path d="M820 900 L780 820 L940 900" opacity="0.06" />
-          <path d="M620 780 L780 820 L720 720" opacity="0.04" />
-
-          {/* === Sparse center elements (very faint) === */}
-          <path d="M580 360 L680 120 L880 180" opacity="0.03" />
-          <path d="M580 360 L880 180 L860 360" opacity="0.03" />
-          <path d="M580 360 L720 480 L860 360" opacity="0.03" />
-          <path d="M520 500 L720 480 L580 360" opacity="0.03" />
-          <path d="M920 500 L720 480 L860 360" opacity="0.03" />
-          <path d="M480 640 L720 480 L520 500" opacity="0.03" />
-          <path d="M960 640 L720 480 L920 500" opacity="0.03" />
-          <path d="M620 780 L720 480 L480 640" opacity="0.02" />
-          <path d="M780 820 L720 480 L960 640" opacity="0.02" />
-        </g>
+        <rect width="100%" height="100%" fill="url(#dot-grid)" />
       </svg>
     </div>
   );
