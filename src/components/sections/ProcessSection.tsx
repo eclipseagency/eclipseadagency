@@ -178,7 +178,7 @@ export function ProcessSection() {
           style={{
             height: `${lineProgress}%`,
             background:
-              "linear-gradient(to bottom, rgba(6,182,212,0.6), rgba(6,182,212,0.15))",
+              "linear-gradient(to bottom, rgba(255,107,53,0.6), rgba(255,107,53,0.15))",
             transition: "height 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
           }}
         />
