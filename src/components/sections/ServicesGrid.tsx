@@ -20,14 +20,14 @@ export function ServicesGrid() {
           <Link
             key={service.id}
             href={`/services#${service.id}`}
-            className="group rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-md transition-all duration-300 hover:border-primary/50 hover:-translate-y-0.5 hover:shadow-xl"
+            className="group rounded-2xl border border-border bg-bg-card p-8 transition-all duration-300 hover:border-border-hover hover:bg-white/[0.06]"
           >
-            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary/20">
+            <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl border border-primary/20 bg-primary/10 text-primary transition-all">
               <ServiceIcon icon={service.icon} size={26} />
             </div>
-            <h3 className="mb-3 text-xl font-semibold text-white">{service.title}</h3>
+            <h3 className="mb-3 font-heading text-xl font-bold">{service.title}</h3>
             <p className="mb-5 text-sm leading-relaxed text-text-secondary">{service.description}</p>
-            <div className="flex items-center gap-2 text-xs font-semibold text-primary opacity-0 transition-all group-hover:opacity-100">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.1em] text-primary opacity-0 transition-all group-hover:opacity-100">
               Learn More <ArrowRightIcon size={14} />
             </div>
           </Link>

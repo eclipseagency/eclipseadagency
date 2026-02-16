@@ -11,7 +11,7 @@ export function ServicesDetailSection() {
         <SectionWrapper key={service.id} id={service.id} dark={i % 2 === 1}>
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
             <div className={i % 2 === 1 ? "lg:order-2" : ""}>
-              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary">
                 <ServiceIcon icon={service.icon} size={32} />
               </div>
               <h2 className="mb-4 font-heading text-3xl font-bold md:text-4xl">{service.title}</h2>
@@ -28,7 +28,7 @@ export function ServicesDetailSection() {
 
             {/* Decorative visual */}
             <div className={`relative ${i % 2 === 1 ? "lg:order-1" : ""}`}>
-              <div className="aspect-[4/3] rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-8 flex items-center justify-center">
+              <div className="aspect-[4/3] rounded-2xl border border-border bg-bg-card p-8 flex items-center justify-center">
                 <div className="relative">
                   <div className="flex h-32 w-32 items-center justify-center rounded-full border-2 border-primary/20 text-primary">
                     <ServiceIcon icon={service.icon} size={56} className="opacity-40" />

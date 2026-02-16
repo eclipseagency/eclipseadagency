@@ -127,7 +127,7 @@ export default function AboutPage() {
           title="From Bold Idea to Creative Powerhouse"
         />
         <div className="grid items-start gap-10 md:grid-cols-2">
-          <div className="overflow-hidden rounded-2xl border border-white/10">
+          <div className="overflow-hidden rounded-2xl border border-border">
             <Image
               src={profileImages[0].src}
               alt={profileImages[0].alt}
@@ -152,7 +152,7 @@ export default function AboutPage() {
       {/* ── Showreel 2024 ── */}
       <SectionWrapper>
         <SectionHeader badge="Showreel" title="Showreel 2024" />
-        <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-white/10">
+        <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-border">
           <div className="relative" style={{ paddingTop: "56.25%" }}>
             <iframe
               src="https://player.vimeo.com/video/1051203598?h=a43672f073&badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&background=1"
@@ -175,7 +175,7 @@ export default function AboutPage() {
       {/* ── Motion Reel ── */}
       <SectionWrapper>
         <SectionHeader badge="Motion" title="Motion & Animation" />
-        <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-white/10">
+        <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-border">
           <video
             autoPlay
             muted
@@ -208,7 +208,7 @@ export default function AboutPage() {
           {aboutContent.values.map((value) => (
             <div
               key={value.title}
-              className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-7 text-center transition-all duration-300 hover:border-primary/50"
+              className="rounded-2xl border border-border bg-bg-card p-7 text-center"
             >
               <h3 className="mb-3 font-heading text-xl font-bold">
                 {value.title}
@@ -243,7 +243,7 @@ export default function AboutPage() {
           {aboutContent.team.map((member) => (
             <div
               key={member.name}
-              className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 hover:border-primary/50"
+              className="group overflow-hidden rounded-2xl border border-border bg-bg-card"
             >
               <div className="aspect-square overflow-hidden">
                 <Image

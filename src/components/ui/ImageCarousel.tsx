@@ -54,7 +54,7 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
               href={img.src}
               target="_blank"
               rel="noopener noreferrer"
-              className="block overflow-hidden rounded-2xl border border-white/10"
+              className="block overflow-hidden rounded-2xl border border-border"
             >
               <Image
                 src={img.src}
@@ -73,7 +73,7 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
         type="button"
         aria-label="Previous"
         onClick={() => scroll("left")}
-        className={`absolute -left-4 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-bg/90 text-white backdrop-blur-sm transition-opacity duration-300 hover:border-primary/40 ${
+        className={`absolute -left-4 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-[#0a0c11]/90 text-white backdrop-blur-sm transition-opacity duration-300 hover:border-primary/40 ${
           canScrollLeft ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
@@ -86,7 +86,7 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
         type="button"
         aria-label="Next"
         onClick={() => scroll("right")}
-        className={`absolute -right-4 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-bg/90 text-white backdrop-blur-sm transition-opacity duration-300 hover:border-primary/40 ${
+        className={`absolute -right-4 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-[#0a0c11]/90 text-white backdrop-blur-sm transition-opacity duration-300 hover:border-primary/40 ${
           canScrollRight ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >

@@ -24,7 +24,7 @@ const socialIcons = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/5 bg-bg px-5 pt-16 pb-8 md:px-8">
+    <footer className="border-t border-border bg-bg-elevated px-5 pt-16 pb-8 md:px-8">
       <div className="mx-auto max-w-[1400px]">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
@@ -106,7 +106,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg text-text-muted transition-colors duration-300 hover:bg-white/10 hover:text-primary"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-glass-border text-text-muted transition-all hover:border-primary hover:text-primary"
                 >
                   <Icon size={16} />
                 </a>
@@ -116,7 +116,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 md:flex-row">
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row">
           <p className="text-xs text-text-muted">
             &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </p>

@@ -103,8 +103,8 @@ export function CustomCursor() {
               <circle cx="20" cy="16" r="11" fill="black" />
             </mask>
             <radialGradient id="eclipse-glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#06b6d4" stopOpacity="0" />
+              <stop offset="0%" stopColor="#ff6b35" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#ff6b35" stopOpacity="0" />
             </radialGradient>
           </defs>
           {/* Outer glow */}
@@ -114,7 +114,7 @@ export function CustomCursor() {
             cx="14"
             cy="16"
             r="10"
-            fill="#06b6d4"
+            fill="#ff6b35"
             mask="url(#eclipse-mask)"
           />
         </svg>

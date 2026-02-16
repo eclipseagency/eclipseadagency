@@ -26,7 +26,7 @@ export function PortfolioGrid({ limit, showCta = true }: PortfolioGridProps) {
         {items.map((item) => (
           <div
             key={item.id}
-            className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 hover:border-primary/50"
+            className="group relative overflow-hidden rounded-2xl border border-border bg-bg-card"
           >
             <div className="relative aspect-[4/3] overflow-hidden">
               <Image
@@ -43,15 +43,15 @@ export function PortfolioGrid({ limit, showCta = true }: PortfolioGridProps) {
               </div>
             </div>
             <div className="p-5">
-              <span className="mb-2 inline-block text-xs font-semibold text-primary">
+              <span className="mb-2 inline-block text-xs font-bold uppercase tracking-[0.1em] text-primary">
                 {item.category}
               </span>
-              <h3 className="text-lg font-semibold text-white">{item.title}</h3>
+              <h3 className="font-heading text-lg font-bold">{item.title}</h3>
               <div className="mt-3 flex flex-wrap gap-2">
                 {item.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] text-primary"
+                    className="rounded-full border border-glass-border px-2.5 py-0.5 text-[10px] uppercase tracking-wider text-text-muted"
                   >
                     {tag}
                   </span>
