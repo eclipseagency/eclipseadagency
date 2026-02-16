@@ -16,17 +16,17 @@ export function Hero() {
   });
 
   /* ── Text: rises fast + fades ── */
-  const textY = useTransform(scrollYProgress, [0, 0.6], [0, -140]);
+  const textY = useTransform(scrollYProgress, [0, 0.6], [0, -100]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   /* ── Astronaut: rises slower (parallax depth) ── */
-  const astroY = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const astroScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
-  const astroRotate = useTransform(scrollYProgress, [0, 1], [0, -3]);
+  const astroY = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const astroScale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
+  const astroRotate = useTransform(scrollYProgress, [0, 1], [0, -2]);
 
   /* ── Eclipse ring ── */
   const ringOpacity = useTransform(scrollYProgress, [0, 0.6], [0.15, 0]);
-  const ringScale = useTransform(scrollYProgress, [0, 1], [1, 1.3]);
+  const ringScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
 
   /* ── Scroll indicator ── */
   const scrollIndOp = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
@@ -34,7 +34,7 @@ export function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen overflow-hidden px-5 pb-20 pt-28 md:px-8 md:pb-0 md:pt-0"
+      className="relative min-h-screen overflow-x-hidden px-5 pt-32 pb-16 md:px-8 md:pt-36 md:pb-20"
     >
       {/* ── BG: clean dark gradient ── */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#060612] via-bg to-bg" />
@@ -45,11 +45,11 @@ export function Hero() {
       {/* ── Film grain ── */}
       <div className="page-hero-noise absolute inset-0" />
 
-      {/* ── Two-column layout ── */}
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-[1400px] flex-col items-center justify-center gap-10 md:flex-row md:gap-12 lg:gap-20">
+      {/* ── Two-column grid ── */}
+      <div className="relative z-10 mx-auto grid max-w-[1400px] items-center gap-10 md:gap-12 lg:grid-cols-2 lg:gap-16 lg:min-h-[calc(100vh-10rem)]">
         {/* ─── Left: Text ─── */}
         <motion.div
-          className="flex-1 text-center md:text-left"
+          className="text-center lg:text-left"
           style={{ y: textY, opacity: textOpacity }}
         >
           <motion.span
@@ -76,7 +76,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.6 }}
-            className="mt-6 max-w-lg text-base leading-relaxed text-text-secondary md:text-lg"
+            className="mx-auto mt-6 max-w-lg text-base leading-relaxed text-text-secondary md:text-lg lg:mx-0"
           >
             {heroContent.subheading}
           </motion.p>
@@ -85,7 +85,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.75 }}
-            className="mt-8 flex flex-wrap justify-center gap-4 md:justify-start"
+            className="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start"
           >
             <Button href={heroContent.cta.href} size="lg">
               {heroContent.cta.label}
@@ -103,7 +103,7 @@ export function Hero() {
             className="mt-12 grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-4"
           >
             {heroContent.stats.map((stat) => (
-              <div key={stat.label} className="text-center md:text-left">
+              <div key={stat.label} className="text-center lg:text-left">
                 <p className="font-heading text-2xl font-bold text-primary md:text-3xl">
                   {stat.value}
                 </p>
@@ -115,7 +115,7 @@ export function Hero() {
 
         {/* ─── Right: Astronaut ─── */}
         <motion.div
-          className="relative flex flex-1 items-center justify-center"
+          className="relative flex items-center justify-center"
           style={{ y: astroY, scale: astroScale, rotate: astroRotate }}
         >
           {/* Eclipse ring */}
@@ -123,14 +123,14 @@ export function Hero() {
             className="absolute inset-0 flex items-center justify-center"
             style={{ opacity: ringOpacity, scale: ringScale }}
           >
-            <div className="h-[340px] w-[340px] animate-spin-slow rounded-full border border-primary/20 md:h-[440px] md:w-[440px] lg:h-[500px] lg:w-[500px]">
+            <div className="h-[280px] w-[280px] animate-spin-slow rounded-full border border-primary/20 sm:h-[340px] sm:w-[340px] md:h-[440px] md:w-[440px] lg:h-[500px] lg:w-[500px]">
               <div className="absolute -top-1 left-1/2 h-2.5 w-2.5 rounded-full bg-primary" />
               <div className="absolute -bottom-1 left-1/2 h-2 w-2 rounded-full bg-primary-light" />
             </div>
           </motion.div>
 
           {/* Globe glow */}
-          <div className="absolute bottom-[15%] left-1/2 h-[100px] w-[100px] -translate-x-1/2 rounded-full bg-primary/15 blur-[40px] md:h-[140px] md:w-[140px]" />
+          <div className="absolute bottom-[15%] left-1/2 h-[80px] w-[80px] -translate-x-1/2 rounded-full bg-primary/15 blur-[40px] md:h-[140px] md:w-[140px]" />
 
           {/* Astronaut image */}
           <motion.div
@@ -144,7 +144,7 @@ export function Hero() {
               width={520}
               height={520}
               priority
-              className="relative z-10 h-auto w-[280px] drop-shadow-[0_0_50px_rgba(255,107,53,0.12)] sm:w-[340px] md:w-[420px] lg:w-[480px]"
+              className="relative z-10 h-auto w-[240px] drop-shadow-[0_0_50px_rgba(255,107,53,0.12)] sm:w-[300px] md:w-[380px] lg:w-[460px]"
             />
           </motion.div>
         </motion.div>
