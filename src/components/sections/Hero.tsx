@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useEffect, useState, useCallback } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { ChevronDownIcon } from "@/components/ui/Icons";
@@ -90,10 +90,46 @@ function LightRays() {
 }
 
 /* ═══════════════════════════════════════════════════════
+   useMouseParallax — smooth mouse-tracking offset
+   ═══════════════════════════════════════════════════════ */
+function useMouseParallax(strength: number = 25) {
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const target = useRef({ x: 0, y: 0 });
+  const current = useRef({ x: 0, y: 0 });
+  const raf = useRef(0);
+
+  const animate = useCallback(() => {
+    current.current.x += (target.current.x - current.current.x) * 0.06;
+    current.current.y += (target.current.y - current.current.y) * 0.06;
+    setOffset({ x: current.current.x, y: current.current.y });
+    raf.current = requestAnimationFrame(animate);
+  }, []);
+
+  useEffect(() => {
+    function onMove(e: MouseEvent) {
+      const cx = (e.clientX / window.innerWidth - 0.5) * 2;
+      const cy = (e.clientY / window.innerHeight - 0.5) * 2;
+      target.current = { x: cx * strength, y: cy * strength };
+    }
+
+    window.addEventListener("mousemove", onMove, { passive: true });
+    raf.current = requestAnimationFrame(animate);
+
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(raf.current);
+    };
+  }, [strength, animate]);
+
+  return offset;
+}
+
+/* ═══════════════════════════════════════════════════════
    Main hero — cinematic astronaut space composition
    ═══════════════════════════════════════════════════════ */
 export function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const mouse = useMouseParallax(30);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -186,7 +222,7 @@ export function Hero() {
 
       {/* ── Center composition ── */}
       <div className="absolute inset-0 flex items-center justify-center">
-        {/* ─── Giant background text: ECLIPSE ─── */}
+        {/* ─── Giant background text: ECLIPSE AGENCY ─── */}
         <motion.div
           className="absolute w-full text-center pointer-events-none select-none z-[1]"
           style={{ y: textTopY }}
@@ -195,20 +231,23 @@ export function Hero() {
           transition={{ duration: 1.2, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           <h1
-            className="font-heading font-black uppercase leading-none tracking-tight"
+            className="font-heading font-black uppercase leading-none"
             style={{
-              fontSize: "clamp(60px, 13vw, 180px)",
-              color: "transparent",
-              WebkitTextStroke: "1.5px rgba(255,255,255,0.07)",
-              textShadow: "0 0 80px rgba(255,107,53,0.06)",
+              fontSize: "clamp(56px, 12vw, 170px)",
+              letterSpacing: "0.04em",
               marginTop: "-3vw",
+              background: "linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.05) 60%, rgba(255,107,53,0.08) 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              WebkitTextStroke: "1px rgba(255,255,255,0.1)",
+              filter: "drop-shadow(0 0 60px rgba(255,107,53,0.08))",
             }}
           >
             ECLIPSE
           </h1>
         </motion.div>
 
-        {/* ─── Giant background text: AGENCY ─── */}
         <motion.div
           className="absolute w-full text-center pointer-events-none select-none z-[1]"
           style={{ y: textBotY }}
@@ -217,14 +256,18 @@ export function Hero() {
           transition={{ duration: 1.2, delay: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           <span
-            className="font-heading font-black uppercase leading-none tracking-tight"
+            className="font-heading font-black uppercase leading-none"
             style={{
-              fontSize: "clamp(60px, 13vw, 180px)",
-              color: "transparent",
-              WebkitTextStroke: "1.5px rgba(255,255,255,0.07)",
-              textShadow: "0 0 80px rgba(255,107,53,0.06)",
+              fontSize: "clamp(56px, 12vw, 170px)",
+              letterSpacing: "0.04em",
               marginTop: "8vw",
               display: "block",
+              background: "linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.04) 60%, rgba(255,107,53,0.06) 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              WebkitTextStroke: "1px rgba(255,255,255,0.1)",
+              filter: "drop-shadow(0 0 60px rgba(255,107,53,0.08))",
             }}
           >
             AGENCY
@@ -240,10 +283,11 @@ export function Hero() {
           transition={{ duration: 1.4, delay: 0.5 }}
         >
           <span
-            className="font-heading font-black uppercase leading-none tracking-tight"
+            className="font-heading font-black uppercase leading-none"
             style={{
-              fontSize: "clamp(60px, 13vw, 180px)",
-              background: "linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.03) 100%)",
+              fontSize: "clamp(56px, 12vw, 170px)",
+              letterSpacing: "0.04em",
+              background: "linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.06) 70%, rgba(255,107,53,0.1) 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -263,10 +307,11 @@ export function Hero() {
           transition={{ duration: 1.4, delay: 0.6 }}
         >
           <span
-            className="font-heading font-black uppercase leading-none tracking-tight"
+            className="font-heading font-black uppercase leading-none"
             style={{
-              fontSize: "clamp(60px, 13vw, 180px)",
-              background: "linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.03) 100%)",
+              fontSize: "clamp(56px, 12vw, 170px)",
+              letterSpacing: "0.04em",
+              background: "linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.06) 70%, rgba(255,107,53,0.1) 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -319,10 +364,16 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* ─── Astronaut image ─── */}
+        {/* ─── Astronaut image — floating in space + mouse tracking ─── */}
         <motion.div
-          className="relative z-[2]"
-          style={{ y: astroY, scale: astroScale }}
+          className="relative z-[2] hero-space-float"
+          style={{
+            y: astroY,
+            scale: astroScale,
+            x: mouse.x,
+            rotateY: mouse.x * 0.3,
+            rotateX: -mouse.y * 0.3,
+          }}
           initial={{ opacity: 0, scale: 0.88, y: 40 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{
