@@ -416,6 +416,20 @@ select option:checked {
   100% { background-position: 200% 0; }
 }
 
+/* ── Astronaut floating in space — multi-axis drift ── */
+@keyframes space-float {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  25%  { transform: translate(6px, -14px) rotate(1.5deg); }
+  50%  { transform: translate(-4px, -8px) rotate(-1deg); }
+  75%  { transform: translate(3px, -18px) rotate(0.8deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.hero-space-float {
+  animation: space-float 8s ease-in-out infinite;
+  perspective: 800px;
+}
+
 /* ── Hero star twinkle ── */
 @keyframes hero-star-twinkle {
   0%, 100% { opacity: 0.1; transform: scale(0.8); }
