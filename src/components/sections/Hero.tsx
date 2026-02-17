@@ -140,7 +140,7 @@ export function Hero() {
   const astroY = useTransform(scrollYProgress, [0, 1], [0, -80]);
   const astroScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
   const textTopY = useTransform(scrollYProgress, [0, 1], [0, -50]);
-  const textBotY = useTransform(scrollYProgress, [0, 1], [0, 30]);
+  // textBotY kept for potential future parallax layers
   const eclipseArcY = useTransform(scrollYProgress, [0, 1], [0, -30]);
   const raysOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const bottomFade = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
@@ -222,104 +222,83 @@ export function Hero() {
 
       {/* ── Center composition ── */}
       <div className="absolute inset-0 flex items-center justify-center">
-        {/* ─── Giant background text: ECLIPSE AGENCY ─── */}
+        {/* ─── Background text: ECLIPSE AGENCY ─── */}
         <motion.div
-          className="absolute w-full text-center pointer-events-none select-none z-[1]"
+          className="absolute w-full text-center pointer-events-none select-none z-[1] flex flex-col items-center"
           style={{ y: textTopY }}
-          initial={{ opacity: 0, scale: 0.92 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           <h1
-            className="font-heading font-black uppercase leading-none"
+            className="font-heading font-black uppercase"
             style={{
-              fontSize: "clamp(56px, 12vw, 170px)",
-              letterSpacing: "0.04em",
-              marginTop: "-3vw",
-              background: "linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.05) 60%, rgba(255,107,53,0.08) 100%)",
+              fontSize: "clamp(36px, 7vw, 100px)",
+              lineHeight: 1.1,
+              letterSpacing: "0.12em",
+              background: "linear-gradient(135deg, rgba(255,107,53,0.25) 0%, rgba(247,147,30,0.15) 50%, rgba(255,255,255,0.08) 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
-              WebkitTextStroke: "1px rgba(255,255,255,0.1)",
-              filter: "drop-shadow(0 0 60px rgba(255,107,53,0.08))",
+              WebkitTextStroke: "1px rgba(255,107,53,0.15)",
+              filter: "drop-shadow(0 0 40px rgba(255,107,53,0.06))",
             }}
           >
             ECLIPSE
+            <span
+              style={{
+                display: "block",
+                fontSize: "0.55em",
+                letterSpacing: "0.35em",
+                marginTop: "0.15em",
+                background: "linear-gradient(135deg, rgba(255,107,53,0.18) 0%, rgba(255,255,255,0.1) 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                WebkitTextStroke: "0.5px rgba(255,255,255,0.08)",
+              }}
+            >
+              AGENCY
+            </span>
           </h1>
         </motion.div>
 
+        {/* ─── Overlay text (in front of astronaut edges) ─── */}
         <motion.div
-          className="absolute w-full text-center pointer-events-none select-none z-[1]"
-          style={{ y: textBotY }}
-          initial={{ opacity: 0, scale: 0.92 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, delay: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
-        >
-          <span
-            className="font-heading font-black uppercase leading-none"
-            style={{
-              fontSize: "clamp(56px, 12vw, 170px)",
-              letterSpacing: "0.04em",
-              marginTop: "8vw",
-              display: "block",
-              background: "linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.04) 60%, rgba(255,107,53,0.06) 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              WebkitTextStroke: "1px rgba(255,255,255,0.1)",
-              filter: "drop-shadow(0 0 60px rgba(255,107,53,0.08))",
-            }}
-          >
-            AGENCY
-          </span>
-        </motion.div>
-
-        {/* ─── Filled text overlay (in front of astronaut edges) ─── */}
-        <motion.div
-          className="absolute w-full text-center pointer-events-none select-none z-[3]"
+          className="absolute w-full text-center pointer-events-none select-none z-[3] flex flex-col items-center"
           style={{ y: textTopY, mixBlendMode: "screen" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.4, delay: 0.5 }}
         >
           <span
-            className="font-heading font-black uppercase leading-none"
+            className="font-heading font-black uppercase"
             style={{
-              fontSize: "clamp(56px, 12vw, 170px)",
-              letterSpacing: "0.04em",
-              background: "linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.06) 70%, rgba(255,107,53,0.1) 100%)",
+              fontSize: "clamp(36px, 7vw, 100px)",
+              lineHeight: 1.1,
+              letterSpacing: "0.12em",
+              background: "linear-gradient(135deg, rgba(255,107,53,0.18) 0%, rgba(247,147,30,0.1) 50%, rgba(255,255,255,0.06) 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
-              marginTop: "-3vw",
               display: "block",
             }}
           >
             ECLIPSE
-          </span>
-        </motion.div>
-
-        <motion.div
-          className="absolute w-full text-center pointer-events-none select-none z-[3]"
-          style={{ y: textBotY, mixBlendMode: "screen" }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.4, delay: 0.6 }}
-        >
-          <span
-            className="font-heading font-black uppercase leading-none"
-            style={{
-              fontSize: "clamp(56px, 12vw, 170px)",
-              letterSpacing: "0.04em",
-              background: "linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.06) 70%, rgba(255,107,53,0.1) 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              marginTop: "8vw",
-              display: "block",
-            }}
-          >
-            AGENCY
+            <span
+              style={{
+                display: "block",
+                fontSize: "0.55em",
+                letterSpacing: "0.35em",
+                marginTop: "0.15em",
+                background: "linear-gradient(135deg, rgba(255,107,53,0.12) 0%, rgba(255,255,255,0.06) 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              AGENCY
+            </span>
           </span>
         </motion.div>
 
