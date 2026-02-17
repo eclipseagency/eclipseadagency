@@ -344,7 +344,7 @@ export function Hero() {
           />
 
           <Image
-            src="/images/hero-astronaut-space.jpg"
+            src="/images/hero-astronaut-space.png"
             alt="Eclipse astronaut floating in space — From Shadow to Spotlight"
             width={740}
             height={740}
