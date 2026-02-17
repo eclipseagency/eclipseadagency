@@ -1,452 +1,239 @@
 "use client";
 
-import { useRef, useState, useCallback, useEffect } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValueEvent,
-  type MotionValue,
-} from "framer-motion";
+import { motion } from "framer-motion";
 import { portfolioItems } from "@/data/site";
 import { Button } from "@/components/ui/Button";
-
-/* ════════════════════════════════════════════════════════════
-   Types
-   ════════════════════════════════════════════════════════════ */
-type Item = (typeof portfolioItems)[number];
 
 interface PortfolioGridProps {
   limit?: number;
   showCta?: boolean;
 }
 
-/* ════════════════════════════════════════════════════════════
-   Letter-by-letter title reveal
-   ════════════════════════════════════════════════════════════ */
-function AnimatedTitle({ text, active }: { text: string; active: boolean }) {
-  return (
-    <span className="inline-flex flex-wrap" aria-label={text}>
-      {text.split("").map((char, i) => (
-        <motion.span
-          key={i}
-          className="inline-block font-heading text-4xl font-bold text-white md:text-5xl lg:text-6xl"
-          initial={false}
-          animate={{
-            opacity: active ? 1 : 0.15,
-            y: active ? 0 : 12,
-            filter: active ? "blur(0px)" : "blur(4px)",
-          }}
-          transition={{
-            duration: 0.4,
-            delay: active ? i * 0.025 : 0,
-            ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
-          }}
-        >
-          {char === " " ? "\u00A0" : char}
-        </motion.span>
-      ))}
-    </span>
-  );
-}
+/* ── Staggered entrance ── */
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.08,
+      duration: 0.7,
+      ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
+    },
+  }),
+};
 
-/* ════════════════════════════════════════════════════════════
-   Magnetic hover wrapper
-   ════════════════════════════════════════════════════════════ */
-function MagneticWrap({
-  children,
-  className,
+/* ── Project card ── */
+function ProjectCard({
+  item,
+  index,
 }: {
-  children: React.ReactNode;
-  className?: string;
+  item: (typeof portfolioItems)[number];
+  index: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [hover, setHover] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
 
-  const handleMove = useCallback((e: React.MouseEvent) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    setPos({
-      x: (e.clientX - cx) * 0.15,
-      y: (e.clientY - cy) * 0.15,
+  function handleMouseMove(e: React.MouseEvent) {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setMousePos({
+      x: (e.clientX - rect.left) / rect.width,
+      y: (e.clientY - rect.top) / rect.height,
     });
-  }, []);
+  }
 
-  const handleLeave = useCallback(() => setPos({ x: 0, y: 0 }), []);
+  const glareX = mousePos.x * 100;
+  const glareY = mousePos.y * 100;
 
   return (
     <motion.div
-      ref={ref}
-      className={className}
-      onMouseMove={handleMove}
-      onMouseLeave={handleLeave}
-      animate={{ x: pos.x, y: pos.y }}
-      transition={{ type: "spring", stiffness: 250, damping: 20 }}
+      ref={cardRef}
+      custom={index}
+      variants={cardVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-60px" }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => {
+        setHover(false);
+        setMousePos({ x: 0.5, y: 0.5 });
+      }}
+      onMouseMove={handleMouseMove}
+      className="group relative"
     >
-      {children}
+      <motion.div
+        className="relative overflow-hidden rounded-2xl"
+        animate={{
+          y: hover ? -6 : 0,
+          scale: hover ? 1.015 : 1,
+        }}
+        transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] }}
+        style={{
+          background: "rgba(255,255,255,0.02)",
+          border: hover
+            ? "1px solid rgba(194,138,20,0.2)"
+            : "1px solid rgba(255,255,255,0.05)",
+          boxShadow: hover
+            ? "0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(194,138,20,0.06)"
+            : "0 2px 12px rgba(0,0,0,0.2)",
+          transition: "border-color 0.5s, box-shadow 0.5s",
+        }}
+      >
+        {/* Cursor-tracked glow */}
+        <div
+          className="absolute inset-0 z-10 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none"
+          style={{
+            background: `radial-gradient(500px circle at ${glareX}% ${glareY}%, rgba(194,138,20,0.08), transparent 40%)`,
+          }}
+        />
+
+        {/* Glass top-edge reflection */}
+        <div
+          className="absolute top-0 left-0 right-0 h-px z-10 pointer-events-none"
+          style={{
+            background: "linear-gradient(90deg, transparent 10%, rgba(255,255,255,0.08) 40%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.08) 60%, transparent 90%)",
+          }}
+        />
+
+        {/* Image */}
+        <div className="relative aspect-[4/3] overflow-hidden">
+          <Image
+            src={item.image}
+            alt={item.title}
+            width={800}
+            height={600}
+            unoptimized
+            className="h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.06]"
+          />
+
+          {/* Default bottom gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+
+          {/* Hover overlay — darker + golden accent */}
+          <div
+            className="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+            style={{
+              background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%)",
+            }}
+          />
+
+          {/* Content overlay */}
+          <div className="absolute inset-0 z-10 flex flex-col justify-end p-6">
+            {/* Category — always visible */}
+            <span className="mb-auto self-start rounded-full border border-white/10 bg-black/30 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-white/60 backdrop-blur-sm">
+              {item.category}
+            </span>
+
+            {/* Title — always visible */}
+            <h3 className="font-heading text-lg font-bold leading-tight text-white md:text-xl">
+              {item.title}
+            </h3>
+
+            {/* Description — hover reveal */}
+            <motion.p
+              className="mt-2 text-[13px] leading-relaxed text-white/50"
+              initial={false}
+              animate={{
+                opacity: hover ? 1 : 0,
+                y: hover ? 0 : 8,
+              }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            >
+              {item.description}
+            </motion.p>
+
+            {/* Tags — hover reveal */}
+            <motion.div
+              className="mt-3 flex flex-wrap gap-1.5"
+              initial={false}
+              animate={{
+                opacity: hover ? 1 : 0,
+                y: hover ? 0 : 6,
+              }}
+              transition={{ duration: 0.3, ease: "easeOut", delay: 0.04 }}
+            >
+              {item.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-white/[0.07] bg-white/[0.04] px-2.5 py-0.5 text-[9px] uppercase tracking-wider text-white/35"
+                >
+                  {tag}
+                </span>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
 
-/* ════════════════════════════════════════════════════════════
-   Single immersive panel
-   ════════════════════════════════════════════════════════════ */
-function Panel({
-  item,
-  index,
-  total,
-  scrollX,
-  panelWidth,
-}: {
-  item: Item;
-  index: number;
-  total: number;
-  scrollX: MotionValue<string>;
-  panelWidth: number;
-}) {
-  const [isHover, setIsHover] = useState(false);
-  const [isActive, setIsActive] = useState(false);
-  const panelRef = useRef<HTMLDivElement>(null);
-
-  /* Track which panel is closest to center viewport */
-  useEffect(() => {
-    function check() {
-      if (!panelRef.current) return;
-      const rect = panelRef.current.getBoundingClientRect();
-      const center = rect.left + rect.width / 2;
-      const viewCenter = window.innerWidth / 2;
-      setIsActive(Math.abs(center - viewCenter) < rect.width * 0.45);
-    }
-    const id = setInterval(check, 80);
-    check();
-    return () => clearInterval(id);
-  }, []);
-
-  /* Parallax depth — image shifts slightly behind the panel frame */
-  const imgOffset = useTransform(
-    scrollX,
-    (val) => {
-      // scrollX is a percentage like "-150%"
-      const pct = parseFloat(val);
-      // Each panel occupies ~(100/total)% of the horizontal band
-      const panelCenter = index * (100 / total) + 100 / total / 2;
-      const delta = -pct - panelCenter + 50;
-      return delta * 0.6; // parallax multiplier
-    }
-  );
-
-  return (
-    <div
-      ref={panelRef}
-      className="relative flex h-full shrink-0 items-center justify-center px-4 md:px-8"
-      style={{ width: `${panelWidth}px` }}
-    >
-      <MagneticWrap className="relative w-full max-w-[900px]">
-        <motion.div
-          className="group relative overflow-hidden rounded-3xl"
-          onMouseEnter={() => setIsHover(true)}
-          onMouseLeave={() => setIsHover(false)}
-          animate={{
-            scale: isActive ? 1 : 0.88,
-            opacity: isActive ? 1 : 0.4,
-          }}
-          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] }}
-          style={{
-            border: "1px solid rgba(255,255,255,0.06)",
-            boxShadow: isHover
-              ? "0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(194,138,20,0.1)"
-              : "0 10px 40px rgba(0,0,0,0.4)",
-          }}
-        >
-          {/* ── Ambient glow behind image ── */}
-          <div
-            className="absolute inset-0 z-0 transition-opacity duration-700"
-            style={{
-              background: `radial-gradient(ellipse 80% 60% at 50% 70%, rgba(194,138,20,${isActive ? 0.08 : 0.02}) 0%, transparent 70%)`,
-            }}
-          />
-
-          {/* ── Image with parallax ── */}
-          <div className="relative aspect-[16/9] overflow-hidden">
-            <motion.div
-              className="absolute inset-[-15%]"
-              style={{ x: imgOffset }}
-            >
-              <Image
-                src={item.image}
-                alt={item.title}
-                width={1200}
-                height={675}
-                unoptimized
-                className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-            </motion.div>
-
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-
-            {/* Motion blur edge effect */}
-            <div
-              className="absolute inset-y-0 left-0 w-24 pointer-events-none"
-              style={{
-                background: "linear-gradient(to right, rgba(0,0,0,0.7), transparent)",
-              }}
-            />
-            <div
-              className="absolute inset-y-0 right-0 w-24 pointer-events-none"
-              style={{
-                background: "linear-gradient(to left, rgba(0,0,0,0.7), transparent)",
-              }}
-            />
-
-            {/* ── Content overlay ── */}
-            <div className="absolute inset-0 z-10 flex flex-col justify-end p-8 md:p-10">
-              {/* Category */}
-              <motion.span
-                className="mb-4 self-start rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-white/60 backdrop-blur-sm"
-                initial={false}
-                animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 8 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-              >
-                {item.category}
-              </motion.span>
-
-              {/* Letter-by-letter title */}
-              <AnimatedTitle text={item.title} active={isActive} />
-
-              {/* Description — reveals on hover */}
-              <motion.p
-                className="mt-3 max-w-md text-sm leading-relaxed text-white/45 md:text-base"
-                initial={false}
-                animate={{
-                  opacity: isHover && isActive ? 1 : 0,
-                  y: isHover && isActive ? 0 : 12,
-                }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
-              >
-                {item.description}
-              </motion.p>
-
-              {/* Tags — reveal on hover */}
-              <motion.div
-                className="mt-3 flex flex-wrap gap-2"
-                initial={false}
-                animate={{
-                  opacity: isHover && isActive ? 1 : 0,
-                  y: isHover && isActive ? 0 : 8,
-                }}
-                transition={{ duration: 0.35, ease: "easeOut", delay: 0.05 }}
-              >
-                {item.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1 text-[10px] uppercase tracking-wider text-white/35"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </motion.div>
-
-              {/* Index number */}
-              <div className="absolute right-8 top-8 font-heading text-7xl font-bold leading-none text-white/[0.04] md:right-10 md:top-10 md:text-8xl">
-                {String(index + 1).padStart(2, "0")}
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      </MagneticWrap>
-    </div>
-  );
-}
-
-/* ════════════════════════════════════════════════════════════
-   Progress bar + dots
-   ════════════════════════════════════════════════════════════ */
-function ProgressBar({
-  progress,
-  total,
-}: {
-  progress: MotionValue<number>;
-  total: number;
-}) {
-  const width = useTransform(progress, [0, 1], ["0%", "100%"]);
-  const [activeIdx, setActiveIdx] = useState(0);
-
-  useMotionValueEvent(progress, "change", (v) => {
-    setActiveIdx(Math.min(Math.round(v * (total - 1)), total - 1));
-  });
-
-  return (
-    <div className="absolute bottom-8 left-1/2 z-30 flex -translate-x-1/2 flex-col items-center gap-4 md:bottom-12">
-      {/* Dots */}
-      <div className="flex items-center gap-3">
-        {Array.from({ length: total }).map((_, i) => (
-          <div
-            key={i}
-            className="relative flex items-center justify-center"
-          >
-            <div
-              className="h-2 w-2 rounded-full transition-all duration-500"
-              style={{
-                background:
-                  i === activeIdx
-                    ? "#c28a14"
-                    : i < activeIdx
-                      ? "rgba(194,138,20,0.4)"
-                      : "rgba(255,255,255,0.12)",
-                boxShadow:
-                  i === activeIdx
-                    ? "0 0 12px rgba(194,138,20,0.5)"
-                    : "none",
-                transform: i === activeIdx ? "scale(1.4)" : "scale(1)",
-              }}
-            />
-          </div>
-        ))}
-      </div>
-
-      {/* Bar */}
-      <div className="h-[2px] w-48 overflow-hidden rounded-full bg-white/[0.06] md:w-64">
-        <motion.div
-          className="h-full rounded-full"
-          style={{
-            width,
-            background: "linear-gradient(90deg, #c28a14, #e8b94a)",
-          }}
-        />
-      </div>
-
-      {/* Counter */}
-      <span className="font-heading text-xs tracking-[0.2em] text-white/30">
-        {String(activeIdx + 1).padStart(2, "0")}
-        <span className="mx-1 text-white/15">/</span>
-        {String(total).padStart(2, "0")}
-      </span>
-    </div>
-  );
-}
-
-/* ════════════════════════════════════════════════════════════
-   Main section — vertical scroll → horizontal motion
-   ════════════════════════════════════════════════════════════ */
+/* ── Main section ── */
 export function PortfolioGrid({ limit, showCta = true }: PortfolioGridProps) {
   const items = limit ? portfolioItems.slice(0, limit) : portfolioItems;
-  const total = items.length;
-  const containerRef = useRef<HTMLElement>(null);
-  const [panelWidth, setPanelWidth] = useState(900);
-
-  /* Responsive panel width */
-  useEffect(() => {
-    function calc() {
-      const vw = window.innerWidth;
-      setPanelWidth(vw < 640 ? vw - 32 : vw < 1024 ? vw * 0.75 : 900);
-    }
-    calc();
-    window.addEventListener("resize", calc);
-    return () => window.removeEventListener("resize", calc);
-  }, []);
-
-  /* Scroll tracking */
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  /* Map vertical scroll → horizontal translate */
-  const scrollX = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ["0%", `-${(total - 1) * 100}%`]
-  );
-
-  /* Section header parallax */
-  const headerOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
-  const headerY = useTransform(scrollYProgress, [0, 0.08], [0, -50]);
 
   return (
-    <section
-      ref={containerRef}
-      className="relative"
-      style={{ height: `${(total + 1) * 100}vh` }}
-    >
-      <div className="sticky top-0 h-screen overflow-hidden">
-        {/* ── Ambient background glow ── */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse 70% 50% at 50% 60%, rgba(194,138,20,0.04) 0%, transparent 70%)",
-          }}
-        />
+    <section className="relative py-24 px-5 md:py-32 md:px-8 overflow-hidden">
+      {/* Ambient glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 55% 40% at 50% 55%, rgba(194,138,20,0.035) 0%, transparent 70%)",
+        }}
+      />
 
-        {/* ── Section header — fades out as scrolling starts ── */}
+      {/* Noise texture */}
+      <div className="page-hero-noise absolute inset-0" style={{ opacity: 0.025 }} />
+
+      <div className="relative z-10 mx-auto max-w-[1400px]">
+        {/* Header */}
         <motion.div
-          className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-5 pointer-events-none"
-          style={{ opacity: headerOpacity, y: headerY }}
+          className="mb-16 text-center md:mb-20"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] }}
         >
           <span className="mb-4 inline-block rounded-full border border-[#c28a14]/25 bg-[#c28a14]/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-[#c28a14]">
             Our Work
           </span>
           <h2 className="font-heading text-3xl font-bold leading-tight md:text-4xl lg:text-[48px]">
-            Projects That Speak
-            <br />
+            Selected{" "}
             <span className="bg-gradient-to-r from-[#c28a14] to-[#e8b94a] bg-clip-text text-transparent">
-              for Themselves
+              Projects
             </span>
           </h2>
-          <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/40 md:text-lg">
-            A selection of our recent work across branding, digital, web development, production, and more.
+          <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-white/35 md:text-lg">
+            A curated selection of our recent work across branding, digital, and creative production.
           </p>
-          <div className="mt-8 flex items-center gap-2 text-white/20">
-            <span className="text-[10px] uppercase tracking-[0.25em]">Scroll to explore</span>
-            <motion.svg
-              width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-              animate={{ y: [0, 6, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <path d="M12 5v14M5 12l7 7 7-7" />
-            </motion.svg>
-          </div>
         </motion.div>
 
-        {/* ── Horizontal track ── */}
-        <motion.div
-          className="flex h-full items-center"
-          style={{
-            width: `${total * panelWidth}px`,
-            x: scrollX,
-          }}
-        >
+        {/* Grid */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-7">
           {items.map((item, i) => (
-            <Panel
-              key={item.id}
-              item={item}
-              index={i}
-              total={total}
-              scrollX={scrollX}
-              panelWidth={panelWidth}
-            />
+            <ProjectCard key={item.id} item={item} index={i} />
           ))}
-        </motion.div>
-
-        {/* ── Progress ── */}
-        <ProgressBar progress={scrollYProgress} total={total} />
-
-        {/* ── Top / bottom subtle lines ── */}
-        <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.04] to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.04] to-transparent" />
-      </div>
-
-      {/* ── CTA after scroll completes ── */}
-      {showCta && (
-        <div className="absolute bottom-0 left-0 right-0 flex justify-center pb-[15vh]">
-          <Button href="/portfolio" variant="outline" size="lg">
-            View All Projects
-          </Button>
         </div>
-      )}
+
+        {/* CTA */}
+        {showCta && (
+          <motion.div
+            className="mt-16 text-center md:mt-20"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            <Button href="/portfolio" variant="outline" size="lg">
+              View All Projects
+            </Button>
+          </motion.div>
+        )}
+      </div>
     </section>
   );
 }
