@@ -8,7 +8,22 @@ import {
   MailIcon,
   PhoneIcon,
   MapPinIcon,
+  LinkedInIcon,
+  InstagramIcon,
+  FacebookIcon,
+  TikTokIcon,
+  BehanceIcon,
+  PinterestIcon,
 } from "@/components/ui/Icons";
+
+const socialIcons = [
+  { Icon: LinkedInIcon, href: siteConfig.social.linkedin, label: "LinkedIn" },
+  { Icon: InstagramIcon, href: siteConfig.social.instagram, label: "Instagram" },
+  { Icon: TikTokIcon, href: siteConfig.social.tiktok, label: "TikTok" },
+  { Icon: FacebookIcon, href: siteConfig.social.facebook, label: "Facebook" },
+  { Icon: BehanceIcon, href: siteConfig.social.behance, label: "Behance" },
+  { Icon: PinterestIcon, href: siteConfig.social.pinterest, label: "Pinterest" },
+];
 
 export function Footer() {
   return (
@@ -121,6 +136,20 @@ export function Footer() {
                 <span>{siteConfig.address}</span>
               </li>
             </ul>
+            <div className="mt-5 flex gap-2">
+              {socialIcons.map(({ Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.06] text-white/40 transition-all duration-300 hover:border-primary/40 hover:bg-primary/10 hover:text-primary"
+                >
+                  <Icon size={15} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
