@@ -3,7 +3,26 @@ import { PageHero } from "@/components/sections/PageHero";
 import { ContactForm } from "./ContactForm";
 import { siteConfig } from "@/data/site";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
-import { MailIcon, PhoneIcon, MapPinIcon } from "@/components/ui/Icons";
+import {
+  MailIcon,
+  PhoneIcon,
+  MapPinIcon,
+  LinkedInIcon,
+  InstagramIcon,
+  FacebookIcon,
+  TikTokIcon,
+  BehanceIcon,
+  PinterestIcon,
+} from "@/components/ui/Icons";
+
+const socialLinks = [
+  { Icon: LinkedInIcon, href: siteConfig.social.linkedin, label: "LinkedIn" },
+  { Icon: InstagramIcon, href: siteConfig.social.instagram, label: "Instagram" },
+  { Icon: TikTokIcon, href: siteConfig.social.tiktok, label: "TikTok" },
+  { Icon: FacebookIcon, href: siteConfig.social.facebook, label: "Facebook" },
+  { Icon: BehanceIcon, href: siteConfig.social.behance, label: "Behance" },
+  { Icon: PinterestIcon, href: siteConfig.social.pinterest, label: "Pinterest" },
+];
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -74,6 +93,27 @@ export default function ContactPage() {
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* Social links */}
+            <div className="mt-10">
+              <p className="mb-4 text-xs font-bold uppercase tracking-[0.15em] text-text-muted">
+                Follow Us
+              </p>
+              <div className="flex gap-2">
+                {socialLinks.map(({ Icon, href, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.06] text-white/40 transition-all duration-300 hover:border-primary/40 hover:bg-primary/10 hover:text-primary"
+                  >
+                    <Icon size={16} />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
