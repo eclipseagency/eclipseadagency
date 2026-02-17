@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { processSteps } from "@/data/site";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { SunlightGlow } from "@/components/ui/SunlightGlow";
 import { cn } from "@/lib/utils";
 
 function ProcessStep({
@@ -132,6 +133,7 @@ export function ProcessSection() {
 
   return (
     <SectionWrapper dark>
+      <SunlightGlow />
       <SectionHeader
         badge="Our Process"
         title="How We Bring Ideas to Life"
