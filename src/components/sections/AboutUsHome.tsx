@@ -77,7 +77,7 @@ export function AboutUsHome() {
             className="relative z-10"
           >
             <Image
-              src="/images/hero-astronaut-space.png"
+              src="/images/hero-astronaut-new.png"
               alt="Eclipse astronaut — About Eclipse Agency"
               width={560}
               height={560}
