@@ -118,7 +118,7 @@ function GlowOrbs({
   return (
     <>
       <motion.div
-        className="absolute h-[500px] w-[500px] rounded-full blur-[150px] md:h-[700px] md:w-[700px]"
+        className="absolute h-[400px] w-[400px] rounded-full blur-[80px] md:h-[550px] md:w-[550px]"
         style={{
           left: orb1X,
           top: orb1Y,
@@ -126,10 +126,11 @@ function GlowOrbs({
           background: "radial-gradient(circle, rgba(255,107,53,0.3) 0%, transparent 70%)",
           translateX: "-50%",
           translateY: "-50%",
+          willChange: "transform",
         }}
       />
       <motion.div
-        className="absolute h-[400px] w-[400px] rounded-full blur-[120px] md:h-[600px] md:w-[600px]"
+        className="absolute h-[350px] w-[350px] rounded-full blur-[60px] md:h-[450px] md:w-[450px]"
         style={{
           left: orb2X,
           top: orb2Y,
@@ -137,6 +138,7 @@ function GlowOrbs({
           background: "radial-gradient(circle, rgba(247,147,30,0.25) 0%, transparent 70%)",
           translateX: "-50%",
           translateY: "-50%",
+          willChange: "transform",
         }}
       />
     </>

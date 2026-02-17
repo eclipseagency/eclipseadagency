@@ -66,22 +66,10 @@ export function Hero() {
       {/* ── BG layers ── */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#060608] via-bg to-bg" />
 
-      {/* Ambient glow orbs */}
-      <motion.div
-        className="absolute -left-[10%] top-[10%] h-[600px] w-[600px] rounded-full bg-primary/[0.05] blur-[150px]"
-        animate={{ scale: [1, 1.2, 1], opacity: [0.05, 0.08, 0.05] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute -right-[5%] top-[30%] h-[500px] w-[500px] rounded-full bg-primary-light/[0.04] blur-[120px]"
-        animate={{ scale: [1, 1.15, 1], opacity: [0.04, 0.07, 0.04] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-      />
-      <motion.div
-        className="absolute left-[30%] -bottom-[10%] h-[400px] w-[400px] rounded-full bg-primary/[0.03] blur-[100px]"
-        animate={{ scale: [1, 1.25, 1], opacity: [0.03, 0.06, 0.03] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 8 }}
-      />
+      {/* Ambient glow orbs — static, no JS animation to avoid GPU thrash on blurred elements */}
+      <div className="absolute -left-[10%] top-[10%] h-[500px] w-[500px] rounded-full bg-primary/[0.06] blur-[100px]" />
+      <div className="absolute -right-[5%] top-[30%] h-[400px] w-[400px] rounded-full bg-primary-light/[0.04] blur-[80px]" />
+      <div className="absolute left-[30%] -bottom-[10%] h-[350px] w-[350px] rounded-full bg-primary/[0.04] blur-[80px]" />
 
       {/* Film grain */}
       <div className="page-hero-noise absolute inset-0" />
