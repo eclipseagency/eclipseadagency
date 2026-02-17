@@ -5,25 +5,10 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { siteConfig, footerContent } from "@/data/site";
 import {
-  LinkedInIcon,
-  InstagramIcon,
-  FacebookIcon,
-  TikTokIcon,
-  BehanceIcon,
-  PinterestIcon,
   MailIcon,
   PhoneIcon,
   MapPinIcon,
 } from "@/components/ui/Icons";
-
-const socialIcons = [
-  { Icon: LinkedInIcon, href: siteConfig.social.linkedin, label: "LinkedIn" },
-  { Icon: InstagramIcon, href: siteConfig.social.instagram, label: "Instagram" },
-  { Icon: TikTokIcon, href: siteConfig.social.tiktok, label: "TikTok" },
-  { Icon: FacebookIcon, href: siteConfig.social.facebook, label: "Facebook" },
-  { Icon: BehanceIcon, href: siteConfig.social.behance, label: "Behance" },
-  { Icon: PinterestIcon, href: siteConfig.social.pinterest, label: "Pinterest" },
-];
 
 export function Footer() {
   return (
@@ -70,23 +55,9 @@ export function Footer() {
             <Link href="/" className="mb-5 inline-block">
               <Image src="/images/logo.png" alt={siteConfig.name} width={180} height={48} />
             </Link>
-            <p className="mb-6 text-sm leading-relaxed text-text-secondary">
+            <p className="text-sm leading-relaxed text-text-secondary">
               {footerContent.description}
             </p>
-            <div className="flex gap-2">
-              {socialIcons.map(({ Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.06] text-white/40 transition-all duration-300 hover:border-primary/40 hover:bg-primary/10 hover:text-primary"
-                >
-                  <Icon size={15} />
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Services */}
