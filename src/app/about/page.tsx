@@ -232,40 +232,6 @@ export default function AboutPage() {
         />
       </SectionWrapper>
 
-      {/* ── Team ── */}
-      <SectionWrapper>
-        <SectionHeader
-          badge="Our Team"
-          title="Meet the Minds Behind Eclipse"
-          subtitle="A diverse team of creative professionals bringing expertise across design, strategy, development, and production."
-        />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {aboutContent.team.map((member) => (
-            <div
-              key={member.name}
-              className="group overflow-hidden rounded-2xl border border-border bg-bg-card"
-            >
-              <div className="aspect-square overflow-hidden">
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  width={400}
-                  height={400}
-                  unoptimized
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-5 text-center">
-                <h3 className="font-heading text-base font-bold">
-                  {member.name}
-                </h3>
-                <p className="mt-1 text-xs text-text-muted">{member.role}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </SectionWrapper>
-
       <CtaBanner />
     </>
   );
