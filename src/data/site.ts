@@ -154,72 +154,14 @@ export const processSteps = [
   },
 ];
 
-export const portfolioItems = [
-  {
-    id: "meridian-brand",
-    title: "Meridian Studios",
-    category: "Branding",
-    description: "Complete visual identity for a creative production house.",
-    image: "/images/portfolio/project-01.svg",
-    tags: ["Logo", "Brand Guidelines", "Stationery"],
-  },
-  {
-    id: "pulse-fitness",
-    title: "Pulse Fitness",
-    category: "Web & Apps",
-    description: "Mobile-first web platform for a premium fitness brand.",
-    image: "/images/portfolio/project-02.svg",
-    tags: ["Web Design", "Mobile App", "UI/UX"],
-  },
-  {
-    id: "verde-organic",
-    title: "Verde Organic",
-    category: "Branding",
-    description: "Sustainable packaging and brand identity for organic food line.",
-    image: "/images/portfolio/project-03.svg",
-    tags: ["Packaging", "Logo", "Brand Identity"],
-  },
-  {
-    id: "skyline-properties",
-    title: "Skyline Properties",
-    category: "Production",
-    description: "Cinematic property showcase for luxury real estate.",
-    image: "/images/portfolio/project-04.svg",
-    tags: ["Video Production", "Aerial", "Photography"],
-  },
-  {
-    id: "nova-tech",
-    title: "Nova Technologies",
-    category: "Digital Marketing",
-    description: "Multi-channel digital launch for a SaaS platform.",
-    image: "/images/portfolio/project-05.svg",
-    tags: ["Social Media", "SEO", "Content Strategy"],
-  },
-  {
-    id: "artisan-coffee",
-    title: "Artisan Roasters",
-    category: "3D Creations",
-    description: "Photorealistic product renders for a specialty coffee brand.",
-    image: "/images/portfolio/project-06.svg",
-    tags: ["3D Rendering", "Product Viz", "Animation"],
-  },
-  {
-    id: "echo-music",
-    title: "Echo Music",
-    category: "Animation",
-    description: "Animated brand reveal and social content for a music label.",
-    image: "/images/portfolio/project-07.svg",
-    tags: ["Motion Graphics", "Logo Animation", "Social"],
-  },
-  {
-    id: "atlas-travel",
-    title: "Atlas Voyages",
-    category: "Web & Apps",
-    description: "Responsive travel booking platform with immersive UI.",
-    image: "/images/portfolio/project-08.svg",
-    tags: ["Web App", "UI/UX", "E-Commerce"],
-  },
-];
+export const portfolioItems: {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  image: string;
+  tags: string[];
+}[] = [];
 
 export const testimonials = [
   {

@@ -288,6 +288,22 @@ export function PortfolioGrid({ limit, showCta = true }: PortfolioGridProps) {
   const headerOpacity = useTransform(scrollYProgress, [0, 0.06], [1, 0]);
   const headerY = useTransform(scrollYProgress, [0, 0.06], [0, -40]);
 
+  if (total === 0) {
+    return (
+      <section className="py-24 text-center">
+        <span className="mb-4 inline-block rounded-full border border-[#c28a14]/25 bg-[#c28a14]/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-[#c28a14]">
+          Coming Soon
+        </span>
+        <h2 className="font-heading text-3xl font-bold md:text-4xl">
+          Portfolio projects coming soon
+        </h2>
+        <p className="mx-auto mt-4 max-w-md text-text-secondary">
+          We&apos;re curating our best work to showcase here. Stay tuned.
+        </p>
+      </section>
+    );
+  }
+
   // Track progress for particles and focus index
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     setSmoothProgress(v);
