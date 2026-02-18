@@ -26,8 +26,6 @@ export const siteConfig = {
         { label: "Branding", href: "/solutions/branding" },
         { label: "Digital Marketing", href: "/solutions/digital-marketing" },
         { label: "Web & Apps", href: "/solutions/web-apps" },
-        { label: "Production", href: "/solutions/production" },
-        { label: "3D Creations", href: "/solutions/3d-creations" },
         { label: "Animation", href: "/solutions/animation" },
       ],
     },
@@ -58,7 +56,7 @@ export const servicesOverview = [
     slug: "branding",
     icon: "palette",
     title: "Branding & Identity",
-    image: "/images/solutions/branding.svg",
+    image: "/images/solutions/branding.png",
     description:
       "We build visual identities that resonate. From logos to full brand systems, we create cohesive brands that stand out in crowded markets.",
     features: [
@@ -75,7 +73,7 @@ export const servicesOverview = [
     slug: "digital-marketing",
     icon: "trending-up",
     title: "Digital Marketing",
-    image: "/images/solutions/digital-marketing.svg",
+    image: "/images/solutions/digital-marketing.jpg",
     description:
       "Data-driven campaigns that deliver measurable results. We combine analytics with creativity to maximize your digital presence and ROI.",
     features: [
@@ -92,7 +90,7 @@ export const servicesOverview = [
     slug: "web-apps",
     icon: "code",
     title: "Web & App Development",
-    image: "/images/solutions/web-apps.svg",
+    image: "/images/solutions/web-apps.jpg",
     description:
       "Custom web and mobile solutions built for performance and scale. Responsive, fast, and designed to convert visitors into customers.",
     features: [
@@ -105,45 +103,11 @@ export const servicesOverview = [
     ],
   },
   {
-    id: "production",
-    slug: "production",
-    icon: "video",
-    title: "Production",
-    image: "/images/solutions/production.svg",
-    description:
-      "Cinematic video production and photography that tells your brand story. From concept to final cut, we deliver visual content that converts.",
-    features: [
-      "Commercial Production",
-      "Corporate Videos",
-      "Product Photography",
-      "Aerial Filming",
-      "Event Coverage",
-      "Post-Production",
-    ],
-  },
-  {
-    id: "3d-creations",
-    slug: "3d-creations",
-    icon: "box",
-    title: "3D Creations",
-    image: "/images/solutions/3d-creations.svg",
-    description:
-      "Stunning three-dimensional visuals that bring products and concepts to life. Photorealistic renders and immersive 3D environments.",
-    features: [
-      "3D Modeling",
-      "Product Visualization",
-      "Architectural Renders",
-      "3D Animation",
-      "AR Experiences",
-      "Virtual Tours",
-    ],
-  },
-  {
     id: "animation",
     slug: "animation",
     icon: "play",
     title: "Motion & Animation",
-    image: "/images/solutions/animation.svg",
+    image: "/images/solutions/animation.jpg",
     description:
       "Dynamic motion graphics and character animation that engage and explain. We animate ideas into compelling visual narratives.",
     features: [
@@ -422,8 +386,6 @@ export const footerContent = {
       { label: "Branding", href: "/solutions/branding" },
       { label: "Digital Marketing", href: "/solutions/digital-marketing" },
       { label: "Web & Apps", href: "/solutions/web-apps" },
-      { label: "Production", href: "/solutions/production" },
-      { label: "3D Creations", href: "/solutions/3d-creations" },
       { label: "Animation", href: "/solutions/animation" },
     ],
     company: [
