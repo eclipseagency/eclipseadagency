@@ -62,7 +62,7 @@ export function Header() {
             height={56}
             className={cn(
               "transition-all duration-500",
-              scrolled ? "h-10 w-auto" : "h-12 w-auto"
+              scrolled ? "h-12 w-auto" : "h-16 w-auto"
             )}
             priority
           />
