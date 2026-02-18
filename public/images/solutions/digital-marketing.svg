@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0c11"/>
+      <stop offset="100%" style="stop-color:#1a1d25"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="42%" r="20%">
+      <stop offset="0%" style="stop-color:#c28a14;stop-opacity:0.15"/>
+      <stop offset="60%" style="stop-color:#c28a14;stop-opacity:0.05"/>
+      <stop offset="100%" style="stop-color:#c28a14;stop-opacity:0"/>
+    </radialGradient>
+    <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#d4a028"/>
+      <stop offset="100%" style="stop-color:#b07a10"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1200" height="800" fill="none" stroke="#c28a14" stroke-opacity="0.08" stroke-width="1"/>
+  <!-- Glow -->
+  <ellipse cx="600" cy="340" rx="260" ry="260" fill="url(#glow)"/>
+  <!-- Trending Up Chart Icon -->
+  <g transform="translate(600, 320)" fill="none" stroke="url(#iconGrad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Chart background area -->
+    <rect x="-55" y="-50" width="110" height="100" rx="6" fill="#c28a14" fill-opacity="0.06" stroke-opacity="0.4"/>
+    <!-- Grid lines -->
+    <line x1="-40" y1="-20" x2="40" y2="-20" stroke="#c28a14" stroke-opacity="0.1" stroke-width="1"/>
+    <line x1="-40" y1="5" x2="40" y2="5" stroke="#c28a14" stroke-opacity="0.1" stroke-width="1"/>
+    <line x1="-40" y1="30" x2="40" y2="30" stroke="#c28a14" stroke-opacity="0.1" stroke-width="1"/>
+    <!-- Trending line -->
+    <polyline points="-38,30 -12,8 10,18 40,-35" stroke="#c28a14" stroke-width="3.5" fill="none"/>
+    <!-- Area fill under line -->
+    <polygon points="-38,30 -12,8 10,18 40,-35 40,35 -38,35" fill="#c28a14" fill-opacity="0.08"/>
+    <!-- Arrow at end -->
+    <polyline points="30,-30 40,-35 35,-22" stroke="#c28a14" stroke-width="3"/>
+    <!-- Data points -->
+    <circle cx="-38" cy="30" r="4" fill="#0a0c11" stroke="#c28a14" stroke-width="2.5"/>
+    <circle cx="-12" cy="8" r="4" fill="#0a0c11" stroke="#c28a14" stroke-width="2.5"/>
+    <circle cx="10" cy="18" r="4" fill="#0a0c11" stroke="#c28a14" stroke-width="2.5"/>
+  </g>
+  <!-- Title -->
+  <text x="600" y="440" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="600" fill="#ffffff" letter-spacing="1">Digital Marketing</text>
+  <text x="600" y="478" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="300" fill="#ffffff" fill-opacity="0.4" letter-spacing="3">ECLIPSE AD AGENCY</text>
+  <line x1="540" y1="508" x2="660" y2="508" stroke="#c28a14" stroke-width="1.5" stroke-opacity="0.3"/>
+</svg>

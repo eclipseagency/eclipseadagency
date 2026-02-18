@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0c11"/>
+      <stop offset="100%" style="stop-color:#1a1d25"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="42%" r="20%">
+      <stop offset="0%" style="stop-color:#c28a14;stop-opacity:0.15"/>
+      <stop offset="60%" style="stop-color:#c28a14;stop-opacity:0.05"/>
+      <stop offset="100%" style="stop-color:#c28a14;stop-opacity:0"/>
+    </radialGradient>
+    <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#d4a028"/>
+      <stop offset="100%" style="stop-color:#b07a10"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <!-- Subtle border line -->
+  <rect x="0" y="0" width="1200" height="800" fill="none" stroke="#c28a14" stroke-opacity="0.08" stroke-width="1"/>
+  <!-- Glow behind icon -->
+  <ellipse cx="600" cy="340" rx="260" ry="260" fill="url(#glow)"/>
+  <!-- Palette Icon -->
+  <g transform="translate(600, 320)" fill="none" stroke="url(#iconGrad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Palette shape -->
+    <path d="M0,-55 C30,-55 55,-35 55,-5 C55,15 42,30 25,30 C15,30 10,22 15,15 C20,8 15,0 5,0 C-5,0 -10,8 -15,8 C-25,8 -30,0 -30,-5 L-30,-5 C-55,-5 -55,-55 0,-55 Z" fill="#c28a14" fill-opacity="0.1"/>
+    <path d="M0,-55 C30,-55 55,-35 55,-5 C55,15 42,30 25,30 C15,30 10,22 15,15 C20,8 15,0 5,0 C-5,0 -10,8 -15,8 C-25,8 -30,0 -30,-5 L-30,-5 C-55,-5 -55,-55 0,-55 Z"/>
+    <!-- Paint dots -->
+    <circle cx="-18" cy="-30" r="6" fill="#c28a14" stroke="none"/>
+    <circle cx="5" cy="-38" r="6" fill="#c28a14" stroke="none"/>
+    <circle cx="28" cy="-25" r="6" fill="#c28a14" stroke="none"/>
+    <circle cx="32" cy="-2" r="6" fill="#c28a14" stroke="none"/>
+  </g>
+  <!-- Title text -->
+  <text x="600" y="440" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="600" fill="#ffffff" letter-spacing="1">Branding &amp; Identity</text>
+  <!-- Subtle subtitle -->
+  <text x="600" y="478" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="300" fill="#ffffff" fill-opacity="0.4" letter-spacing="3" text-transform="uppercase">ECLIPSE AD AGENCY</text>
+  <!-- Decorative line -->
+  <line x1="540" y1="508" x2="660" y2="508" stroke="#c28a14" stroke-width="1.5" stroke-opacity="0.3"/>
+</svg>
