@@ -29,7 +29,6 @@ export const siteConfig = {
         { label: "Animation", href: "/solutions/animation" },
       ],
     },
-    { label: "Portfolio", href: "/portfolio" },
     { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
   ],
@@ -41,7 +40,7 @@ export const heroContent = {
   subheading:
     "We craft bold brands, digital strategies, and immersive experiences that transform businesses and captivate audiences worldwide.",
   cta: { label: "Get Started", href: "/contact" },
-  secondaryCta: { label: "View Our Work", href: "/portfolio" },
+  secondaryCta: { label: "View Our Work", href: "/contact" },
   stats: [
     { value: "200+", label: "Projects Delivered" },
     { value: "50+", label: "Happy Clients" },
@@ -332,7 +331,6 @@ export const footerContent = {
     ],
     company: [
       { label: "About Us", href: "/about" },
-      { label: "Portfolio", href: "/portfolio" },
       { label: "Blog", href: "/blog" },
       { label: "Contact", href: "/contact" },
     ],

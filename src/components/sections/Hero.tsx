@@ -325,7 +325,7 @@ export function Hero() {
           <Button href="/about" variant="primary" size="lg">
             Get to Know Us
           </Button>
-          <Button href="/portfolio" variant="outline" size="lg">
+          <Button href="/contact" variant="outline" size="lg">
             View Our Work
           </Button>
         </motion.div>

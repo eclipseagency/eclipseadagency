@@ -22,7 +22,7 @@ export function CtaBanner() {
           <Button href="/contact" size="lg">
             Start a Project
           </Button>
-          <Button href="/portfolio" variant="outline" size="lg">
+          <Button href="/contact" variant="outline" size="lg">
             See Our Work
           </Button>
         </div>
