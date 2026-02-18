@@ -78,7 +78,8 @@ export function Header() {
                 onMouseEnter={() => setDropdownOpen(true)}
                 onMouseLeave={() => setDropdownOpen(false)}
               >
-                <button
+                <Link
+                  href={item.href}
                   className={cn(
                     "flex items-center gap-1 rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-300",
                     pathname.startsWith("/solutions")
@@ -94,7 +95,7 @@ export function Header() {
                       dropdownOpen && "rotate-180"
                     )}
                   />
-                </button>
+                </Link>
                 <AnimatePresence>
                   {dropdownOpen && (
                     <motion.div
@@ -184,9 +185,12 @@ export function Header() {
                   transition={{ delay: i * 0.05 + 0.1 }}
                   className="flex flex-col items-center gap-3"
                 >
-                  <span className="text-lg font-semibold text-white/50">
+                  <Link
+                    href={item.href}
+                    className="text-lg font-semibold text-white/60 transition-colors hover:text-white"
+                  >
                     {item.label}
-                  </span>
+                  </Link>
                   {item.children.map((child) => (
                     <Link
                       key={child.label}
