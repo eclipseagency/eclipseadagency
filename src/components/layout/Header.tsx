@@ -81,7 +81,7 @@ export function Header() {
                 <button
                   className={cn(
                     "flex items-center gap-1 rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-300",
-                    pathname.startsWith("/services")
+                    pathname.startsWith("/solutions")
                       ? "text-white"
                       : "text-white/60 hover:text-white hover:bg-white/[0.05]"
                   )}

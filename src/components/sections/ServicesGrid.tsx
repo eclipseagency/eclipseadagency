@@ -41,7 +41,7 @@ export function ServicesGrid() {
             viewport={{ once: true, margin: "-50px" }}
           >
             <Link
-              href={`/services#${service.id}`}
+              href={`/solutions/${service.id}`}
               className="glass-card group block p-8"
             >
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/[0.08] text-primary transition-all duration-300 group-hover:bg-primary/[0.15] group-hover:shadow-[0_0_20px_rgba(255,107,53,0.15)]">

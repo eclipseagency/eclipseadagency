@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0c11"/>
+      <stop offset="100%" style="stop-color:#1a1d25"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="42%" r="20%">
+      <stop offset="0%" style="stop-color:#c28a14;stop-opacity:0.15"/>
+      <stop offset="60%" style="stop-color:#c28a14;stop-opacity:0.05"/>
+      <stop offset="100%" style="stop-color:#c28a14;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1200" height="800" fill="none" stroke="#c28a14" stroke-opacity="0.08" stroke-width="1"/>
+  <!-- Glow -->
+  <ellipse cx="600" cy="340" rx="260" ry="260" fill="url(#glow)"/>
+  <!-- 3D Cube Icon -->
+  <g transform="translate(600, 310)" fill="none" stroke="#c28a14" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Front face -->
+    <polygon points="0,-55 48,-28 48,28 0,55 -48,28 -48,-28" fill="#c28a14" fill-opacity="0.04"/>
+    <!-- Top face -->
+    <polygon points="0,-55 48,-28 0,-2 -48,-28" fill="#c28a14" fill-opacity="0.1"/>
+    <!-- Left face -->
+    <polygon points="-48,-28 0,-2 0,55 -48,28" fill="#c28a14" fill-opacity="0.06"/>
+    <!-- Right face -->
+    <polygon points="48,-28 0,-2 0,55 48,28" fill="#c28a14" fill-opacity="0.03"/>
+    <!-- Outer edges -->
+    <line x1="0" y1="-55" x2="48" y2="-28" stroke-width="3.5"/>
+    <line x1="48" y1="-28" x2="48" y2="28" stroke-width="3.5"/>
+    <line x1="48" y1="28" x2="0" y2="55" stroke-width="3.5"/>
+    <line x1="0" y1="55" x2="-48" y2="28" stroke-width="3.5"/>
+    <line x1="-48" y1="28" x2="-48" y2="-28" stroke-width="3.5"/>
+    <line x1="-48" y1="-28" x2="0" y2="-55" stroke-width="3.5"/>
+    <!-- Inner edges -->
+    <line x1="0" y1="-2" x2="48" y2="-28" stroke-width="2.5" stroke-opacity="0.5"/>
+    <line x1="0" y1="-2" x2="-48" y2="-28" stroke-width="2.5" stroke-opacity="0.5"/>
+    <line x1="0" y1="-2" x2="0" y2="55" stroke-width="2.5" stroke-opacity="0.5"/>
+    <!-- Corner dots -->
+    <circle cx="0" cy="-55" r="3" fill="#c28a14" stroke="none"/>
+    <circle cx="48" cy="-28" r="3" fill="#c28a14" stroke="none"/>
+    <circle cx="48" cy="28" r="3" fill="#c28a14" stroke="none"/>
+    <circle cx="0" cy="55" r="3" fill="#c28a14" stroke="none"/>
+    <circle cx="-48" cy="28" r="3" fill="#c28a14" stroke="none"/>
+    <circle cx="-48" cy="-28" r="3" fill="#c28a14" stroke="none"/>
+  </g>
+  <!-- Title -->
+  <text x="600" y="440" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="600" fill="#ffffff" letter-spacing="1">3D Creations</text>
+  <text x="600" y="478" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="300" fill="#ffffff" fill-opacity="0.4" letter-spacing="3">ECLIPSE AD AGENCY</text>
+  <line x1="540" y1="508" x2="660" y2="508" stroke="#c28a14" stroke-width="1.5" stroke-opacity="0.3"/>
+</svg>
