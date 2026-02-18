@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
-import { SolutionsGrid } from "./SolutionsGrid";
+import { ServicesDetailSection } from "./ServicesDetailSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 
@@ -19,7 +19,7 @@ export default function SolutionsPage() {
         subtitle="From brand strategy to digital execution, we offer a comprehensive suite of services designed to elevate your business at every touchpoint."
         image="/images/hero-pages/astronaut-space-2.jpg"
       />
-      <SolutionsGrid />
+      <ServicesDetailSection />
       <ProcessSection />
       <CtaBanner />
     </>
