@@ -17,7 +17,7 @@ export default function ServicesPage() {
         badge="Solutions"
         title="Creative Services That Deliver Results"
         subtitle="From brand strategy to digital execution, we offer a comprehensive suite of services designed to elevate your business at every touchpoint."
-        image="https://eclipseadagency.com/wp-content/uploads/2024/11/DSC_7529-1536x1025.jpg"
+        image="/images/hero-pages/astronaut-space-2.jpg"
       />
       <ServicesDetailSection />
       <ProcessSection />
