@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import Image from "next/image";
 import { processSteps } from "@/data/site";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -76,6 +77,7 @@ function ProcessStep({
 
 export function ProcessSection() {
   const [activeIndex, setActiveIndex] = useState(-1);
+  const [dotOffsets, setDotOffsets] = useState<number[]>([]);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
@@ -86,6 +88,19 @@ export function ProcessSection() {
     },
     []
   );
+
+  // Measure dot Y positions relative to the container
+  const measureDots = useCallback(() => {
+    if (!containerRef.current) return;
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const offsets = stepRefs.current.map((el) => {
+      if (!el) return 0;
+      const rect = el.getBoundingClientRect();
+      // Center of the step element relative to the container top
+      return rect.top + rect.height / 2 - containerRect.top;
+    });
+    setDotOffsets(offsets);
+  }, []);
 
   useEffect(() => {
     function updateActiveStep() {
@@ -108,6 +123,7 @@ export function ProcessSection() {
       });
 
       setActiveIndex(closestIndex);
+      measureDots();
     }
 
     function onScroll() {
@@ -125,10 +141,15 @@ export function ProcessSection() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [measureDots]);
 
   const lineProgress =
     activeIndex < 0 ? 0 : ((activeIndex + 0.5) / processSteps.length) * 100;
+
+  const astronautY =
+    activeIndex >= 0 && dotOffsets[activeIndex] !== undefined
+      ? dotOffsets[activeIndex]
+      : 0;
 
   return (
     <SectionWrapper>
@@ -152,6 +173,25 @@ export function ProcessSection() {
             transition: "height 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
           }}
         />
+
+        {/* Floating astronaut on timeline */}
+        <div
+          className="pointer-events-none absolute left-1/2 top-0 z-20 hidden md:block"
+          style={{
+            transform: `translate(-50%, ${astronautY - 28}px)`,
+            transition:
+              "transform 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+            opacity: activeIndex >= 0 ? 1 : 0,
+          }}
+        >
+          <Image
+            src="/images/hero-astronaut-space.png"
+            alt="Astronaut"
+            width={56}
+            height={56}
+            className="h-14 w-14 object-contain drop-shadow-[0_0_12px_rgba(255,107,53,0.3)]"
+          />
+        </div>
 
         <div className="space-y-14 md:space-y-20">
           {processSteps.map((step, i) => (
