@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
 import { ServicesDetailSection } from "./ServicesDetailSection";
-import { ProcessSection } from "@/components/sections/ProcessSection";
+
 import { CtaBanner } from "@/components/sections/CtaBanner";
 
 export const metadata: Metadata = {
@@ -20,7 +20,6 @@ export default function SolutionsPage() {
         image="/images/hero-pages/astronaut-space-2.jpg"
       />
       <ServicesDetailSection />
-      <ProcessSection />
       <CtaBanner />
     </>
   );
