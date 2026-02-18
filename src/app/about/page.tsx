@@ -117,7 +117,7 @@ export default function AboutPage() {
         badge="Profile"
         title="The Creative Force Behind the Work"
         subtitle="We are a team of strategists, designers, developers, and storytellers united by a passion for building brands that matter."
-        image="https://eclipseadagency.com/wp-content/uploads/2024/11/22167859-a1d9-4963-b7d0-efb4cbb352fe-1536x1025.jpeg"
+        image="/images/about-hero.png"
       />
 
       {/* ── Story ── */}
