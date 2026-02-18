@@ -39,31 +39,6 @@ export function Footer() {
       <div className="absolute -top-20 left-1/2 h-40 w-[60%] -translate-x-1/2 rounded-full bg-primary/[0.04] blur-[80px]" />
 
       <div className="relative mx-auto max-w-[1400px]">
-        {/* Top: CTA strip */}
-        <div className="mb-16 flex flex-col items-center gap-6 text-center md:flex-row md:justify-between md:text-left">
-          <div>
-            <h3 className="font-heading text-2xl font-bold md:text-3xl">
-              Ready to create something{" "}
-              <span className="gradient-text">extraordinary</span>?
-            </h3>
-            <p className="mt-2 text-sm text-text-secondary">
-              Let&apos;s bring your vision to life with strategy, creativity, and precision.
-            </p>
-          </div>
-          <Link
-            href="/contact"
-            className="inline-flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-r from-[#ff6b35] to-[#f7931e] px-7 py-3 text-sm font-semibold text-white transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,53,0.35)]"
-          >
-            Start a Project
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </Link>
-        </div>
-
-        {/* Divider */}
-        <div className="mb-12 h-px w-full bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
-
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-1">
