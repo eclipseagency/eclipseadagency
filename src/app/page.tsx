@@ -3,6 +3,7 @@ import { AboutUsHome } from "@/components/sections/AboutUsHome";
 import { ServicesOverview } from "@/components/sections/ServicesOverview";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { ProcessSection } from "@/components/sections/ProcessSection";
+import { CtaBanner } from "@/components/sections/CtaBanner";
 
 export default function HomePage() {
   return (
@@ -12,6 +13,7 @@ export default function HomePage() {
       <ServicesOverview />
       <ServicesGrid />
       <ProcessSection />
+      <CtaBanner />
     </>
   );
 }
