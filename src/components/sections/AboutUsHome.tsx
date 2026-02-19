@@ -77,11 +77,12 @@ export function AboutUsHome() {
             className="relative z-10"
           >
             <Image
-              src="/images/hero-astronaut-space.png"
+              src="/images/hero-character.webp"
               alt="Eclipse astronaut — About Eclipse Agency"
               width={560}
               height={560}
-              className="relative h-auto drop-shadow-[0_0_60px_rgba(255,107,53,0.15)]"
+              unoptimized
+              className="hero-flying-character relative h-auto"
               style={{
                 width: "min(55vw, 420px)",
                 objectFit: "contain",
