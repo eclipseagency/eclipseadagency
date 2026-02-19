@@ -67,7 +67,8 @@ const portfolioProjects: PortfolioProject[] = [
       "The branding for Volume merges sophistication and style, showcasing elegant typography and luxurious design elements that perfectly complement the product's refined essence.",
     image:
       "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-6.png",
-    href: "https://eclipseadagency.com/branding/volume/",
+    href: "/volume/",
+    target: "_blank",
   },
   {
     title: "Sunny Beans",
