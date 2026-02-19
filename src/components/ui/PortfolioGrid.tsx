@@ -8,6 +8,7 @@ export interface PortfolioProject {
   description: string;
   image: string;
   href: string;
+  target?: string;
 }
 
 interface PortfolioGridProps {
@@ -21,6 +22,8 @@ export function PortfolioGrid({ projects }: PortfolioGridProps) {
         <Link
           key={project.title}
           href={project.href}
+          target={project.target}
+          rel={project.target === "_blank" ? "noopener noreferrer" : undefined}
           className="group relative block aspect-[4/3] overflow-hidden rounded-2xl border border-border text-left"
         >
           {/* Cover image */}
@@ -41,7 +44,7 @@ export function PortfolioGrid({ projects }: PortfolioGridProps) {
               {project.description}
             </p>
             <span className="mt-3 text-xs font-bold uppercase tracking-wider text-primary md:text-sm">
-              Learn More &rsaquo;
+              LEARN MORE
             </span>
           </div>
         </Link>

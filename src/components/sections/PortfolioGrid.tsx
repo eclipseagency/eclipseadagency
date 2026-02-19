@@ -116,7 +116,7 @@ function TunnelCard({
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <MaybeLink href={isFocused ? item.href : undefined}>
+      <MaybeLink href={isFocused ? item.href : undefined} target={isFocused ? item.target : undefined}>
       <div
         className="relative overflow-hidden rounded-2xl"
         style={{
@@ -240,14 +240,21 @@ function TunnelCard({
    ═══════════════════════════════════════════════════════ */
 function MaybeLink({
   href,
+  target,
   children,
 }: {
   href?: string;
+  target?: string;
   children: React.ReactNode;
 }) {
   if (!href) return <>{children}</>;
   return (
-    <Link href={href} className="block">
+    <Link
+      href={href}
+      target={target}
+      rel={target === "_blank" ? "noopener noreferrer" : undefined}
+      className="block"
+    >
       {children}
     </Link>
   );

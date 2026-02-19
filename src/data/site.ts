@@ -161,6 +161,7 @@ export const portfolioItems: {
   image: string;
   tags: string[];
   href?: string;
+  target?: string;
 }[] = [
   {
     id: "noon-studio",
@@ -183,6 +184,18 @@ export const portfolioItems: {
       "https://eclipseadagency.com/wp-content/uploads/2024/12/sparkle-brand-presentation.png",
     tags: ["Brand Identity", "Space Design", "Visual Language"],
     href: "/sparkle",
+  },
+  {
+    id: "volume",
+    title: "Volume",
+    category: "Branding",
+    description:
+      "Where Sophistication Meets Style — an elegant brand identity merging luxury and modern sophistication for a refined haircare brand.",
+    image:
+      "https://eclipseadagency.com/wp-content/uploads/2024/12/volume-branding-presentation_11zon-1.png",
+    tags: ["Brand Identity", "Luxury Design", "Visual Language"],
+    href: "/volume/",
+    target: "_blank",
   },
 ];
 
