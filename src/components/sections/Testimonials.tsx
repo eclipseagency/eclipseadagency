@@ -6,7 +6,6 @@ import { testimonials } from "@/data/site";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SunlightGlow } from "@/components/ui/SunlightGlow";
 import { QuoteIcon } from "@/components/ui/Icons";
-import { MobileCarousel } from "@/components/ui/MobileCarousel";
 import { cn } from "@/lib/utils";
 
 /* ── Star SVG ── */
@@ -169,8 +168,8 @@ export function Testimonials() {
         </div>
       </div>
 
-      {/* ── Grid / Carousel ── */}
-      <MobileCarousel desktopGrid="md:grid-cols-2" breakpoint="md" gap="gap-6 lg:gap-8">
+      {/* ── Grid ── */}
+      <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
         {testimonials.map((t, i) => (
           <div key={i} ref={setCardRef(i)}>
             <TestimonialCard
@@ -180,7 +179,7 @@ export function Testimonials() {
             />
           </div>
         ))}
-      </MobileCarousel>
+      </div>
     </SectionWrapper>
   );
 }

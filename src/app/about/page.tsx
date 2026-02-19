@@ -9,7 +9,6 @@ import { MissionVision } from "@/components/sections/MissionVision";
 import { ImageCarousel } from "@/components/ui/ImageCarousel";
 import { PortfolioGrid } from "@/components/ui/PortfolioGrid";
 import type { PortfolioProject } from "@/components/ui/PortfolioGrid";
-import { ValuesGrid } from "./ValuesGrid";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -205,7 +204,21 @@ export default function AboutPage() {
           title="What Guides Us"
           subtitle="These principles shape every decision, every design, and every relationship we build."
         />
-        <ValuesGrid values={aboutContent.values} />
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {aboutContent.values.map((value) => (
+            <div
+              key={value.title}
+              className="rounded-2xl border border-border bg-bg-card p-7 text-center"
+            >
+              <h3 className="mb-3 font-heading text-xl font-bold">
+                {value.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-text-secondary">
+                {value.description}
+              </p>
+            </div>
+          ))}
+        </div>
       </SectionWrapper>
 
       {/* ── Project Gallery ── */}
