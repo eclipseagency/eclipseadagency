@@ -51,7 +51,7 @@ const portfolioProjects: PortfolioProject[] = [
       "The branding for Noon Studio reflects a modern and vibrant identity, featuring bold patterns, dynamic shapes, and a harmonious color palette that embodies creativity and innovation.",
     image:
       "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-4.png",
-    href: "https://eclipseadagency.com/branding/noon-studio/",
+    href: "/portfolio/noon-studio",
   },
   {
     title: "Sparkle",
