@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 const profileImages = [
   {
-    src: "https://eclipseadagency.com/wp-content/uploads/2024/11/22167859-a1d9-4963-b7d0-efb4cbb352fe-1536x1025.jpeg",
+    src: "/images/about/our-story.webp",
     alt: "Eclipse Agency team at work",
   },
   {
