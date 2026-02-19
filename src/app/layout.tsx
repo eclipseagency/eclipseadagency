@@ -3,6 +3,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WireframeBackground } from "@/components/ui/WireframeBackground";
 import { CustomCursor } from "@/components/ui/CustomCursor";
+import { Preloader } from "@/components/ui/Preloader";
 import { siteConfig } from "@/data/site";
 import "./globals.css";
 
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="min-h-screen cursor-none bg-bg font-body text-text antialiased">
+        <Preloader />
         <CustomCursor />
         <WireframeBackground />
         <Header />
