@@ -128,13 +128,13 @@ export default function AboutPage() {
           title="From Bold Idea to Creative Powerhouse"
         />
         <div className="grid items-start gap-10 md:grid-cols-2">
-          <div className="overflow-hidden rounded-2xl border border-border">
+          <div className="flex items-center justify-center overflow-hidden rounded-2xl border border-border">
             <Image
               src={profileImages[0].src}
               alt={profileImages[0].alt}
-              width={1536}
-              height={1025}
-              className="h-full w-full object-cover"
+              width={421}
+              height={593}
+              className="max-h-[500px] w-auto object-contain"
             />
           </div>
           <div className="space-y-6">
