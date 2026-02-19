@@ -2,6 +2,7 @@
 
 import { useRef, useState, useMemo, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   motion,
   useScroll,
@@ -115,6 +116,7 @@ function TunnelCard({
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
+      <MaybeLink href={isFocused ? item.href : undefined}>
       <div
         className="relative overflow-hidden rounded-2xl"
         style={{
@@ -228,7 +230,26 @@ function TunnelCard({
           </div>
         </div>
       </div>
+      </MaybeLink>
     </motion.div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════
+   Conditional link wrapper
+   ═══════════════════════════════════════════════════════ */
+function MaybeLink({
+  href,
+  children,
+}: {
+  href?: string;
+  children: React.ReactNode;
+}) {
+  if (!href) return <>{children}</>;
+  return (
+    <Link href={href} className="block">
+      {children}
+    </Link>
   );
 }
 

@@ -160,7 +160,31 @@ export const portfolioItems: {
   description: string;
   image: string;
   tags: string[];
-}[] = [];
+  href?: string;
+}[] = [
+  {
+    id: "noon-studio",
+    title: "Noon Studio",
+    category: "Branding",
+    description:
+      "A bold brand identity for a vibrant creative vision, combining dynamic shapes and a harmonious color palette.",
+    image:
+      "https://eclipseadagency.com/wp-content/uploads/2024/12/noon-studio-branding.png",
+    tags: ["Brand Identity", "Visual Design", "Creative Direction"],
+    href: "/noon-studio",
+  },
+  {
+    id: "sparkle",
+    title: "Sparkle",
+    category: "Branding",
+    description:
+      "Where Magic Happens — a captivating visual identity reflecting innovation, energy, and magic through immersive space design.",
+    image:
+      "https://eclipseadagency.com/wp-content/uploads/2024/12/sparkle-brand-presentation.png",
+    tags: ["Brand Identity", "Space Design", "Visual Language"],
+    href: "/sparkle",
+  },
+];
 
 export const testimonials = [
   {
