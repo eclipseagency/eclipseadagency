@@ -321,7 +321,7 @@ export function Hero() {
           Marketing Built on Strategy, Driven by Creativity.
         </motion.p>
 
-        <motion.div variants={fadeUp} className="mt-6 flex gap-4">
+        <motion.div variants={fadeUp} className="mt-6 flex flex-wrap justify-center gap-3 md:gap-4">
           <Button href="/about" variant="primary" size="lg">
             Get to Know Us
           </Button>

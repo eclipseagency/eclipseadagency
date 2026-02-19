@@ -35,9 +35,9 @@ export function Button({
   };
 
   const sizes = {
-    sm: "px-6 py-2.5 text-[11px] gap-2.5",
-    md: "px-8 py-3 text-xs gap-3",
-    lg: "px-10 py-3.5 text-[13px] gap-3.5",
+    sm: "px-5 py-2 text-[10px] gap-2 md:px-6 md:py-2.5 md:text-[11px] md:gap-2.5",
+    md: "px-6 py-2.5 text-[11px] gap-2.5 md:px-8 md:py-3 md:text-xs md:gap-3",
+    lg: "px-6 py-2.5 text-[11px] gap-2.5 md:px-10 md:py-3.5 md:text-[13px] md:gap-3.5",
   };
 
   const classes = cn(
