@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 const profileImages = [
   {
-    src: "/images/about/our-story.webp",
+    src: "/images/about/our-story.png",
     alt: "Eclipse Agency team at work",
   },
   {
