@@ -59,7 +59,7 @@ const portfolioProjects: PortfolioProject[] = [
       'Crafted a bold, modern identity for Sparkle, featuring vibrant patterns and immersive design elements that bring their tagline, "Where Magic Happens," to life.',
     image:
       "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-5.png",
-    href: "https://eclipseadagency.com/branding/sparkle/",
+    href: "/sparkle",
   },
   {
     title: "Volume",
