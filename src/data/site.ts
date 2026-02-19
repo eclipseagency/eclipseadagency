@@ -197,6 +197,66 @@ export const portfolioItems: {
     href: "/volume/",
     target: "_blank",
   },
+  {
+    id: "sunny-beans",
+    title: "Sunny Beans",
+    category: "Branding",
+    description:
+      "Brewing Warmth, Joy, and Community — a brand identity radiating earthy tones, playful patterns, and a sun-inspired logo for coffee lovers.",
+    image:
+      "https://eclipseadagency.com/wp-content/uploads/2024/12/sunny-beans-branding.png",
+    tags: ["Brand Identity", "Packaging", "Coffee Culture"],
+    href: "/sunny-beans/",
+    target: "_blank",
+  },
+  {
+    id: "grano-de-cafe",
+    title: "Grano de Café",
+    category: "Branding",
+    description:
+      "Authentic branding for Colombian coffee heritage, blending tradition with modern design through a rich, earthy color palette.",
+    image:
+      "https://eclipseadagency.com/wp-content/uploads/2024/12/Granodecafe-branding.png",
+    tags: ["Brand Identity", "Heritage", "Coffee Culture"],
+    href: "/grano-de-cafe/",
+    target: "_blank",
+  },
+  {
+    id: "forcup",
+    title: "For Cup",
+    category: "Branding",
+    description:
+      "Modern minimalism with a playful edge — clean typography and bold iconography for a fresh, contemporary take on coffee culture.",
+    image:
+      "https://eclipseadagency.com/wp-content/uploads/2024/12/for-cup-branding-presentation-1.png",
+    tags: ["Brand Identity", "Minimalism", "Coffee Culture"],
+    href: "/forcup/",
+    target: "_blank",
+  },
+  {
+    id: "qatf",
+    title: "Qatf",
+    category: "Branding",
+    description:
+      "Fresh branding for premium agricultural products with clean visuals and an organic aesthetic emphasizing sustainability.",
+    image:
+      "https://eclipseadagency.com/wp-content/uploads/2024/12/qatf-branding-presentation.png",
+    tags: ["Brand Identity", "Agriculture", "Organic Design"],
+    href: "/qatf/",
+    target: "_blank",
+  },
+  {
+    id: "waf",
+    title: "Waf",
+    category: "Branding",
+    description:
+      "Sleek and professional branding showcasing innovation and excellence in business services with vibrant, dynamic visuals.",
+    image:
+      "https://eclipseadagency.com/wp-content/uploads/2024/12/waf-branding-presentation.png",
+    tags: ["Brand Identity", "Business", "Professional Design"],
+    href: "/waf/",
+    target: "_blank",
+  },
 ];
 
 export const testimonials = [

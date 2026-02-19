@@ -76,7 +76,8 @@ const portfolioProjects: PortfolioProject[] = [
       "The branding for Sunny Beans radiates warmth and joy, featuring earthy tones, playful patterns, and a sun-inspired logo that captures the spirit of community and a love for coffee.",
     image:
       "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-7.png",
-    href: "https://eclipseadagency.com/branding/sunny-beans/",
+    href: "/sunny-beans/",
+    target: "_blank",
   },
   {
     title: "Grano de Café",
@@ -84,7 +85,8 @@ const portfolioProjects: PortfolioProject[] = [
       "The branding for Grano de Café captures the authentic essence of Colombian coffee with a rich, earthy color palette and traditional design elements, emphasizing quality and heritage.",
     image:
       "https://eclipseadagency.com/wp-content/uploads/2024/12/Grano-de-cafe-cover-12.png",
-    href: "https://eclipseadagency.com/branding/grano-de-cafe/",
+    href: "/grano-de-cafe/",
+    target: "_blank",
   },
   {
     title: "For Cup",
@@ -92,7 +94,8 @@ const portfolioProjects: PortfolioProject[] = [
       "The branding for For Cup blends modern minimalism with a playful edge, featuring clean typography and bold iconography that reflects a fresh and contemporary take on coffee culture.",
     image:
       "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-1.png",
-    href: "https://eclipseadagency.com/branding/forcup/",
+    href: "/forcup/",
+    target: "_blank",
   },
   {
     title: "Qatf",
@@ -100,7 +103,8 @@ const portfolioProjects: PortfolioProject[] = [
       "A fresh, modern brand identity emphasizing premium agricultural products with clean visuals and an organic aesthetic.",
     image:
       "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-2.png",
-    href: "https://eclipseadagency.com/branding/qatf/",
+    href: "/qatf/",
+    target: "_blank",
   },
   {
     title: "Waf",
@@ -108,7 +112,8 @@ const portfolioProjects: PortfolioProject[] = [
       "A bold, professional brand design showcasing innovation and excellence in business services with sleek, vibrant visuals.",
     image:
       "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-3.png",
-    href: "https://eclipseadagency.com/branding/waf/",
+    href: "/waf/",
+    target: "_blank",
   },
 ];
 
