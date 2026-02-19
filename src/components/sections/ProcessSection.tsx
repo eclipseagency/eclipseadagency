@@ -5,6 +5,7 @@ import Image from "next/image";
 import { processSteps } from "@/data/site";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { MobileCarousel } from "@/components/ui/MobileCarousel";
 import { cn } from "@/lib/utils";
 
 function ProcessStep({
@@ -159,13 +160,36 @@ export function ProcessSection() {
         subtitle="A proven five-step process that ensures every project moves from concept to launch with precision and creative excellence."
       />
 
-      <div className="relative" ref={containerRef}>
+      {/* ── Mobile: carousel ── */}
+      <div className="md:hidden">
+        <MobileCarousel breakpoint="md" cardWidth="min-w-[82%]" gap="gap-4">
+          {processSteps.map((step) => (
+            <div
+              key={step.number}
+              className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6"
+            >
+              <span className="font-heading text-5xl font-bold text-primary/15">
+                {step.number}
+              </span>
+              <h3 className="mt-3 font-heading text-xl font-bold text-white">
+                {step.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-white/50">
+                {step.description}
+              </p>
+            </div>
+          ))}
+        </MobileCarousel>
+      </div>
+
+      {/* ── Desktop: timeline ── */}
+      <div className="relative hidden md:block" ref={containerRef}>
         {/* Timeline track */}
-        <div className="absolute left-[6px] top-0 hidden h-full w-px bg-white/[0.04] md:left-1/2 md:-translate-x-px md:block" />
+        <div className="absolute left-1/2 top-0 h-full w-px -translate-x-px bg-white/[0.04]" />
 
         {/* Animated fill line */}
         <div
-          className="absolute left-[6px] top-0 hidden w-px md:left-1/2 md:-translate-x-px md:block"
+          className="absolute left-1/2 top-0 w-px -translate-x-px"
           style={{
             height: `${lineProgress}%`,
             background:
@@ -176,7 +200,7 @@ export function ProcessSection() {
 
         {/* Floating astronaut on timeline */}
         <div
-          className="pointer-events-none absolute left-1/2 top-0 z-20 hidden md:block"
+          className="pointer-events-none absolute left-1/2 top-0 z-20"
           style={{
             transform: `translate(-50%, ${astronautY - 28}px)`,
             transition:
@@ -193,7 +217,7 @@ export function ProcessSection() {
           />
         </div>
 
-        <div className="space-y-14 md:space-y-20">
+        <div className="space-y-20">
           {processSteps.map((step, i) => (
             <div key={step.number} ref={setStepRef(i)}>
               <ProcessStep

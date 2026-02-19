@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { ArrowRightIcon, QuoteIcon } from "@/components/ui/Icons";
+import { MobileCarousel } from "@/components/ui/MobileCarousel";
 
 const services = [
   {
@@ -138,38 +139,40 @@ export function ServicesOverview() {
         })}
       </div>
 
-      {/* Mobile: stacked cards */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:hidden">
-        {services.map((service) => (
-          <div
-            key={service.number}
-            className="group relative aspect-[3/4] overflow-hidden rounded-2xl"
-          >
-            <Image
-              src={service.image}
-              alt={service.title}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20" />
-            <div className="absolute left-5 top-5 z-10">
-              <span className="font-heading text-5xl font-bold text-white/10">
-                {service.number}
-              </span>
+      {/* Mobile: carousel cards */}
+      <div className="lg:hidden">
+        <MobileCarousel desktopGrid="sm:grid-cols-2" breakpoint="lg" cardWidth="min-w-[78%]">
+          {services.map((service) => (
+            <div
+              key={service.number}
+              className="group relative aspect-[3/4] overflow-hidden rounded-2xl"
+            >
+              <Image
+                src={service.image}
+                alt={service.title}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20" />
+              <div className="absolute left-5 top-5 z-10">
+                <span className="font-heading text-5xl font-bold text-white/10">
+                  {service.number}
+                </span>
+              </div>
+              <div className="absolute inset-x-0 bottom-0 z-10 p-5">
+                <h3 className="font-heading text-xl font-bold text-primary">
+                  {service.title}
+                </h3>
+                <p className="mt-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70">
+                  {service.subtitle}
+                </p>
+              </div>
+              <div className="absolute bottom-5 right-5 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/60 backdrop-blur-sm">
+                <ArrowRightIcon size={16} />
+              </div>
             </div>
-            <div className="absolute inset-x-0 bottom-0 z-10 p-5">
-              <h3 className="font-heading text-xl font-bold text-primary">
-                {service.title}
-              </h3>
-              <p className="mt-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70">
-                {service.subtitle}
-              </p>
-            </div>
-            <div className="absolute bottom-5 right-5 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/60 backdrop-blur-sm">
-              <ArrowRightIcon size={16} />
-            </div>
-          </div>
-        ))}
+          ))}
+        </MobileCarousel>
       </div>
     </SectionWrapper>
   );
