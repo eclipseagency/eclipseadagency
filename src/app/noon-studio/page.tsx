@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { CtaBanner } from "@/components/sections/CtaBanner";
 
 export const metadata: Metadata = {
   title: "Noon Studio — Brand Identity | Eclipse Agency",
@@ -33,6 +34,8 @@ export default function NoonStudioPage() {
           />
         </div>
       </div>
+
+      <CtaBanner />
     </main>
   );
 }
