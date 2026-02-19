@@ -292,13 +292,12 @@ export function Hero() {
           />
 
           <Image
-            src="/images/hero-character.webp"
+            src="/images/hero-astronaut-new.png"
             alt="Eclipse astronaut floating in space — From Shadow to Spotlight"
             width={740}
             height={740}
             priority
-            unoptimized
-            className="hero-flying-character relative h-auto"
+            className="relative h-auto drop-shadow-[0_0_80px_rgba(255,107,53,0.2)]"
             style={{
               width: "min(65vw, 480px)",
               objectFit: "contain",
