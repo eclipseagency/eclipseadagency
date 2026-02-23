@@ -55,7 +55,7 @@ export const servicesOverview = [
     slug: "branding",
     icon: "palette",
     title: "Branding & Identity",
-    image: "/images/solutions/branding.webp",
+    image: "/images/solutions/branding.svg",
     description:
       "We build visual identities that resonate. From logos to full brand systems, we create cohesive brands that stand out in crowded markets.",
     features: [
@@ -72,7 +72,7 @@ export const servicesOverview = [
     slug: "digital-marketing",
     icon: "trending-up",
     title: "Digital Marketing",
-    image: "/images/solutions/digital-marketing.webp",
+    image: "/images/solutions/digital-marketing.svg",
     description:
       "Data-driven campaigns that deliver measurable results. We combine analytics with creativity to maximize your digital presence and ROI.",
     features: [
@@ -89,7 +89,7 @@ export const servicesOverview = [
     slug: "web-apps",
     icon: "code",
     title: "Web & App Development",
-    image: "/images/solutions/web-apps.webp",
+    image: "/images/solutions/web-apps.svg",
     description:
       "Custom web and mobile solutions built for performance and scale. Responsive, fast, and designed to convert visitors into customers.",
     features: [
@@ -106,7 +106,7 @@ export const servicesOverview = [
     slug: "animation",
     icon: "play",
     title: "Motion & Animation",
-    image: "/images/solutions/animation.webp",
+    image: "/images/solutions/animation.svg",
     description:
       "Dynamic motion graphics and character animation that engage and explain. We animate ideas into compelling visual narratives.",
     features: [
