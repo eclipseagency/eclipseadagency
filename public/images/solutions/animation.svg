@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0d0d"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="accent2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff6b35"/>
+      <stop offset="100%" style="stop-color:#ff8c42"/>
+    </linearGradient>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow2">
+      <feGaussianBlur stdDeviation="25" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg2)"/>
+
+  <!-- Subtle grid -->
+  <g opacity="0.03" stroke="#ffffff" stroke-width="0.5">
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="450" x2="800" y2="450"/>
+    <line x1="200" y1="0" x2="200" y2="600"/>
+    <line x1="400" y1="0" x2="400" y2="600"/>
+    <line x1="600" y1="0" x2="600" y2="600"/>
+  </g>
+
+  <!-- Ambient glow -->
+  <circle cx="400" cy="280" r="200" fill="#ff6b35" opacity="0.04" filter="url(#softglow2)"/>
+
+  <!-- Play button / Film frame -->
+  <g transform="translate(400, 250)">
+    <!-- Film strip frame -->
+    <rect x="-140" y="-100" width="280" height="200" rx="12" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1.5" opacity="0.6"/>
+
+    <!-- Film perforations left -->
+    <rect x="-135" y="-85" width="12" height="8" rx="2" fill="#ff6b35" opacity="0.15"/>
+    <rect x="-135" y="-65" width="12" height="8" rx="2" fill="#ff6b35" opacity="0.15"/>
+    <rect x="-135" y="-45" width="12" height="8" rx="2" fill="#ff6b35" opacity="0.15"/>
+    <rect x="-135" y="-25" width="12" height="8" rx="2" fill="#ff6b35" opacity="0.15"/>
+    <rect x="-135" y="-5" width="12" height="8" rx="2" fill="#ff6b35" opacity="0.15"/>
+    <rect x="-135" y="15" width="12" height="8" rx="2" fill="#ff6b35" opacity="0.15"/>
+    <rect x="-135" y="35" width="12" height="8" rx="2" fill="#ff6b35" opacity="0.15"/>
+    <rect x="-135" y="55" width="12" height="8" rx="2" fill="#ff6b35" opacity="0.15"/>
+    <rect x="-135" y="75" width="12" height="8" rx="2" fill="#ff6b35" opacity="0.15"/>
+
+    <!-- Film perforations right -->
+    <rect x="123" y="-85" width="12" height="8" rx="2" fill="#ff6b35" opacity="0.15"/>
+    <rect x="123" y="-65" width="12" height="8" rx="2" fill="#ff6b35" opacity="0.15"/>
+    <rect x="123" y="-45" width="12" height="8" rx="2" fill="#ff6b35" opacity="0.15"/>
+    <rect x="123" y="-25" width="12" height="8" rx="2" fill="#ff6b35" opacity="0.15"/>
+    <rect x="123" y="-5" width="12" height="8" rx="2" fill="#ff6b35" opacity="0.15"/>
+    <rect x="123" y="15" width="12" height="8" rx="2" fill="#ff6b35" opacity="0.15"/>
+    <rect x="123" y="35" width="12" height="8" rx="2" fill="#ff6b35" opacity="0.15"/>
+    <rect x="123" y="55" width="12" height="8" rx="2" fill="#ff6b35" opacity="0.15"/>
+    <rect x="123" y="75" width="12" height="8" rx="2" fill="#ff6b35" opacity="0.15"/>
+
+    <!-- Play button -->
+    <circle cx="0" cy="0" r="45" fill="#ff6b35" opacity="0.1" filter="url(#glow2)"/>
+    <circle cx="0" cy="0" r="35" fill="none" stroke="#ff6b35" stroke-width="2.5" opacity="0.8"/>
+    <polygon points="15,0 -8,-15 -8,15" fill="#ff6b35" opacity="0.9"/>
+  </g>
+
+  <!-- Motion trail / animation path -->
+  <g filter="url(#glow2)">
+    <path d="M 150 420 Q 250 380 350 420 Q 450 460 550 420 Q 650 380 700 400" fill="none" stroke="#ff6b35" stroke-width="2" opacity="0.4" stroke-dasharray="8 4"/>
+
+    <!-- Motion dots along path -->
+    <circle cx="200" cy="400" r="4" fill="#ff6b35" opacity="0.3"/>
+    <circle cx="300" cy="415" r="5" fill="#ff6b35" opacity="0.5"/>
+    <circle cx="400" cy="435" r="6" fill="#ff6b35" opacity="0.7"/>
+    <circle cx="500" cy="425" r="7" fill="#ff6b35" opacity="0.9"/>
+    <circle cx="600" cy="400" r="5" fill="#ff8c42" opacity="0.4"/>
+  </g>
+
+  <!-- Timeline bar -->
+  <g transform="translate(150, 500)">
+    <rect x="0" y="0" width="500" height="4" rx="2" fill="#ffffff" opacity="0.1"/>
+    <rect x="0" y="0" width="280" height="4" rx="2" fill="#ff6b35" opacity="0.7"/>
+    <circle cx="280" cy="2" r="6" fill="#ff6b35" opacity="0.9"/>
+
+    <!-- Time markers -->
+    <line x1="0" y1="-5" x2="0" y2="9" stroke="#ffffff" stroke-width="1" opacity="0.15"/>
+    <line x1="125" y1="-5" x2="125" y2="9" stroke="#ffffff" stroke-width="1" opacity="0.15"/>
+    <line x1="250" y1="-5" x2="250" y2="9" stroke="#ffffff" stroke-width="1" opacity="0.15"/>
+    <line x1="375" y1="-5" x2="375" y2="9" stroke="#ffffff" stroke-width="1" opacity="0.15"/>
+    <line x1="500" y1="-5" x2="500" y2="9" stroke="#ffffff" stroke-width="1" opacity="0.15"/>
+  </g>
+
+  <!-- Floating keyframe diamonds -->
+  <g>
+    <rect x="215" y="473" width="8" height="8" rx="1" transform="rotate(45 219 477)" fill="#ff6b35" opacity="0.6"/>
+    <rect x="345" y="473" width="8" height="8" rx="1" transform="rotate(45 349 477)" fill="#ff8c42" opacity="0.5"/>
+    <rect x="435" y="473" width="8" height="8" rx="1" transform="rotate(45 439 477)" fill="#ff6b35" opacity="0.4"/>
+  </g>
+
+  <!-- Corner decorations -->
+  <g stroke="#ff6b35" stroke-width="1" opacity="0.2">
+    <line x1="30" y1="30" x2="80" y2="30"/>
+    <line x1="30" y1="30" x2="30" y2="80"/>
+    <line x1="720" y1="570" x2="770" y2="570"/>
+    <line x1="770" y1="520" x2="770" y2="570"/>
+  </g>
+
+  <!-- Small particles -->
+  <circle cx="120" cy="150" r="1.5" fill="#ff6b35" opacity="0.25"/>
+  <circle cx="680" cy="180" r="2" fill="#ff8c42" opacity="0.2"/>
+  <circle cx="700" cy="350" r="1" fill="#ff6b35" opacity="0.3"/>
+  <circle cx="100" cy="380" r="1.5" fill="#ff8c42" opacity="0.15"/>
+</svg>

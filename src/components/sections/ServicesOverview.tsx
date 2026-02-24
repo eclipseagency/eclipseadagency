@@ -11,25 +11,25 @@ const services = [
     number: "01",
     title: "Branding",
     subtitle: "CRAFTING STELLAR IDENTITIES",
-    image: "/images/solutions/branding.webp",
+    image: "/images/solutions/branding.svg",
   },
   {
     number: "02",
     title: "Animation & Production",
     subtitle: "BRINGING IMAGINATION TO LIFE",
-    image: "/images/solutions/animation.webp",
+    image: "/images/solutions/animation.svg",
   },
   {
     number: "03",
     title: "Web & Apps Development",
     subtitle: "BUILDING TOMORROW'S DIGITAL LANDSCAPES",
-    image: "/images/solutions/web-apps.webp",
+    image: "/images/solutions/web-apps.svg",
   },
   {
     number: "04",
     title: "Digital Marketing",
     subtitle: "ACCELERATING YOUR BRAND TO NEW HEIGHTS",
-    image: "/images/solutions/digital-marketing.webp",
+    image: "/images/solutions/digital-marketing.svg",
   },
 ];
 

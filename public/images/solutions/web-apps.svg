@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0d0d"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <filter id="glow3">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow3">
+      <feGaussianBlur stdDeviation="25" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg3)"/>
+
+  <!-- Subtle grid -->
+  <g opacity="0.03" stroke="#ffffff" stroke-width="0.5">
+    <line x1="0" y1="100" x2="800" y2="100"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="400" x2="800" y2="400"/>
+    <line x1="0" y1="500" x2="800" y2="500"/>
+    <line x1="160" y1="0" x2="160" y2="600"/>
+    <line x1="320" y1="0" x2="320" y2="600"/>
+    <line x1="480" y1="0" x2="480" y2="600"/>
+    <line x1="640" y1="0" x2="640" y2="600"/>
+  </g>
+
+  <!-- Ambient glow -->
+  <circle cx="400" cy="280" r="220" fill="#ff6b35" opacity="0.03" filter="url(#softglow3)"/>
+
+  <!-- Browser window -->
+  <g transform="translate(150, 100)">
+    <!-- Window frame -->
+    <rect x="0" y="0" width="500" height="340" rx="10" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1" opacity="0.5"/>
+
+    <!-- Title bar -->
+    <rect x="0" y="0" width="500" height="32" rx="10" fill="#1e1e36"/>
+    <rect x="0" y="20" width="500" height="12" fill="#1e1e36"/>
+
+    <!-- Traffic lights -->
+    <circle cx="20" cy="16" r="5" fill="#ff5f56" opacity="0.7"/>
+    <circle cx="38" cy="16" r="5" fill="#ffbd2e" opacity="0.7"/>
+    <circle cx="56" cy="16" r="5" fill="#27c93f" opacity="0.7"/>
+
+    <!-- URL bar -->
+    <rect x="100" y="8" width="300" height="16" rx="8" fill="#0d0d0d" opacity="0.5"/>
+    <rect x="112" y="13" width="80" height="6" rx="3" fill="#ff6b35" opacity="0.3"/>
+
+    <!-- Code content area -->
+    <g transform="translate(20, 48)">
+      <!-- Line numbers -->
+      <text x="0" y="14" font-family="monospace" font-size="10" fill="#ffffff" opacity="0.15">1</text>
+      <text x="0" y="30" font-family="monospace" font-size="10" fill="#ffffff" opacity="0.15">2</text>
+      <text x="0" y="46" font-family="monospace" font-size="10" fill="#ffffff" opacity="0.15">3</text>
+      <text x="0" y="62" font-family="monospace" font-size="10" fill="#ffffff" opacity="0.15">4</text>
+      <text x="0" y="78" font-family="monospace" font-size="10" fill="#ffffff" opacity="0.15">5</text>
+      <text x="0" y="94" font-family="monospace" font-size="10" fill="#ffffff" opacity="0.15">6</text>
+      <text x="0" y="110" font-family="monospace" font-size="10" fill="#ffffff" opacity="0.15">7</text>
+      <text x="0" y="126" font-family="monospace" font-size="10" fill="#ffffff" opacity="0.15">8</text>
+      <text x="0" y="142" font-family="monospace" font-size="10" fill="#ffffff" opacity="0.15">9</text>
+
+      <!-- Code lines (abstract colored blocks) -->
+      <rect x="22" y="6" width="60" height="10" rx="2" fill="#ff6b35" opacity="0.6"/>
+      <rect x="88" y="6" width="35" height="10" rx="2" fill="#ffffff" opacity="0.15"/>
+
+      <rect x="36" y="22" width="90" height="10" rx="2" fill="#ff8c42" opacity="0.4"/>
+      <rect x="132" y="22" width="50" height="10" rx="2" fill="#ffffff" opacity="0.1"/>
+      <rect x="188" y="22" width="70" height="10" rx="2" fill="#ff6b35" opacity="0.25"/>
+
+      <rect x="36" y="38" width="45" height="10" rx="2" fill="#ffffff" opacity="0.12"/>
+      <rect x="87" y="38" width="110" height="10" rx="2" fill="#ff6b35" opacity="0.35"/>
+
+      <rect x="50" y="54" width="75" height="10" rx="2" fill="#ff8c42" opacity="0.3"/>
+      <rect x="131" y="54" width="40" height="10" rx="2" fill="#ffffff" opacity="0.1"/>
+
+      <rect x="50" y="70" width="55" height="10" rx="2" fill="#ffffff" opacity="0.08"/>
+      <rect x="111" y="70" width="85" height="10" rx="2" fill="#ff6b35" opacity="0.4"/>
+      <rect x="202" y="70" width="30" height="10" rx="2" fill="#ff8c42" opacity="0.2"/>
+
+      <rect x="36" y="86" width="40" height="10" rx="2" fill="#ff6b35" opacity="0.5"/>
+
+      <rect x="22" y="102" width="50" height="10" rx="2" fill="#ff6b35" opacity="0.6"/>
+
+      <rect x="22" y="118" width="0" height="10" rx="2" fill="#ffffff" opacity="0.1"/>
+
+      <rect x="22" y="134" width="70" height="10" rx="2" fill="#ff8c42" opacity="0.3"/>
+      <rect x="98" y="134" width="45" height="10" rx="2" fill="#ffffff" opacity="0.12"/>
+    </g>
+
+    <!-- Side panel (component tree) -->
+    <g transform="translate(330, 48)">
+      <rect x="0" y="0" width="1" height="270" fill="#ffffff" opacity="0.05"/>
+      <rect x="15" y="10" width="80" height="8" rx="2" fill="#ffffff" opacity="0.08"/>
+      <rect x="25" y="28" width="70" height="8" rx="2" fill="#ff6b35" opacity="0.3"/>
+      <rect x="25" y="46" width="55" height="8" rx="2" fill="#ffffff" opacity="0.06"/>
+      <rect x="35" y="64" width="60" height="8" rx="2" fill="#ff8c42" opacity="0.2"/>
+      <rect x="35" y="82" width="45" height="8" rx="2" fill="#ffffff" opacity="0.06"/>
+      <rect x="25" y="100" width="65" height="8" rx="2" fill="#ffffff" opacity="0.06"/>
+      <rect x="25" y="118" width="50" height="8" rx="2" fill="#ff6b35" opacity="0.2"/>
+    </g>
+  </g>
+
+  <!-- Mobile phone mockup -->
+  <g transform="translate(580, 280)">
+    <rect x="0" y="0" width="100" height="180" rx="14" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1" opacity="0.5"/>
+    <!-- Status bar -->
+    <rect x="30" y="8" width="40" height="4" rx="2" fill="#ffffff" opacity="0.1"/>
+    <!-- App content blocks -->
+    <rect x="10" y="22" width="80" height="30" rx="4" fill="#ff6b35" opacity="0.15"/>
+    <rect x="10" y="58" width="80" height="6" rx="2" fill="#ffffff" opacity="0.08"/>
+    <rect x="10" y="70" width="55" height="6" rx="2" fill="#ffffff" opacity="0.06"/>
+    <rect x="10" y="84" width="36" height="28" rx="4" fill="#ff6b35" opacity="0.1"/>
+    <rect x="52" y="84" width="36" height="28" rx="4" fill="#ff8c42" opacity="0.1"/>
+    <rect x="10" y="120" width="80" height="6" rx="2" fill="#ffffff" opacity="0.06"/>
+    <rect x="10" y="132" width="60" height="6" rx="2" fill="#ffffff" opacity="0.05"/>
+    <!-- Bottom nav -->
+    <rect x="10" y="156" width="80" height="1" fill="#ffffff" opacity="0.05"/>
+    <circle cx="25" cy="166" r="4" fill="#ff6b35" opacity="0.4"/>
+    <circle cx="50" cy="166" r="4" fill="#ffffff" opacity="0.1"/>
+    <circle cx="75" cy="166" r="4" fill="#ffffff" opacity="0.1"/>
+  </g>
+
+  <!-- Connection lines between browser and mobile -->
+  <g stroke="#ff6b35" stroke-width="1" opacity="0.15" stroke-dasharray="4 3">
+    <line x1="650" y1="260" x2="620" y2="300"/>
+    <line x1="650" y1="380" x2="630" y2="400"/>
+  </g>
+
+  <!-- Terminal indicator -->
+  <g transform="translate(150, 480)">
+    <rect x="0" y="0" width="240" height="60" rx="8" fill="#0d0d0d" stroke="#ffffff" stroke-width="0.5" opacity="0.3"/>
+    <text x="12" y="20" font-family="monospace" font-size="10" fill="#ff6b35" opacity="0.7">$</text>
+    <rect x="24" y="12" width="100" height="10" rx="2" fill="#ff6b35" opacity="0.3"/>
+    <text x="12" y="38" font-family="monospace" font-size="10" fill="#27c93f" opacity="0.5">&#x2713;</text>
+    <rect x="24" y="30" width="150" height="10" rx="2" fill="#27c93f" opacity="0.15"/>
+    <rect x="24" y="46" width="6" height="10" rx="1" fill="#ff6b35" opacity="0.8"/>
+  </g>
+
+  <!-- Corner decorations -->
+  <g stroke="#ff6b35" stroke-width="1" opacity="0.2">
+    <line x1="30" y1="30" x2="80" y2="30"/>
+    <line x1="30" y1="30" x2="30" y2="80"/>
+    <line x1="720" y1="570" x2="770" y2="570"/>
+    <line x1="770" y1="520" x2="770" y2="570"/>
+  </g>
+
+  <!-- Particles -->
+  <circle cx="100" cy="200" r="1.5" fill="#ff6b35" opacity="0.2"/>
+  <circle cx="720" cy="150" r="2" fill="#ff8c42" opacity="0.15"/>
+  <circle cx="90" cy="500" r="1" fill="#ff6b35" opacity="0.25"/>
+</svg>
