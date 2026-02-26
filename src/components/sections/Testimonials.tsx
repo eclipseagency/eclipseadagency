@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import Image from "next/image";
 import { testimonials } from "@/data/site";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SunlightGlow } from "@/components/ui/SunlightGlow";
@@ -80,15 +79,8 @@ function TestimonialCard({
 
       {/* Author */}
       <div className="flex items-center gap-4">
-        <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full border border-white/[0.08]">
-          <Image
-            src={t.avatar}
-            alt={t.name}
-            width={48}
-            height={48}
-            unoptimized
-            className="h-full w-full object-cover"
-          />
+        <div className="h-12 w-12 shrink-0 flex items-center justify-center rounded-full border border-primary/30 bg-gradient-to-br from-primary/20 to-primary/5 font-heading text-base font-bold text-primary">
+          {t.name.charAt(0)}
         </div>
         <div>
           <p className="font-heading text-sm font-bold text-white">{t.name}</p>

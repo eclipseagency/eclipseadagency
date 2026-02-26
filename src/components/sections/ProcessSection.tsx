@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import Image from "next/image";
 import { processSteps } from "@/data/site";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -184,13 +183,18 @@ export function ProcessSection() {
             opacity: activeIndex >= 0 ? 1 : 0,
           }}
         >
-          <Image
-            src="/images/hero-astronaut-space.png"
-            alt="Astronaut"
-            width={56}
-            height={56}
-            className="h-14 w-14 object-contain drop-shadow-[0_0_12px_rgba(255,107,53,0.3)]"
-          />
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-[0_0_10px_rgba(255,107,53,0.5)]">
+            <circle cx="20" cy="20" r="20" fill="rgba(255,107,53,0.08)"/>
+            <circle cx="20" cy="20" r="14" fill="none" stroke="rgba(255,107,53,0.2)" strokeWidth="1"/>
+            {/* Rocket body */}
+            <path d="M20 8 C20 8 27 13 27 21 L27 26 L20 30 L13 26 L13 21 C13 13 20 8 20 8Z" fill="rgba(255,107,53,0.12)" stroke="#ff6b35" strokeWidth="1.2"/>
+            {/* Rocket tip */}
+            <path d="M20 8 L16 16 L24 16 Z" fill="#ff6b35" fillOpacity="0.5"/>
+            {/* Window */}
+            <circle cx="20" cy="20" r="3.5" fill="none" stroke="#ff8c42" strokeWidth="1" opacity="0.7"/>
+            {/* Exhaust */}
+            <path d="M16 26 L20 33 L24 26" fill="none" stroke="#ff8c42" strokeWidth="1.2" opacity="0.6"/>
+          </svg>
         </div>
 
         <div className="space-y-14 md:space-y-20">
