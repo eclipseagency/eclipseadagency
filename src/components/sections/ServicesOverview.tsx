@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { ArrowRightIcon, QuoteIcon } from "@/components/ui/Icons";
@@ -66,14 +65,8 @@ export function ServicesOverview() {
               animate={{ flex: isActive ? 4 : 1 }}
               transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              {/* Background Image */}
-              <Image
-                src={service.image}
-                alt={service.title}
-                fill
-                className="object-cover"
-                sizes="(min-width: 1024px) 50vw, 100vw"
-              />
+              {/* Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-bg-card to-bg" />
 
               {/* Dark Overlay */}
               <motion.div
@@ -145,12 +138,7 @@ export function ServicesOverview() {
             key={service.number}
             className="group relative aspect-[3/4] overflow-hidden rounded-2xl"
           >
-            <Image
-              src={service.image}
-              alt={service.title}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
-            />
+            <div className="absolute inset-0 bg-gradient-to-br from-bg-card to-bg" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20" />
             <div className="absolute left-5 top-5 z-10">
               <span className="font-heading text-5xl font-bold text-white/10">

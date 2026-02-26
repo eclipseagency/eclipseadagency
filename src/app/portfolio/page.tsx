@@ -16,7 +16,6 @@ export default function PortfolioPage() {
         badge="Portfolio"
         title="Our Creative Work"
         subtitle="A curated selection of projects that showcase our creative range and the results we deliver for our clients."
-        image="/images/hero-pages/astronaut-above-1.jpg"
       />
       <PortfolioGrid showCta={false} />
       <CtaBanner />

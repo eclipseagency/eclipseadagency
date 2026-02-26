@@ -20,7 +20,6 @@ export default function BlogPage() {
         badge="Blog"
         title="Insights & Ideas"
         subtitle="Expert perspectives on branding, marketing, design, and technology — written by our team for yours."
-        image="/images/hero-pages/lunar-eclipse.webp"
       />
 
       <SectionWrapper>

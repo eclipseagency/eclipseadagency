@@ -38,7 +38,6 @@ export default function ContactPage() {
         badge="Get Started"
         title="Let's Build Something Extraordinary"
         subtitle="Tell us about your project and goals. We'll get back to you within 24 hours with ideas and next steps."
-        image="/images/hero-pages/astronaut-over-1.jpg"
       />
 
       <SectionWrapper>
