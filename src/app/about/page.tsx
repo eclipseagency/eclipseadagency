@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PageHero } from "@/components/sections/PageHero";
 import { aboutContent } from "@/data/site";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
@@ -15,6 +16,17 @@ export const metadata: Metadata = {
   description:
     "Learn about Eclipse Agency — our mission, vision, values, and the team behind the creative work.",
 };
+
+const profileImages = [
+  {
+    src: "/images/about/our-story.png",
+    alt: "Eclipse Agency team at work",
+  },
+  {
+    src: "https://eclipseadagency.com/wp-content/uploads/2024/11/DSC_7529-1536x1025.jpg",
+    alt: "Eclipse Agency office",
+  },
+];
 
 const projectImages = [
   "https://eclipseadagency.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-19-at-2.15.58-PM.jpeg",
@@ -112,6 +124,7 @@ export default function AboutPage() {
         badge="Profile"
         title="The Creative Force Behind the Work"
         subtitle="We are a team of strategists, designers, developers, and storytellers united by a passion for building brands that matter."
+        image="/images/hero-pages/profile-hero.webp"
       />
 
       {/* ── Story ── */}
@@ -120,15 +133,26 @@ export default function AboutPage() {
           badge="Our Story"
           title="From Bold Idea to Creative Powerhouse"
         />
-        <div className="mx-auto max-w-3xl space-y-6">
-          {aboutContent.story.map((paragraph, i) => (
-            <p
-              key={i}
-              className="text-base leading-relaxed text-text-secondary md:text-lg"
-            >
-              {paragraph}
-            </p>
-          ))}
+        <div className="grid items-start gap-10 md:grid-cols-2">
+          <div className="flex items-center justify-center overflow-hidden rounded-2xl border border-border">
+            <Image
+              src={profileImages[0].src}
+              alt={profileImages[0].alt}
+              width={421}
+              height={593}
+              className="max-h-[500px] w-auto object-contain"
+            />
+          </div>
+          <div className="space-y-6">
+            {aboutContent.story.map((paragraph, i) => (
+              <p
+                key={i}
+                className="text-base leading-relaxed text-text-secondary md:text-lg"
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
         </div>
       </SectionWrapper>
 

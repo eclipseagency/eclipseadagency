@@ -1,16 +1,32 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface PageHeroProps {
   badge: string;
   title: string;
   subtitle?: string;
+  image?: string;
 }
 
-export function PageHero({ badge, title, subtitle }: PageHeroProps) {
+export function PageHero({ badge, title, subtitle, image }: PageHeroProps) {
   return (
     <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden px-5 pb-20 pt-32 md:px-8 md:pt-40">
+      {/* ── Layer 0: Background image ── */}
+      {image && (
+        <div className="absolute inset-0">
+          <Image
+            src={image}
+            alt=""
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+        </div>
+      )}
+
       {/* ── Layer 1: Dark overlays for depth & contrast ── */}
       <div className="absolute inset-0 bg-black/60" />
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/80 via-transparent to-[#0a0a0a]/90" />
