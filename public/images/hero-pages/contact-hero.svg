@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <defs>
+    <linearGradient id="con-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0d0d"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <filter id="con-glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="con-softglow">
+      <feGaussianBlur stdDeviation="22" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#con-bg)"/>
+
+  <!-- Grid -->
+  <g opacity="0.03" stroke="#ffffff" stroke-width="0.5">
+    <line x1="0" y1="100" x2="800" y2="100"/><line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="300" x2="800" y2="300"/><line x1="0" y1="400" x2="800" y2="400"/>
+    <line x1="0" y1="500" x2="800" y2="500"/>
+    <line x1="100" y1="0" x2="100" y2="600"/><line x1="200" y1="0" x2="200" y2="600"/>
+    <line x1="300" y1="0" x2="300" y2="600"/><line x1="400" y1="0" x2="400" y2="600"/>
+    <line x1="500" y1="0" x2="500" y2="600"/><line x1="600" y1="0" x2="600" y2="600"/>
+    <line x1="700" y1="0" x2="700" y2="600"/>
+  </g>
+
+  <!-- Ambient glow -->
+  <circle cx="400" cy="275" r="255" fill="#ff6b35" opacity="0.04" filter="url(#con-softglow)"/>
+
+  <!-- Main: Message/envelope icon (communication) -->
+  <g transform="translate(400, 265)">
+    <!-- Outer rings -->
+    <circle cx="0" cy="0" r="148" fill="none" stroke="#ff6b35" stroke-width="0.5" stroke-dasharray="4 5" opacity="0.15"/>
+    <circle cx="0" cy="0" r="118" fill="none" stroke="#ff6b35" stroke-width="1" opacity="0.2"/>
+    <circle cx="0" cy="0" r="90" fill="#ff6b35" opacity="0.05"/>
+    <circle cx="0" cy="0" r="90" fill="none" stroke="#ff6b35" stroke-width="2" opacity="0.62"/>
+
+    <!-- Message/chat bubble icon -->
+    <g filter="url(#con-glow)">
+      <!-- Envelope shape -->
+      <rect x="-48" y="-30" width="96" height="64" rx="8" fill="#ff6b35" opacity="0.09" stroke="#ff6b35" stroke-width="2.5"/>
+      <!-- Envelope flap (V shape) -->
+      <path d="M-48 -30 L0 10 L48 -30" fill="none" stroke="#ff6b35" stroke-width="2" stroke-linejoin="round"/>
+      <!-- Bottom fold lines -->
+      <line x1="-48" y1="34" x2="-18" y2="8" stroke="#ff6b35" stroke-width="1" opacity="0.35"/>
+      <line x1="48" y1="34" x2="18" y2="8" stroke="#ff6b35" stroke-width="1" opacity="0.35"/>
+    </g>
+
+    <!-- Signal waves radiating outward -->
+    <g stroke="#ff6b35" fill="none" opacity="0.18">
+      <path d="M-135 -40 Q-155 -15 -135 15" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M-148 -55 Q-175 -15 -148 30" stroke-width="1" stroke-linecap="round"/>
+      <path d="M135 -40 Q155 -15 135 15" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M148 -55 Q175 -15 148 30" stroke-width="1" stroke-linecap="round"/>
+    </g>
+
+    <!-- Orbital dots -->
+    <circle cx="0" cy="-118" r="4" fill="#ff6b35" opacity="0.7"/>
+    <circle cx="118" cy="0" r="3" fill="#ff8c42" opacity="0.55"/>
+    <circle cx="0" cy="118" r="3.5" fill="#ff6b35" opacity="0.6"/>
+    <circle cx="-118" cy="0" r="2.5" fill="#ff8c42" opacity="0.45"/>
+    <circle cx="83" cy="-83" r="3" fill="#ff6b35" opacity="0.4"/>
+    <circle cx="-83" cy="83" r="3" fill="#ff6b35" opacity="0.35"/>
+  </g>
+
+  <!-- Connection network (nodes) -->
+  <g opacity="0.22" stroke="#ff6b35" stroke-width="0.7">
+    <line x1="130" y1="165" x2="282" y2="195"/>
+    <line x1="130" y1="165" x2="168" y2="330"/>
+    <line x1="668" y1="160" x2="520" y2="195"/>
+    <line x1="668" y1="160" x2="638" y2="325"/>
+    <line x1="150" y1="450" x2="282" y2="370"/>
+    <line x1="650" y1="445" x2="520" y2="370"/>
+    <line x1="150" y1="450" x2="650" y2="445"/>
+  </g>
+
+  <!-- Node circles -->
+  <circle cx="130" cy="165" r="7" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1.5" opacity="0.55"/>
+  <circle cx="130" cy="165" r="2.5" fill="#ff6b35" opacity="0.6"/>
+  <circle cx="668" cy="160" r="7" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="668" cy="160" r="2.5" fill="#ff8c42" opacity="0.55"/>
+  <circle cx="150" cy="450" r="7" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1.5" opacity="0.45"/>
+  <circle cx="150" cy="450" r="2.5" fill="#ff6b35" opacity="0.5"/>
+  <circle cx="650" cy="445" r="7" fill="#1a1a2e" stroke="#ff8c42" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="650" cy="445" r="2.5" fill="#ff8c42" opacity="0.45"/>
+  <circle cx="168" cy="330" r="5" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1" opacity="0.35"/>
+  <circle cx="638" cy="325" r="5" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1" opacity="0.3"/>
+
+  <!-- Contact info cards -->
+  <g transform="translate(82, 370)">
+    <rect x="0" y="0" width="120" height="52" rx="9" fill="#1a1a2e" stroke="#ff6b35" stroke-width="0.8" opacity="0.4"/>
+    <!-- Mail icon stub -->
+    <rect x="14" y="14" width="20" height="14" rx="3" fill="none" stroke="#ff6b35" stroke-width="1" opacity="0.5"/>
+    <path d="M14 14 L24 21 L34 14" fill="none" stroke="#ff6b35" stroke-width="0.8" opacity="0.4"/>
+    <!-- Text stubs -->
+    <rect x="44" y="15" width="60" height="5" rx="2" fill="#ffffff" opacity="0.08"/>
+    <rect x="44" y="27" width="45" height="4" rx="2" fill="#ff6b35" opacity="0.22"/>
+  </g>
+  <g transform="translate(600, 375)">
+    <rect x="0" y="0" width="120" height="52" rx="9" fill="#1a1a2e" stroke="#ff8c42" stroke-width="0.8" opacity="0.35"/>
+    <!-- Phone icon stub -->
+    <rect x="14" y="12" width="14" height="22" rx="3" fill="none" stroke="#ff8c42" stroke-width="1" opacity="0.45"/>
+    <rect x="17" y="28" width="8" height="3" rx="1" fill="#ff8c42" opacity="0.3"/>
+    <!-- Text stubs -->
+    <rect x="40" y="14" width="65" height="5" rx="2" fill="#ffffff" opacity="0.07"/>
+    <rect x="40" y="26" width="50" height="4" rx="2" fill="#ff8c42" opacity="0.2"/>
+  </g>
+
+  <!-- 24h badge -->
+  <g transform="translate(338, 460)">
+    <rect x="0" y="0" width="124" height="38" rx="19" fill="#ff6b35" opacity="0.14" stroke="#ff6b35" stroke-width="0.8"/>
+    <rect x="16" y="14" width="90" height="10" rx="5" fill="#ff6b35" opacity="0.3"/>
+  </g>
+
+  <!-- Corner decorations -->
+  <g stroke="#ff6b35" stroke-width="1" opacity="0.2">
+    <line x1="30" y1="30" x2="80" y2="30"/><line x1="30" y1="30" x2="30" y2="80"/>
+    <line x1="720" y1="570" x2="770" y2="570"/><line x1="770" y1="520" x2="770" y2="570"/>
+  </g>
+
+  <!-- Particles -->
+  <circle cx="680" cy="115" r="1.5" fill="#ff6b35" opacity="0.3"/>
+  <circle cx="115" cy="480" r="1" fill="#ff8c42" opacity="0.25"/>
+  <circle cx="655" cy="455" r="1.5" fill="#ff6b35" opacity="0.2"/>
+  <circle cx="160" cy="155" r="1" fill="#ff6b35" opacity="0.2"/>
+</svg>

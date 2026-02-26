@@ -8,12 +8,13 @@ interface PageHeroProps {
   title: string;
   subtitle?: string;
   image?: string;
+  illustration?: string;
 }
 
-export function PageHero({ badge, title, subtitle, image }: PageHeroProps) {
+export function PageHero({ badge, title, subtitle, image, illustration }: PageHeroProps) {
   return (
     <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden px-5 pb-20 pt-32 md:px-8 md:pt-40">
-      {/* ── Layer 0: Background image ── */}
+      {/* ── Layer 0a: Background photo (full-bleed) ── */}
       {image && (
         <div className="absolute inset-0">
           <Image
@@ -27,8 +28,22 @@ export function PageHero({ badge, title, subtitle, image }: PageHeroProps) {
         </div>
       )}
 
+      {/* ── Layer 0b: SVG Illustration (contained, dark bg fills gaps) ── */}
+      {illustration && !image && (
+        <div className="absolute inset-0 bg-[#0d0d0d]">
+          <Image
+            src={illustration}
+            alt=""
+            fill
+            className="object-contain"
+            priority
+            sizes="100vw"
+          />
+        </div>
+      )}
+
       {/* ── Layer 1: Dark overlays for depth & contrast ── */}
-      <div className="absolute inset-0 bg-black/60" />
+      <div className={`absolute inset-0 ${illustration && !image ? "bg-black/10" : "bg-black/60"}`} />
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/80 via-transparent to-[#0a0a0a]/90" />
       <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/40 via-transparent to-[#0a0a0a]/40" />
 
