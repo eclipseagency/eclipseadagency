@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { SunlightGlow } from "@/components/ui/SunlightGlow";
 import { wallCards, type TestimonialItem } from "@/data/testimonials";
@@ -86,15 +85,8 @@ function TestimonialCard({ card }: { card: TestimonialItem }) {
 
       {/* Author */}
       <div className="flex items-center gap-3">
-        <div className="h-9 w-9 shrink-0 overflow-hidden rounded-full border border-white/[0.08]">
-          <Image
-            src={card.avatar}
-            alt={card.name}
-            width={36}
-            height={36}
-            unoptimized
-            className="h-full w-full object-cover"
-          />
+        <div className="h-9 w-9 shrink-0 flex items-center justify-center rounded-full border border-primary/30 bg-gradient-to-br from-primary/20 to-primary/5 font-heading text-sm font-bold text-primary">
+          {card.name.charAt(0)}
         </div>
         <div>
           <p className="text-sm font-semibold text-white">{card.name}</p>
@@ -194,16 +186,9 @@ export function TestimonialsWall() {
             {avatars.map((card, i) => (
               <div
                 key={i}
-                className="h-7 w-7 overflow-hidden rounded-full border-2 border-bg-elevated"
+                className="h-7 w-7 flex items-center justify-center rounded-full border-2 border-bg-elevated bg-gradient-to-br from-primary/25 to-primary/8 font-heading text-[10px] font-bold text-primary"
               >
-                <Image
-                  src={card.avatar}
-                  alt={card.name}
-                  width={28}
-                  height={28}
-                  unoptimized
-                  className="h-full w-full object-cover"
-                />
+                {card.name.charAt(0)}
               </div>
             ))}
           </div>

@@ -1,18 +1,64 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
-  <rect width="800" height="500" fill="#0a0a0a"/>
-  <rect x="16" y="16" width="768" height="468" rx="8" fill="#0f0f0f" stroke="#1a1a1a" stroke-width="1"/>
-  <!-- Top accent line -->
-  <rect x="60" y="60" width="80" height="3" rx="1.5" fill="#ff6b35"/>
-  <!-- Category label -->
-  <text x="60" y="110" font-family="Arial,Helvetica,sans-serif"
-        font-size="13" fill="#ff6b35" letter-spacing="2" text-transform="uppercase">BLOG POST 05</text>
-  <!-- Title -->
-  <text x="60" y="260" font-family="Arial,Helvetica,sans-serif" font-weight="700"
-        font-size="36" fill="#ffffff">Digital Marketing</text>
-  <text x="60" y="300" font-family="Arial,Helvetica,sans-serif"
-        font-size="15" fill="#666">Insights &amp; perspectives from Eclipse Agency</text>
-  <!-- Decorative element -->
-  <rect x="60" y="420" width="120" height="36" rx="18" fill="none" stroke="#ff6b35" stroke-width="1.5" opacity="0.5"/>
-  <text x="120" y="443" font-family="Arial,Helvetica,sans-serif"
-        font-size="12" fill="#ff6b35" text-anchor="middle" opacity="0.7">READ MORE</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a12"/><stop offset="100%" style="stop-color:#12101e"/>
+    </linearGradient>
+    <filter id="glow05"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="soft05"><feGaussianBlur stdDeviation="30" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg05)"/>
+  <g opacity="0.03" stroke="#fff" stroke-width="0.5">
+    <line x1="0" y1="112" x2="800" y2="112"/><line x1="0" y1="225" x2="800" y2="225"/><line x1="0" y1="337" x2="800" y2="337"/>
+    <line x1="200" y1="0" x2="200" y2="450"/><line x1="400" y1="0" x2="400" y2="450"/><line x1="600" y1="0" x2="600" y2="450"/>
+  </g>
+  <circle cx="400" cy="210" r="160" fill="#ff6b35" opacity="0.045" filter="url(#soft05)"/>
+  <!-- 3D Isometric Product Box -->
+  <g transform="translate(400,210)">
+    <!-- Top face -->
+    <polygon points="0,-95 95,-48 0,0 -95,-48" fill="#ff6b35" opacity="0.1" stroke="#ff6b35" stroke-width="1.5" stroke-linejoin="round" filter="url(#glow05)"/>
+    <!-- Left face -->
+    <polygon points="-95,-48 0,0 0,95 -95,47" fill="#ff8c42" opacity="0.06" stroke="#ff8c42" stroke-width="1.5" stroke-linejoin="round"/>
+    <!-- Right face -->
+    <polygon points="95,-48 0,0 0,95 95,47" fill="#ff6b35" opacity="0.04" stroke="#ff6b35" stroke-width="1.5" stroke-linejoin="round"/>
+    <!-- Corner dots -->
+    <circle cx="0" cy="-95" r="4" fill="#ff6b35" opacity="0.85" filter="url(#glow05)"/>
+    <circle cx="95" cy="-48" r="3" fill="#ff8c42" opacity="0.65"/>
+    <circle cx="-95" cy="-48" r="3" fill="#ff8c42" opacity="0.65"/>
+    <circle cx="0" cy="0" r="5" fill="#ff6b35" opacity="0.95" filter="url(#glow05)"/>
+    <circle cx="95" cy="47" r="3" fill="#ff6b35" opacity="0.5"/>
+    <circle cx="-95" cy="47" r="3" fill="#ff6b35" opacity="0.5"/>
+    <circle cx="0" cy="95" r="4" fill="#ff8c42" opacity="0.7" filter="url(#glow05)"/>
+    <!-- Center vertical edge -->
+    <line x1="0" y1="0" x2="0" y2="95" stroke="#ff6b35" stroke-width="1" opacity="0.25" stroke-dasharray="4 3"/>
+    <!-- Orbit ring -->
+  </g>
+  <ellipse cx="400" cy="210" rx="155" ry="52" stroke="#ff6b35" stroke-width="1" opacity="0.12" stroke-dasharray="8 4"/>
+  <!-- AR corner markers -->
+  <g opacity="0.45" stroke="#ff6b35" stroke-width="1.5">
+    <line x1="200" y1="80" x2="240" y2="80"/><line x1="200" y1="80" x2="200" y2="120"/>
+    <line x1="600" y1="80" x2="560" y2="80"/><line x1="600" y1="80" x2="600" y2="120"/>
+    <line x1="200" y1="340" x2="240" y2="340"/><line x1="200" y1="340" x2="200" y2="300"/>
+    <line x1="600" y1="340" x2="560" y2="340"/><line x1="600" y1="340" x2="600" y2="300"/>
+  </g>
+  <!-- Product cards floating -->
+  <rect x="82" y="158" width="88" height="110" rx="10" fill="#1a1a28" stroke="#ff6b35" stroke-width="0.8" opacity="0.5"/>
+  <rect x="90" y="166" width="72" height="52" rx="6" fill="#ff6b35" opacity="0.06"/>
+  <rect x="90" y="226" width="50" height="6" rx="2" fill="#fff" opacity="0.1"/>
+  <rect x="90" y="238" width="38" height="5" rx="2" fill="#ff6b35" opacity="0.25"/>
+  <rect x="630" y="158" width="88" height="110" rx="10" fill="#1a1a28" stroke="#ff8c42" stroke-width="0.8" opacity="0.45"/>
+  <rect x="638" y="166" width="72" height="52" rx="6" fill="#ff8c42" opacity="0.05"/>
+  <rect x="638" y="226" width="50" height="6" rx="2" fill="#fff" opacity="0.1"/>
+  <rect x="638" y="238" width="38" height="5" rx="2" fill="#ff8c42" opacity="0.22"/>
+  <!-- Dimension lines -->
+  <g opacity="0.15" stroke="#ff6b35" stroke-width="0.8">
+    <line x1="305" y1="305" x2="305" y2="370"/><line x1="495" y1="305" x2="495" y2="370"/>
+    <line x1="305" y1="362" x2="495" y2="362"/>
+    <line x1="298" y1="355" x2="305" y2="362"/><line x1="298" y1="369" x2="305" y2="362"/>
+    <line x1="502" y1="355" x2="495" y2="362"/><line x1="502" y1="369" x2="495" y2="362"/>
+  </g>
+  <text x="400" y="415" font-family="Inter,sans-serif" font-size="11" font-weight="600" letter-spacing="3" fill="#ff6b35" text-anchor="middle" opacity="0.35">3D PRODUCT VISUALIZATION</text>
+  <g stroke="#ff6b35" stroke-width="1" opacity="0.18">
+    <line x1="24" y1="24" x2="60" y2="24"/><line x1="24" y1="24" x2="24" y2="60"/>
+    <line x1="740" y1="426" x2="776" y2="426"/><line x1="776" y1="390" x2="776" y2="426"/>
+  </g>
 </svg>
