@@ -133,14 +133,13 @@ export default function AboutPage() {
           badge="Our Story"
           title="From Bold Idea to Creative Powerhouse"
         />
-        <div className="grid items-start gap-10 md:grid-cols-2">
-          <div className="overflow-hidden rounded-2xl border border-border">
+        <div className="grid items-stretch gap-10 md:grid-cols-2">
+          <div className="relative min-h-[300px] overflow-hidden rounded-2xl border border-border">
             <Image
               src={profileImages[0].src}
               alt={profileImages[0].alt}
-              width={500}
-              height={700}
-              className="h-auto w-full object-cover"
+              fill
+              className="object-cover"
             />
           </div>
           <div className="space-y-6">
