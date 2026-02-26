@@ -17,7 +17,7 @@ export default function SolutionsPage() {
         badge="Solutions"
         title="Creative Services That Deliver Results"
         subtitle="From brand strategy to digital execution, we offer a comprehensive suite of services designed to elevate your business at every touchpoint."
-        image="/images/hero-pages/astronaut-above-2.jpg"
+        illustration="/images/hero-pages/solutions-hero.svg"
       />
       <ServicesDetailSection />
       <CtaBanner />

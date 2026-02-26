@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <defs>
+    <linearGradient id="about-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0d0d"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <filter id="about-glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="about-softglow">
+      <feGaussianBlur stdDeviation="22" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#about-bg)"/>
+
+  <!-- Grid -->
+  <g opacity="0.03" stroke="#ffffff" stroke-width="0.5">
+    <line x1="0" y1="100" x2="800" y2="100"/><line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="300" x2="800" y2="300"/><line x1="0" y1="400" x2="800" y2="400"/>
+    <line x1="0" y1="500" x2="800" y2="500"/>
+    <line x1="100" y1="0" x2="100" y2="600"/><line x1="200" y1="0" x2="200" y2="600"/>
+    <line x1="300" y1="0" x2="300" y2="600"/><line x1="400" y1="0" x2="400" y2="600"/>
+    <line x1="500" y1="0" x2="500" y2="600"/><line x1="600" y1="0" x2="600" y2="600"/>
+    <line x1="700" y1="0" x2="700" y2="600"/>
+  </g>
+
+  <!-- Ambient glow -->
+  <circle cx="400" cy="280" r="260" fill="#ff6b35" opacity="0.04" filter="url(#about-softglow)"/>
+
+  <!-- Main: Eclipse motif (overlapping circles = Eclipse Agency) -->
+  <g transform="translate(400, 265)">
+    <!-- Outer dashed ring -->
+    <circle cx="0" cy="0" r="145" fill="none" stroke="#ff6b35" stroke-width="0.5" stroke-dasharray="5 4" opacity="0.18"/>
+    <!-- Orbit ring -->
+    <circle cx="0" cy="0" r="118" fill="none" stroke="#ff6b35" stroke-width="1" opacity="0.22"/>
+    <!-- Main ring -->
+    <circle cx="0" cy="0" r="92" fill="#ff6b35" opacity="0.05"/>
+    <circle cx="0" cy="0" r="92" fill="none" stroke="#ff6b35" stroke-width="2" opacity="0.65"/>
+
+    <!-- Eclipse icon: sun circle -->
+    <circle cx="-12" cy="0" r="52" fill="none" stroke="#ff6b35" stroke-width="2.5" opacity="0.9" filter="url(#about-glow)"/>
+    <circle cx="-12" cy="0" r="52" fill="#ff6b35" opacity="0.06"/>
+    <!-- Moon circle (partially covering) -->
+    <circle cx="20" cy="0" r="52" fill="#0f0f1a"/>
+    <circle cx="20" cy="0" r="52" fill="none" stroke="#ff6b35" stroke-width="2" opacity="0.5"/>
+    <!-- Crescent glow highlight -->
+    <path d="M -12 -52 A 52 52 0 0 1 -12 52 A 52 52 0 0 0 -12 -52 Z" fill="#ff6b35" opacity="0.12"/>
+
+    <!-- Sun rays (faint) -->
+    <g stroke="#ff6b35" stroke-width="1" opacity="0.15">
+      <line x1="-12" y1="-92" x2="-12" y2="-118"/>
+      <line x1="-12" y1="92" x2="-12" y2="118"/>
+      <line x1="-104" y1="0" x2="-118" y2="0"/>
+      <line x1="80" y1="0" x2="90" y2="0"/>
+      <line x1="-76" y1="-64" x2="-88" y2="-76"/>
+      <line x1="-76" y1="64" x2="-88" y2="76"/>
+    </g>
+
+    <!-- Orbital dots -->
+    <circle cx="0" cy="-118" r="4" fill="#ff6b35" opacity="0.7"/>
+    <circle cx="118" cy="0" r="3" fill="#ff8c42" opacity="0.5"/>
+    <circle cx="0" cy="118" r="3.5" fill="#ff6b35" opacity="0.6"/>
+    <circle cx="-118" cy="0" r="2.5" fill="#ff8c42" opacity="0.4"/>
+
+    <!-- Team nodes at 45deg -->
+    <circle cx="83" cy="-83" r="7" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1.5" opacity="0.65"/>
+    <circle cx="-83" cy="-83" r="7" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1.5" opacity="0.55"/>
+    <circle cx="83" cy="83" r="7" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1.5" opacity="0.5"/>
+    <circle cx="-83" cy="83" r="7" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1.5" opacity="0.5"/>
+    <!-- Inner dot in team nodes -->
+    <circle cx="83" cy="-83" r="2" fill="#ff6b35" opacity="0.6"/>
+    <circle cx="-83" cy="-83" r="2" fill="#ff6b35" opacity="0.5"/>
+    <circle cx="83" cy="83" r="2" fill="#ff6b35" opacity="0.45"/>
+    <circle cx="-83" cy="83" r="2" fill="#ff6b35" opacity="0.45"/>
+  </g>
+
+  <!-- Floating info cards -->
+  <g transform="translate(90, 370)">
+    <rect x="0" y="0" width="108" height="50" rx="9" fill="#1a1a2e" stroke="#ff6b35" stroke-width="0.8" opacity="0.45"/>
+    <rect x="12" y="12" width="45" height="6" rx="2" fill="#ffffff" opacity="0.1"/>
+    <rect x="12" y="26" width="68" height="9" rx="2" fill="#ff6b35" opacity="0.4"/>
+  </g>
+  <g transform="translate(610, 130)">
+    <rect x="0" y="0" width="108" height="50" rx="9" fill="#1a1a2e" stroke="#ff6b35" stroke-width="0.8" opacity="0.38"/>
+    <rect x="12" y="12" width="55" height="6" rx="2" fill="#ffffff" opacity="0.08"/>
+    <rect x="12" y="26" width="72" height="9" rx="2" fill="#ff8c42" opacity="0.35"/>
+  </g>
+  <g transform="translate(615, 400)">
+    <rect x="0" y="0" width="95" height="44" rx="9" fill="#1a1a2e" stroke="#ffffff" stroke-width="0.3" opacity="0.18"/>
+    <rect x="10" y="10" width="40" height="5" rx="2" fill="#ffffff" opacity="0.07"/>
+    <rect x="10" y="23" width="60" height="8" rx="2" fill="#ff6b35" opacity="0.28"/>
+  </g>
+
+  <!-- Text stubs -->
+  <g opacity="0.1">
+    <rect x="90" y="435" width="108" height="4" rx="2" fill="#ffffff"/>
+    <rect x="90" y="447" width="70" height="3" rx="1.5" fill="#ffffff"/>
+    <rect x="610" y="195" width="108" height="4" rx="2" fill="#ffffff"/>
+    <rect x="610" y="207" width="75" height="3" rx="1.5" fill="#ffffff"/>
+  </g>
+
+  <!-- Corner decorations -->
+  <g stroke="#ff6b35" stroke-width="1" opacity="0.2">
+    <line x1="30" y1="30" x2="80" y2="30"/><line x1="30" y1="30" x2="30" y2="80"/>
+    <line x1="720" y1="570" x2="770" y2="570"/><line x1="770" y1="520" x2="770" y2="570"/>
+  </g>
+
+  <!-- Particles -->
+  <circle cx="680" cy="115" r="1.5" fill="#ff6b35" opacity="0.3"/>
+  <circle cx="115" cy="475" r="1" fill="#ff8c42" opacity="0.25"/>
+  <circle cx="660" cy="460" r="1.5" fill="#ff6b35" opacity="0.2"/>
+  <circle cx="165" cy="145" r="1" fill="#ff6b35" opacity="0.2"/>
+</svg>

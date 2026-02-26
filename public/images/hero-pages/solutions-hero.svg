@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <defs>
+    <linearGradient id="sol-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0d0d"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <filter id="sol-glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="sol-softglow">
+      <feGaussianBlur stdDeviation="22" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#sol-bg)"/>
+
+  <!-- Grid -->
+  <g opacity="0.03" stroke="#ffffff" stroke-width="0.5">
+    <line x1="0" y1="100" x2="800" y2="100"/><line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="300" x2="800" y2="300"/><line x1="0" y1="400" x2="800" y2="400"/>
+    <line x1="0" y1="500" x2="800" y2="500"/>
+    <line x1="100" y1="0" x2="100" y2="600"/><line x1="200" y1="0" x2="200" y2="600"/>
+    <line x1="300" y1="0" x2="300" y2="600"/><line x1="400" y1="0" x2="400" y2="600"/>
+    <line x1="500" y1="0" x2="500" y2="600"/><line x1="600" y1="0" x2="600" y2="600"/>
+    <line x1="700" y1="0" x2="700" y2="600"/>
+  </g>
+
+  <!-- Ambient glow -->
+  <circle cx="400" cy="280" r="255" fill="#ff6b35" opacity="0.04" filter="url(#sol-softglow)"/>
+
+  <!-- Main: Diamond/gem at center = creative services -->
+  <g transform="translate(400, 265)">
+    <!-- Outer rings -->
+    <circle cx="0" cy="0" r="148" fill="none" stroke="#ff6b35" stroke-width="0.5" stroke-dasharray="4 5" opacity="0.16"/>
+    <circle cx="0" cy="0" r="118" fill="none" stroke="#ff6b35" stroke-width="1" opacity="0.2"/>
+    <circle cx="0" cy="0" r="90" fill="#ff6b35" opacity="0.05"/>
+    <circle cx="0" cy="0" r="90" fill="none" stroke="#ff6b35" stroke-width="2" opacity="0.6"/>
+
+    <!-- Diamond / gem icon -->
+    <g filter="url(#sol-glow)">
+      <!-- Diamond shape -->
+      <path d="M0 -52 L40 -18 L40 18 L0 52 L-40 18 L-40 -18 Z" fill="none" stroke="#ff6b35" stroke-width="2.5" stroke-linejoin="round" opacity="0.9"/>
+      <!-- Inner facets -->
+      <line x1="0" y1="-52" x2="0" y2="52" stroke="#ff6b35" stroke-width="0.8" opacity="0.3"/>
+      <line x1="-40" y1="-18" x2="40" y2="-18" stroke="#ff6b35" stroke-width="0.8" opacity="0.3"/>
+      <line x1="-40" y1="18" x2="40" y2="18" stroke="#ff6b35" stroke-width="0.8" opacity="0.3"/>
+      <line x1="-40" y1="-18" x2="0" y2="52" stroke="#ff6b35" stroke-width="0.5" opacity="0.2"/>
+      <line x1="40" y1="-18" x2="0" y2="52" stroke="#ff6b35" stroke-width="0.5" opacity="0.2"/>
+      <!-- Center fill -->
+      <path d="M0 -52 L40 -18 L40 18 L0 52 L-40 18 L-40 -18 Z" fill="#ff6b35" opacity="0.07"/>
+    </g>
+
+    <!-- 6 service nodes orbiting -->
+    <!-- Top -->
+    <circle cx="0" cy="-118" r="10" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1.5" opacity="0.7"/>
+    <circle cx="0" cy="-118" r="3" fill="#ff6b35" opacity="0.7"/>
+    <!-- Top-right -->
+    <circle cx="102" cy="-59" r="10" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1.5" opacity="0.6"/>
+    <circle cx="102" cy="-59" r="3" fill="#ff8c42" opacity="0.6"/>
+    <!-- Bottom-right -->
+    <circle cx="102" cy="59" r="10" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1.5" opacity="0.55"/>
+    <circle cx="102" cy="59" r="3" fill="#ff6b35" opacity="0.55"/>
+    <!-- Bottom -->
+    <circle cx="0" cy="118" r="10" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1.5" opacity="0.6"/>
+    <circle cx="0" cy="118" r="3" fill="#ff8c42" opacity="0.6"/>
+    <!-- Bottom-left -->
+    <circle cx="-102" cy="59" r="10" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1.5" opacity="0.5"/>
+    <circle cx="-102" cy="59" r="3" fill="#ff6b35" opacity="0.5"/>
+    <!-- Top-left -->
+    <circle cx="-102" cy="-59" r="10" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1.5" opacity="0.55"/>
+    <circle cx="-102" cy="-59" r="3" fill="#ff6b35" opacity="0.55"/>
+
+    <!-- Connector lines from service nodes to center -->
+    <line x1="0" y1="-90" x2="0" y2="-108" stroke="#ff6b35" stroke-width="0.5" opacity="0.2"/>
+    <line x1="78" y1="-45" x2="93" y2="-54" stroke="#ff6b35" stroke-width="0.5" opacity="0.2"/>
+    <line x1="78" y1="45" x2="93" y2="54" stroke="#ff6b35" stroke-width="0.5" opacity="0.2"/>
+    <line x1="0" y1="90" x2="0" y2="108" stroke="#ff6b35" stroke-width="0.5" opacity="0.2"/>
+    <line x1="-78" y1="45" x2="-93" y2="54" stroke="#ff6b35" stroke-width="0.5" opacity="0.2"/>
+    <line x1="-78" y1="-45" x2="-93" y2="-54" stroke="#ff6b35" stroke-width="0.5" opacity="0.2"/>
+
+    <!-- Outer dots at 148 ring -->
+    <circle cx="0" cy="-148" r="3" fill="#ff6b35" opacity="0.35"/>
+    <circle cx="128" cy="-74" r="2.5" fill="#ff8c42" opacity="0.3"/>
+    <circle cx="128" cy="74" r="2.5" fill="#ff6b35" opacity="0.28"/>
+  </g>
+
+  <!-- Service label cards -->
+  <g transform="translate(88, 140)">
+    <rect x="0" y="0" width="105" height="32" rx="16" fill="#ff6b35" opacity="0.12" stroke="#ff6b35" stroke-width="0.8"/>
+    <rect x="16" y="12" width="70" height="8" rx="4" fill="#ff6b35" opacity="0.3"/>
+  </g>
+  <g transform="translate(88, 390)">
+    <rect x="0" y="0" width="95" height="32" rx="16" fill="#1a1a2e" stroke="#ff6b35" stroke-width="0.5" opacity="0.35"/>
+    <rect x="14" y="12" width="60" height="8" rx="4" fill="#ffffff" opacity="0.08"/>
+  </g>
+  <g transform="translate(612, 160)">
+    <rect x="0" y="0" width="100" height="32" rx="16" fill="#1a1a2e" stroke="#ff8c42" stroke-width="0.5" opacity="0.35"/>
+    <rect x="14" y="12" width="65" height="8" rx="4" fill="#ff8c42" opacity="0.25"/>
+  </g>
+  <g transform="translate(618, 390)">
+    <rect x="0" y="0" width="90" height="32" rx="16" fill="#ff6b35" opacity="0.1" stroke="#ff6b35" stroke-width="0.5"/>
+    <rect x="12" y="12" width="58" height="8" rx="4" fill="#ff6b35" opacity="0.28"/>
+  </g>
+
+  <!-- Corner decorations -->
+  <g stroke="#ff6b35" stroke-width="1" opacity="0.2">
+    <line x1="30" y1="30" x2="80" y2="30"/><line x1="30" y1="30" x2="30" y2="80"/>
+    <line x1="720" y1="570" x2="770" y2="570"/><line x1="770" y1="520" x2="770" y2="570"/>
+  </g>
+
+  <!-- Particles -->
+  <circle cx="680" cy="115" r="1.5" fill="#ff6b35" opacity="0.3"/>
+  <circle cx="115" cy="480" r="1" fill="#ff8c42" opacity="0.25"/>
+  <circle cx="655" cy="460" r="1.5" fill="#ff6b35" opacity="0.2"/>
+  <circle cx="160" cy="150" r="1" fill="#ff6b35" opacity="0.2"/>
+</svg>

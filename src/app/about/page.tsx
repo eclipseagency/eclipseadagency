@@ -124,7 +124,7 @@ export default function AboutPage() {
         badge="Profile"
         title="The Creative Force Behind the Work"
         subtitle="We are a team of strategists, designers, developers, and storytellers united by a passion for building brands that matter."
-        image="/images/about-hero.png"
+        illustration="/images/hero-pages/about-hero.svg"
       />
 
       {/* ── Story ── */}
