@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 700" fill="none">
+  <defs>
+    <linearGradient id="story-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0d0d"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <filter id="story-glow">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="story-softglow">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="story-glow-sm">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="700" fill="url(#story-bg)"/>
+
+  <!-- Grid -->
+  <g opacity="0.03" stroke="#ffffff" stroke-width="0.5">
+    <line x1="0" y1="100" x2="500" y2="100"/><line x1="0" y1="200" x2="500" y2="200"/>
+    <line x1="0" y1="300" x2="500" y2="300"/><line x1="0" y1="400" x2="500" y2="400"/>
+    <line x1="0" y1="500" x2="500" y2="500"/><line x1="0" y1="600" x2="500" y2="600"/>
+    <line x1="100" y1="0" x2="100" y2="700"/><line x1="200" y1="0" x2="200" y2="700"/>
+    <line x1="300" y1="0" x2="300" y2="700"/><line x1="400" y1="0" x2="400" y2="700"/>
+  </g>
+
+  <!-- ── TOP: Creative Powerhouse — sun-burst / star ── -->
+  <g transform="translate(250, 155)">
+    <!-- Soft ambient glow behind -->
+    <circle cx="0" cy="0" r="110" fill="#ff6b35" opacity="0.05" filter="url(#story-softglow)"/>
+
+    <!-- Outer dashed ring -->
+    <circle cx="0" cy="0" r="100" fill="none" stroke="#ff6b35" stroke-width="0.5" stroke-dasharray="4 5" opacity="0.2"/>
+    <!-- Second ring -->
+    <circle cx="0" cy="0" r="80" fill="none" stroke="#ff6b35" stroke-width="1" opacity="0.25"/>
+    <!-- Inner circle -->
+    <circle cx="0" cy="0" r="60" fill="#ff6b35" opacity="0.06"/>
+    <circle cx="0" cy="0" r="60" fill="none" stroke="#ff6b35" stroke-width="2" opacity="0.7" filter="url(#story-glow)"/>
+
+    <!-- Sun-burst rays (8 rays = creative power) -->
+    <g stroke="#ff6b35" stroke-width="1.5" opacity="0.35">
+      <line x1="0" y1="-60" x2="0" y2="-95"/>
+      <line x1="0" y1="60" x2="0" y2="95"/>
+      <line x1="-60" y1="0" x2="-95" y2="0"/>
+      <line x1="60" y1="0" x2="95" y2="0"/>
+      <line x1="-42" y1="-42" x2="-67" y2="-67"/>
+      <line x1="42" y1="-42" x2="67" y2="-67"/>
+      <line x1="-42" y1="42" x2="-67" y2="67"/>
+      <line x1="42" y1="42" x2="67" y2="67"/>
+    </g>
+    <!-- Ray tips dots -->
+    <circle cx="0" cy="-95" r="3" fill="#ff6b35" opacity="0.6"/>
+    <circle cx="95" cy="0" r="2.5" fill="#ff8c42" opacity="0.5"/>
+    <circle cx="0" cy="95" r="3" fill="#ff6b35" opacity="0.55"/>
+    <circle cx="-95" cy="0" r="2.5" fill="#ff8c42" opacity="0.45"/>
+    <circle cx="67" cy="-67" r="2" fill="#ff6b35" opacity="0.4"/>
+    <circle cx="-67" cy="-67" r="2" fill="#ff6b35" opacity="0.35"/>
+    <circle cx="67" cy="67" r="2" fill="#ff6b35" opacity="0.35"/>
+    <circle cx="-67" cy="67" r="2" fill="#ff6b35" opacity="0.3"/>
+
+    <!-- Lightning / energy icon inside circle -->
+    <path d="M10 -32 L-8 2 L4 2 L-10 32 L8 -2 L-4 -2 Z"
+      fill="#ff6b35" opacity="0.9" stroke="#ff6b35" stroke-width="1"
+      stroke-linejoin="round" filter="url(#story-glow)"/>
+  </g>
+
+  <!-- ── CENTER: Journey path (idea rising to powerhouse) ── -->
+  <!-- Dashed vertical line connecting bulb to sun -->
+  <line x1="250" y1="255" x2="250" y2="460"
+    stroke="#ff6b35" stroke-width="1" stroke-dasharray="5 5" opacity="0.25"/>
+
+  <!-- Milestone nodes on the path -->
+  <!-- Node 1 -->
+  <circle cx="250" cy="300" r="5" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1.5" opacity="0.55"/>
+  <circle cx="250" cy="300" r="2" fill="#ff6b35" opacity="0.6"/>
+  <!-- Side label for node 1 -->
+  <rect x="272" y="293" width="80" height="14" rx="7" fill="#ff6b35" opacity="0.12" stroke="#ff6b35" stroke-width="0.5"/>
+  <rect x="280" y="297" width="55" height="6" rx="3" fill="#ff6b35" opacity="0.25"/>
+
+  <!-- Node 2 -->
+  <circle cx="250" cy="350" r="5" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="250" cy="350" r="2" fill="#ff8c42" opacity="0.55"/>
+  <!-- Side label for node 2 (left side) -->
+  <rect x="148" y="343" width="80" height="14" rx="7" fill="#ff6b35" opacity="0.1" stroke="#ff6b35" stroke-width="0.4"/>
+  <rect x="156" y="347" width="60" height="6" rx="3" fill="#ff8c42" opacity="0.22"/>
+
+  <!-- Node 3 -->
+  <circle cx="250" cy="400" r="5" fill="#1a1a2e" stroke="#ff6b35" stroke-width="1.5" opacity="0.45"/>
+  <circle cx="250" cy="400" r="2" fill="#ff6b35" opacity="0.5"/>
+  <!-- Side label for node 3 -->
+  <rect x="272" y="393" width="75" height="14" rx="7" fill="#ff6b35" opacity="0.1" stroke="#ff6b35" stroke-width="0.4"/>
+  <rect x="280" y="397" width="50" height="6" rx="3" fill="#ff6b35" opacity="0.2"/>
+
+  <!-- ── BOTTOM: Bold Idea — lightbulb ── -->
+  <g transform="translate(250, 545)">
+    <!-- Soft glow behind -->
+    <circle cx="0" cy="0" r="90" fill="#ff6b35" opacity="0.04" filter="url(#story-softglow)"/>
+
+    <!-- Outer ring -->
+    <circle cx="0" cy="0" r="80" fill="none" stroke="#ff6b35" stroke-width="0.5" stroke-dasharray="3 5" opacity="0.18"/>
+    <circle cx="0" cy="0" r="64" fill="none" stroke="#ff6b35" stroke-width="1" opacity="0.22"/>
+    <!-- Inner circle -->
+    <circle cx="0" cy="0" r="50" fill="#ff6b35" opacity="0.05"/>
+    <circle cx="0" cy="0" r="50" fill="none" stroke="#ff6b35" stroke-width="2" opacity="0.65" filter="url(#story-glow-sm)"/>
+
+    <!-- Lightbulb icon (bold idea) -->
+    <g filter="url(#story-glow-sm)">
+      <!-- Bulb dome -->
+      <path d="M-20 -8 Q-20 -38 0 -38 Q20 -38 20 -8 Q20 10 10 20 L10 30 L-10 30 L-10 20 Q-20 10 -20 -8 Z"
+        fill="#ff6b35" opacity="0.1" stroke="#ff6b35" stroke-width="2" stroke-linejoin="round"/>
+      <!-- Filament detail -->
+      <line x1="-8" y1="-14" x2="8" y2="-14" stroke="#ff6b35" stroke-width="1" opacity="0.4"/>
+      <line x1="-10" y1="-5" x2="10" y2="-5" stroke="#ff6b35" stroke-width="0.8" opacity="0.3"/>
+      <!-- Base bands -->
+      <line x1="-10" y1="30" x2="10" y2="30" stroke="#ff6b35" stroke-width="2" opacity="0.7"/>
+      <line x1="-7" y1="36" x2="7" y2="36" stroke="#ff6b35" stroke-width="1.5" opacity="0.5"/>
+      <line x1="-4" y1="41" x2="4" y2="41" stroke="#ff6b35" stroke-width="1.2" opacity="0.35"/>
+    </g>
+
+    <!-- Orbital dots -->
+    <circle cx="0" cy="-64" r="3" fill="#ff6b35" opacity="0.5"/>
+    <circle cx="64" cy="0" r="2.5" fill="#ff8c42" opacity="0.4"/>
+    <circle cx="-64" cy="0" r="2.5" fill="#ff6b35" opacity="0.38"/>
+    <circle cx="45" cy="45" r="2" fill="#ff6b35" opacity="0.3"/>
+    <circle cx="-45" cy="45" r="2" fill="#ff8c42" opacity="0.28"/>
+  </g>
+
+  <!-- Floating stat/achievement badges -->
+  <!-- Left badge -->
+  <g transform="translate(30, 260)">
+    <rect x="0" y="0" width="90" height="45" rx="8" fill="#1a1a2e" stroke="#ff6b35" stroke-width="0.8" opacity="0.4"/>
+    <rect x="10" y="10" width="35" height="5" rx="2" fill="#ffffff" opacity="0.08"/>
+    <rect x="10" y="22" width="60" height="8" rx="3" fill="#ff6b35" opacity="0.3"/>
+  </g>
+  <!-- Right badge -->
+  <g transform="translate(380, 390)">
+    <rect x="0" y="0" width="90" height="45" rx="8" fill="#1a1a2e" stroke="#ff8c42" stroke-width="0.8" opacity="0.35"/>
+    <rect x="10" y="10" width="45" height="5" rx="2" fill="#ffffff" opacity="0.07"/>
+    <rect x="10" y="22" width="55" height="8" rx="3" fill="#ff8c42" opacity="0.25"/>
+  </g>
+
+  <!-- Corner decorations -->
+  <g stroke="#ff6b35" stroke-width="1" opacity="0.18">
+    <line x1="25" y1="25" x2="65" y2="25"/><line x1="25" y1="25" x2="25" y2="65"/>
+    <line x1="435" y1="675" x2="475" y2="675"/><line x1="475" y1="635" x2="475" y2="675"/>
+  </g>
+
+  <!-- Particles -->
+  <circle cx="440" cy="90" r="1.5" fill="#ff6b35" opacity="0.3"/>
+  <circle cx="60" cy="620" r="1" fill="#ff8c42" opacity="0.25"/>
+  <circle cx="430" cy="580" r="1.5" fill="#ff6b35" opacity="0.2"/>
+  <circle cx="70" cy="120" r="1" fill="#ff6b35" opacity="0.2"/>
+  <circle cx="460" cy="300" r="1" fill="#ff8c42" opacity="0.2"/>
+  <circle cx="35" cy="430" r="1.5" fill="#ff6b35" opacity="0.18"/>
+</svg>
