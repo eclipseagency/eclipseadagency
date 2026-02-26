@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0d0d"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="accent3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff6b35"/>
+      <stop offset="100%" style="stop-color:#ff8c42"/>
+    </linearGradient>
+    <filter id="glow3">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow3">
+      <feGaussianBlur stdDeviation="25" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg3)"/>
+
+  <!-- Subtle grid -->
+  <g opacity="0.03" stroke="#ffffff" stroke-width="0.5">
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="450" x2="800" y2="450"/>
+    <line x1="200" y1="0" x2="200" y2="600"/>
+    <line x1="400" y1="0" x2="400" y2="600"/>
+    <line x1="600" y1="0" x2="600" y2="600"/>
+  </g>
+
+  <!-- Ambient glow -->
+  <circle cx="400" cy="270" r="200" fill="#ff6b35" opacity="0.04" filter="url(#softglow3)"/>
+
+  <!-- 3D Cube (isometric) -->
+  <g transform="translate(400, 255)">
+    <!-- Top face -->
+    <polygon points="0,-90 90,-45 0,0 -90,-45" fill="#ff6b35" opacity="0.12" stroke="#ff6b35" stroke-width="1.5" stroke-linejoin="round" filter="url(#glow3)"/>
+    <!-- Left face -->
+    <polygon points="-90,-45 0,0 0,90 -90,45" fill="#ff8c42" opacity="0.07" stroke="#ff8c42" stroke-width="1.5" stroke-linejoin="round"/>
+    <!-- Right face -->
+    <polygon points="90,-45 0,0 0,90 90,45" fill="#ff6b35" opacity="0.05" stroke="#ff6b35" stroke-width="1.5" stroke-linejoin="round"/>
+
+    <!-- Inner edge lines -->
+    <line x1="0" y1="0" x2="0" y2="90" stroke="#ff6b35" stroke-width="1" opacity="0.25" stroke-dasharray="4 3"/>
+
+    <!-- Wireframe extensions -->
+    <line x1="-90" y1="-45" x2="-90" y2="45" stroke="#ff8c42" stroke-width="1" opacity="0.3" stroke-dasharray="4 3"/>
+    <line x1="90" y1="-45" x2="90" y2="45" stroke="#ff6b35" stroke-width="1" opacity="0.3" stroke-dasharray="4 3"/>
+
+    <!-- Corner dots -->
+    <circle cx="0" cy="-90" r="4" fill="#ff6b35" opacity="0.8" filter="url(#glow3)"/>
+    <circle cx="90" cy="-45" r="3" fill="#ff8c42" opacity="0.6"/>
+    <circle cx="-90" cy="-45" r="3" fill="#ff8c42" opacity="0.6"/>
+    <circle cx="0" cy="0" r="5" fill="#ff6b35" opacity="0.9" filter="url(#glow3)"/>
+    <circle cx="90" cy="45" r="3" fill="#ff6b35" opacity="0.5"/>
+    <circle cx="-90" cy="45" r="3" fill="#ff6b35" opacity="0.5"/>
+    <circle cx="0" cy="90" r="4" fill="#ff8c42" opacity="0.7" filter="url(#glow3)"/>
+  </g>
+
+  <!-- Orbit ring around cube -->
+  <ellipse cx="400" cy="255" rx="150" ry="50" stroke="#ff6b35" stroke-width="1" opacity="0.15" stroke-dasharray="8 4"/>
+
+  <!-- Floating geometry shapes -->
+  <!-- Triangle wireframe -->
+  <g transform="translate(190, 190)" opacity="0.4">
+    <polygon points="40,0 80,70 0,70" fill="none" stroke="#ff6b35" stroke-width="1.5"/>
+    <line x1="40" y1="0" x2="40" y2="70" stroke="#ff6b35" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/>
+    <circle cx="40" cy="0" r="3" fill="#ff6b35"/>
+    <circle cx="0" cy="70" r="2" fill="#ff8c42"/>
+    <circle cx="80" cy="70" r="2" fill="#ff8c42"/>
+  </g>
+
+  <!-- Diamond shape -->
+  <g transform="translate(560, 170)" opacity="0.4">
+    <polygon points="35,0 65,35 35,70 5,35" fill="none" stroke="#ff8c42" stroke-width="1.5"/>
+    <line x1="5" y1="35" x2="65" y2="35" stroke="#ff8c42" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/>
+    <line x1="35" y1="0" x2="35" y2="70" stroke="#ff8c42" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/>
+    <circle cx="35" cy="0" r="3" fill="#ff8c42"/>
+  </g>
+
+  <!-- Grid floor perspective -->
+  <g transform="translate(130, 430)" opacity="0.08" stroke="#ff6b35" stroke-width="0.8">
+    <line x1="270" y1="0" x2="0" y2="100"/>
+    <line x1="310" y1="0" x2="60" y2="100"/>
+    <line x1="350" y1="0" x2="120" y2="100"/>
+    <line x1="390" y1="0" x2="180" y2="100"/>
+    <line x1="430" y1="0" x2="240" y2="100"/>
+    <line x1="470" y1="0" x2="300" y2="100"/>
+    <line x1="510" y1="0" x2="360" y2="100"/>
+    <line x1="0" y1="30" x2="540" y2="30"/>
+    <line x1="0" y1="60" x2="540" y2="60"/>
+    <line x1="0" y1="90" x2="540" y2="90"/>
+  </g>
+
+  <!-- Corner decorations -->
+  <g stroke="#ff6b35" stroke-width="1" opacity="0.2">
+    <line x1="30" y1="30" x2="80" y2="30"/>
+    <line x1="30" y1="30" x2="30" y2="80"/>
+    <line x1="720" y1="570" x2="770" y2="570"/>
+    <line x1="770" y1="520" x2="770" y2="570"/>
+  </g>
+
+  <!-- Small particles -->
+  <circle cx="120" cy="150" r="1.5" fill="#ff6b35" opacity="0.25"/>
+  <circle cx="680" cy="180" r="2" fill="#ff8c42" opacity="0.2"/>
+  <circle cx="700" cy="350" r="1" fill="#ff6b35" opacity="0.3"/>
+  <circle cx="100" cy="380" r="1.5" fill="#ff8c42" opacity="0.15"/>
+</svg>

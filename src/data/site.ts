@@ -27,6 +27,8 @@ export const siteConfig = {
         { label: "Digital Marketing", href: "/solutions/digital-marketing" },
         { label: "Web & Apps", href: "/solutions/web-apps" },
         { label: "Animation", href: "/solutions/animation" },
+        { label: "Production", href: "/solutions/production" },
+        { label: "3D Creations", href: "/solutions/3d-creations" },
       ],
     },
     { label: "Blog", href: "/blog" },
@@ -116,6 +118,40 @@ export const servicesOverview = [
       "Logo Animation",
       "Kinetic Typography",
       "Social Media Animations",
+    ],
+  },
+  {
+    id: "production",
+    slug: "production",
+    icon: "video",
+    title: "Production",
+    image: "/images/solutions/production.svg",
+    description:
+      "Cinematic video production and photography that tells your brand story. From concept to final cut, we deliver visual content that converts.",
+    features: [
+      "Commercial Production",
+      "Corporate Videos",
+      "Product Photography",
+      "Aerial Filming",
+      "Event Coverage",
+      "Post-Production",
+    ],
+  },
+  {
+    id: "3d-creations",
+    slug: "3d-creations",
+    icon: "box",
+    title: "3D Creations",
+    image: "/images/solutions/3d-creations.svg",
+    description:
+      "Stunning three-dimensional visuals that bring products and concepts to life. Photorealistic renders and immersive 3D environments.",
+    features: [
+      "3D Modeling",
+      "Product Visualization",
+      "Architectural Renders",
+      "3D Animation",
+      "AR Experiences",
+      "Virtual Tours",
     ],
   },
 ];
@@ -425,6 +461,8 @@ export const footerContent = {
       { label: "Digital Marketing", href: "/solutions/digital-marketing" },
       { label: "Web & Apps", href: "/solutions/web-apps" },
       { label: "Animation", href: "/solutions/animation" },
+      { label: "Production", href: "/solutions/production" },
+      { label: "3D Creations", href: "/solutions/3d-creations" },
     ],
     company: [
       { label: "About Us", href: "/about" },
