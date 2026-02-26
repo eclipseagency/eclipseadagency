@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { servicesOverview } from "@/data/site";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
@@ -35,6 +36,15 @@ function BentoCard({
         href={`/solutions/${service.slug}`}
         className="absolute inset-0 z-10"
         aria-label={service.title}
+      />
+
+      {/* Background image */}
+      <Image
+        src={service.image}
+        alt={service.title}
+        fill
+        className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+        sizes="(min-width: 1024px) 50vw, 100vw"
       />
 
       {/* Dark gradient overlay */}
