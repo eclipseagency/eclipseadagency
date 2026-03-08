@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useMemo, useEffect, useState, useCallback } from "react";
+import { useRef, useMemo, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { ChevronDownIcon } from "@/components/ui/Icons";
@@ -12,7 +12,7 @@ import { ChevronDownIcon } from "@/components/ui/Icons";
 function StarField() {
   const stars = useMemo(
     () =>
-      Array.from({ length: 80 }, (_, i) => ({
+      Array.from({ length: 35 }, (_, i) => ({
         id: i,
         x: Math.random() * 100,
         y: Math.random() * 100,
@@ -51,8 +51,8 @@ function StarField() {
 function LightRays() {
   const rays = useMemo(
     () =>
-      Array.from({ length: 12 }, (_, i) => {
-        const angle = -55 + (i * 110) / 11;
+      Array.from({ length: 6 }, (_, i) => {
+        const angle = -55 + (i * 110) / 5;
         return {
           id: i,
           angle,
@@ -93,19 +93,24 @@ function LightRays() {
    useMouseParallax — smooth mouse-tracking offset
    ═══════════════════════════════════════════════════════ */
 function useMouseParallax(strength: number = 25) {
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const ref = useRef<HTMLDivElement>(null);
   const target = useRef({ x: 0, y: 0 });
   const current = useRef({ x: 0, y: 0 });
   const raf = useRef(0);
 
-  const animate = useCallback(() => {
-    current.current.x += (target.current.x - current.current.x) * 0.06;
-    current.current.y += (target.current.y - current.current.y) * 0.06;
-    setOffset({ x: current.current.x, y: current.current.y });
-    raf.current = requestAnimationFrame(animate);
-  }, []);
-
   useEffect(() => {
+    // Skip on touch devices
+    if ("ontouchstart" in window) return;
+
+    function animate() {
+      current.current.x += (target.current.x - current.current.x) * 0.06;
+      current.current.y += (target.current.y - current.current.y) * 0.06;
+      if (ref.current) {
+        ref.current.style.transform = `translate3d(${current.current.x}px, ${current.current.y}px, 0)`;
+      }
+      raf.current = requestAnimationFrame(animate);
+    }
+
     function onMove(e: MouseEvent) {
       const cx = (e.clientX / window.innerWidth - 0.5) * 2;
       const cy = (e.clientY / window.innerHeight - 0.5) * 2;
@@ -119,9 +124,9 @@ function useMouseParallax(strength: number = 25) {
       window.removeEventListener("mousemove", onMove);
       cancelAnimationFrame(raf.current);
     };
-  }, [strength, animate]);
+  }, [strength]);
 
-  return offset;
+  return ref;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -129,7 +134,7 @@ function useMouseParallax(strength: number = 25) {
    ═══════════════════════════════════════════════════════ */
 export function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const mouse = useMouseParallax(30);
+  const mouseRef = useMouseParallax(30);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -262,14 +267,12 @@ export function Hero() {
         </motion.div>
 
         {/* ─── Astronaut image — floating in space + mouse tracking ─── */}
+        <div ref={mouseRef} style={{ willChange: "transform" }}>
         <motion.div
           className="relative z-[2] hero-space-float"
           style={{
             y: astroY,
             scale: astroScale,
-            x: mouse.x,
-            rotateY: mouse.x * 0.3,
-            rotateX: -mouse.y * 0.3,
           }}
           initial={{ opacity: 0, scale: 0.88, y: 40 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -304,6 +307,7 @@ export function Hero() {
             }}
           />
         </motion.div>
+        </div>
       </div>
 
       {/* ── Bottom content — tagline + CTA ── */}

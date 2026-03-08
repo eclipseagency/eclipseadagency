@@ -16,7 +16,16 @@ export function Header() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 40);
+          ticking = false;
+        });
+      }
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -47,8 +56,8 @@ export function Header() {
             : "bg-transparent"
         )}
         style={{
-          backdropFilter: scrolled ? "blur(20px) saturate(1.5)" : "none",
-          WebkitBackdropFilter: scrolled ? "blur(20px) saturate(1.5)" : "none",
+          backdropFilter: scrolled ? "blur(12px) saturate(1.2)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(12px) saturate(1.2)" : "none",
         }}
       />
 

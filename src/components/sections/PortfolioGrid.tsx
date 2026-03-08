@@ -25,7 +25,7 @@ interface PortfolioGridProps {
 function TunnelParticles({ progress }: { progress: number }) {
   const specs = useMemo(
     () =>
-      Array.from({ length: 40 }, (_, i) => ({
+      Array.from({ length: 15 }, (_, i) => ({
         id: i,
         x: 10 + Math.random() * 80,
         y: 10 + Math.random() * 80,
@@ -332,11 +332,15 @@ export function PortfolioGrid({ limit, showCta = true }: PortfolioGridProps) {
     );
   }
 
-  // Track progress for particles and focus index
+  // Track progress for particles and focus index (throttled via RAF)
+  const rafId = useRef(0);
   useMotionValueEvent(scrollYProgress, "change", (v) => {
-    setSmoothProgress(v);
-    const idx = Math.min(Math.round(v * (total - 1)), total - 1);
-    setFocusIdx(idx);
+    cancelAnimationFrame(rafId.current);
+    rafId.current = requestAnimationFrame(() => {
+      setSmoothProgress(v);
+      const idx = Math.min(Math.round(v * (total - 1)), total - 1);
+      setFocusIdx(idx);
+    });
   });
 
   // Compute depth for each card relative to current scroll position
