@@ -9,7 +9,6 @@ import {
   siteConfig,
   servicesOverview,
   processSteps,
-  portfolioItems,
   testimonials,
   aboutContent,
 } from "@/data/site";
@@ -1884,8 +1883,17 @@ function PartnersSection() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SECTION: Portfolio — Horizontal scroll with space theme
+   SECTION: Portfolio — Video showreel horizontal scroll
    ═══════════════════════════════════════════════════════════ */
+const portfolioVideos = [
+  { id: "showreel", title: "Showreel", category: "Motion", src: "https://eclipseadagency.com/wp-content/uploads/2024/08/WEBSITE-VIDEO-MOTION.mp4" },
+  { id: "eclipse-motion", title: "Eclipse Motion", category: "Production", src: "https://eclipseadagency.com/wp-content/uploads/2024/10/ECLIPSE-VIDEO-MOTION-small.mp4" },
+  { id: "showreel-2x", title: "Showreel 2025", category: "Showreel", src: "https://eclipseadagency.com/wp-content/uploads/2025/04/Shorel2x.mp4" },
+  { id: "storytelling", title: "Storytelling", category: "Animation", src: "https://eclipseadagency.com/wp-content/uploads/2024/08/\u0627\u0644\u0633\u0631\u062f-\u0627\u0644\u0642\u0635\u0627\u0635\u064a-2.mp4" },
+  { id: "explainer", title: "Explainer Video", category: "Animation", src: "https://eclipseadagency.com/wp-content/uploads/2024/08/\u0641\u064a\u062f\u064a\u0648-\u062a\u0648\u0636\u064a\u062d\u064a.mp4" },
+  { id: "latest", title: "Latest Work", category: "Production", src: "https://eclipseadagency.com/wp-content/uploads/2025/10/original-3cdfb08697e373c822d51a1526d11d1a.mp4" },
+];
+
 function PortfolioSection() {
   return (
     <section id="portfolio" className="relative py-16 md:py-24 overflow-hidden">
@@ -1908,23 +1916,23 @@ function PortfolioSection() {
         <div className="mt-4 h-px w-full origin-left bg-gradient-to-r from-[#ff6b35]/20 to-transparent" data-line />
       </div>
 
-      {/* Horizontal scroll — desktop only, stack on mobile */}
+      {/* Horizontal scroll — desktop only */}
       <div className="hidden md:block">
         <div data-h-scroll className="relative h-[80vh]">
           <div data-h-track className="flex h-full items-center gap-10 pl-[max(2rem,calc((100vw-1100px)/2+1.25rem))] pr-[50vw]">
-            {portfolioItems.map((item) => (
-              <ProjectCard key={item.id} item={item} />
+            {portfolioVideos.map((v) => (
+              <VideoCard key={v.id} video={v} />
             ))}
           </div>
         </div>
       </div>
 
-      {/* Mobile: vertical scroll cards */}
+      {/* Mobile: horizontal scroll cards */}
       <div className="md:hidden px-5">
         <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory hide-scrollbar">
-          {portfolioItems.map((item) => (
-            <div key={item.id} className="snap-center shrink-0" style={{ width: "80vw" }}>
-              <ProjectCard item={item} />
+          {portfolioVideos.map((v) => (
+            <div key={v.id} className="snap-center shrink-0" style={{ width: "85vw" }}>
+              <VideoCard video={v} />
             </div>
           ))}
         </div>
@@ -1933,41 +1941,36 @@ function PortfolioSection() {
   );
 }
 
-function ProjectCard({ item }: { item: (typeof portfolioItems)[number] }) {
+function VideoCard({ video }: { video: (typeof portfolioVideos)[number] }) {
   return (
-    <Link href={item.href || "#"} target={item.target} className="block shrink-0 group">
+    <div className="block shrink-0 group">
       <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] transition-all duration-500 hover:border-[#ff6b35]/20 hover:shadow-[0_20px_80px_rgba(255,107,53,0.1)]"
         style={{ width: "min(70vw, 550px)" }}
       >
-        <div className="relative aspect-[4/3] overflow-hidden bg-white/[0.02]">
-          <Image
-            src={item.image} alt={item.title}
-            width={1200} height={900}
-            sizes="(max-width: 768px) 80vw, 550px"
-            className="h-full w-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.08]"
+        <div className="relative aspect-video overflow-hidden bg-white/[0.02]">
+          <video
+            src={video.src}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="h-full w-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.05]"
           />
           {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-
-          {/* Corner accent */}
-          <div className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/[0.08] backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0 translate-x-2">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M7 17L17 7M17 7H7M17 7v10" />
-            </svg>
-          </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-70" />
         </div>
 
         {/* Info */}
         <div className="absolute bottom-0 left-0 right-0 p-5 md:p-7">
-          <span className="inline-block rounded-full bg-[#ff6b35]/10 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.15em] text-[#ff6b35]/70 mb-3">
-            {item.category}
+          <span className="inline-block rounded-full bg-[#ff6b35]/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-[#ff6b35]/70 mb-2">
+            {video.category}
           </span>
           <h3 className="font-heading text-lg font-bold text-white md:text-xl transition-colors duration-300 group-hover:text-[#ff6b35]">
-            {item.title}
+            {video.title}
           </h3>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 
