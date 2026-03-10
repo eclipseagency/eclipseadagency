@@ -554,7 +554,7 @@ function HeroSection() {
   const canvasRef = useHeroCanvas();
 
   return (
-    <section data-hero className="relative h-[120vh] overflow-hidden bg-[#050508]">
+    <section data-hero className="relative h-screen overflow-hidden bg-[#050508]">
       {/* ── Animated canvas background ── */}
       <canvas
         ref={canvasRef}
@@ -596,9 +596,11 @@ function HeroSection() {
    Scroll Rocket — Canvas rocket that flies naturally between sections
    Reveals content as it swoops through, with fire trail + smoke
    ═══════════════════════════════════════════════════════════ */
-function ScrollRocket() {
+function ScrollRocket({ visible }: { visible: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const scrollProgress = useRef(0);
+  const visibleRef = useRef(false);
+  visibleRef.current = visible;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -645,18 +647,18 @@ function ScrollRocket() {
     // Waypoints the rocket flies through (normalized x,y in viewport)
     // Each: [scrollT, x%, y%, rotation hint]
     const waypoints = [
-      [0.04, 0.50, 0.42],  // start: emerge from eclipse center
-      [0.08, 0.55, 0.25],  // rise up-right from eclipse
-      [0.13, 0.70, 0.15],  // arc toward top-right
-      [0.18, 0.85, 0.30],  // swoop right
-      [0.24, 0.75, 0.60],  // dive down to reveal About section
-      [0.30, 0.55, 0.75],  // sweep across center-bottom
-      [0.36, 0.25, 0.55],  // curve up to the left
-      [0.42, 0.15, 0.30],  // rise up-left (Services area)
-      [0.48, 0.30, 0.15],  // arc across top
-      [0.55, 0.60, 0.20],  // glide right (Portfolio area)
-      [0.62, 0.80, 0.45],  // dive right-center
-      [0.68, 0.70, 0.70],  // swoop down
+      [0.01, 0.50, 0.42],  // start: at eclipse center
+      [0.03, 0.55, 0.25],  // rise up-right from eclipse immediately
+      [0.07, 0.70, 0.15],  // arc toward top-right
+      [0.12, 0.85, 0.30],  // swoop right
+      [0.18, 0.75, 0.60],  // dive down toward About section
+      [0.25, 0.55, 0.75],  // sweep across center-bottom
+      [0.32, 0.25, 0.55],  // curve up to the left
+      [0.39, 0.15, 0.30],  // rise up-left (Services area)
+      [0.46, 0.30, 0.15],  // arc across top
+      [0.53, 0.60, 0.20],  // glide right (Portfolio area)
+      [0.60, 0.80, 0.45],  // dive right-center
+      [0.67, 0.70, 0.70],  // swoop down
       [0.74, 0.40, 0.80],  // sweep left-bottom (Process)
       [0.80, 0.20, 0.60],  // curve up-left
       [0.86, 0.30, 0.35],  // rise (Testimonials)
@@ -787,9 +789,15 @@ function ScrollRocket() {
 
       ctx.clearRect(0, 0, w, h);
 
+      // Don't render until preloader is done
+      if (!visibleRef.current) {
+        animId = requestAnimationFrame(draw);
+        return;
+      }
+
       const t = scrollProgress.current;
       // Show stationary rocket at eclipse center before scrolling starts
-      if (t < 0.04) {
+      if (t < 0.01) {
         drawRocket(w * 0.5, h * 0.42, -Math.PI / 2, 1.3);
         animId = requestAnimationFrame(draw);
         return;
@@ -803,7 +811,7 @@ function ScrollRocket() {
       prevProgress = t;
       const moving = isScrolling && scrollDelta > 0.0001;
 
-      if (visible && t > 0.08 && moving) {
+      if (visible && t > 0.01 && moving) {
         const thrustX = -Math.cos(angle) * 2;
         const thrustY = -Math.sin(angle) * 2;
         // Fire particles
@@ -868,7 +876,7 @@ function ScrollRocket() {
       }
 
       // ── Engine glow (only while moving) ──
-      if (visible && t > 0.08 && moving) {
+      if (visible && t > 0.01 && moving) {
         const glowX = x + -Math.cos(angle) * 18;
         const glowY = y + -Math.sin(angle) * 18;
         const engineGlow = ctx.createRadialGradient(glowX, glowY, 0, glowX, glowY, 35);
@@ -1792,14 +1800,15 @@ function WhatsAppButton() {
    PAGE
    ═══════════════════════════════════════════════════════════ */
 export default function HomePage() {
+  const [preloaderDone, setPreloaderDone] = useState(false);
   useSmoothScroll();
   useScrollAnimations();
 
   return (
     <>
-      <RocketPreloader onComplete={() => {}} />
+      <RocketPreloader onComplete={() => setPreloaderDone(true)} />
       <main className="bg-[#0a0a0a] text-[#e8e8e8] min-h-screen">
-        <ScrollRocket />
+        <ScrollRocket visible={preloaderDone} />
         <WhatsAppButton />
         <HeroSection />
         <AboutSection />
