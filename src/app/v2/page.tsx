@@ -42,69 +42,6 @@ function useSmoothScroll() {
   }, []);
 }
 
-/* ═══════════════════════════════════════════════════════════
-   Custom Cursor
-   ═══════════════════════════════════════════════════════════ */
-function CustomCursor() {
-  const outer = useRef<HTMLDivElement>(null);
-  const dot = useRef<HTMLDivElement>(null);
-  const pos = useRef({ x: -100, y: -100 });
-  const target = useRef({ x: -100, y: -100 });
-  const scale = useRef(1);
-  const label = useRef("");
-
-  useEffect(() => {
-    if ("ontouchstart" in window) return;
-
-    const onMove = (e: MouseEvent) => {
-      target.current = { x: e.clientX, y: e.clientY };
-    };
-
-    const onOver = (e: MouseEvent) => {
-      const el = (e.target as HTMLElement)?.closest?.("[data-cursor]");
-      if (el) {
-        scale.current = 2.5;
-        label.current = (el as HTMLElement).dataset.cursor || "";
-      }
-    };
-
-    const onOut = (e: MouseEvent) => {
-      const el = (e.target as HTMLElement)?.closest?.("[data-cursor]");
-      if (el) { scale.current = 1; label.current = ""; }
-    };
-
-    function animate() {
-      pos.current.x += (target.current.x - pos.current.x) * 0.12;
-      pos.current.y += (target.current.y - pos.current.y) * 0.12;
-      if (outer.current) {
-        outer.current.style.transform = `translate3d(${pos.current.x - 24}px, ${pos.current.y - 24}px, 0) scale(${scale.current})`;
-        outer.current.textContent = label.current;
-      }
-      if (dot.current) {
-        dot.current.style.transform = `translate3d(${target.current.x - 4}px, ${target.current.y - 4}px, 0)`;
-      }
-      requestAnimationFrame(animate);
-    }
-
-    document.addEventListener("mousemove", onMove);
-    document.addEventListener("mouseover", onOver);
-    document.addEventListener("mouseout", onOut);
-    requestAnimationFrame(animate);
-
-    return () => {
-      document.removeEventListener("mousemove", onMove);
-      document.removeEventListener("mouseover", onOver);
-      document.removeEventListener("mouseout", onOut);
-    };
-  }, []);
-
-  return (
-    <>
-      <div ref={outer} className="pointer-events-none fixed top-0 left-0 z-[9999] flex h-12 w-12 items-center justify-center rounded-full border border-[#ff6b35]/40 text-[9px] font-bold uppercase tracking-widest text-[#ff6b35] mix-blend-difference transition-[width,height,border-color] duration-300" style={{ willChange: "transform" }} />
-      <div ref={dot} className="pointer-events-none fixed top-0 left-0 z-[9999] h-2 w-2 rounded-full bg-[#ff6b35]" style={{ willChange: "transform" }} />
-    </>
-  );
-}
 
 /* ═══════════════════════════════════════════════════════════
    GSAP Scroll Animations Hook
@@ -634,48 +571,37 @@ function HeroSection() {
       {/* ── Bottom gradient fade ── */}
       <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent pointer-events-none z-[2]" />
 
-      {/* ── Content overlay ── */}
-      <div data-hero-content className="relative z-10 flex h-screen flex-col items-center justify-end px-5 pb-24 md:pb-32">
-        <div data-hero-text className="text-center">
-          <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.4em] text-[#ff6b35]/50 md:text-xs" data-fade="0">
+      {/* ── Content overlay — below the eclipse ── */}
+      <div data-hero-content className="relative z-10 flex h-screen flex-col items-end justify-end px-5 pb-16 md:pb-20">
+        <div data-hero-text className="w-full text-center">
+          <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.4em] text-[#ff6b35]/50 md:text-xs" data-fade="0">
             Creative Agency
           </p>
-          <h1 className="font-heading text-[clamp(2.2rem,7vw,6.5rem)] font-bold leading-[0.92] tracking-tight">
-            <span className="block text-white">From Shadow</span>
-            <span className="block bg-gradient-to-r from-[#ff6b35] to-[#f7931e] bg-clip-text text-transparent">
+          <h1 className="font-heading text-[clamp(1.6rem,4vw,3.5rem)] font-bold leading-[0.95] tracking-tight">
+            <span className="text-white">From Shadow </span>
+            <span className="bg-gradient-to-r from-[#ff6b35] to-[#f7931e] bg-clip-text text-transparent">
               to Spotlight
             </span>
           </h1>
-          <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed text-white/30 md:text-[15px]" data-fade="0.3">
-            We craft bold brands, digital strategies, and immersive experiences
-            that transform businesses and captivate audiences.
+          <p className="mx-auto mt-4 max-w-md text-xs leading-relaxed text-white/30 md:text-sm" data-fade="0.3">
+            Marketing Built on Strategy, Driven by Creativity.
           </p>
-          <div className="mt-8 flex justify-center gap-4" data-fade="0.5">
-            <MagneticLink href="/contact" cursor="Go" className="rounded-full bg-[#ff6b35] px-7 py-3 text-sm font-semibold text-white transition-shadow duration-300 hover:shadow-[0_0_40px_rgba(255,107,53,0.3)]">
+          <div className="mt-6 flex justify-center gap-4" data-fade="0.5">
+            <Link href="/contact" className="rounded-full bg-[#ff6b35] px-7 py-2.5 text-sm font-semibold text-white transition-shadow duration-300 hover:shadow-[0_0_40px_rgba(255,107,53,0.3)]">
               Start a Project
-            </MagneticLink>
-            <MagneticLink href="/portfolio" cursor="View" className="rounded-full border border-white/10 px-7 py-3 text-sm font-semibold text-white/50 transition-all duration-300 hover:border-white/25 hover:text-white">
+            </Link>
+            <Link href="/portfolio" className="rounded-full border border-white/10 px-7 py-2.5 text-sm font-semibold text-white/50 transition-all duration-300 hover:border-white/25 hover:text-white">
               Our Work
-            </MagneticLink>
+            </Link>
           </div>
-        </div>
-
-        {/* Scroll prompt */}
-        <div className="mt-10 flex flex-col items-center gap-2">
-          <span className="text-[9px] uppercase tracking-[0.35em] text-white/15">Scroll</span>
-          <div className="h-10 w-px bg-gradient-to-b from-white/15 to-transparent" style={{
-            animation: "pulse 2.5s ease-in-out infinite",
-          }} />
         </div>
       </div>
     </section>
   );
 }
-
 /* ═══════════════════════════════════════════════════════════
-   Scroll Rocket — Canvas rocket that flies as user scrolls
-   Fixed overlay that draws a rocket following a curved path
-   with fire trail, smoke, and particle effects
+   Scroll Rocket — Canvas rocket that flies naturally between sections
+   Reveals content as it swoops through, with fire trail + smoke
    ═══════════════════════════════════════════════════════════ */
 function ScrollRocket() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -711,58 +637,71 @@ function ScrollRocket() {
     // ── Trail particles ──
     const trail: { x: number; y: number; vx: number; vy: number; life: number; maxLife: number; size: number; type: "fire" | "smoke" }[] = [];
 
-    // ── Rocket path — a curved journey across the page ──
+    // ── Rocket path — natural flight weaving between sections ──
+    // Uses cubic bezier interpolation for smooth, organic curves
+    function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
+    function ease(t: number) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+
+    // Waypoints the rocket flies through (normalized x,y in viewport)
+    // Each: [scrollT, x%, y%, rotation hint]
+    const waypoints = [
+      [0.04, 0.50, 0.42],  // start: emerge from eclipse center
+      [0.08, 0.55, 0.25],  // rise up-right from eclipse
+      [0.13, 0.70, 0.15],  // arc toward top-right
+      [0.18, 0.85, 0.30],  // swoop right
+      [0.24, 0.75, 0.60],  // dive down to reveal About section
+      [0.30, 0.55, 0.75],  // sweep across center-bottom
+      [0.36, 0.25, 0.55],  // curve up to the left
+      [0.42, 0.15, 0.30],  // rise up-left (Services area)
+      [0.48, 0.30, 0.15],  // arc across top
+      [0.55, 0.60, 0.20],  // glide right (Portfolio area)
+      [0.62, 0.80, 0.45],  // dive right-center
+      [0.68, 0.70, 0.70],  // swoop down
+      [0.74, 0.40, 0.80],  // sweep left-bottom (Process)
+      [0.80, 0.20, 0.60],  // curve up-left
+      [0.86, 0.30, 0.35],  // rise (Testimonials)
+      [0.92, 0.50, 0.20],  // center top
+      [0.97, 0.50, -0.30], // blast off to space!
+    ];
+
     function getRocketPos(t: number): { x: number; y: number; angle: number } {
-      // Phase 0-0.08: hidden below screen
-      if (t < 0.08) {
-        return { x: w * 0.15, y: h + 100, angle: -Math.PI / 2 };
+      if (t < waypoints[0][0]) {
+        return { x: w * 0.5, y: h * 0.42, angle: -Math.PI / 2 };
       }
-      // Phase 0.08-0.2: launch upward from bottom-left
-      if (t < 0.2) {
-        const p = (t - 0.08) / 0.12;
-        const ease = 1 - Math.pow(1 - p, 3);
-        const x = w * 0.15 + ease * w * 0.1;
-        const y = h + 100 - ease * (h * 0.6 + 100);
-        const angle = -Math.PI / 2 + ease * 0.3;
-        return { x, y, angle };
+      if (t >= waypoints[waypoints.length - 1][0]) {
+        const last = waypoints[waypoints.length - 1];
+        return { x: w * last[1], y: h * last[2], angle: -Math.PI / 2 };
       }
-      // Phase 0.2-0.45: curve across the top to the right
-      if (t < 0.45) {
-        const p = (t - 0.2) / 0.25;
-        const ease = p;
-        const x = w * 0.25 + ease * w * 0.55;
-        const y = h * 0.4 - Math.sin(p * Math.PI) * h * 0.25;
-        const prevX = w * 0.25 + (ease - 0.01) * w * 0.55;
-        const prevY = h * 0.4 - Math.sin((p - 0.01) * Math.PI) * h * 0.25;
-        const angle = Math.atan2(y - prevY, x - prevX);
-        return { x, y, angle };
+
+      // Find segment
+      let seg = 0;
+      for (let i = 0; i < waypoints.length - 1; i++) {
+        if (t >= waypoints[i][0] && t < waypoints[i + 1][0]) { seg = i; break; }
       }
-      // Phase 0.45-0.65: swoop down right side
-      if (t < 0.65) {
-        const p = (t - 0.45) / 0.2;
-        const x = w * 0.8 + Math.sin(p * Math.PI * 0.5) * w * 0.1;
-        const y = h * 0.4 + p * h * 0.35;
-        const prevX = w * 0.8 + Math.sin((p - 0.01) * Math.PI * 0.5) * w * 0.1;
-        const prevY = h * 0.4 + (p - 0.01) * h * 0.35;
-        const angle = Math.atan2(y - prevY, x - prevX);
-        return { x, y, angle };
+
+      const wp0 = waypoints[Math.max(0, seg - 1)];
+      const wp1 = waypoints[seg];
+      const wp2 = waypoints[seg + 1];
+      const wp3 = waypoints[Math.min(waypoints.length - 1, seg + 2)];
+
+      const segT = (t - wp1[0]) / (wp2[0] - wp1[0]);
+      const p = ease(segT);
+
+      // Catmull-Rom spline for smooth curves through waypoints
+      function catmull(p0: number, p1: number, p2: number, p3: number, t: number) {
+        return 0.5 * ((2 * p1) + (-p0 + p2) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t * t + (-p0 + 3 * p1 - 3 * p2 + p3) * t * t * t);
       }
-      // Phase 0.65-0.85: curve back across to the left
-      if (t < 0.85) {
-        const p = (t - 0.65) / 0.2;
-        const x = w * 0.9 - p * w * 0.6;
-        const y = h * 0.75 - Math.sin(p * Math.PI) * h * 0.15;
-        const prevX = w * 0.9 - (p - 0.01) * w * 0.6;
-        const prevY = h * 0.75 - Math.sin((p - 0.01) * Math.PI) * h * 0.15;
-        const angle = Math.atan2(y - prevY, x - prevX);
-        return { x, y, angle };
-      }
-      // Phase 0.85-1.0: blast off upward to space
-      const p = (t - 0.85) / 0.15;
-      const ease = p * p;
-      const x = w * 0.3 - ease * w * 0.1;
-      const y = h * 0.75 - ease * (h + 200);
-      const angle = -Math.PI / 2 - ease * 0.2;
+
+      const x = catmull(wp0[1], wp1[1], wp2[1], wp3[1], p) * w;
+      const y = catmull(wp0[2], wp1[2], wp2[2], wp3[2], p) * h;
+
+      // Calculate angle from nearby points
+      const dp = 0.002;
+      const p2t = Math.min(1, p + dp);
+      const nx = catmull(wp0[1], wp1[1], wp2[1], wp3[1], p2t) * w;
+      const ny = catmull(wp0[2], wp1[2], wp2[2], wp3[2], p2t) * h;
+      const angle = Math.atan2(ny - y, nx - x);
+
       return { x, y, angle };
     }
 
@@ -1250,8 +1189,7 @@ export default function V2Page() {
   useScrollAnimations();
 
   return (
-    <main className="bg-[#0a0a0a] text-[#e8e8e8] min-h-screen cursor-none">
-      <CustomCursor />
+    <main className="bg-[#0a0a0a] text-[#e8e8e8] min-h-screen">
       <ScrollRocket />
       <HeroSection />
       <AboutSection />
