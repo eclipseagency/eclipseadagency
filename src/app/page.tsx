@@ -664,23 +664,11 @@ function ScrollRocket({ visible }: { visible: boolean }) {
     let prevProgress = 0;
     let isScrolling = false;
     let scrollTimeout = 0;
-    let scrollDirection: "down" | "up" = "down";
-    let lastScrollY = 0;
-    let directionLockTimeout = 0;
+    let scrollDir: "down" | "up" = "down";
 
     const onScroll = () => {
       const docH = document.documentElement.scrollHeight - window.innerHeight;
       scrollProgress.current = Math.min(window.scrollY / docH, 1);
-      const delta = window.scrollY - lastScrollY;
-      // Only switch direction if delta is significant (avoid flicker from smooth scroll)
-      if (Math.abs(delta) > 2) {
-        const newDir = delta > 0 ? "down" : "up";
-        if (newDir !== scrollDirection) {
-          clearTimeout(directionLockTimeout);
-          scrollDirection = newDir;
-        }
-      }
-      lastScrollY = window.scrollY;
       isScrolling = true;
       clearTimeout(scrollTimeout);
       scrollTimeout = window.setTimeout(() => { isScrolling = false; }, 80);
@@ -876,16 +864,20 @@ function ScrollRocket({ visible }: { visible: boolean }) {
 
       const t = scrollProgress.current;
 
+      // ── Detect scroll direction from progress delta ──
+      const rawDelta = t - prevProgress;
+      const scrollDelta = Math.abs(rawDelta);
+      if (scrollDelta > 0.0001) {
+        scrollDir = rawDelta > 0 ? "down" : "up";
+      }
+      prevProgress = t;
+      const moving = isScrolling && scrollDelta > 0.0001;
+
       // Switch path based on scroll direction
-      activeWaypoints = scrollDirection === "up" ? waypointsUp : waypointsDown;
+      activeWaypoints = scrollDir === "up" ? waypointsUp : waypointsDown;
 
       const { x, y, angle } = getRocketPos(t);
       const visible = y > -80 && y < h + 80 && x > -80 && x < w + 80;
-
-      // ── Spawn trail particles only while scrolling ──
-      const scrollDelta = Math.abs(t - prevProgress);
-      prevProgress = t;
-      const moving = isScrolling && scrollDelta > 0.0001;
 
       if (visible && t > 0.01 && moving) {
         const thrustX = -Math.cos(angle) * 2;
