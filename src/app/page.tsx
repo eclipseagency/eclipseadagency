@@ -1885,9 +1885,15 @@ function PartnersSection() {
 /* ═══════════════════════════════════════════════════════════
    SECTION: Portfolio — Video showreel horizontal scroll
    ═══════════════════════════════════════════════════════════ */
-const portfolioVideos = [
-  { id: "profile-showreel", src: "https://eclipseadagency.com/wp-content/uploads/2024/08/WEBSITE-VIDEO-MOTION.mp4" },
-  { id: "profile-velan", src: "https://eclipseadagency.com/wp-content/uploads/2023/05/v1.mp4" },
+const portfolioVideos: { id: string; vimeoId?: string; src?: string; aspect: string }[] = [
+  { id: "showreel", vimeoId: "1051203598", aspect: "65%" },
+  { id: "branding-1", vimeoId: "1144863160", aspect: "100%" },
+  { id: "branding-2", vimeoId: "1144863671", aspect: "100%" },
+  { id: "branding-3", vimeoId: "1147623451", aspect: "100%" },
+  { id: "webdev-1", vimeoId: "1144880936", aspect: "100%" },
+  { id: "webdev-2", vimeoId: "1144881841", aspect: "100%" },
+  { id: "webdev-3", vimeoId: "1054176209", aspect: "125%" },
+  { id: "tube-man", src: "https://eclipseadagency.com/wp-content/uploads/2024/08/Inflatable-Tube-Man.webm", aspect: "56.25%" },
 ];
 
 function PortfolioSection() {
@@ -1940,18 +1946,29 @@ function PortfolioSection() {
 function VideoCard({ video }: { video: (typeof portfolioVideos)[number] }) {
   return (
     <div className="block shrink-0 group">
-      <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] transition-all duration-500 hover:border-[#ff6b35]/20 hover:shadow-[0_20px_80px_rgba(255,107,53,0.1)]"
+      <div
+        className="relative overflow-hidden rounded-2xl border border-white/[0.06] transition-all duration-500 hover:border-[#ff6b35]/20 hover:shadow-[0_20px_80px_rgba(255,107,53,0.1)]"
         style={{ width: "min(70vw, 550px)" }}
       >
-        <div className="relative aspect-video overflow-hidden bg-white/[0.02]">
-          <video
-            src={video.src}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="h-full w-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.05]"
-          />
+        <div className="relative overflow-hidden bg-white/[0.02]" style={{ paddingTop: video.aspect }}>
+          {video.vimeoId ? (
+            <iframe
+              src={`https://player.vimeo.com/video/${video.vimeoId}?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&background=1`}
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+              referrerPolicy="strict-origin-when-cross-origin"
+              className="absolute inset-0 h-full w-full border-0"
+              loading="lazy"
+            />
+          ) : video.src ? (
+            <video
+              src={video.src}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : null}
         </div>
       </div>
     </div>
