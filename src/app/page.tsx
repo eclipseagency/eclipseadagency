@@ -2275,8 +2275,7 @@ export default function HomePage() {
         <WhatsAppButton />
         <BackToTop />
         <HeroSection />
-        <AboutSection />
-        <div className="relative z-30 flex justify-center pointer-events-none select-none" style={{ marginTop: "-280px", marginBottom: "-80px" }}>
+        <div className="relative z-30 flex justify-center pointer-events-none select-none" style={{ marginBottom: "-160px" }}>
           <video
             src="https://eclipseadagency.com/wp-content/uploads/2024/08/Inflatable-Tube-Man.webm"
             autoPlay
@@ -2287,6 +2286,7 @@ export default function HomePage() {
             style={{ transform: "translateX(20px)" }}
           />
         </div>
+        <AboutSection />
         <ServicesSection />
         <PartnersSection />
         <PortfolioSection />
