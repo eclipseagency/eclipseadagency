@@ -205,7 +205,7 @@ function useHeroCanvas() {
     window.addEventListener("mousemove", onMove, { passive: true });
 
     // ── Stars ──
-    const STAR_COUNT = 200;
+    const STAR_COUNT = 120;
     const stars = Array.from({ length: STAR_COUNT }, () => ({
       x: Math.random(), y: Math.random(),
       size: 0.3 + Math.random() * 1.5,
@@ -215,7 +215,7 @@ function useHeroCanvas() {
     }));
 
     // ── Orbiting particles around eclipse ──
-    const ORBIT_COUNT = 80;
+    const ORBIT_COUNT = 50;
     const orbitals = Array.from({ length: ORBIT_COUNT }, () => ({
       angle: Math.random() * Math.PI * 2,
       radius: 80 + Math.random() * 160,
@@ -232,7 +232,7 @@ function useHeroCanvas() {
     let shootTimer = 0;
 
     // ── Floating dust/particles that react to mouse ──
-    const DUST_COUNT = 60;
+    const DUST_COUNT = 35;
     const dust = Array.from({ length: DUST_COUNT }, () => ({
       x: Math.random(), y: Math.random(),
       vx: 0, vy: 0,
@@ -487,11 +487,11 @@ function OrbitingSolutions() {
   const containerRef = useRef<HTMLDivElement>(null);
   const solutions = useMemo(() => [
     { label: "Branding", href: "/solutions/branding", color: "#ff6b35", size: 38 },
-    { label: "Web & Apps", href: "/solutions/web-apps", color: "#4a9eff", size: 34 },
+    { label: "Web & Apps", href: "/solutions/web-apps", color: "#e8621e", size: 34 },
     { label: "Marketing", href: "/solutions/digital-marketing", color: "#f7931e", size: 40 },
-    { label: "Production", href: "/solutions/production", color: "#a855f7", size: 32 },
-    { label: "Animation", href: "/solutions/animation", color: "#22d3ee", size: 30 },
-    { label: "3D Creations", href: "/solutions/3d-creations", color: "#f43f5e", size: 36 },
+    { label: "Production", href: "/solutions/production", color: "#d4551a", size: 32 },
+    { label: "Animation", href: "/solutions/animation", color: "#ffad66", size: 30 },
+    { label: "3D Creations", href: "/solutions/3d-creations", color: "#cc4a15", size: 36 },
   ], []);
 
   useEffect(() => {
@@ -598,7 +598,6 @@ function HeroSection() {
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"
-        style={{ willChange: "transform" }}
       />
 
       {/* ── Orbiting solutions around the eclipse ── */}
@@ -615,15 +614,15 @@ function HeroSection() {
       {/* ── Title centered inside the eclipse sphere ── */}
       <div data-hero-content className="absolute inset-0 z-10 pointer-events-none" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
         <div data-hero-text className="text-center" style={{ marginTop: "-16vh" }}>
-          <p className="text-white/60 text-[clamp(0.5rem,1vw,0.7rem)] font-semibold uppercase tracking-[0.4em] mb-3">Eclipse Agency</p>
-          <h1 className="font-heading text-[clamp(0.9rem,2vw,1.6rem)] font-bold leading-[1.15] tracking-tight">
+          <p className="text-white/60 text-[clamp(0.6rem,1.2vw,0.85rem)] font-semibold uppercase tracking-[0.4em] mb-3">Eclipse Agency</p>
+          <h1 className="font-heading text-[clamp(1.4rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight">
             <span className="text-white">From Shadow</span>
             <br />
             <span className="bg-gradient-to-r from-[#ff6b35] to-[#f7931e] bg-clip-text text-transparent">
               to Spotlight
             </span>
           </h1>
-          <p className="mx-auto mt-2 max-w-[200px] text-[8px] leading-relaxed text-white/20 md:text-[10px]">
+          <p className="mx-auto mt-3 max-w-[280px] text-[10px] leading-relaxed text-white/25 md:text-xs">
             Marketing Built on Strategy,<br />Driven by Creativity.
           </p>
         </div>
@@ -666,10 +665,15 @@ function ScrollRocket({ visible }: { visible: boolean }) {
     let isScrolling = false;
     let scrollTimeout = 0;
     let scrollDir: "down" | "up" = "down";
+    let hasInitialized = false;
 
     const onScroll = () => {
       const docH = document.documentElement.scrollHeight - window.innerHeight;
-      scrollProgress.current = Math.min(window.scrollY / docH, 1);
+      if (docH > 0) {
+        scrollProgress.current = Math.min(Math.max(window.scrollY / docH, 0), 1);
+      } else {
+        scrollProgress.current = 0;
+      }
       isScrolling = true;
       clearTimeout(scrollTimeout);
       scrollTimeout = window.setTimeout(() => { isScrolling = false; }, 80);
@@ -689,9 +693,9 @@ function ScrollRocket({ visible }: { visible: boolean }) {
     // Each: [scrollT, x%, y%, rotation hint]
     // Descending path (scrolling down)
     const waypointsDown = [
-      [0.01, 0.50, 0.26],  // start: above eclipse text
-      [0.03, 0.55, 0.20],  // rise up-right immediately
-      [0.07, 0.70, 0.15],  // arc toward top-right
+      [0.001, 0.50, 0.26],  // start: above eclipse text
+      [0.01, 0.55, 0.20],   // rise up-right immediately
+      [0.07, 0.70, 0.15],   // arc toward top-right
       [0.12, 0.85, 0.30],  // swoop right
       [0.18, 0.75, 0.60],  // dive down toward About section
       [0.25, 0.55, 0.75],  // sweep across center-bottom
@@ -708,26 +712,27 @@ function ScrollRocket({ visible }: { visible: boolean }) {
       [0.97, 0.50, -0.30], // blast off to space!
     ];
 
-    // Ascending path (scrolling up) — more vertical, rocket-ascending feel
-    // Reversed scroll values, different x positions for a fresh ascent feel
+    // Ascending path (scrolling up) — y INCREASES with t so that
+    // when t decreases (scroll up), the rocket consistently moves UPWARD.
+    // Gentle horizontal weaving for visual interest.
     const waypointsUp = [
-      [0.01, 0.50, 0.26],  // home: above eclipse text
-      [0.03, 0.45, 0.20],  // rise left
-      [0.07, 0.30, 0.12],  // arc top-left
-      [0.12, 0.15, 0.25],  // swoop left
-      [0.18, 0.25, 0.50],  // descend left-center
-      [0.25, 0.45, 0.65],  // sweep center
-      [0.32, 0.70, 0.50],  // curve right
-      [0.39, 0.85, 0.35],  // rise right (ascending feel)
-      [0.46, 0.75, 0.18],  // arc up
-      [0.53, 0.50, 0.12],  // center-top
-      [0.60, 0.25, 0.30],  // left descent
-      [0.67, 0.20, 0.55],  // left-center
-      [0.74, 0.40, 0.70],  // sweep center-bottom
-      [0.80, 0.65, 0.55],  // right rise
-      [0.86, 0.75, 0.30],  // ascending right
-      [0.92, 0.60, 0.15],  // near top
-      [0.97, 0.50, -0.30], // blast off to space!
+      [0.001, 0.50, 0.26],  // park position (top of page)
+      [0.01, 0.45, 0.28],
+      [0.07, 0.35, 0.32],
+      [0.12, 0.25, 0.38],
+      [0.18, 0.30, 0.44],
+      [0.25, 0.40, 0.50],
+      [0.32, 0.55, 0.56],
+      [0.39, 0.65, 0.62],
+      [0.46, 0.70, 0.68],
+      [0.53, 0.60, 0.73],
+      [0.60, 0.45, 0.78],
+      [0.67, 0.30, 0.82],
+      [0.74, 0.35, 0.86],
+      [0.80, 0.50, 0.90],
+      [0.86, 0.60, 0.94],
+      [0.92, 0.55, 0.98],
+      [0.97, 0.50, 1.10],  // off-screen bottom
     ];
 
     // Active waypoints — switches based on scroll direction
@@ -863,6 +868,12 @@ function ScrollRocket({ visible }: { visible: boolean }) {
         return;
       }
 
+      // Recalculate scroll on first visible frame to avoid stale values
+      if (!hasInitialized) {
+        hasInitialized = true;
+        onScroll();
+      }
+
       const t = scrollProgress.current;
 
       // ── Detect scroll direction from progress delta ──
@@ -883,7 +894,7 @@ function ScrollRocket({ visible }: { visible: boolean }) {
       const angle = scrollDir === "up" ? pos.angle + Math.PI : pos.angle;
       const visible = y > -80 && y < h + 80 && x > -80 && x < w + 80;
 
-      if (visible && t > 0.01 && moving) {
+      if (visible && t > 0.002 && moving) {
         const thrustX = -Math.cos(angle) * 2;
         const thrustY = -Math.sin(angle) * 2;
         // Fire particles
@@ -948,7 +959,7 @@ function ScrollRocket({ visible }: { visible: boolean }) {
       }
 
       // ── Engine glow (only while moving) ──
-      if (visible && t > 0.01 && moving) {
+      if (visible && t > 0.002 && moving) {
         const glowX = x + -Math.cos(angle) * 18;
         const glowY = y + -Math.sin(angle) * 18;
         const engineGlow = ctx.createRadialGradient(glowX, glowY, 0, glowX, glowY, 35);
@@ -961,7 +972,8 @@ function ScrollRocket({ visible }: { visible: boolean }) {
 
       // ── Draw rocket ──
       if (visible) {
-        drawRocket(x, y, angle, 1.3);
+        const rocketScale = w < 640 ? 0.9 : 1.3;
+        drawRocket(x, y, angle, rocketScale);
       }
 
       // Limit trail array
@@ -983,7 +995,6 @@ function ScrollRocket({ visible }: { visible: boolean }) {
     <canvas
       ref={canvasRef}
       className="pointer-events-none fixed inset-0 z-[50]"
-      style={{ willChange: "transform" }}
     />
   );
 }
@@ -998,6 +1009,15 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef(0);
   const [done, setDone] = useState(false);
+
+  // Skip preloader for returning visitors in the same session
+  const shouldSkip = useMemo(() => {
+    if (typeof window === "undefined") return false;
+    const seen = sessionStorage.getItem("eclipse-preloader-seen");
+    if (seen) return true;
+    sessionStorage.setItem("eclipse-preloader-seen", "1");
+    return false;
+  }, []);
 
   // Generate jagged tear edge points (stable across renders)
   const tearPoints = useMemo(() => {
@@ -1024,7 +1044,16 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
     }))
   , []);
 
+  // If returning visitor, skip preloader entirely
   useEffect(() => {
+    if (shouldSkip) {
+      onComplete();
+      setDone(true);
+    }
+  }, [shouldSkip, onComplete]);
+
+  useEffect(() => {
+    if (shouldSkip) return;
     const canvas = canvasRef.current;
     const container = containerRef.current;
     if (!canvas || !container) return;
@@ -1473,7 +1502,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
       document.body.style.inset = "";
       document.body.style.overflowY = "";
     };
-  }, [tearPoints, onComplete]);
+  }, [tearPoints, cosmicStars, onComplete, shouldSkip]);
 
   if (done) return null;
 
@@ -1537,9 +1566,9 @@ function SpaceBackground() {
 
     // Subtle nebula wisps — very faint color patches
     const nebulae = [
-      { x: 0.2, y: 0.25, rx: 250, ry: 150, color: "rgba(100,50,180,0.015)", parallax: 0.05 },
+      { x: 0.2, y: 0.25, rx: 250, ry: 150, color: "rgba(180,80,20,0.015)", parallax: 0.05 },
       { x: 0.75, y: 0.55, rx: 300, ry: 180, color: "rgba(255,80,30,0.012)", parallax: 0.08 },
-      { x: 0.5, y: 0.8, rx: 200, ry: 130, color: "rgba(50,120,200,0.01)", parallax: 0.06 },
+      { x: 0.5, y: 0.8, rx: 200, ry: 130, color: "rgba(200,100,30,0.01)", parallax: 0.06 },
     ];
 
     let scrollY = 0;
@@ -1620,7 +1649,6 @@ function SpaceBackground() {
     <canvas
       ref={canvasRef}
       className="pointer-events-none fixed inset-0 z-[1]"
-      style={{ willChange: "transform" }}
     />
   );
 }
