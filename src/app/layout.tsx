@@ -1,6 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { siteConfig } from "@/data/site";
 import "./globals.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#0a0a0a",
+};
 
 export const metadata: Metadata = {
   title: {
@@ -45,6 +52,45 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="min-h-screen bg-bg font-body text-text antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: siteConfig.name,
+              url: siteConfig.url,
+              logo: `${siteConfig.url}/images/logo.png`,
+              description: siteConfig.description,
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "28 Sayed Afifi St., Al Golf, Heliopolis",
+                addressLocality: "Cairo",
+                addressCountry: "EG",
+                postalCode: "11586",
+              },
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: `+${siteConfig.whatsapp}`,
+                contactType: "sales",
+                availableLanguage: ["English", "Arabic"],
+              },
+              sameAs: Object.values(siteConfig.social),
+              hasOfferCatalog: {
+                "@type": "OfferCatalog",
+                name: "Creative Services",
+                itemListElement: [
+                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Branding & Identity" } },
+                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Digital Marketing" } },
+                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Web & App Development" } },
+                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Animation" } },
+                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Production" } },
+                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "3D Creations" } },
+                ],
+              },
+            }),
+          }}
+        />
         {children}
       </body>
     </html>

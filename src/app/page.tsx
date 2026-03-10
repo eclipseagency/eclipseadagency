@@ -593,7 +593,7 @@ function HeroSection() {
   const canvasRef = useHeroCanvas();
 
   return (
-    <section data-hero className="relative h-screen overflow-hidden bg-[#050508]">
+    <section id="hero" data-hero className="relative h-screen overflow-hidden bg-[#050508]">
       {/* ── Animated canvas background ── */}
       <canvas
         ref={canvasRef}
@@ -1656,7 +1656,7 @@ function SpaceBackground() {
    ═══════════════════════════════════════════════════════════ */
 function AboutSection() {
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden">
+    <section id="about" className="relative py-16 md:py-24 overflow-hidden">
       {/* Subtle nebula glow */}
       <div className="absolute top-0 right-0 w-[60%] h-[60%] pointer-events-none opacity-30" style={{
         background: "radial-gradient(ellipse at 80% 20%, rgba(255,107,53,0.08) 0%, transparent 60%)",
@@ -1714,7 +1714,7 @@ function AboutSection() {
    ═══════════════════════════════════════════════════════════ */
 function ServicesSection() {
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden">
+    <section id="services" className="relative py-16 md:py-24 overflow-hidden">
       {/* Left nebula */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[40%] h-[80%] pointer-events-none opacity-20" style={{
         background: "radial-gradient(ellipse at 10% 50%, rgba(255,107,53,0.1) 0%, transparent 60%)",
@@ -1773,11 +1773,46 @@ function ServicesSection() {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   SECTION: Partners — Certified partner badges
+   ═══════════════════════════════════════════════════════════ */
+function PartnersSection() {
+  const partners = [
+    { name: "HubSpot", label: "Certified Partner" },
+    { name: "Google", label: "Partner" },
+    { name: "Semrush", label: "Certified Agency" },
+    { name: "Adjust", label: "Solutions Partner" },
+  ];
+
+  return (
+    <section id="partners" className="relative py-10 md:py-14 overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+      <div className="relative mx-auto max-w-[1100px] px-5 md:px-8">
+        <p className="text-center text-[10px] font-semibold uppercase tracking-[0.4em] text-white/20 mb-8 md:text-xs" data-fade>
+          Trusted Partners
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
+          {partners.map((p, i) => (
+            <div
+              key={p.name}
+              data-fade={i * 0.1}
+              className="group flex items-center gap-2.5 rounded-full border border-white/[0.06] bg-white/[0.02] px-5 py-2.5 transition-all duration-500 hover:border-[#ff6b35]/20 hover:bg-[#ff6b35]/[0.03]"
+            >
+              <span className="text-sm font-bold text-white/50 group-hover:text-[#ff6b35] transition-colors">{p.name}</span>
+              <span className="text-[10px] uppercase tracking-wider text-white/20">{p.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
    SECTION: Portfolio — Horizontal scroll with space theme
    ═══════════════════════════════════════════════════════════ */
 function PortfolioSection() {
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden">
+    <section id="portfolio" className="relative py-16 md:py-24 overflow-hidden">
 
       {/* Top/bottom borders */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
@@ -1831,7 +1866,8 @@ function ProjectCard({ item }: { item: (typeof portfolioItems)[number] }) {
         <div className="relative aspect-[4/3] overflow-hidden bg-white/[0.02]">
           <Image
             src={item.image} alt={item.title}
-            width={1200} height={900} unoptimized
+            width={1200} height={900}
+            sizes="(max-width: 768px) 80vw, 550px"
             className="h-full w-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.08]"
           />
           {/* Gradient overlay */}
@@ -1864,7 +1900,7 @@ function ProjectCard({ item }: { item: (typeof portfolioItems)[number] }) {
    ═══════════════════════════════════════════════════════════ */
 function ProcessSection() {
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden">
+    <section id="process" className="relative py-16 md:py-24 overflow-hidden">
 
       {/* Center nebula */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] pointer-events-none opacity-15" style={{
@@ -1920,7 +1956,7 @@ function ProcessSection() {
    ═══════════════════════════════════════════════════════════ */
 function TestimonialsSection() {
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden">
+    <section id="testimonials" className="relative py-16 md:py-24 overflow-hidden">
 
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
 
@@ -1979,7 +2015,7 @@ function TestimonialsSection() {
    ═══════════════════════════════════════════════════════════ */
 function CTASection() {
   return (
-    <section className="relative py-20 md:py-32 overflow-hidden">
+    <section id="contact" className="relative py-20 md:py-32 overflow-hidden">
 
 
       {/* Central eclipse glow */}
@@ -2094,6 +2130,33 @@ function WhatsAppButton() {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   Back to Top Button — appears after scrolling down
+   ═══════════════════════════════════════════════════════════ */
+function BackToTop() {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setShow(window.scrollY > window.innerHeight);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <button
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      aria-label="Back to top"
+      className={`fixed bottom-6 left-6 z-[60] flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-[#0a0a0a]/80 backdrop-blur-sm text-white/40 transition-all duration-300 hover:border-[#ff6b35]/30 hover:text-[#ff6b35] ${
+        show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+      }`}
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M18 15l-6-6-6 6" />
+      </svg>
+    </button>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
    PAGE
    ═══════════════════════════════════════════════════════════ */
 export default function HomePage() {
@@ -2109,9 +2172,11 @@ export default function HomePage() {
         <SpaceBackground />
         <ScrollRocket visible={preloaderDone} />
         <WhatsAppButton />
+        <BackToTop />
         <HeroSection />
         <AboutSection />
         <ServicesSection />
+        <PartnersSection />
         <PortfolioSection />
         <ProcessSection />
         <TestimonialsSection />
