@@ -1797,18 +1797,6 @@ function ServicesSection() {
 
       <div className="relative mx-auto max-w-[1100px] px-5 md:px-8">
         <div className="text-center mb-10 md:mb-14">
-          {/* Tube Man mascot — directly above section title */}
-          <div className="relative z-20 flex justify-center pointer-events-none select-none" style={{ marginBottom: "-200px", marginTop: "-20px" }}>
-            <video
-              src="https://eclipseadagency.com/wp-content/uploads/2024/08/Inflatable-Tube-Man.webm"
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="h-[260px] w-auto mix-blend-screen md:h-[380px]"
-              style={{ transform: "translateY(-220px) translateX(20px)" }}
-            />
-          </div>
           <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-[#ff6b35]/50 mb-3 md:text-xs" data-fade>Our Solutions</p>
           <h2 className="font-heading text-[clamp(1.8rem,4vw,3.5rem)] font-bold text-white" data-reveal>What We Do</h2>
           <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-[#ff6b35]/30 to-transparent" data-line />
@@ -2288,6 +2276,17 @@ export default function HomePage() {
         <BackToTop />
         <HeroSection />
         <AboutSection />
+        <div className="relative z-30 flex justify-center pointer-events-none select-none" style={{ marginTop: "-180px", marginBottom: "-180px" }}>
+          <video
+            src="https://eclipseadagency.com/wp-content/uploads/2024/08/Inflatable-Tube-Man.webm"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="h-[260px] w-auto mix-blend-screen md:h-[380px]"
+            style={{ transform: "translateX(20px)" }}
+          />
+        </div>
         <ServicesSection />
         <PartnersSection />
         <PortfolioSection />
