@@ -1731,7 +1731,7 @@ function SpaceBackground() {
    ═══════════════════════════════════════════════════════════ */
 function AboutSection() {
   return (
-    <section id="about" className="relative pt-16 pb-8 md:pt-24 md:pb-12 overflow-hidden">
+    <section id="about" className="relative z-0 pt-16 pb-8 md:pt-24 md:pb-12 overflow-hidden">
       {/* Subtle nebula glow */}
       <div className="absolute top-0 right-0 w-[60%] h-[60%] pointer-events-none opacity-30" style={{
         background: "radial-gradient(ellipse at 80% 20%, rgba(255,107,53,0.08) 0%, transparent 60%)",
