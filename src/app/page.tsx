@@ -961,12 +961,12 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
       },
     });
 
-    // Phase 1: Rocket descends and tears (0 → 1)
-    tl.to(proxy, { progress: 1, duration: 2, ease: "power2.inOut" }, 0.3);
+    // Phase 1: Rocket descends and tears (0 → 1) — starts at 1s to let text be read
+    tl.to(proxy, { progress: 1, duration: 2.2, ease: "power2.inOut" }, 1.0);
     // Phase 2: Split halves apart
-    tl.to(proxy, { split: 1, duration: 0.9, ease: "power3.in" }, 2.0);
+    tl.to(proxy, { split: 1, duration: 0.9, ease: "power3.in" }, 2.8);
     // Phase 3: Fade out
-    tl.to(proxy, { fade: 0, duration: 0.4, ease: "power2.in" }, 2.6);
+    tl.to(proxy, { fade: 0, duration: 0.4, ease: "power2.in" }, 3.4);
 
     // Sync progress ref
     gsap.ticker.add(() => {
@@ -1223,19 +1223,21 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
         drawRocket(cx, rocketY, Math.PI, 1.5);
       }
 
-      // ── "Eclipse Agency" text before tear starts ──
-      if (p < 0.3) {
-        const textAlpha = p < 0.05 ? p * 20 : Math.max(0, 1 - (p - 0.15) / 0.15);
+      // ── "Eclipse Agency" text — stays until rocket reaches it ──
+      // Rocket reaches center (h*0.45) when p ≈ 0.45, so fade out starting at p=0.35
+      if (p < 0.55) {
+        const fadeIn = Math.min(1, p / 0.08); // fade in over first 8%
+        const fadeOut = p > 0.35 ? Math.max(0, 1 - (p - 0.35) / 0.15) : 1; // fade out 0.35→0.50
+        const textAlpha = fadeIn * fadeOut;
         if (textAlpha > 0) {
           ctx.save();
-          ctx.fillStyle = `rgba(255,255,255,${textAlpha * 0.7})`;
-          ctx.font = "600 11px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillStyle = `rgba(255,255,255,${textAlpha * 0.8})`;
+          ctx.font = "600 14px 'Plus Jakarta Sans', sans-serif";
           ctx.textAlign = "center";
-          ctx.letterSpacing = "0.4em";
-          ctx.fillText("ECLIPSE AGENCY", cx, h * 0.45);
-          ctx.fillStyle = `rgba(255,107,53,${textAlpha * 0.5})`;
-          ctx.font = "400 9px 'Plus Jakarta Sans', sans-serif";
-          ctx.fillText("FROM SHADOW TO SPOTLIGHT", cx, h * 0.45 + 22);
+          ctx.fillText("ECLIPSE AGENCY", cx, h * 0.46);
+          ctx.fillStyle = `rgba(255,107,53,${textAlpha * 0.6})`;
+          ctx.font = "400 11px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillText("FROM SHADOW TO SPOTLIGHT", cx, h * 0.46 + 28);
           ctx.restore();
         }
       }
