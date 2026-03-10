@@ -187,7 +187,7 @@ export default function TeamPage() {
         badge="Your Team, Our Office"
         title="Your On-Site Creative & Tech Team in Egypt"
         subtitle="A fully managed, dedicated team working from our office — under your direction, at a fraction of the cost. No freelancers. No remote unknowns. Real people, real office, real results."
-        image="/images/team-office/WhatsApp Image 2026-03-08 at 2.20.25 AM (1).jpeg"
+        illustration="/images/hero-pages/solutions-hero.svg"
       />
 
       {/* ── The Challenge ── */}
