@@ -492,20 +492,12 @@ export function TeamBuilder() {
         </div>
 
         {mode === "custom" && oneTimeSetupUSD > 0 && (
-          <div className="flex divide-x divide-border border-t border-border bg-primary/5">
-            {(["SAR", "USD", "AED"] as Currency[]).map((c) => {
-              const val = Math.round(oneTimeSetupUSD * currencyRates[c]);
-              return (
-                <div key={c} className="flex-1 px-4 py-2.5 text-center">
-                  <p className="text-[10px] text-text-muted">One-time setup</p>
-                  <p className="text-sm font-bold text-primary">
-                    {c === "USD" ? "$" : ""}
-                    {val.toLocaleString()}
-                    {c !== "USD" ? ` ${c}` : ""}
-                  </p>
-                </div>
-              );
-            })}
+          <div className="border-t border-border bg-primary/5 px-6 py-3 text-center">
+            <p className="text-sm">
+              <span className="text-text-muted">One-time setup: </span>
+              <span className="font-bold text-primary">{fmt(oneTimeSetupUSD)}</span>
+              <span className="text-text-muted"> ({headcount} x {fmt(500)} for equipment & PCs)</span>
+            </p>
           </div>
         )}
 
