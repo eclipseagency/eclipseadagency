@@ -1798,7 +1798,7 @@ function ServicesSection() {
       <div className="relative mx-auto max-w-[1100px] px-5 md:px-8">
         <div className="text-center mb-10 md:mb-14">
           {/* Tube Man mascot — directly above section title */}
-          <div className="flex justify-center -mt-10 -mb-10 md:-mt-16 md:-mb-14 pointer-events-none select-none">
+          <div className="flex justify-center -mt-20 -mb-12 md:-mt-28 md:-mb-16 pointer-events-none select-none">
             <video
               src="https://eclipseadagency.com/wp-content/uploads/2024/08/Inflatable-Tube-Man.webm"
               autoPlay
