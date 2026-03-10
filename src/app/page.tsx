@@ -121,22 +121,21 @@ function useScrollAnimations() {
         });
       }
 
-      // ── Rocket reveal: About section sweeps in from right with expanding circle ──
-      const revealSection = document.querySelector("[data-rocket-reveal]");
-      if (revealSection) {
-        gsap.fromTo(revealSection,
-          { clipPath: "circle(0% at 80% 30%)", opacity: 0 },
-          {
-            clipPath: "circle(150% at 80% 30%)", opacity: 1,
-            duration: 1, ease: "power2.out",
-            scrollTrigger: {
-              trigger: revealSection,
-              start: "top 80%",
-              end: "top 20%",
-              scrub: 1,
-            },
-          }
-        );
+      // ── Paper tear reveal: hero tears open to reveal About section ──
+      const tearLeft = document.querySelector("[data-tear-left]");
+      const tearRight = document.querySelector("[data-tear-right]");
+      const tearContainer = document.querySelector("[data-tear]");
+      if (tearLeft && tearRight && tearContainer) {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: tearContainer,
+            start: "top 70%",
+            end: "top 10%",
+            scrub: 1,
+          },
+        });
+        tl.to(tearLeft, { xPercent: -110, rotate: -3, ease: "power2.in" }, 0);
+        tl.to(tearRight, { xPercent: 110, rotate: 3, ease: "power2.in" }, 0);
       }
 
       // ── Line draw on scroll ──
@@ -922,6 +921,71 @@ function ScrollRocket() {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   Paper Tear — Hero tears open to reveal next section
+   Two halves split apart with jagged edges and orange glow
+   ═══════════════════════════════════════════════════════════ */
+function PaperTear() {
+  // Jagged edge path — random tear pattern
+  const tearPath = useMemo(() => {
+    const points: string[] = [];
+    const segments = 30;
+    for (let i = 0; i <= segments; i++) {
+      const y = (i / segments) * 100;
+      const jag = (Math.sin(i * 2.7) * 3 + Math.sin(i * 5.1) * 1.5 + Math.sin(i * 8.3) * 0.8);
+      points.push(`${50 + jag},${y}`);
+    }
+    return points.join(" ");
+  }, []);
+
+  return (
+    <div data-tear className="relative h-[40vh] md:h-[50vh] -mt-[10vh] z-[4] overflow-hidden">
+      {/* Left half */}
+      <div
+        data-tear-left
+        className="absolute inset-0 origin-center-right"
+        style={{ clipPath: "polygon(0 0, 50% 0, 50% 100%, 0 100%)", willChange: "transform" }}
+      >
+        <div className="absolute inset-0 bg-[#050508]" />
+        {/* Torn edge glow — right side of left half */}
+        <div className="absolute top-0 bottom-0 right-0 w-8 pointer-events-none" style={{
+          background: "linear-gradient(to left, rgba(255,107,53,0.3), transparent)",
+          filter: "blur(4px)",
+        }} />
+        {/* Jagged edge SVG */}
+        <svg className="absolute top-0 right-0 h-full w-4 translate-x-1/2" viewBox="0 0 100 100" preserveAspectRatio="none" style={{ filter: "drop-shadow(2px 0 6px rgba(255,107,53,0.4))" }}>
+          <polyline points={tearPath} fill="none" stroke="#ff6b35" strokeWidth="3" vectorEffect="non-scaling-stroke" />
+        </svg>
+      </div>
+
+      {/* Right half */}
+      <div
+        data-tear-right
+        className="absolute inset-0 origin-center-left"
+        style={{ clipPath: "polygon(50% 0, 100% 0, 100% 100%, 50% 100%)", willChange: "transform" }}
+      >
+        <div className="absolute inset-0 bg-[#050508]" />
+        {/* Torn edge glow — left side of right half */}
+        <div className="absolute top-0 bottom-0 left-0 w-8 pointer-events-none" style={{
+          background: "linear-gradient(to right, rgba(255,107,53,0.3), transparent)",
+          filter: "blur(4px)",
+        }} />
+        {/* Jagged edge SVG */}
+        <svg className="absolute top-0 left-0 h-full w-4 -translate-x-1/2" viewBox="0 0 100 100" preserveAspectRatio="none" style={{ filter: "drop-shadow(-2px 0 6px rgba(255,107,53,0.4))" }}>
+          <polyline points={tearPath} fill="none" stroke="#ff6b35" strokeWidth="3" vectorEffect="non-scaling-stroke" />
+        </svg>
+      </div>
+
+      {/* Center glow line — visible as halves separate */}
+      <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1 pointer-events-none" style={{
+        background: "linear-gradient(to bottom, transparent, rgba(255,107,53,0.5) 30%, rgba(255,107,53,0.5) 70%, transparent)",
+        filter: "blur(3px)",
+        boxShadow: "0 0 20px 4px rgba(255,107,53,0.15)",
+      }} />
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
    Shared: Space background canvas for sections
    Draws subtle stars + nebula behind content sections
    ═══════════════════════════════════════════════════════════ */
@@ -964,7 +1028,7 @@ function SectionStars({ density = 40, className = "" }: { density?: number; clas
    ═══════════════════════════════════════════════════════════ */
 function AboutSection() {
   return (
-    <section data-rocket-reveal className="relative py-24 md:py-40 overflow-hidden">
+    <section className="relative py-24 md:py-40 overflow-hidden">
       {/* Subtle nebula glow */}
       <div className="absolute top-0 right-0 w-[60%] h-[60%] pointer-events-none opacity-30" style={{
         background: "radial-gradient(ellipse at 80% 20%, rgba(255,107,53,0.08) 0%, transparent 60%)",
@@ -1413,6 +1477,7 @@ export default function HomePage() {
       <ScrollRocket />
       <WhatsAppButton />
       <HeroSection />
+      <PaperTear />
       <AboutSection />
       <ServicesSection />
       <PortfolioSection />
