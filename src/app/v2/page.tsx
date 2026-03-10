@@ -121,6 +121,24 @@ function useScrollAnimations() {
         });
       }
 
+      // ── Rocket reveal: About section sweeps in from right with expanding circle ──
+      const revealSection = document.querySelector("[data-rocket-reveal]");
+      if (revealSection) {
+        gsap.fromTo(revealSection,
+          { clipPath: "circle(0% at 80% 30%)", opacity: 0 },
+          {
+            clipPath: "circle(150% at 80% 30%)", opacity: 1,
+            duration: 1, ease: "power2.out",
+            scrollTrigger: {
+              trigger: revealSection,
+              start: "top 80%",
+              end: "top 20%",
+              scrub: 1,
+            },
+          }
+        );
+      }
+
       // ── Line draw on scroll ──
       document.querySelectorAll("[data-line]").forEach((el) => {
         gsap.fromTo(el,
@@ -486,12 +504,12 @@ function useHeroCanvas() {
 function OrbitingSolutions() {
   const containerRef = useRef<HTMLDivElement>(null);
   const solutions = useMemo(() => [
-    { label: "Branding", icon: "◆" },
-    { label: "Web & Apps", icon: "⬡" },
-    { label: "Marketing", icon: "◈" },
-    { label: "Social Media", icon: "◉" },
-    { label: "Video", icon: "▲" },
-    { label: "Design", icon: "✦" },
+    { label: "Branding", icon: "◆", href: "/solutions/branding" },
+    { label: "Web & Apps", icon: "⬡", href: "/solutions/web-apps" },
+    { label: "Marketing", icon: "◈", href: "/solutions/digital-marketing" },
+    { label: "Production", icon: "◉", href: "/solutions/production" },
+    { label: "Animation", icon: "▲", href: "/solutions/animation" },
+    { label: "3D Creations", icon: "✦", href: "/solutions/3d-creations" },
   ], []);
 
   useEffect(() => {
@@ -527,19 +545,20 @@ function OrbitingSolutions() {
   }, []);
 
   return (
-    <div ref={containerRef} className="absolute left-1/2 top-[42%] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-[3]">
+    <div ref={containerRef} className="absolute left-1/2 top-[42%] -translate-x-1/2 -translate-y-1/2 z-[3]">
       {solutions.map((s, i) => (
-        <div
+        <Link
           key={i}
+          href={s.href}
           data-orbit-item
           className="absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
           style={{ willChange: "transform, opacity" }}
         >
-          <div className="flex items-center gap-2 rounded-full border border-white/[0.08] bg-[rgba(10,10,10,0.6)] px-4 py-2 backdrop-blur-sm">
+          <div className="flex items-center gap-2 rounded-full border border-white/[0.08] bg-[rgba(10,10,10,0.6)] px-4 py-2 backdrop-blur-sm transition-all duration-300 hover:border-[#ff6b35]/30 hover:bg-[rgba(255,107,53,0.08)]">
             <span className="text-[#ff6b35] text-xs">{s.icon}</span>
             <span className="text-[11px] font-medium uppercase tracking-[0.12em] text-white/50">{s.label}</span>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );
@@ -571,29 +590,20 @@ function HeroSection() {
       {/* ── Bottom gradient fade ── */}
       <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent pointer-events-none z-[2]" />
 
-      {/* ── Content overlay — below the eclipse ── */}
-      <div data-hero-content className="relative z-10 flex h-screen flex-col items-end justify-end px-5 pb-16 md:pb-20">
-        <div data-hero-text className="w-full text-center">
-          <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.4em] text-[#ff6b35]/50 md:text-xs" data-fade="0">
-            Creative Agency
-          </p>
-          <h1 className="font-heading text-[clamp(1.6rem,4vw,3.5rem)] font-bold leading-[0.95] tracking-tight">
-            <span className="text-white">From Shadow </span>
+      {/* ── Title centered inside the eclipse ── */}
+      <div data-hero-content className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none" style={{ top: "-8%" }}>
+        <div data-hero-text className="text-center">
+          <h1 className="font-heading text-[clamp(1rem,2.5vw,2rem)] font-bold leading-[1.1] tracking-tight">
+            <span className="block text-white/80 text-[clamp(0.6rem,1.2vw,0.85rem)] font-semibold uppercase tracking-[0.35em] mb-2">Eclipse Agency</span>
+            <span className="text-white">From Shadow</span>
+            <br />
             <span className="bg-gradient-to-r from-[#ff6b35] to-[#f7931e] bg-clip-text text-transparent">
               to Spotlight
             </span>
           </h1>
-          <p className="mx-auto mt-4 max-w-md text-xs leading-relaxed text-white/30 md:text-sm" data-fade="0.3">
+          <p className="mx-auto mt-3 max-w-xs text-[10px] leading-relaxed text-white/25 md:text-xs">
             Marketing Built on Strategy, Driven by Creativity.
           </p>
-          <div className="mt-6 flex justify-center gap-4" data-fade="0.5">
-            <Link href="/contact" className="rounded-full bg-[#ff6b35] px-7 py-2.5 text-sm font-semibold text-white transition-shadow duration-300 hover:shadow-[0_0_40px_rgba(255,107,53,0.3)]">
-              Start a Project
-            </Link>
-            <Link href="/portfolio" className="rounded-full border border-white/10 px-7 py-2.5 text-sm font-semibold text-white/50 transition-all duration-300 hover:border-white/25 hover:text-white">
-              Our Work
-            </Link>
-          </div>
         </div>
       </div>
     </section>
@@ -904,7 +914,7 @@ function ScrollRocket() {
    ═══════════════════════════════════════════════════════════ */
 function AboutSection() {
   return (
-    <section className="relative py-40 md:py-56">
+    <section data-rocket-reveal className="relative py-40 md:py-56">
       <div className="mx-auto max-w-[1100px] px-5 md:px-8">
         {/* Large editorial statement */}
         <h2 className="font-heading text-[clamp(1.8rem,4.5vw,4rem)] font-bold leading-[1.15] tracking-tight" data-reveal>
@@ -1172,17 +1182,14 @@ function Footer() {
           {/* Contact */}
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/40 mb-4">Contact</p>
-            <div className="space-y-2">
+            <div className="space-y-3">
               <a href={`mailto:${siteConfig.email}`} className="block text-sm text-white/40 transition-colors hover:text-[#ff6b35]">
                 {siteConfig.email}
               </a>
-              <a href={`https://wa.me/${siteConfig.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-white/40 transition-colors hover:text-[#25D366]">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                +20 1129 560 357
+              <a href={`https://wa.me/${siteConfig.whatsapp}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#25D366]/20 px-4 py-2 text-xs font-medium text-[#25D366]/70 transition-all hover:border-[#25D366]/40 hover:text-[#25D366]">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Chat on WhatsApp
               </a>
-              <p className="text-xs text-white/25 leading-relaxed mt-2">
-                {siteConfig.address}
-              </p>
             </div>
           </div>
 

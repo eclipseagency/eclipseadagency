@@ -582,3 +582,20 @@ select option:checked {
   80% { width: 85%; }
   100% { width: 100%; }
 }
+
+/* ── V2 page: hide root layout chrome ── */
+body.v2-page header:first-of-type,
+body.v2-page .preloader-overlay,
+body.v2-page .eclipse-cursor,
+body.v2-page .wireframe-bg {
+  display: none !important;
+}
+/* Hide root footer but keep v2's own footer */
+body.v2-page > footer,
+body.v2-page main + footer {
+  display: none !important;
+}
+body.v2-page,
+body.v2-page * {
+  cursor: auto !important;
+}
