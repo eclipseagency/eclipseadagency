@@ -1658,7 +1658,7 @@ function SpaceBackground() {
    ═══════════════════════════════════════════════════════════ */
 function AboutSection() {
   return (
-    <section className="relative py-24 md:py-40 overflow-hidden">
+    <section className="relative py-16 md:py-24 overflow-hidden">
       {/* Subtle nebula glow */}
       <div className="absolute top-0 right-0 w-[60%] h-[60%] pointer-events-none opacity-30" style={{
         background: "radial-gradient(ellipse at 80% 20%, rgba(255,107,53,0.08) 0%, transparent 60%)",
@@ -1716,7 +1716,7 @@ function AboutSection() {
    ═══════════════════════════════════════════════════════════ */
 function ServicesSection() {
   return (
-    <section className="relative py-24 md:py-40 overflow-hidden">
+    <section className="relative py-16 md:py-24 overflow-hidden">
       {/* Left nebula */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[40%] h-[80%] pointer-events-none opacity-20" style={{
         background: "radial-gradient(ellipse at 10% 50%, rgba(255,107,53,0.1) 0%, transparent 60%)",
@@ -1779,7 +1779,7 @@ function ServicesSection() {
    ═══════════════════════════════════════════════════════════ */
 function PortfolioSection() {
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden">
+    <section className="relative py-16 md:py-24 overflow-hidden">
 
       {/* Top/bottom borders */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
@@ -1866,7 +1866,7 @@ function ProjectCard({ item }: { item: (typeof portfolioItems)[number] }) {
    ═══════════════════════════════════════════════════════════ */
 function ProcessSection() {
   return (
-    <section className="relative py-24 md:py-40 overflow-hidden">
+    <section className="relative py-16 md:py-24 overflow-hidden">
 
       {/* Center nebula */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] pointer-events-none opacity-15" style={{
@@ -1922,7 +1922,7 @@ function ProcessSection() {
    ═══════════════════════════════════════════════════════════ */
 function TestimonialsSection() {
   return (
-    <section className="relative py-24 md:py-40 overflow-hidden">
+    <section className="relative py-16 md:py-24 overflow-hidden">
 
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
 
@@ -1981,7 +1981,7 @@ function TestimonialsSection() {
    ═══════════════════════════════════════════════════════════ */
 function CTASection() {
   return (
-    <section className="relative py-32 md:py-48 overflow-hidden">
+    <section className="relative py-20 md:py-32 overflow-hidden">
 
 
       {/* Central eclipse glow */}
