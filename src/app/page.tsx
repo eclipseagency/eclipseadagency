@@ -639,7 +639,8 @@ function ScrollRocket({ visible }: { visible: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const scrollProgress = useRef(0);
   const visibleRef = useRef(false);
-  visibleRef.current = visible;
+  // Sync ref on every render — this runs synchronously during render
+  if (visible) visibleRef.current = true;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -876,7 +877,10 @@ function ScrollRocket({ visible }: { visible: boolean }) {
       // Switch path based on scroll direction
       activeWaypoints = scrollDir === "up" ? waypointsUp : waypointsDown;
 
-      const { x, y, angle } = getRocketPos(t);
+      const pos = getRocketPos(t);
+      const x = pos.x, y = pos.y;
+      // Flip angle when scrolling up so rocket nose faces direction of travel
+      const angle = scrollDir === "up" ? pos.angle + Math.PI : pos.angle;
       const visible = y > -80 && y < h + 80 && x > -80 && x < w + 80;
 
       if (visible && t > 0.01 && moving) {
