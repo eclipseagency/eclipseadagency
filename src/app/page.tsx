@@ -647,8 +647,8 @@ function ScrollRocket({ visible }: { visible: boolean }) {
     // Waypoints the rocket flies through (normalized x,y in viewport)
     // Each: [scrollT, x%, y%, rotation hint]
     const waypoints = [
-      [0.01, 0.50, 0.42],  // start: at eclipse center
-      [0.03, 0.55, 0.25],  // rise up-right from eclipse immediately
+      [0.01, 0.50, 0.26],  // start: above eclipse text
+      [0.03, 0.55, 0.20],  // rise up-right immediately
       [0.07, 0.70, 0.15],  // arc toward top-right
       [0.12, 0.85, 0.30],  // swoop right
       [0.18, 0.75, 0.60],  // dive down toward About section
@@ -668,7 +668,7 @@ function ScrollRocket({ visible }: { visible: boolean }) {
 
     function getRocketPos(t: number): { x: number; y: number; angle: number } {
       if (t < waypoints[0][0]) {
-        return { x: w * 0.5, y: h * 0.42, angle: -Math.PI / 2 };
+        return { x: w * 0.5, y: h * 0.26, angle: -Math.PI / 2 };
       }
       if (t >= waypoints[waypoints.length - 1][0]) {
         const last = waypoints[waypoints.length - 1];
@@ -796,9 +796,9 @@ function ScrollRocket({ visible }: { visible: boolean }) {
       }
 
       const t = scrollProgress.current;
-      // Show stationary rocket at eclipse center before scrolling starts
+      // Show stationary rocket above the eclipse text before scrolling starts
       if (t < 0.01) {
-        drawRocket(w * 0.5, h * 0.42, -Math.PI / 2, 1.3);
+        drawRocket(w * 0.5, h * 0.26, -Math.PI / 2, 1.3);
         animId = requestAnimationFrame(draw);
         return;
       }
@@ -938,6 +938,19 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
     }
     return pts;
   }, []);
+
+  // Cosmic tear stars — tiny stars visible through the rift
+  const cosmicStars = useMemo(() =>
+    Array.from({ length: 120 }, () => ({
+      x: (Math.random() - 0.5) * 80,
+      y: Math.random(),
+      size: 0.3 + Math.random() * 2,
+      brightness: 0.3 + Math.random() * 0.7,
+      phase: Math.random() * Math.PI * 2,
+      speed: 0.5 + Math.random() * 2,
+      hue: Math.random() > 0.6 ? 200 + Math.random() * 60 : 15 + Math.random() * 30, // blue/purple or orange
+    }))
+  , []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -1086,7 +1099,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
       const tearRocketY = -60 + (h + 120) * p;
 
       // Return path: rocket flies from bottom back to eclipse center with a curve
-      const eclipseCenterY = h * 0.42;
+      const eclipseCenterY = h * 0.26;
       const returnStartY = h + 60;
       const returnStartX = cx;
       // Curved return path — arcs to the right then back to center
@@ -1113,6 +1126,101 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
       // ── Draw the two dark halves ──
       const splitOffset = split * (w * 0.55);
       const tearWidth = split * 60 + 2; // gap grows as split increases
+      const glowHeight = Math.min(p * 1.2, 1) * h;
+      const time = now * 0.001;
+
+      // ── Cosmic rift visible through the tear ──
+      if (p > 0.03) {
+        ctx.save();
+        // Clip to tear region
+        ctx.beginPath();
+        // Left edge of rift
+        for (let i = 0; i < tearPoints.length; i++) {
+          const pt = tearPoints[i];
+          const ex = cx - tearWidth / 2 + pt.x - splitOffset;
+          const ey = pt.y * h;
+          if (ey > glowHeight) break;
+          if (i === 0) ctx.moveTo(ex, ey); else ctx.lineTo(ex, ey);
+        }
+        // Right edge of rift (reverse)
+        for (let i = tearPoints.length - 1; i >= 0; i--) {
+          const pt = tearPoints[i];
+          const ey = pt.y * h;
+          if (ey > glowHeight) continue;
+          const ex = cx + tearWidth / 2 - pt.x + splitOffset;
+          ctx.lineTo(ex, ey);
+        }
+        ctx.closePath();
+        ctx.clip();
+
+        // Deep cosmic background inside the rift
+        const riftBg = ctx.createLinearGradient(cx, 0, cx, glowHeight);
+        riftBg.addColorStop(0, "rgba(10, 2, 25, 0.95)");
+        riftBg.addColorStop(0.3, "rgba(20, 5, 40, 0.9)");
+        riftBg.addColorStop(0.6, "rgba(40, 10, 15, 0.85)");
+        riftBg.addColorStop(1, "rgba(10, 2, 20, 0.9)");
+        ctx.fillStyle = riftBg;
+        ctx.fillRect(cx - 100, 0, 200, glowHeight);
+
+        // Nebula glow layers inside the rift
+        const nebula1 = ctx.createRadialGradient(cx, glowHeight * 0.3, 0, cx, glowHeight * 0.3, 60 + split * 40);
+        nebula1.addColorStop(0, "rgba(120, 40, 200, 0.3)");
+        nebula1.addColorStop(0.5, "rgba(80, 20, 160, 0.15)");
+        nebula1.addColorStop(1, "transparent");
+        ctx.fillStyle = nebula1;
+        ctx.fillRect(cx - 100, 0, 200, glowHeight);
+
+        const nebula2 = ctx.createRadialGradient(cx + 10, glowHeight * 0.65, 0, cx, glowHeight * 0.65, 50 + split * 30);
+        nebula2.addColorStop(0, "rgba(255, 80, 30, 0.25)");
+        nebula2.addColorStop(0.5, "rgba(200, 40, 80, 0.12)");
+        nebula2.addColorStop(1, "transparent");
+        ctx.fillStyle = nebula2;
+        ctx.fillRect(cx - 100, 0, 200, glowHeight);
+
+        // Stars twinkling inside the cosmic rift
+        for (const star of cosmicStars) {
+          const sy = star.y * glowHeight;
+          if (sy > glowHeight) continue;
+          const sx = cx + star.x;
+          const twinkle = 0.4 + 0.6 * Math.sin(time * star.speed + star.phase);
+          const alpha = star.brightness * twinkle * Math.min(1, p * 5);
+          ctx.beginPath();
+          ctx.arc(sx, sy, star.size, 0, Math.PI * 2);
+          if (star.hue > 100) {
+            // Blue/purple cosmic stars
+            ctx.fillStyle = `hsla(${star.hue}, 80%, 75%, ${alpha})`;
+          } else {
+            // Warm orange/gold stars
+            ctx.fillStyle = `hsla(${star.hue}, 90%, 70%, ${alpha})`;
+          }
+          ctx.fill();
+          // Glow on bigger stars
+          if (star.size > 1.2) {
+            ctx.beginPath();
+            ctx.arc(sx, sy, star.size * 3, 0, Math.PI * 2);
+            ctx.fillStyle = `hsla(${star.hue}, 70%, 60%, ${alpha * 0.15})`;
+            ctx.fill();
+          }
+        }
+
+        // Cosmic energy streaks flowing through the rift
+        ctx.globalCompositeOperation = "screen";
+        for (let i = 0; i < 6; i++) {
+          const streakY = (glowHeight * (i + 0.5)) / 6;
+          const wave = Math.sin(time * 1.5 + i * 2.1) * 15;
+          const streakAlpha = 0.08 + 0.05 * Math.sin(time * 2 + i);
+          const grad = ctx.createLinearGradient(cx - 30, streakY, cx + 30, streakY);
+          grad.addColorStop(0, "transparent");
+          grad.addColorStop(0.3, `rgba(${i % 2 === 0 ? "160,100,255" : "255,120,50"}, ${streakAlpha})`);
+          grad.addColorStop(0.7, `rgba(${i % 2 === 0 ? "100,60,220" : "255,80,30"}, ${streakAlpha})`);
+          grad.addColorStop(1, "transparent");
+          ctx.fillStyle = grad;
+          ctx.fillRect(cx - 40 + wave, streakY - 3, 80, 6);
+        }
+        ctx.globalCompositeOperation = "source-over";
+
+        ctx.restore();
+      }
 
       // Left half
       ctx.save();
@@ -1125,20 +1233,6 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
       ctx.closePath();
       ctx.fillStyle = "#050508";
       ctx.fill();
-
-      // Left tear edge glow
-      if (p > 0.05) {
-        const glowHeight = Math.min(p * 1.2, 1) * h;
-        for (const pt of tearPoints) {
-          if (pt.y * h > glowHeight) break;
-          const ex = cx - tearWidth / 2 + pt.x - splitOffset;
-          const ey = pt.y * h;
-          ctx.beginPath();
-          ctx.arc(ex, ey, 3 + split * 8, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 107, 53, ${0.15 * (1 - pt.y * 0.5)})`;
-          ctx.fill();
-        }
-      }
       ctx.restore();
 
       // Right half
@@ -1152,47 +1246,54 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
       ctx.closePath();
       ctx.fillStyle = "#050508";
       ctx.fill();
+      ctx.restore();
 
-      // Right tear edge glow
+      // ── Torn edge glow — cosmic energy bleeding out from the rift edges ──
       if (p > 0.05) {
-        const glowHeight = Math.min(p * 1.2, 1) * h;
         for (const pt of tearPoints) {
           if (pt.y * h > glowHeight) break;
-          const ex = cx + tearWidth / 2 - pt.x + splitOffset;
-          const ey = pt.y * h;
+          const edgeGlow = 3 + split * 10;
+          const alpha = 0.2 * (1 - pt.y * 0.3);
+          // Left edge — purple/orange gradient
+          const exL = cx - tearWidth / 2 + pt.x - splitOffset;
           ctx.beginPath();
-          ctx.arc(ex, ey, 3 + split * 8, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 107, 53, ${0.15 * (1 - pt.y * 0.5)})`;
+          ctx.arc(exL, pt.y * h, edgeGlow, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(180, 80, 255, ${alpha * 0.6})`;
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(exL, pt.y * h, edgeGlow * 0.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 200, 255, ${alpha * 0.4})`;
+          ctx.fill();
+          // Right edge
+          const exR = cx + tearWidth / 2 - pt.x + splitOffset;
+          ctx.beginPath();
+          ctx.arc(exR, pt.y * h, edgeGlow, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 100, 50, ${alpha * 0.6})`;
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(exR, pt.y * h, edgeGlow * 0.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 220, 180, ${alpha * 0.4})`;
           ctx.fill();
         }
       }
-      ctx.restore();
 
-      // ── Orange glow through the tear gap ──
-      if (p > 0.05 && split < 0.8) {
-        const glowHeight = Math.min(p * 1.2, 1) * h;
-        const glowGrad = ctx.createLinearGradient(cx, 0, cx, glowHeight);
-        glowGrad.addColorStop(0, "rgba(255,107,53,0.4)");
-        glowGrad.addColorStop(0.5, "rgba(247,147,30,0.25)");
-        glowGrad.addColorStop(1, "rgba(255,107,53,0.1)");
-        ctx.save();
-        ctx.beginPath();
-        ctx.rect(cx - tearWidth / 2 - 20, 0, tearWidth + 40, glowHeight);
-        ctx.fillStyle = glowGrad;
-        ctx.filter = "blur(12px)";
-        ctx.fill();
-        ctx.filter = "none";
-        ctx.restore();
-
-        // Thin bright center line
+      // ── Central energy line — bright white/blue core ──
+      if (p > 0.05 && split < 0.6) {
         ctx.save();
         ctx.beginPath();
         ctx.moveTo(cx, 0);
         ctx.lineTo(cx, glowHeight);
-        ctx.strokeStyle = `rgba(255,107,53,${0.6 * (1 - split)})`;
-        ctx.lineWidth = 2;
-        ctx.shadowColor = "rgba(255,107,53,0.8)";
-        ctx.shadowBlur = 15;
+        const lineAlpha = 0.7 * (1 - split * 1.5);
+        ctx.strokeStyle = `rgba(200, 180, 255, ${Math.max(0, lineAlpha)})`;
+        ctx.lineWidth = 1.5;
+        ctx.shadowColor = "rgba(150, 100, 255, 0.9)";
+        ctx.shadowBlur = 20;
+        ctx.stroke();
+        // Second pass — warmer inner glow
+        ctx.strokeStyle = `rgba(255, 200, 150, ${Math.max(0, lineAlpha * 0.5)})`;
+        ctx.lineWidth = 0.8;
+        ctx.shadowColor = "rgba(255, 107, 53, 0.6)";
+        ctx.shadowBlur = 12;
         ctx.stroke();
         ctx.shadowBlur = 0;
         ctx.restore();
