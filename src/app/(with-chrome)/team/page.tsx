@@ -710,7 +710,7 @@ export default function TeamPage() {
           <div className="mt-12 flex flex-col items-center">
             <div className="h-16 w-16 overflow-hidden rounded-full border-2 border-primary/30 bg-bg-card">
               <Image
-                src="/images/team-office/DSC_7621-1536x1025.jpg"
+                src="/images/team-office/mustafa.jpeg"
                 alt="Mustafa Halawa"
                 width={64}
                 height={64}
