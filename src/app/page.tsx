@@ -486,12 +486,12 @@ function useHeroCanvas() {
 function OrbitingSolutions() {
   const containerRef = useRef<HTMLDivElement>(null);
   const solutions = useMemo(() => [
-    { label: "Branding", icon: "◆", href: "/solutions/branding" },
-    { label: "Web & Apps", icon: "⬡", href: "/solutions/web-apps" },
-    { label: "Marketing", icon: "◈", href: "/solutions/digital-marketing" },
-    { label: "Production", icon: "◉", href: "/solutions/production" },
-    { label: "Animation", icon: "▲", href: "/solutions/animation" },
-    { label: "3D Creations", icon: "✦", href: "/solutions/3d-creations" },
+    { label: "Branding", href: "/solutions/branding", color: "#ff6b35", size: 38 },
+    { label: "Web & Apps", href: "/solutions/web-apps", color: "#4a9eff", size: 34 },
+    { label: "Marketing", href: "/solutions/digital-marketing", color: "#f7931e", size: 40 },
+    { label: "Production", href: "/solutions/production", color: "#a855f7", size: 32 },
+    { label: "Animation", href: "/solutions/animation", color: "#22d3ee", size: 30 },
+    { label: "3D Creations", href: "/solutions/3d-creations", color: "#f43f5e", size: 36 },
   ], []);
 
   useEffect(() => {
@@ -505,18 +505,20 @@ function OrbitingSolutions() {
       const t = (now - startTime) * 0.001;
       items.forEach((el, i) => {
         const baseAngle = (i / items.length) * Math.PI * 2;
-        const angle = baseAngle + t * 0.15; // slow rotation
+        const angle = baseAngle + t * 0.12; // slow rotation
         // Elliptical orbit
         const rx = Math.min(window.innerWidth * 0.32, 320);
-        const ry = rx * 0.35;
+        const ry = rx * 0.38;
         const x = Math.cos(angle) * rx;
         const y = Math.sin(angle) * ry;
         // Depth effect — items at back are smaller and dimmer
         const depth = Math.sin(angle); // -1 = back, 1 = front
-        const scale = 0.65 + (depth + 1) * 0.2;
-        const opacity = 0.2 + (depth + 1) * 0.3;
+        const scale = 0.55 + (depth + 1) * 0.25;
+        const opacity = 0.15 + (depth + 1) * 0.35;
         const zIndex = depth > 0 ? 5 : 1;
-        el.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+        // Subtle wobble for floating feel
+        const wobbleY = Math.sin(t * 1.5 + i * 1.2) * 4;
+        el.style.transform = `translate(${x}px, ${y + wobbleY}px) scale(${scale})`;
         el.style.opacity = `${opacity}`;
         el.style.zIndex = `${zIndex}`;
       });
@@ -536,10 +538,47 @@ function OrbitingSolutions() {
           className="absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
           style={{ willChange: "transform, opacity" }}
         >
-          <div className="group/pill flex items-center gap-2 rounded-full border border-white/[0.12] bg-[rgba(10,10,10,0.7)] px-4 py-2 backdrop-blur-sm transition-all duration-300 hover:border-[#ff6b35]/50 hover:bg-[rgba(255,107,53,0.12)] hover:shadow-[0_0_20px_rgba(255,107,53,0.15)] cursor-pointer">
-            <span className="text-[#ff6b35] text-xs">{s.icon}</span>
-            <span className="text-[11px] font-medium uppercase tracking-[0.12em] text-white/60 group-hover/pill:text-white transition-colors">{s.label}</span>
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-white/20 group-hover/pill:text-[#ff6b35] group-hover/pill:translate-x-0.5 transition-all"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <div className="group/planet flex flex-col items-center gap-1.5 cursor-pointer">
+            {/* Planet sphere */}
+            <div
+              className="relative rounded-full transition-all duration-500 group-hover/planet:scale-[1.2]"
+              style={{
+                width: s.size,
+                height: s.size,
+                background: `radial-gradient(circle at 35% 30%, ${s.color}dd, ${s.color}88 50%, ${s.color}33 80%, transparent)`,
+                boxShadow: `0 0 ${s.size * 0.6}px ${s.color}40, inset -${s.size * 0.15}px -${s.size * 0.1}px ${s.size * 0.3}px rgba(0,0,0,0.5), inset ${s.size * 0.08}px ${s.size * 0.08}px ${s.size * 0.15}px rgba(255,255,255,0.15)`,
+              }}
+            >
+              {/* Highlight/shine on planet */}
+              <div
+                className="absolute rounded-full"
+                style={{
+                  width: s.size * 0.3,
+                  height: s.size * 0.25,
+                  top: "18%",
+                  left: "22%",
+                  background: "radial-gradient(ellipse, rgba(255,255,255,0.35), transparent)",
+                  filter: "blur(1px)",
+                }}
+              />
+              {/* Hover ring */}
+              <div
+                className="absolute inset-[-6px] rounded-full border border-transparent transition-all duration-500 group-hover/planet:border-current opacity-0 group-hover/planet:opacity-40"
+                style={{ color: s.color }}
+              />
+              {/* Outer glow on hover */}
+              <div
+                className="absolute inset-[-12px] rounded-full opacity-0 transition-opacity duration-500 group-hover/planet:opacity-100"
+                style={{ background: `radial-gradient(circle, ${s.color}20, transparent 70%)` }}
+              />
+            </div>
+            {/* Label below planet */}
+            <span
+              className="text-[9px] font-semibold uppercase tracking-[0.15em] transition-all duration-300 group-hover/planet:tracking-[0.2em]"
+              style={{ color: `${s.color}88`, textShadow: `0 0 8px ${s.color}30` }}
+            >
+              {s.label}
+            </span>
           </div>
         </Link>
       ))}
