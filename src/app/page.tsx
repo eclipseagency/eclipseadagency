@@ -668,7 +668,7 @@ function HeroSection() {
   const canvasRef = useHeroCanvas();
 
   return (
-    <section id="hero" data-hero className="relative h-screen overflow-hidden bg-[#050508]">
+    <section id="hero" data-hero className="relative h-[95vh] min-h-[600px] overflow-hidden bg-[#050508]">
       {/* ── Animated canvas background ── */}
       <canvas
         ref={canvasRef}
@@ -685,7 +685,7 @@ function HeroSection() {
 
       {/* ── Title centered inside the eclipse sphere ── */}
       <div data-hero-content className="absolute inset-0 z-10 pointer-events-none" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div data-hero-text className="text-center" style={{ marginTop: "-16vh" }}>
+        <div data-hero-text className="text-center" style={{ marginTop: "-10vh" }}>
           <p className="text-white/60 text-[clamp(0.6rem,1.2vw,0.85rem)] font-semibold uppercase tracking-[0.4em] mb-3">Eclipse Agency</p>
           <h1 className="font-heading text-[clamp(1.4rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight">
             <span className="text-white">From Shadow</span>
