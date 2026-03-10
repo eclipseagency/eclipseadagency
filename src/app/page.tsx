@@ -788,7 +788,12 @@ function ScrollRocket() {
       ctx.clearRect(0, 0, w, h);
 
       const t = scrollProgress.current;
-      if (t < 0.06) { animId = requestAnimationFrame(draw); return; }
+      // Show stationary rocket at eclipse center before scrolling starts
+      if (t < 0.04) {
+        drawRocket(w * 0.5, h * 0.42, -Math.PI / 2, 1.3);
+        animId = requestAnimationFrame(draw);
+        return;
+      }
 
       const { x, y, angle } = getRocketPos(t);
       const visible = y > -80 && y < h + 80 && x > -80 && x < w + 80;
@@ -951,7 +956,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
     document.body.style.overflow = "hidden";
 
     // ── Animation timeline via GSAP ──
-    const proxy = { progress: 0, split: 0, fade: 1 };
+    const proxy = { progress: 0, split: 0, rocketReturn: 0, fade: 1 };
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -965,8 +970,10 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
     tl.to(proxy, { progress: 1, duration: 2.2, ease: "power2.inOut" }, 1.0);
     // Phase 2: Split halves apart
     tl.to(proxy, { split: 1, duration: 0.9, ease: "power3.in" }, 2.8);
-    // Phase 3: Fade out
-    tl.to(proxy, { fade: 0, duration: 0.4, ease: "power2.in" }, 3.4);
+    // Phase 3: Rocket flies back up to eclipse center (seamless handoff to ScrollRocket)
+    tl.to(proxy, { rocketReturn: 1, duration: 1.0, ease: "power2.inOut" }, 3.2);
+    // Phase 4: Fade out preloader canvas (ScrollRocket already sitting at eclipse center beneath)
+    tl.to(proxy, { fade: 0, duration: 0.5, ease: "power2.in" }, 4.0);
 
     // Sync progress ref
     gsap.ticker.add(() => {
@@ -1054,6 +1061,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
       lastTime = now;
       const p = proxy.progress;
       const split = proxy.split;
+      const rocketReturn = proxy.rocketReturn;
       const fade = proxy.fade;
 
       if (fade <= 0) { animId = requestAnimationFrame(draw); return; }
@@ -1063,7 +1071,32 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
 
       const cx = w / 2;
       // Rocket Y position: from top (-60px) to bottom (h + 60px)
-      const rocketY = -60 + (h + 120) * p;
+      const tearRocketY = -60 + (h + 120) * p;
+
+      // Return path: rocket flies from bottom back to eclipse center with a curve
+      const eclipseCenterY = h * 0.42;
+      const returnStartY = h + 60;
+      const returnStartX = cx;
+      // Curved return path — arcs to the right then back to center
+      const returnT = rocketReturn;
+      const returnX = returnStartX + Math.sin(returnT * Math.PI) * w * 0.15;
+      const returnY = returnStartY + (eclipseCenterY - returnStartY) * returnT;
+
+      // Determine current rocket position based on phase
+      const inReturnPhase = rocketReturn > 0;
+      const rocketX = inReturnPhase ? returnX : cx;
+      const rocketY = inReturnPhase ? returnY : tearRocketY;
+
+      // Rocket angle during return (pointing in direction of travel)
+      let rocketAngle = Math.PI; // pointing down during tear
+      if (inReturnPhase) {
+        // Calculate angle from return path derivative
+        const dt2 = 0.01;
+        const nextT = Math.min(1, returnT + dt2);
+        const nx = returnStartX + Math.sin(nextT * Math.PI) * w * 0.15;
+        const ny = returnStartY + (eclipseCenterY - returnStartY) * nextT;
+        rocketAngle = Math.atan2(ny - rocketY, nx - rocketX) + Math.PI / 2;
+      }
 
       // ── Draw the two dark halves ──
       const splitOffset = split * (w * 0.55);
@@ -1154,13 +1187,18 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
       }
 
       // ── Spawn fire/smoke particles behind rocket ──
-      if (p > 0.02 && p < 0.98 && split < 0.3) {
+      const rocketActive = (p > 0.02 && p < 0.98 && split < 0.3) || (inReturnPhase && rocketReturn < 0.95);
+      if (rocketActive) {
+        // Thrust direction (opposite of travel)
+        const thrustAngle = inReturnPhase ? rocketAngle - Math.PI / 2 : 0;
+        const thrustDx = inReturnPhase ? -Math.cos(thrustAngle) : 0;
+        const thrustDy = inReturnPhase ? -Math.sin(thrustAngle) : 1;
         for (let i = 0; i < 4; i++) {
           particles.push({
-            x: cx + (Math.random() - 0.5) * 8,
-            y: rocketY + 30 + Math.random() * 10,
-            vx: (Math.random() - 0.5) * 40,
-            vy: -50 - Math.random() * 80,
+            x: rocketX + (Math.random() - 0.5) * 8 + thrustDx * 15,
+            y: rocketY + 30 * (inReturnPhase ? -1 : 1) + Math.random() * 10 + thrustDy * 15,
+            vx: (Math.random() - 0.5) * 40 + thrustDx * 60,
+            vy: (inReturnPhase ? 50 + Math.random() * 80 : -50 - Math.random() * 80) + thrustDy * 30,
             life: 0, maxLife: 0.3 + Math.random() * 0.4,
             size: 2 + Math.random() * 4,
             type: "fire",
@@ -1168,10 +1206,10 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
         }
         if (Math.random() > 0.4) {
           particles.push({
-            x: cx + (Math.random() - 0.5) * 12,
-            y: rocketY + 35 + Math.random() * 15,
-            vx: (Math.random() - 0.5) * 25,
-            vy: -20 - Math.random() * 40,
+            x: rocketX + (Math.random() - 0.5) * 12 + thrustDx * 20,
+            y: rocketY + 35 * (inReturnPhase ? -1 : 1) + Math.random() * 15 + thrustDy * 20,
+            vx: (Math.random() - 0.5) * 25 + thrustDx * 30,
+            vy: (inReturnPhase ? 20 + Math.random() * 40 : -20 - Math.random() * 40) + thrustDy * 15,
             life: 0, maxLife: 0.6 + Math.random() * 0.6,
             size: 4 + Math.random() * 8,
             type: "smoke",
@@ -1209,18 +1247,19 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
       if (particles.length > 200) particles.splice(0, particles.length - 200);
 
       // ── Engine glow ──
-      if (p > 0.02 && p < 0.98 && split < 0.3) {
-        const glowR = ctx.createRadialGradient(cx, rocketY + 25, 0, cx, rocketY + 25, 40);
+      if (rocketActive) {
+        const glowR = ctx.createRadialGradient(rocketX, rocketY + (inReturnPhase ? -25 : 25), 0, rocketX, rocketY + (inReturnPhase ? -25 : 25), 40);
         glowR.addColorStop(0, "rgba(255,160,50,0.6)");
         glowR.addColorStop(0.3, "rgba(255,107,53,0.3)");
         glowR.addColorStop(1, "transparent");
         ctx.fillStyle = glowR;
-        ctx.fillRect(cx - 45, rocketY - 15, 90, 80);
+        ctx.fillRect(rocketX - 45, rocketY + (inReturnPhase ? -65 : -15), 90, 80);
       }
 
-      // ── Draw rocket (pointing down) ──
-      if (p < 0.98 && split < 0.5) {
-        drawRocket(cx, rocketY, Math.PI, 1.5);
+      // ── Draw rocket ──
+      const showRocket = (p < 0.98 && split < 0.5) || (inReturnPhase && rocketReturn < 0.98);
+      if (showRocket) {
+        drawRocket(rocketX, rocketY, rocketAngle, 1.5);
       }
 
       // ── "Eclipse Agency" text — stays until rocket reaches it ──
@@ -1753,15 +1792,14 @@ function WhatsAppButton() {
    PAGE
    ═══════════════════════════════════════════════════════════ */
 export default function HomePage() {
-  const [preloaderDone, setPreloaderDone] = useState(false);
   useSmoothScroll();
   useScrollAnimations();
 
   return (
     <>
-      <RocketPreloader onComplete={() => setPreloaderDone(true)} />
+      <RocketPreloader onComplete={() => {}} />
       <main className="bg-[#0a0a0a] text-[#e8e8e8] min-h-screen">
-        {preloaderDone && <ScrollRocket />}
+        <ScrollRocket />
         <WhatsAppButton />
         <HeroSection />
         <AboutSection />
