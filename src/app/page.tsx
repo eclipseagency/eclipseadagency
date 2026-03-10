@@ -1789,14 +1789,14 @@ function AboutSection() {
    ═══════════════════════════════════════════════════════════ */
 function TubeManSection() {
   return (
-    <div className="relative flex justify-center py-4 md:py-8 pointer-events-none select-none">
+    <div className="relative flex justify-center -my-8 md:-my-12 pointer-events-none select-none">
       <video
         src="https://eclipseadagency.com/wp-content/uploads/2024/08/Inflatable-Tube-Man.webm"
         autoPlay
         muted
         loop
         playsInline
-        className="h-[180px] w-auto mix-blend-screen md:h-[260px]"
+        className="h-[280px] w-auto mix-blend-screen md:h-[400px]"
       />
     </div>
   );
