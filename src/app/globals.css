@@ -338,32 +338,23 @@ select option:checked {
   color: #fff;
 }
 
-/* ── Custom cursor ── */
-@media (pointer: fine) {
-  * {
-    cursor: none !important;
-  }
-
-  .eclipse-cursor {
-    transition: opacity 0.3s ease;
-  }
-
-  .eclipse-cursor svg {
-    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
-                filter 0.3s ease;
-    filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.3));
-  }
-
-  .eclipse-cursor.cursor-hover svg {
-    filter: drop-shadow(0 0 14px rgba(255, 107, 53, 0.5));
-  }
+/* ── Custom cursor (sub-pages with chrome only) ── */
+.chrome-cursor-active * {
+  cursor: none !important;
 }
 
-/* Show default cursor on touch devices */
-@media (pointer: coarse) {
-  * {
-    cursor: auto !important;
-  }
+.eclipse-cursor {
+  transition: opacity 0.3s ease;
+}
+
+.eclipse-cursor svg {
+  transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+              filter 0.3s ease;
+  filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.3));
+}
+
+.eclipse-cursor.cursor-hover svg {
+  filter: drop-shadow(0 0 14px rgba(255, 107, 53, 0.5));
 }
 
 /* ── Scrollbar ── */
@@ -583,19 +574,3 @@ select option:checked {
   100% { width: 100%; }
 }
 
-/* ── V2 page: hide root layout chrome ── */
-body.v2-page header:first-of-type,
-body.v2-page .preloader-overlay,
-body.v2-page .eclipse-cursor,
-body.v2-page .wireframe-bg {
-  display: none !important;
-}
-/* Hide root footer but keep v2's own footer */
-body.v2-page > footer,
-body.v2-page main + footer {
-  display: none !important;
-}
-body.v2-page,
-body.v2-page * {
-  cursor: auto !important;
-}
