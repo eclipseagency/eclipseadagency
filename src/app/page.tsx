@@ -1057,15 +1057,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
     // ── Animation timeline via GSAP ──
     const proxy = { progress: 0, split: 0, rocketReturn: 0, fade: 1 };
 
-    const tl = gsap.timeline({
-      onComplete: () => {
-        document.body.style.position = "";
-        document.body.style.inset = "";
-        document.body.style.overflowY = "";
-        setDone(true);
-        onComplete();
-      },
-    });
+    const tl = gsap.timeline();
 
     // Phase 1: Rocket descends and tears (0 → 1) — starts at 1s to let text be read
     tl.to(proxy, { progress: 1, duration: 2.2, ease: "power2.inOut" }, 1.0);
@@ -1077,6 +1069,13 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
     tl.call(() => { onComplete(); }, [], 3.8);
     // Phase 4: Fade out preloader canvas (ScrollRocket already visible beneath)
     tl.to(proxy, { fade: 0, duration: 0.5, ease: "power2.in" }, 4.0);
+    // Phase 5: Cleanup — unlock body scroll, unmount preloader
+    tl.call(() => {
+      document.body.style.position = "";
+      document.body.style.inset = "";
+      document.body.style.overflowY = "";
+      setDone(true);
+    }, [], 4.5);
 
     // Sync progress ref
     gsap.ticker.add(() => {
@@ -1243,8 +1242,8 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
 
         // Nebula glow — soft radials
         const nebula1 = ctx.createRadialGradient(cx, glowHeight * 0.3, 0, cx, glowHeight * 0.3, 70 + split * 50);
-        nebula1.addColorStop(0, "rgba(120, 40, 200, 0.25)");
-        nebula1.addColorStop(0.4, "rgba(80, 20, 160, 0.1)");
+        nebula1.addColorStop(0, "rgba(255, 120, 40, 0.2)");
+        nebula1.addColorStop(0.4, "rgba(255, 80, 20, 0.08)");
         nebula1.addColorStop(1, "transparent");
         ctx.fillStyle = nebula1;
         ctx.fillRect(cx - 120, 0, 240, glowHeight);
@@ -1293,8 +1292,8 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
           const wave = Math.sin(time * 1.5 + i * 2.1) * 10;
           const streakAlpha = (0.06 + 0.04 * Math.sin(time * 2 + i)) * Math.min(1, p * 4);
           const grad = ctx.createRadialGradient(cx + wave, streakY, 0, cx + wave, streakY, 25 + split * 15);
-          grad.addColorStop(0, `rgba(${i % 2 === 0 ? "140,90,230" : "230,100,40"}, ${streakAlpha})`);
-          grad.addColorStop(0.6, `rgba(${i % 2 === 0 ? "80,40,180" : "200,60,20"}, ${streakAlpha * 0.4})`);
+          grad.addColorStop(0, `rgba(${i % 2 === 0 ? "255,140,40" : "255,90,20"}, ${streakAlpha})`);
+          grad.addColorStop(0.6, `rgba(${i % 2 === 0 ? "255,100,20" : "200,60,10"}, ${streakAlpha * 0.4})`);
           grad.addColorStop(1, "transparent");
           ctx.fillStyle = grad;
           ctx.fillRect(cx - 60 + wave, streakY - 8, 120, 16);
@@ -1304,49 +1303,42 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
         ctx.restore();
       }
 
-      // Left half — with soft outer edge fade during split
+      // Overall opacity fade for split phase — smoothly dissolves the halves
+      const halvesAlpha = split > 0.3 ? Math.max(0, 1 - (split - 0.3) / 0.7) : 1;
+
+      // Left half
       ctx.save();
+      ctx.globalAlpha = fade * halvesAlpha;
       ctx.beginPath();
-      ctx.moveTo(-splitOffset - 50, 0);
-      for (const pt of tearPoints) {
+      // Extend well beyond viewport on all non-tear sides
+      ctx.moveTo(-w, -100);
+      ctx.lineTo(-w, h + 100);
+      for (let i = tearPoints.length - 1; i >= 0; i--) {
+        const pt = tearPoints[i];
         ctx.lineTo(cx - tearWidth / 2 + pt.x - splitOffset, pt.y * h);
       }
-      ctx.lineTo(-splitOffset - 50, h);
+      ctx.lineTo(-w, -100);
       ctx.closePath();
-      if (split > 0.01) {
-        // Gradient from solid to transparent on outer edge
-        const leftGrad = ctx.createLinearGradient(-splitOffset - 50, 0, cx - splitOffset, 0);
-        leftGrad.addColorStop(0, "rgba(5,5,8,0)");
-        leftGrad.addColorStop(0.15, "rgba(5,5,8,0.7)");
-        leftGrad.addColorStop(0.4, "#050508");
-        leftGrad.addColorStop(1, "#050508");
-        ctx.fillStyle = leftGrad;
-      } else {
-        ctx.fillStyle = "#050508";
-      }
+      ctx.fillStyle = "#050508";
       ctx.fill();
+      ctx.globalAlpha = fade;
       ctx.restore();
 
-      // Right half — with soft outer edge fade during split
+      // Right half
       ctx.save();
+      ctx.globalAlpha = fade * halvesAlpha;
       ctx.beginPath();
-      ctx.moveTo(w + splitOffset + 50, 0);
-      for (const pt of tearPoints) {
+      ctx.moveTo(w * 2, -100);
+      ctx.lineTo(w * 2, h + 100);
+      for (let i = tearPoints.length - 1; i >= 0; i--) {
+        const pt = tearPoints[i];
         ctx.lineTo(cx + tearWidth / 2 - pt.x + splitOffset, pt.y * h);
       }
-      ctx.lineTo(w + splitOffset + 50, h);
+      ctx.lineTo(w * 2, -100);
       ctx.closePath();
-      if (split > 0.01) {
-        const rightGrad = ctx.createLinearGradient(w + splitOffset + 50, 0, cx + splitOffset, 0);
-        rightGrad.addColorStop(0, "rgba(5,5,8,0)");
-        rightGrad.addColorStop(0.15, "rgba(5,5,8,0.7)");
-        rightGrad.addColorStop(0.4, "#050508");
-        rightGrad.addColorStop(1, "#050508");
-        ctx.fillStyle = rightGrad;
-      } else {
-        ctx.fillStyle = "#050508";
-      }
+      ctx.fillStyle = "#050508";
       ctx.fill();
+      ctx.globalAlpha = fade;
       ctx.restore();
 
       // ── Torn edge glow — soft cosmic energy bleeding from rift edges ──
@@ -1358,11 +1350,11 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
           const edgeGlow = 5 + split * 14;
           const yFade = Math.min(1, pt.y * h / 30) * Math.min(1, (glowHeight - pt.y * h) / 40);
           const alpha = 0.15 * (1 - pt.y * 0.3) * yFade;
-          // Left edge — purple glow
+          // Left edge — orange glow
           const exL = cx - tearWidth / 2 + pt.x - splitOffset;
           const glL = ctx.createRadialGradient(exL, pt.y * h, 0, exL, pt.y * h, edgeGlow);
-          glL.addColorStop(0, `rgba(200, 130, 255, ${alpha * 0.5})`);
-          glL.addColorStop(0.5, `rgba(150, 60, 220, ${alpha * 0.2})`);
+          glL.addColorStop(0, `rgba(255, 180, 80, ${alpha * 0.5})`);
+          glL.addColorStop(0.5, `rgba(255, 120, 40, ${alpha * 0.2})`);
           glL.addColorStop(1, "transparent");
           ctx.fillStyle = glL;
           ctx.fillRect(exL - edgeGlow, pt.y * h - edgeGlow, edgeGlow * 2, edgeGlow * 2);
@@ -1377,22 +1369,22 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
         }
       }
 
-      // ── Central energy line — bright white/blue core ──
+      // ── Central energy line — bright orange core ──
       if (p > 0.05 && split < 0.6) {
         ctx.save();
         ctx.beginPath();
         ctx.moveTo(cx, 0);
         ctx.lineTo(cx, glowHeight);
         const lineAlpha = 0.7 * (1 - split * 1.5);
-        ctx.strokeStyle = `rgba(200, 180, 255, ${Math.max(0, lineAlpha)})`;
+        ctx.strokeStyle = `rgba(255, 150, 60, ${Math.max(0, lineAlpha)})`;
         ctx.lineWidth = 1.5;
-        ctx.shadowColor = "rgba(150, 100, 255, 0.9)";
+        ctx.shadowColor = "rgba(255, 107, 53, 0.9)";
         ctx.shadowBlur = 20;
         ctx.stroke();
-        // Second pass — warmer inner glow
-        ctx.strokeStyle = `rgba(255, 200, 150, ${Math.max(0, lineAlpha * 0.5)})`;
+        // Second pass — bright white inner core
+        ctx.strokeStyle = `rgba(255, 230, 200, ${Math.max(0, lineAlpha * 0.5)})`;
         ctx.lineWidth = 0.8;
-        ctx.shadowColor = "rgba(255, 107, 53, 0.6)";
+        ctx.shadowColor = "rgba(255, 180, 80, 0.7)";
         ctx.shadowBlur = 12;
         ctx.stroke();
         ctx.shadowBlur = 0;
