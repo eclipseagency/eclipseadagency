@@ -500,15 +500,16 @@ export default function TeamPage() {
             </div>
           ))}
         </div>
-        <div className="mt-12 overflow-hidden rounded-2xl border border-border">
-          <Image
-            src="/images/team-office/2024-05-08.webp"
-            alt="Developer coding at Eclipse Agency office"
-            width={1200}
-            height={500}
-            className="h-auto w-full object-cover"
-            sizes="100vw"
-          />
+        <div className="mx-auto mt-12 max-w-3xl overflow-hidden rounded-2xl border border-border">
+          <div className="relative aspect-[16/7]">
+            <Image
+              src="/images/team-office/2024-05-08.webp"
+              alt="Developer coding at Eclipse Agency office"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 768px"
+            />
+          </div>
         </div>
       </SectionWrapper>
 
