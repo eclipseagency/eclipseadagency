@@ -1016,7 +1016,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
       brightness: 0.3 + Math.random() * 0.7,
       phase: Math.random() * Math.PI * 2,
       speed: 0.5 + Math.random() * 2,
-      hue: Math.random() > 0.6 ? 200 + Math.random() * 60 : 15 + Math.random() * 30, // blue/purple or orange
+      hue: Math.random() > 0.5 ? 30 + Math.random() * 20 : 10 + Math.random() * 20, // warm gold or deep orange
     }))
   , []);
 
@@ -1198,57 +1198,37 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
       const glowHeight = Math.min(p * 1.2, 1) * h;
       const time = now * 0.001;
 
-      // ── Cosmic rift visible through the tear ──
+      // ── Cosmic rift visible through the tear — no clip, just soft radials ──
       if (p > 0.03) {
         ctx.save();
-        // Soft clip to tear region using rounded rect-like approach
-        ctx.beginPath();
-        // Left edge of rift — with padding for soft glow
-        const pad = 4 + split * 12;
-        for (let i = 0; i < tearPoints.length; i++) {
-          const pt = tearPoints[i];
-          const ex = cx - tearWidth / 2 + pt.x - splitOffset - pad;
-          const ey = pt.y * h;
-          if (ey > glowHeight + 10) break;
-          if (i === 0) ctx.moveTo(ex, ey); else ctx.lineTo(ex, ey);
-        }
-        // Right edge of rift (reverse) — with padding
-        for (let i = tearPoints.length - 1; i >= 0; i--) {
-          const pt = tearPoints[i];
-          const ey = pt.y * h;
-          if (ey > glowHeight + 10) continue;
-          const ex = cx + tearWidth / 2 - pt.x + splitOffset + pad;
-          ctx.lineTo(ex, ey);
-        }
-        ctx.closePath();
-        ctx.clip();
 
-        // Deep cosmic background — soft radial gradient, no hard fills
-        const riftBg = ctx.createRadialGradient(cx, glowHeight * 0.4, 0, cx, glowHeight * 0.4, Math.max(glowHeight * 0.6, 40));
-        riftBg.addColorStop(0, "rgba(15, 3, 30, 0.9)");
-        riftBg.addColorStop(0.4, "rgba(20, 5, 35, 0.7)");
-        riftBg.addColorStop(0.7, "rgba(30, 8, 20, 0.4)");
+        // Warm glow in the rift gap — contained by tight radial
+        const riftW = tearWidth / 2 + 10;
+        const riftBg = ctx.createRadialGradient(cx, glowHeight * 0.4, 0, cx, glowHeight * 0.4, Math.max(riftW, 20));
+        riftBg.addColorStop(0, "rgba(50, 18, 5, 0.6)");
+        riftBg.addColorStop(0.5, "rgba(35, 10, 3, 0.3)");
         riftBg.addColorStop(1, "transparent");
         ctx.fillStyle = riftBg;
-        ctx.fillRect(cx - 120, -10, 240, glowHeight + 20);
+        ctx.fillRect(cx - riftW * 2, -10, riftW * 4, glowHeight + 20);
 
-        // Nebula glow — soft radials
-        const nebula1 = ctx.createRadialGradient(cx, glowHeight * 0.3, 0, cx, glowHeight * 0.3, 70 + split * 50);
+        // Nebula glow — tight to rift width
+        const nebR = Math.max(riftW * 1.5, 20);
+        const nebula1 = ctx.createRadialGradient(cx, glowHeight * 0.3, 0, cx, glowHeight * 0.3, nebR);
         nebula1.addColorStop(0, "rgba(255, 120, 40, 0.2)");
-        nebula1.addColorStop(0.4, "rgba(255, 80, 20, 0.08)");
+        nebula1.addColorStop(0.5, "rgba(255, 80, 20, 0.06)");
         nebula1.addColorStop(1, "transparent");
         ctx.fillStyle = nebula1;
-        ctx.fillRect(cx - 120, 0, 240, glowHeight);
+        ctx.fillRect(cx - nebR, 0, nebR * 2, glowHeight);
 
-        const nebula2 = ctx.createRadialGradient(cx, glowHeight * 0.65, 0, cx, glowHeight * 0.65, 55 + split * 35);
-        nebula2.addColorStop(0, "rgba(255, 80, 30, 0.2)");
-        nebula2.addColorStop(0.4, "rgba(200, 40, 80, 0.08)");
+        const nebula2 = ctx.createRadialGradient(cx, glowHeight * 0.65, 0, cx, glowHeight * 0.65, nebR * 0.8);
+        nebula2.addColorStop(0, "rgba(255, 140, 40, 0.15)");
+        nebula2.addColorStop(0.5, "rgba(200, 80, 20, 0.04)");
         nebula2.addColorStop(1, "transparent");
         ctx.fillStyle = nebula2;
-        ctx.fillRect(cx - 120, 0, 240, glowHeight);
+        ctx.fillRect(cx - nebR, 0, nebR * 2, glowHeight);
 
         // Stars twinkling inside — with edge fade
-        const riftHalfW = tearWidth / 2 + pad;
+        const riftHalfW = tearWidth / 2 + 8;
         for (const star of cosmicStars) {
           const sy = star.y * glowHeight;
           if (sy > glowHeight) continue;
@@ -1263,11 +1243,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
           if (alpha < 0.02) continue;
           ctx.beginPath();
           ctx.arc(sx, sy, star.size, 0, Math.PI * 2);
-          if (star.hue > 100) {
-            ctx.fillStyle = `hsla(${star.hue}, 80%, 75%, ${alpha})`;
-          } else {
-            ctx.fillStyle = `hsla(${star.hue}, 90%, 70%, ${alpha})`;
-          }
+          ctx.fillStyle = `hsla(${star.hue}, 90%, 70%, ${alpha})`;
           ctx.fill();
           if (star.size > 1.2) {
             ctx.beginPath();
@@ -1283,12 +1259,13 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
           const streakY = (glowHeight * (i + 0.5)) / 5;
           const wave = Math.sin(time * 1.5 + i * 2.1) * 10;
           const streakAlpha = (0.06 + 0.04 * Math.sin(time * 2 + i)) * Math.min(1, p * 4);
-          const grad = ctx.createRadialGradient(cx + wave, streakY, 0, cx + wave, streakY, 25 + split * 15);
-          grad.addColorStop(0, `rgba(${i % 2 === 0 ? "255,140,40" : "255,90,20"}, ${streakAlpha})`);
-          grad.addColorStop(0.6, `rgba(${i % 2 === 0 ? "255,100,20" : "200,60,10"}, ${streakAlpha * 0.4})`);
+          const streakR = Math.max(riftW, 12);
+          const grad = ctx.createRadialGradient(cx + wave, streakY, 0, cx + wave, streakY, streakR);
+          grad.addColorStop(0, `rgba(255,130,35, ${streakAlpha})`);
+          grad.addColorStop(0.6, `rgba(255,90,15, ${streakAlpha * 0.3})`);
           grad.addColorStop(1, "transparent");
           ctx.fillStyle = grad;
-          ctx.fillRect(cx - 60 + wave, streakY - 8, 120, 16);
+          ctx.fillRect(cx - streakR + wave, streakY - 6, streakR * 2, 12);
         }
         ctx.globalCompositeOperation = "source-over";
 
@@ -2091,12 +2068,13 @@ function WhatsAppButton() {
    ═══════════════════════════════════════════════════════════ */
 export default function HomePage() {
   const [preloaderDone, setPreloaderDone] = useState(false);
+  const onPreloaderComplete = useCallback(() => setPreloaderDone(true), []);
   useSmoothScroll();
   useScrollAnimations();
 
   return (
     <>
-      <RocketPreloader onComplete={() => setPreloaderDone(true)} />
+      <RocketPreloader onComplete={onPreloaderComplete} />
       <main className="bg-[#0a0a0a] text-[#e8e8e8] min-h-screen">
         <SpaceBackground />
         <ScrollRocket visible={preloaderDone} />
