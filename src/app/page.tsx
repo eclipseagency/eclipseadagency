@@ -1785,6 +1785,24 @@ function AboutSection() {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   SECTION: Tube Man — Fun mascot between About & Services
+   ═══════════════════════════════════════════════════════════ */
+function TubeManSection() {
+  return (
+    <div className="relative flex justify-center py-4 md:py-8 pointer-events-none select-none">
+      <video
+        src="https://eclipseadagency.com/wp-content/uploads/2024/08/Inflatable-Tube-Man.webm"
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="h-[180px] w-auto mix-blend-screen md:h-[260px]"
+      />
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
    SECTION: Services — Space cards with orbital connectors
    ═══════════════════════════════════════════════════════════ */
 function ServicesSection() {
@@ -1893,7 +1911,6 @@ const portfolioVideos: { id: string; vimeoId?: string; vimeoHash?: string; src?:
   { id: "webdev-1", vimeoId: "1144880936" },
   { id: "webdev-2", vimeoId: "1144881841" },
   { id: "webdev-3", vimeoId: "1054176209", vimeoHash: "e8b82880e0" },
-  { id: "tube-man", src: "https://eclipseadagency.com/wp-content/uploads/2024/08/Inflatable-Tube-Man.webm" },
 ];
 
 function PortfolioSection() {
@@ -2278,6 +2295,7 @@ export default function HomePage() {
         <BackToTop />
         <HeroSection />
         <AboutSection />
+        <TubeManSection />
         <ServicesSection />
         <PartnersSection />
         <PortfolioSection />
