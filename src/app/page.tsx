@@ -1011,13 +1011,10 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
   const [done, setDone] = useState(false);
 
   // Skip preloader for returning visitors in the same session
-  const shouldSkip = useMemo(() => {
+  const [shouldSkip] = useState(() => {
     if (typeof window === "undefined") return false;
-    const seen = sessionStorage.getItem("eclipse-preloader-seen");
-    if (seen) return true;
-    sessionStorage.setItem("eclipse-preloader-seen", "1");
-    return false;
-  }, []);
+    return !!sessionStorage.getItem("eclipse-preloader-seen");
+  });
 
   // Generate jagged tear edge points (stable across renders)
   const tearPoints = useMemo(() => {
@@ -1099,6 +1096,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
       document.body.style.position = "";
       document.body.style.inset = "";
       document.body.style.overflowY = "";
+      try { sessionStorage.setItem("eclipse-preloader-seen", "1"); } catch {}
       setDone(true);
     }, [], 4.5);
 
