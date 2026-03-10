@@ -960,15 +960,19 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
     resize();
     window.addEventListener("resize", resize);
 
-    // Prevent scroll during preloader
-    document.body.style.overflow = "hidden";
+    // Prevent scroll during preloader — use fixed position to avoid scrollbar shift
+    document.body.style.position = "fixed";
+    document.body.style.inset = "0";
+    document.body.style.overflowY = "scroll";
 
     // ── Animation timeline via GSAP ──
     const proxy = { progress: 0, split: 0, rocketReturn: 0, fade: 1 };
 
     const tl = gsap.timeline({
       onComplete: () => {
-        document.body.style.overflow = "";
+        document.body.style.position = "";
+        document.body.style.inset = "";
+        document.body.style.overflowY = "";
         setDone(true);
         onComplete();
       },
@@ -1299,7 +1303,9 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
       cancelAnimationFrame(animId);
       tl.kill();
       window.removeEventListener("resize", resize);
-      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.inset = "";
+      document.body.style.overflowY = "";
     };
   }, [tearPoints, onComplete]);
 
