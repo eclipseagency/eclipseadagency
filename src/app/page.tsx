@@ -486,12 +486,12 @@ function useHeroCanvas() {
 function OrbitingSolutions() {
   const containerRef = useRef<HTMLDivElement>(null);
   const solutions = useMemo(() => [
-    { label: "Branding", href: "/solutions/branding", color: "#ff6b35", size: 38 },
-    { label: "Web & Apps", href: "/solutions/web-apps", color: "#e8621e", size: 34 },
-    { label: "Marketing", href: "/solutions/digital-marketing", color: "#f7931e", size: 40 },
-    { label: "Production", href: "/solutions/production", color: "#d4551a", size: 32 },
-    { label: "Animation", href: "/solutions/animation", color: "#ffad66", size: 30 },
-    { label: "3D Creations", href: "/solutions/3d-creations", color: "#cc4a15", size: 36 },
+    { label: "Branding", href: "/solutions/branding", color: "#ff6b35", size: 44 },
+    { label: "Web & Apps", href: "/solutions/web-apps", color: "#e8621e", size: 40 },
+    { label: "Marketing", href: "/solutions/digital-marketing", color: "#f7931e", size: 46 },
+    { label: "Production", href: "/solutions/production", color: "#d4551a", size: 38 },
+    { label: "Animation", href: "/solutions/animation", color: "#ffad66", size: 36 },
+    { label: "3D Creations", href: "/solutions/3d-creations", color: "#cc4a15", size: 42 },
   ], []);
 
   useEffect(() => {
@@ -529,7 +529,7 @@ function OrbitingSolutions() {
   }, []);
 
   return (
-    <div ref={containerRef} className="absolute left-1/2 top-[42%] -translate-x-1/2 -translate-y-1/2 z-[3]">
+    <div ref={containerRef} className="hidden sm:block absolute left-1/2 top-[42%] -translate-x-1/2 -translate-y-1/2 z-[3]">
       {solutions.map((s, i) => (
         <Link
           key={i}
@@ -595,28 +595,27 @@ function JourneyButton() {
 
   const startJourney = useCallback(() => {
     if (scrollingRef.current) {
-      // Stop if already scrolling
       scrollingRef.current = false;
       cancelAnimationFrame(animRef.current);
       return;
     }
     scrollingRef.current = true;
-    const speed = 1.2; // pixels per frame (~72px/sec at 60fps)
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const speed = 2.5; // pixels per frame (~150px/sec at 60fps)
+    let currentPos = window.scrollY;
 
     function step() {
       if (!scrollingRef.current) return;
-      const current = window.scrollY;
-      if (current >= maxScroll - 2) {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (currentPos >= maxScroll - 2) {
         scrollingRef.current = false;
         return;
       }
-      window.scrollBy(0, speed);
+      currentPos = Math.min(currentPos + speed, maxScroll);
+      window.scrollTo(0, currentPos);
       animRef.current = requestAnimationFrame(step);
     }
     animRef.current = requestAnimationFrame(step);
 
-    // Stop on user interaction
     const stop = () => {
       scrollingRef.current = false;
       cancelAnimationFrame(animRef.current);
@@ -637,21 +636,20 @@ function JourneyButton() {
   }, []);
 
   return (
-    <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-20">
+    <div className="absolute bottom-12 md:bottom-16 left-1/2 -translate-x-1/2 z-20">
       <button
         onClick={startJourney}
-        className="group flex flex-col items-center gap-3 cursor-pointer"
+        className="group flex flex-col items-center gap-2 cursor-pointer px-6 py-3 min-h-[48px]"
       >
-        <span className="text-[9px] font-semibold uppercase tracking-[0.3em] text-white/30 group-hover:text-[#ff6b35]/70 transition-colors duration-500 md:text-[10px]">
+        <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/30 group-hover:text-[#ff6b35]/70 transition-colors duration-500 md:text-xs">
           Start the Journey
         </span>
-        {/* Animated chevron pulse */}
         <div className="relative flex flex-col items-center gap-0.5">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
             className="text-white/20 group-hover:text-[#ff6b35]/60 transition-colors animate-bounce" style={{ animationDuration: "2s" }}>
             <path d="M6 9l6 6 6-6" />
           </svg>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
             className="text-white/10 group-hover:text-[#ff6b35]/40 transition-colors animate-bounce" style={{ animationDuration: "2s", animationDelay: "0.15s" }}>
             <path d="M6 9l6 6 6-6" />
           </svg>
@@ -668,7 +666,7 @@ function HeroSection() {
   const canvasRef = useHeroCanvas();
 
   return (
-    <section id="hero" data-hero className="relative h-[95vh] min-h-[600px] overflow-hidden bg-[#050508]">
+    <section id="hero" data-hero className="relative h-[100svh] overflow-hidden bg-[#050508]">
       {/* ── Animated canvas background ── */}
       <canvas
         ref={canvasRef}
@@ -1761,7 +1759,7 @@ function AboutSection() {
         </div>
 
         {/* Stats — floating cards with glow */}
-        <div className="mt-16 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+        <div className="mt-12 md:mt-16 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-6">
           {[
             { value: "200+", label: "Projects", icon: "🚀" },
             { value: "50+", label: "Clients", icon: "🌍" },
@@ -1771,14 +1769,14 @@ function AboutSection() {
             <div
               key={stat.label}
               data-fade={i * 0.12}
-              className="group relative rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 text-center transition-all duration-500 hover:border-[#ff6b35]/20 hover:bg-[#ff6b35]/[0.03] md:p-8"
+              className="group relative rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4 text-center transition-all duration-500 hover:border-[#ff6b35]/20 hover:bg-[#ff6b35]/[0.03] md:p-8"
             >
               <div className="absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{
                 background: "radial-gradient(circle at 50% 50%, rgba(255,107,53,0.06) 0%, transparent 70%)",
               }} />
               <span className="text-2xl">{stat.icon}</span>
               <p className="mt-3 font-heading text-2xl font-bold text-white md:text-3xl">{stat.value}</p>
-              <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-white/25">{stat.label}</p>
+              <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-white/25">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -1865,7 +1863,7 @@ function PartnersSection() {
     <section id="partners" className="relative py-10 md:py-14 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
       <div className="relative mx-auto max-w-[1100px] px-5 md:px-8">
-        <p className="text-center text-[10px] font-semibold uppercase tracking-[0.4em] text-white/20 mb-8 md:text-xs" data-fade>
+        <p className="text-center text-[11px] font-semibold uppercase tracking-[0.4em] text-white/20 mb-8 md:text-xs" data-fade>
           Trusted Partners
         </p>
         <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
@@ -1873,10 +1871,10 @@ function PartnersSection() {
             <div
               key={p.name}
               data-fade={i * 0.1}
-              className="group flex items-center gap-2.5 rounded-full border border-white/[0.06] bg-white/[0.02] px-5 py-2.5 transition-all duration-500 hover:border-[#ff6b35]/20 hover:bg-[#ff6b35]/[0.03]"
+              className="group flex items-center gap-2.5 rounded-full border border-white/[0.06] bg-white/[0.02] px-4 py-2 md:px-5 md:py-2.5 min-h-[44px] transition-all duration-500 hover:border-[#ff6b35]/20 hover:bg-[#ff6b35]/[0.03]"
             >
-              <span className="text-sm font-bold text-white/50 group-hover:text-[#ff6b35] transition-colors">{p.name}</span>
-              <span className="text-[10px] uppercase tracking-wider text-white/20">{p.label}</span>
+              <span className="text-xs md:text-sm font-bold text-white/50 group-hover:text-[#ff6b35] transition-colors">{p.name}</span>
+              <span className="text-[11px] uppercase tracking-wider text-white/20">{p.label}</span>
             </div>
           ))}
         </div>
@@ -2001,7 +1999,7 @@ function ProcessSection() {
             <div
               key={step.number}
               data-fade={i * 0.12}
-              className={`relative flex flex-col md:flex-row items-start gap-6 mb-12 last:mb-0 md:mb-20 ${
+              className={`relative flex flex-col md:flex-row items-start gap-4 md:gap-6 mb-8 last:mb-0 md:mb-16 ${
                 i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
               }`}
             >
@@ -2117,11 +2115,11 @@ function CTASection() {
           Let&apos;s create something extraordinary together. Your brand deserves to shine.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4" data-fade="0.4">
-          <Link href="/contact" className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#ff6b35] to-[#f7931e] px-8 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:shadow-[0_0_50px_rgba(255,107,53,0.35)] hover:translate-y-[-2px]">
+          <Link href="/contact" className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#ff6b35] to-[#f7931e] px-6 py-3 md:px-8 md:py-3.5 min-h-[44px] text-sm font-semibold text-white transition-all duration-300 hover:shadow-[0_0_50px_rgba(255,107,53,0.35)] hover:translate-y-[-2px]">
             Start a Project
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </Link>
-          <a href={`https://wa.me/${siteConfig.whatsapp}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/10 px-8 py-3.5 text-sm font-semibold text-white/50 transition-all duration-300 hover:border-[#25D366]/30 hover:text-[#25D366]">
+          <a href={`https://wa.me/${siteConfig.whatsapp}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/10 px-6 py-3 md:px-8 md:py-3.5 min-h-[44px] text-sm font-semibold text-white/50 transition-all duration-300 hover:border-[#25D366]/30 hover:text-[#25D366]">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             Chat with Us
           </a>
@@ -2176,10 +2174,10 @@ function Footer() {
         </div>
         <div className="mt-12 h-px bg-white/[0.04]" />
         <div className="mt-6 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-          <p className="text-[11px] text-white/15">
+          <p className="text-xs text-white/15">
             &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </p>
-          <p className="text-[11px] text-white/10">
+          <p className="text-xs text-white/10">
             Mon–Fri, 10:00 AM – 5:00 PM
           </p>
         </div>
@@ -2223,7 +2221,7 @@ function BackToTop() {
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Back to top"
-      className={`fixed bottom-6 left-6 z-[60] flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-[#0a0a0a]/80 backdrop-blur-sm text-white/40 transition-all duration-300 hover:border-[#ff6b35]/30 hover:text-[#ff6b35] ${
+      className={`fixed bottom-6 left-6 z-[60] flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[#0a0a0a]/80 backdrop-blur-sm text-white/40 transition-all duration-300 hover:border-[#ff6b35]/30 hover:text-[#ff6b35] ${
         show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
       }`}
     >
