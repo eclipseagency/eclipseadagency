@@ -1731,7 +1731,7 @@ function SpaceBackground() {
    ═══════════════════════════════════════════════════════════ */
 function AboutSection() {
   return (
-    <section id="about" className="relative py-16 md:py-24 overflow-hidden">
+    <section id="about" className="relative pt-16 pb-8 md:pt-24 md:pb-12 overflow-hidden">
       {/* Subtle nebula glow */}
       <div className="absolute top-0 right-0 w-[60%] h-[60%] pointer-events-none opacity-30" style={{
         background: "radial-gradient(ellipse at 80% 20%, rgba(255,107,53,0.08) 0%, transparent 60%)",
@@ -1785,40 +1785,32 @@ function AboutSection() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SECTION: Tube Man — Fun mascot between About & Services
-   ═══════════════════════════════════════════════════════════ */
-function TubeManSection() {
-  return (
-    <div className="relative flex justify-center -my-8 md:-my-12 pointer-events-none select-none">
-      <video
-        src="https://eclipseadagency.com/wp-content/uploads/2024/08/Inflatable-Tube-Man.webm"
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="h-[280px] w-auto mix-blend-screen md:h-[400px]"
-      />
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════
    SECTION: Services — Space cards with orbital connectors
    ═══════════════════════════════════════════════════════════ */
 function ServicesSection() {
   return (
-    <section id="services" className="relative py-16 md:py-24 overflow-hidden">
+    <section id="services" className="relative pt-8 pb-16 md:pt-12 md:pb-24 overflow-hidden">
       {/* Left nebula */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[40%] h-[80%] pointer-events-none opacity-20" style={{
         background: "radial-gradient(ellipse at 10% 50%, rgba(255,107,53,0.1) 0%, transparent 60%)",
       }} />
 
-
       <div className="relative mx-auto max-w-[1100px] px-5 md:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-14">
           <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-[#ff6b35]/50 mb-3 md:text-xs" data-fade>Our Solutions</p>
           <h2 className="font-heading text-[clamp(1.8rem,4vw,3.5rem)] font-bold text-white" data-reveal>What We Do</h2>
           <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-[#ff6b35]/30 to-transparent" data-line />
+          {/* Tube Man mascot */}
+          <div className="flex justify-center -mb-4 md:-mb-6 pointer-events-none select-none">
+            <video
+              src="https://eclipseadagency.com/wp-content/uploads/2024/08/Inflatable-Tube-Man.webm"
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="h-[220px] w-auto mix-blend-screen md:h-[320px]"
+            />
+          </div>
         </div>
 
         {/* Service cards grid */}
@@ -2295,7 +2287,6 @@ export default function HomePage() {
         <BackToTop />
         <HeroSection />
         <AboutSection />
-        <TubeManSection />
         <ServicesSection />
         <PartnersSection />
         <PortfolioSection />
