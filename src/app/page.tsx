@@ -1886,12 +1886,11 @@ function PartnersSection() {
    SECTION: Portfolio — Video showreel horizontal scroll
    ═══════════════════════════════════════════════════════════ */
 const portfolioVideos = [
-  { id: "showreel", title: "Showreel", category: "Motion", src: "https://eclipseadagency.com/wp-content/uploads/2024/08/WEBSITE-VIDEO-MOTION.mp4" },
-  { id: "eclipse-motion", title: "Eclipse Motion", category: "Production", src: "https://eclipseadagency.com/wp-content/uploads/2024/10/ECLIPSE-VIDEO-MOTION-small.mp4" },
-  { id: "showreel-2x", title: "Showreel 2025", category: "Showreel", src: "https://eclipseadagency.com/wp-content/uploads/2025/04/Shorel2x.mp4" },
-  { id: "storytelling", title: "Storytelling", category: "Animation", src: "https://eclipseadagency.com/wp-content/uploads/2024/08/\u0627\u0644\u0633\u0631\u062f-\u0627\u0644\u0642\u0635\u0627\u0635\u064a-2.mp4" },
-  { id: "explainer", title: "Explainer Video", category: "Animation", src: "https://eclipseadagency.com/wp-content/uploads/2024/08/\u0641\u064a\u062f\u064a\u0648-\u062a\u0648\u0636\u064a\u062d\u064a.mp4" },
-  { id: "latest", title: "Latest Work", category: "Production", src: "https://eclipseadagency.com/wp-content/uploads/2025/10/original-3cdfb08697e373c822d51a1526d11d1a.mp4" },
+  { id: "eclipse-motion", src: "https://eclipseadagency.com/wp-content/uploads/2024/10/ECLIPSE-VIDEO-MOTION-small.mp4" },
+  { id: "showreel-2x", src: "https://eclipseadagency.com/wp-content/uploads/2025/04/Shorel2x.mp4" },
+  { id: "storytelling", src: "https://eclipseadagency.com/wp-content/uploads/2024/08/\u0627\u0644\u0633\u0631\u062f-\u0627\u0644\u0642\u0635\u0627\u0635\u064a-2.mp4" },
+  { id: "explainer", src: "https://eclipseadagency.com/wp-content/uploads/2024/08/\u0641\u064a\u062f\u064a\u0648-\u062a\u0648\u0636\u064a\u062d\u064a.mp4" },
+  { id: "latest", src: "https://eclipseadagency.com/wp-content/uploads/2025/10/original-3cdfb08697e373c822d51a1526d11d1a.mp4" },
 ];
 
 function PortfolioSection() {
@@ -1956,18 +1955,6 @@ function VideoCard({ video }: { video: (typeof portfolioVideos)[number] }) {
             playsInline
             className="h-full w-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.05]"
           />
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-70" />
-        </div>
-
-        {/* Info */}
-        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-7">
-          <span className="inline-block rounded-full bg-[#ff6b35]/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-[#ff6b35]/70 mb-2">
-            {video.category}
-          </span>
-          <h3 className="font-heading text-lg font-bold text-white md:text-xl transition-colors duration-300 group-hover:text-[#ff6b35]">
-            {video.title}
-          </h3>
         </div>
       </div>
     </div>
