@@ -96,7 +96,7 @@ function useScrollAnimations() {
             trigger: hScroll,
             start: "top top",
             end: () => `+=${totalWidth}`,
-            scrub: 1,
+            scrub: 0.3,
             pin: true,
           },
         });
