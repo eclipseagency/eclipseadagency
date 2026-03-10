@@ -5,9 +5,10 @@ import { ServicesDetailSection } from "./ServicesDetailSection";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 
 export const metadata: Metadata = {
-  title: "Solutions",
+  title: "Our Services — Branding, Marketing, Web Dev & Production",
   description:
-    "Full-service creative solutions including branding, digital marketing, web development, production, 3D design, and animation.",
+    "Explore Eclipse Agency's full-service creative solutions: branding & identity, digital marketing & SEO, web & app development, video production, 3D design, and animation in Cairo.",
+  alternates: { canonical: "/solutions" },
 };
 
 export default function SolutionsPage() {

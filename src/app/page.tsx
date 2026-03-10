@@ -1797,20 +1797,20 @@ function ServicesSection() {
 
       <div className="relative mx-auto max-w-[1100px] px-5 md:px-8">
         <div className="text-center mb-10 md:mb-14">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-[#ff6b35]/50 mb-3 md:text-xs" data-fade>Our Solutions</p>
-          <h2 className="font-heading text-[clamp(1.8rem,4vw,3.5rem)] font-bold text-white" data-reveal>What We Do</h2>
-          <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-[#ff6b35]/30 to-transparent" data-line />
-          {/* Tube Man mascot */}
-          <div className="flex justify-center -mb-4 md:-mb-6 pointer-events-none select-none">
+          {/* Tube Man mascot — directly above section title */}
+          <div className="flex justify-center -mt-4 -mb-6 md:-mt-6 md:-mb-10 pointer-events-none select-none">
             <video
               src="https://eclipseadagency.com/wp-content/uploads/2024/08/Inflatable-Tube-Man.webm"
               autoPlay
               muted
               loop
               playsInline
-              className="h-[220px] w-auto mix-blend-screen md:h-[320px]"
+              className="h-[200px] w-auto mix-blend-screen md:h-[300px]"
             />
           </div>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-[#ff6b35]/50 mb-3 md:text-xs" data-fade>Our Solutions</p>
+          <h2 className="font-heading text-[clamp(1.8rem,4vw,3.5rem)] font-bold text-white" data-reveal>What We Do</h2>
+          <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-[#ff6b35]/30 to-transparent" data-line />
         </div>
 
         {/* Service cards grid */}

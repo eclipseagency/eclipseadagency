@@ -3,7 +3,7 @@ export const siteConfig = {
   tagline: "From Shadow to Spotlight",
   description:
     "Eclipse is a full-service creative agency specializing in branding, digital marketing, web development, production, 3D design, and animation. We turn bold ideas into unforgettable brand experiences.",
-  url: "https://eclipseadagency.com",
+  url: "https://www.eclipseagency.net",
   ogImage: "/images/og-image.svg",
   email: "marketing@eclipseadagency.com",
   phone: "01129560357",

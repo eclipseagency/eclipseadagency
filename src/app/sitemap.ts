@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { blogPosts, servicesOverview, siteConfig } from "@/data/site";
+import { blogPosts, portfolioItems, servicesOverview, siteConfig } from "@/data/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url;
@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/solutions`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.9 },
     { url: `${base}/portfolio`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.8 },
     { url: `${base}/blog`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
-    { url: `${base}/contact`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
+    { url: `${base}/contact`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
   ];
 
   const solutionPages = servicesOverview.map((s) => ({
@@ -27,5 +27,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...solutionPages, ...blogPages];
+  // Case study pages
+  const caseStudyPages = portfolioItems
+    .filter((p) => p.href && !p.target)
+    .map((p) => ({
+      url: `${base}${p.href}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }));
+
+  return [...staticPages, ...solutionPages, ...blogPages, ...caseStudyPages];
 }

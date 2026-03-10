@@ -21,8 +21,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = servicesOverview.find((s) => s.slug === slug);
   if (!service) return {};
   return {
-    title: service.title,
-    description: service.description,
+    title: `${service.title} Services — Eclipse Agency Cairo`,
+    description: `${service.description} Get a free quote from Eclipse Agency, Cairo's leading creative agency.`,
+    alternates: { canonical: `/solutions/${slug}` },
   };
 }
 

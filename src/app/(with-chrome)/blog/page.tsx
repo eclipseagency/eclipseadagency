@@ -8,9 +8,10 @@ import { ArrowRightIcon } from "@/components/ui/Icons";
 import { formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: "Blog — Branding, Marketing & Design Insights",
   description:
-    "Insights, trends, and practical guides on branding, digital marketing, web development, and creative strategy.",
+    "Expert articles on branding, digital marketing, SEO, web development, video production, and creative strategy from Eclipse Agency's team in Cairo.",
+  alternates: { canonical: "/blog" },
 };
 
 export default function BlogPage() {

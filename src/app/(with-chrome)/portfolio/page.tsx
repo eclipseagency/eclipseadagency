@@ -4,9 +4,10 @@ import { PortfolioGrid } from "@/components/sections/PortfolioGrid";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 
 export const metadata: Metadata = {
-  title: "Portfolio",
+  title: "Portfolio — Our Creative Work & Case Studies",
   description:
-    "Explore our portfolio of branding, web, digital marketing, production, and creative projects delivered for leading brands.",
+    "See Eclipse Agency's portfolio of branding, web development, digital marketing, video production, and 3D design projects delivered for clients across Egypt & Saudi Arabia.",
+  alternates: { canonical: "/portfolio" },
 };
 
 export default function PortfolioPage() {

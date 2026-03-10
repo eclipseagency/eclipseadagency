@@ -11,29 +11,56 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: `${siteConfig.name} — ${siteConfig.tagline}`,
+    default: `${siteConfig.name} — Creative Agency in Cairo | Branding, Marketing & Web Development`,
     template: `%s | ${siteConfig.name}`,
   },
-  description: siteConfig.description,
+  description:
+    "Eclipse Agency is a full-service creative agency in Cairo, Egypt. We specialize in branding, digital marketing, web development, video production, 3D design, and animation. 200+ projects delivered for 50+ clients.",
+  keywords: [
+    "creative agency Cairo",
+    "branding agency Egypt",
+    "digital marketing agency",
+    "web development Cairo",
+    "video production Egypt",
+    "3D design agency",
+    "animation studio Cairo",
+    "social media marketing Egypt",
+    "logo design Cairo",
+    "brand identity agency",
+    "Eclipse Agency",
+    "advertising agency Egypt",
+  ],
   metadataBase: new URL(siteConfig.url),
+  alternates: {
+    canonical: siteConfig.url,
+  },
   openGraph: {
-    title: siteConfig.name,
-    description: siteConfig.description,
+    title: `${siteConfig.name} — Creative Agency in Cairo | Branding, Marketing & Web Development`,
+    description:
+      "Full-service creative agency specializing in branding, digital marketing, web development, production, 3D design, and animation. 200+ projects delivered.",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+    images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: `${siteConfig.name} — Creative Agency in Cairo, Egypt` }],
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
+    title: `${siteConfig.name} — Creative Agency in Cairo`,
+    description:
+      "Full-service creative agency specializing in branding, digital marketing, web development, production, 3D design, and animation.",
     images: [siteConfig.ogImage],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   verification: {
     google: "U7POCbOxNxUeVPtMOEHWInMeB_JSarotTCgv_SBtaR0",
@@ -56,40 +83,126 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: siteConfig.name,
-              url: siteConfig.url,
-              logo: `${siteConfig.url}/images/logo.png`,
-              description: siteConfig.description,
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "28 Sayed Afifi St., Al Golf, Heliopolis",
-                addressLocality: "Cairo",
-                addressCountry: "EG",
-                postalCode: "11586",
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": ["Organization", "LocalBusiness"],
+                "@id": `${siteConfig.url}/#organization`,
+                name: siteConfig.name,
+                alternateName: "Eclipse Ad Agency",
+                url: siteConfig.url,
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://eclipseadagency.com/wp-content/uploads/2025/12/eclipse-logo-source-1.png",
+                  width: 512,
+                  height: 512,
+                },
+                image: "https://eclipseadagency.com/wp-content/uploads/2025/12/eclipse-logo-source-1.png",
+                description: siteConfig.description,
+                foundingDate: "2017",
+                numberOfEmployees: { "@type": "QuantitativeValue", minValue: 10, maxValue: 20 },
+                priceRange: "$$",
+                currenciesAccepted: "EGP, USD, SAR",
+                paymentAccepted: "Cash, Bank Transfer, PayPal",
+                areaServed: [
+                  { "@type": "Country", name: "Egypt" },
+                  { "@type": "Country", name: "Saudi Arabia" },
+                  { "@type": "Country", name: "United Arab Emirates" },
+                ],
+                address: {
+                  "@type": "PostalAddress",
+                  streetAddress: "28 Sayed Afifi St., Al Golf, Heliopolis",
+                  addressLocality: "Cairo",
+                  addressRegion: "Cairo Governorate",
+                  addressCountry: "EG",
+                  postalCode: "11586",
+                },
+                geo: {
+                  "@type": "GeoCoordinates",
+                  latitude: 30.0866,
+                  longitude: 31.3286,
+                },
+                contactPoint: [
+                  {
+                    "@type": "ContactPoint",
+                    telephone: `+${siteConfig.whatsapp}`,
+                    contactType: "sales",
+                    availableLanguage: ["English", "Arabic"],
+                    areaServed: ["EG", "SA", "AE"],
+                  },
+                  {
+                    "@type": "ContactPoint",
+                    email: siteConfig.email,
+                    contactType: "customer service",
+                  },
+                ],
+                sameAs: Object.values(siteConfig.social),
+                hasOfferCatalog: {
+                  "@type": "OfferCatalog",
+                  name: "Creative Services",
+                  itemListElement: [
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Branding & Identity", description: "Logo design, brand guidelines, visual identity systems, and brand strategy." } },
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Digital Marketing", description: "Social media management, SEO, SEM, content strategy, and analytics." } },
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Web & App Development", description: "Custom websites, e-commerce, mobile apps, and UI/UX design." } },
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Motion & Animation", description: "Motion graphics, explainer videos, character animation, and logo animation." } },
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Video Production", description: "Commercial production, corporate videos, product photography, and aerial filming." } },
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "3D Creations", description: "3D modeling, product visualization, architectural renders, and AR experiences." } },
+                  ],
+                },
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: "4.9",
+                  reviewCount: "50",
+                  bestRating: "5",
+                },
               },
-              contactPoint: {
-                "@type": "ContactPoint",
-                telephone: `+${siteConfig.whatsapp}`,
-                contactType: "sales",
-                availableLanguage: ["English", "Arabic"],
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "@id": `${siteConfig.url}/#website`,
+                url: siteConfig.url,
+                name: siteConfig.name,
+                publisher: { "@id": `${siteConfig.url}/#organization` },
               },
-              sameAs: Object.values(siteConfig.social),
-              hasOfferCatalog: {
-                "@type": "OfferCatalog",
-                name: "Creative Services",
-                itemListElement: [
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Branding & Identity" } },
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Digital Marketing" } },
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Web & App Development" } },
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Animation" } },
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Production" } },
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "3D Creations" } },
+              {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: [
+                  {
+                    "@type": "Question",
+                    name: "What services does Eclipse Agency offer?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Eclipse Agency offers branding & identity design, digital marketing (SEO, social media, content strategy), web & app development, motion graphics & animation, video production, and 3D design & visualization.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Where is Eclipse Agency located?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Eclipse Agency is located at 28 Sayed Afifi St., Al Golf, Heliopolis, Cairo, Egypt 11586. We serve clients across Egypt, Saudi Arabia, and the UAE.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "How much does it cost to work with Eclipse Agency?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Project costs vary based on scope and requirements. We offer custom proposals for each project. Contact us at marketing@eclipseadagency.com for a free consultation and quote.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "How long does a branding project take?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "A typical branding project takes 4-8 weeks depending on complexity. This includes discovery, strategy, design, and refinement phases. Larger brand systems may take longer.",
+                    },
+                  },
                 ],
               },
-            }),
+            ]),
           }}
         />
         {children}
