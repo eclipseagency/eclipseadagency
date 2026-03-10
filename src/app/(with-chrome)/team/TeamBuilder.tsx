@@ -46,18 +46,18 @@ const currencySymbols: Record<Currency, string> = {
 
 type OfficeType = "extension" | "registered";
 
-const officeOptions: { id: OfficeType; title: string; desc: string; priceUSD: number }[] = [
+const officeOptions: { id: OfficeType; title: string; desc: string; perPersonUSD: number }[] = [
   {
     id: "extension",
     title: "Extension of Eclipse Office",
     desc: "Your team works from our existing office under Eclipse's company umbrella. Fastest setup, lowest overhead.",
-    priceUSD: 0,
+    perPersonUSD: 0,
   },
   {
     id: "registered",
     title: "New Registered Office",
-    desc: "A new company registered in Egypt under your name — with bank accounts, legal entity, and full compliance. Your own office space, fully set up.",
-    priceUSD: 500,
+    desc: "A new company registered in Egypt under your name — with bank accounts, legal entity, and full compliance. Includes office equipment & PCs.",
+    perPersonUSD: 500,
   },
 ];
 
@@ -123,9 +123,10 @@ export function TeamBuilder() {
     return sum + price * sel.count;
   }, 0);
 
-  const officePrice = officeOptions.find((o) => o.id === officeType)!.priceUSD;
-  const totalUSD = mode === "smart" ? smartTeamUSD : rolesTotal + officePrice;
   const headcount = selections.reduce((sum, s) => sum + s.count, 0);
+  const officePerPerson = officeOptions.find((o) => o.id === officeType)!.perPersonUSD;
+  const oneTimeSetupUSD = officePerPerson * headcount;
+  const totalUSD = mode === "smart" ? smartTeamUSD : rolesTotal;
 
   /* WhatsApp summary */
   const buildWhatsAppMsg = () => {
@@ -140,7 +141,8 @@ export function TeamBuilder() {
       officeType === "extension"
         ? "Extension of Eclipse Office"
         : "New Registered Office";
-    return `Hi Mustafa, I'd like to build a custom team:\n\n${lines.join("\n")}\n\nOffice: ${office}\nEstimated: ${fmt(totalUSD)}/month\n\nLet's discuss!`;
+    const setupMsg = oneTimeSetupUSD > 0 ? `\nOne-time setup: ${fmt(oneTimeSetupUSD)} (${headcount} x ${fmt(500)} for equipment & PCs)` : "";
+    return `Hi Mustafa, I'd like to build a custom team:\n\n${lines.join("\n")}\n\nOffice: ${office}\nMonthly: ${fmt(totalUSD)}/month${setupMsg}\n\nLet's discuss!`;
   };
 
   return (
@@ -429,9 +431,9 @@ export function TeamBuilder() {
                     {opt.desc}
                   </p>
                   <p className="text-sm font-bold text-primary">
-                    {opt.priceUSD === 0
+                    {opt.perPersonUSD === 0
                       ? "No extra cost"
-                      : `+${fmt(opt.priceUSD)}/month`}
+                      : `+${fmt(opt.perPersonUSD)} per person (one-time setup)`}
                   </p>
                 </button>
               ))}
@@ -460,6 +462,11 @@ export function TeamBuilder() {
                 <>
                   <p>{headcount} team member{headcount !== 1 ? "s" : ""}</p>
                   <p>{officeType === "registered" ? "New Registered Office" : "Eclipse Office Extension"}</p>
+                  {oneTimeSetupUSD > 0 && (
+                    <p className="mt-1 font-medium text-primary">
+                      + {fmt(oneTimeSetupUSD)} one-time setup ({headcount} x {fmt(500)})
+                    </p>
+                  )}
                 </>
               )}
               {mode === "smart" && <p>10 team members — Ready in 1 week</p>}
@@ -483,6 +490,24 @@ export function TeamBuilder() {
             );
           })}
         </div>
+
+        {mode === "custom" && oneTimeSetupUSD > 0 && (
+          <div className="flex divide-x divide-border border-t border-border bg-primary/5">
+            {(["SAR", "USD", "AED"] as Currency[]).map((c) => {
+              const val = Math.round(oneTimeSetupUSD * currencyRates[c]);
+              return (
+                <div key={c} className="flex-1 px-4 py-2.5 text-center">
+                  <p className="text-[10px] text-text-muted">One-time setup</p>
+                  <p className="text-sm font-bold text-primary">
+                    {c === "USD" ? "$" : ""}
+                    {val.toLocaleString()}
+                    {c !== "USD" ? ` ${c}` : ""}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        )}
 
         <div className="border-t border-border px-6 py-5 text-center">
           <a
