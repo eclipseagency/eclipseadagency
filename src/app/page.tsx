@@ -574,8 +574,8 @@ function OrbitingSolutions() {
             </div>
             {/* Label below planet */}
             <span
-              className="text-[9px] font-semibold uppercase tracking-[0.15em] transition-all duration-300 group-hover/planet:tracking-[0.2em]"
-              style={{ color: `${s.color}88`, textShadow: `0 0 8px ${s.color}30` }}
+              className="text-[10px] font-bold uppercase tracking-[0.15em] transition-all duration-300 group-hover/planet:tracking-[0.2em]"
+              style={{ color: `${s.color}`, textShadow: `0 0 12px ${s.color}60, 0 1px 3px rgba(0,0,0,0.8)` }}
             >
               {s.label}
             </span>
@@ -666,11 +666,20 @@ function ScrollRocket({ visible }: { visible: boolean }) {
     let scrollTimeout = 0;
     let scrollDirection: "down" | "up" = "down";
     let lastScrollY = 0;
+    let directionLockTimeout = 0;
 
     const onScroll = () => {
       const docH = document.documentElement.scrollHeight - window.innerHeight;
       scrollProgress.current = Math.min(window.scrollY / docH, 1);
-      scrollDirection = window.scrollY >= lastScrollY ? "down" : "up";
+      const delta = window.scrollY - lastScrollY;
+      // Only switch direction if delta is significant (avoid flicker from smooth scroll)
+      if (Math.abs(delta) > 2) {
+        const newDir = delta > 0 ? "down" : "up";
+        if (newDir !== scrollDirection) {
+          clearTimeout(directionLockTimeout);
+          scrollDirection = newDir;
+        }
+      }
       lastScrollY = window.scrollY;
       isScrolling = true;
       clearTimeout(scrollTimeout);
@@ -1064,7 +1073,9 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
     tl.to(proxy, { split: 1, duration: 0.9, ease: "power3.in" }, 2.8);
     // Phase 3: Rocket flies back up to eclipse center (seamless handoff to ScrollRocket)
     tl.to(proxy, { rocketReturn: 1, duration: 1.0, ease: "power2.inOut" }, 3.2);
-    // Phase 4: Fade out preloader canvas (ScrollRocket already sitting at eclipse center beneath)
+    // Show ScrollRocket BEFORE preloader fades so there's no gap
+    tl.call(() => { onComplete(); }, [], 3.8);
+    // Phase 4: Fade out preloader canvas (ScrollRocket already visible beneath)
     tl.to(proxy, { fade: 0, duration: 0.5, ease: "power2.in" }, 4.0);
 
     // Sync progress ref
@@ -1293,29 +1304,48 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
         ctx.restore();
       }
 
-      // Left half
+      // Left half — with soft outer edge fade during split
       ctx.save();
       ctx.beginPath();
-      ctx.moveTo(-splitOffset, 0);
+      ctx.moveTo(-splitOffset - 50, 0);
       for (const pt of tearPoints) {
         ctx.lineTo(cx - tearWidth / 2 + pt.x - splitOffset, pt.y * h);
       }
-      ctx.lineTo(-splitOffset, h);
+      ctx.lineTo(-splitOffset - 50, h);
       ctx.closePath();
-      ctx.fillStyle = "#050508";
+      if (split > 0.01) {
+        // Gradient from solid to transparent on outer edge
+        const leftGrad = ctx.createLinearGradient(-splitOffset - 50, 0, cx - splitOffset, 0);
+        leftGrad.addColorStop(0, "rgba(5,5,8,0)");
+        leftGrad.addColorStop(0.15, "rgba(5,5,8,0.7)");
+        leftGrad.addColorStop(0.4, "#050508");
+        leftGrad.addColorStop(1, "#050508");
+        ctx.fillStyle = leftGrad;
+      } else {
+        ctx.fillStyle = "#050508";
+      }
       ctx.fill();
       ctx.restore();
 
-      // Right half
+      // Right half — with soft outer edge fade during split
       ctx.save();
       ctx.beginPath();
-      ctx.moveTo(w + splitOffset, 0);
+      ctx.moveTo(w + splitOffset + 50, 0);
       for (const pt of tearPoints) {
         ctx.lineTo(cx + tearWidth / 2 - pt.x + splitOffset, pt.y * h);
       }
-      ctx.lineTo(w + splitOffset, h);
+      ctx.lineTo(w + splitOffset + 50, h);
       ctx.closePath();
-      ctx.fillStyle = "#050508";
+      if (split > 0.01) {
+        const rightGrad = ctx.createLinearGradient(w + splitOffset + 50, 0, cx + splitOffset, 0);
+        rightGrad.addColorStop(0, "rgba(5,5,8,0)");
+        rightGrad.addColorStop(0.15, "rgba(5,5,8,0.7)");
+        rightGrad.addColorStop(0.4, "#050508");
+        rightGrad.addColorStop(1, "#050508");
+        ctx.fillStyle = rightGrad;
+      } else {
+        ctx.fillStyle = "#050508";
+      }
       ctx.fill();
       ctx.restore();
 
