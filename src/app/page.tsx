@@ -1885,19 +1885,9 @@ function PartnersSection() {
 /* ═══════════════════════════════════════════════════════════
    SECTION: Portfolio — Video showreel horizontal scroll
    ═══════════════════════════════════════════════════════════ */
-const portfolioVideos: { id: string; src?: string; vimeoId?: string }[] = [
-  // Profile page — first 2 videos
+const portfolioVideos = [
   { id: "profile-showreel", src: "https://eclipseadagency.com/wp-content/uploads/2024/08/WEBSITE-VIDEO-MOTION.mp4" },
   { id: "profile-velan", src: "https://eclipseadagency.com/wp-content/uploads/2023/05/v1.mp4" },
-  // Branding page — all 4 Vimeo videos
-  { id: "branding-1", vimeoId: "1054176898" },
-  { id: "branding-2", vimeoId: "1144863160" },
-  { id: "branding-3", vimeoId: "1144863671" },
-  { id: "branding-4", vimeoId: "1147623451" },
-  // Web development page — all 3 Vimeo videos
-  { id: "webdev-1", vimeoId: "1054176209" },
-  { id: "webdev-2", vimeoId: "1144881841" },
-  { id: "webdev-3", vimeoId: "1144880936" },
 ];
 
 function PortfolioSection() {
@@ -1954,23 +1944,14 @@ function VideoCard({ video }: { video: (typeof portfolioVideos)[number] }) {
         style={{ width: "min(70vw, 550px)" }}
       >
         <div className="relative aspect-video overflow-hidden bg-white/[0.02]">
-          {video.src ? (
-            <video
-              src={video.src}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="h-full w-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.05]"
-            />
-          ) : video.vimeoId ? (
-            <iframe
-              src={`https://player.vimeo.com/video/${video.vimeoId}?autoplay=1&loop=1&muted=1&background=1&quality=1080p`}
-              allow="autoplay; fullscreen"
-              className="absolute inset-0 h-full w-full border-0 transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.05]"
-              loading="lazy"
-            />
-          ) : null}
+          <video
+            src={video.src}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="h-full w-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.05]"
+          />
         </div>
       </div>
     </div>
