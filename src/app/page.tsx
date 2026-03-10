@@ -2276,7 +2276,7 @@ export default function HomePage() {
         <BackToTop />
         <HeroSection />
         <AboutSection />
-        <div className="relative z-30 flex justify-center pointer-events-none select-none" style={{ marginTop: "-180px", marginBottom: "-180px" }}>
+        <div className="relative z-30 flex justify-center pointer-events-none select-none" style={{ marginTop: "-280px", marginBottom: "-80px" }}>
           <video
             src="https://eclipseadagency.com/wp-content/uploads/2024/08/Inflatable-Tube-Man.webm"
             autoPlay
