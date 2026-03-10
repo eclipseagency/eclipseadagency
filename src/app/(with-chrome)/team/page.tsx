@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/sections/PageHero";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { TeamBuilder } from "./TeamBuilder";
 
 export const metadata: Metadata = {
   title:
@@ -448,81 +449,25 @@ export default function TeamPage() {
         </div>
       </SectionWrapper>
 
-      {/* ── Pricing Example ── */}
+      {/* ── Interactive Team Builder ── */}
       <SectionWrapper dark>
         <div className="mx-auto max-w-3xl text-center">
           <span className="mb-3 inline-block text-xs font-bold uppercase tracking-[0.15em] text-primary">
             Pricing
           </span>
           <h2 className="font-heading text-3xl font-bold md:text-4xl">
-            Transparent, Predictable Pricing
+            Build Your Team &{" "}
+            <span className="gradient-text">See the Cost Instantly</span>
           </h2>
           <p className="mt-4 text-text-secondary md:text-lg">
-            No hidden fees. No surprises. One monthly fee covers everything —
-            salaries, office, equipment, management, and compliance.
+            Choose the ready-made Smart Team or build your own — pick roles,
+            seniority levels, and office setup. Real-time pricing in SAR, USD &
+            AED.
           </p>
         </div>
 
-        <div className="mx-auto mt-14 max-w-xl">
-          <div className="overflow-hidden rounded-2xl border-2 border-primary bg-bg-card">
-            <div className="bg-primary/10 px-8 py-5 text-center">
-              <p className="text-xs font-bold uppercase tracking-[0.15em] text-primary">
-                Example Package
-              </p>
-              <h3 className="mt-1 font-heading text-2xl font-bold">
-                Small Digital Marketing Team
-              </h3>
-            </div>
-            <div className="p-8">
-              <div className="mb-6 text-center">
-                <span className="font-heading text-5xl font-bold text-primary">
-                  10,000
-                </span>
-                <span className="ml-2 text-text-secondary">SAR / month</span>
-              </div>
-              <ul className="space-y-3">
-                {[
-                  "Social Media Manager",
-                  "Content Creator",
-                  "Graphic Designer",
-                  "Media Buyer",
-                  "Video Editor",
-                  "Copywriter",
-                  "Account Manager",
-                  "Motion Designer",
-                  "SEO Specialist",
-                  "Community Manager",
-                ].map((role) => (
-                  <li key={role} className="flex items-center gap-3 text-sm">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary">
-                      <svg
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <polyline points="20 6 9 17 4 12" />
-                      </svg>
-                    </span>
-                    {role}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-6 text-center text-xs text-text-muted">
-                10 team members included. Fully managed & on-site.
-              </p>
-            </div>
-          </div>
-          <p className="mt-6 text-center text-sm text-text-secondary">
-            Need a different structure?{" "}
-            <strong className="text-primary">Build Your Own Team</strong> — pick
-            the exact roles, seniority levels, and team size that fits your
-            business.
-          </p>
+        <div className="mx-auto mt-14 max-w-3xl">
+          <TeamBuilder />
         </div>
       </SectionWrapper>
 
