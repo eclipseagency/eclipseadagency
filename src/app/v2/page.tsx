@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState, useCallback, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
@@ -351,7 +351,7 @@ function useHeroCanvas() {
       // ── Eclipse center position ──
       const cx = w * 0.5 + (mx - 0.5) * 20;
       const cy = h * 0.42 + (my - 0.5) * 15;
-      const eclipseR = Math.min(w, h) * 0.13;
+      const eclipseR = Math.min(w, h) * 0.18;
 
       // ── Outer glow / atmosphere ──
       for (let i = 5; i >= 1; i--) {
@@ -544,6 +544,71 @@ function useHeroCanvas() {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   Orbiting Solutions — Labels orbiting the eclipse
+   ═══════════════════════════════════════════════════════════ */
+function OrbitingSolutions() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const solutions = useMemo(() => [
+    { label: "Branding", icon: "◆" },
+    { label: "Web & Apps", icon: "⬡" },
+    { label: "Marketing", icon: "◈" },
+    { label: "Social Media", icon: "◉" },
+    { label: "Video", icon: "▲" },
+    { label: "Design", icon: "✦" },
+  ], []);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const items = container.querySelectorAll<HTMLElement>("[data-orbit-item]");
+    let animId = 0;
+    const startTime = performance.now();
+
+    function animate(now: number) {
+      const t = (now - startTime) * 0.001;
+      items.forEach((el, i) => {
+        const baseAngle = (i / items.length) * Math.PI * 2;
+        const angle = baseAngle + t * 0.15; // slow rotation
+        // Elliptical orbit
+        const rx = Math.min(window.innerWidth * 0.32, 320);
+        const ry = rx * 0.35;
+        const x = Math.cos(angle) * rx;
+        const y = Math.sin(angle) * ry;
+        // Depth effect — items at back are smaller and dimmer
+        const depth = Math.sin(angle); // -1 = back, 1 = front
+        const scale = 0.65 + (depth + 1) * 0.2;
+        const opacity = 0.2 + (depth + 1) * 0.3;
+        const zIndex = depth > 0 ? 5 : 1;
+        el.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+        el.style.opacity = `${opacity}`;
+        el.style.zIndex = `${zIndex}`;
+      });
+      animId = requestAnimationFrame(animate);
+    }
+    animId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animId);
+  }, []);
+
+  return (
+    <div ref={containerRef} className="absolute left-1/2 top-[42%] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-[3]">
+      {solutions.map((s, i) => (
+        <div
+          key={i}
+          data-orbit-item
+          className="absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
+          style={{ willChange: "transform, opacity" }}
+        >
+          <div className="flex items-center gap-2 rounded-full border border-white/[0.08] bg-[rgba(10,10,10,0.6)] px-4 py-2 backdrop-blur-sm">
+            <span className="text-[#ff6b35] text-xs">{s.icon}</span>
+            <span className="text-[11px] font-medium uppercase tracking-[0.12em] text-white/50">{s.label}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
    SECTION: Hero
    ═══════════════════════════════════════════════════════════ */
 function HeroSection() {
@@ -558,18 +623,8 @@ function HeroSection() {
         style={{ willChange: "transform" }}
       />
 
-      {/* ── Astronaut floating over the eclipse ── */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none" data-parallax="-60">
-        <Image
-          src="/images/hero-astronaut-new.png"
-          alt="Eclipse astronaut floating in space"
-          width={520}
-          height={520}
-          priority
-          className="relative opacity-90 drop-shadow-[0_0_80px_rgba(255,107,53,0.25)] hero-space-float"
-          style={{ width: "min(50vw, 380px)", height: "auto", marginTop: "-5%" }}
-        />
-      </div>
+      {/* ── Orbiting solutions around the eclipse ── */}
+      <OrbitingSolutions />
 
       {/* ── Vignette overlay ── */}
       <div className="absolute inset-0 pointer-events-none" style={{
@@ -614,6 +669,294 @@ function HeroSection() {
         </div>
       </div>
     </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Scroll Rocket — Canvas rocket that flies as user scrolls
+   Fixed overlay that draws a rocket following a curved path
+   with fire trail, smoke, and particle effects
+   ═══════════════════════════════════════════════════════════ */
+function ScrollRocket() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const scrollProgress = useRef(0);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d")!;
+    let w = 0, h = 0, dpr = 1;
+    let animId = 0;
+
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio, 2);
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas!.width = w * dpr;
+      canvas!.height = h * dpr;
+      canvas!.style.width = w + "px";
+      canvas!.style.height = h + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    const onScroll = () => {
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      scrollProgress.current = Math.min(window.scrollY / docH, 1);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    // ── Trail particles ──
+    const trail: { x: number; y: number; vx: number; vy: number; life: number; maxLife: number; size: number; type: "fire" | "smoke" }[] = [];
+
+    // ── Rocket path — a curved journey across the page ──
+    function getRocketPos(t: number): { x: number; y: number; angle: number } {
+      // Phase 0-0.08: hidden below screen
+      if (t < 0.08) {
+        return { x: w * 0.15, y: h + 100, angle: -Math.PI / 2 };
+      }
+      // Phase 0.08-0.2: launch upward from bottom-left
+      if (t < 0.2) {
+        const p = (t - 0.08) / 0.12;
+        const ease = 1 - Math.pow(1 - p, 3);
+        const x = w * 0.15 + ease * w * 0.1;
+        const y = h + 100 - ease * (h * 0.6 + 100);
+        const angle = -Math.PI / 2 + ease * 0.3;
+        return { x, y, angle };
+      }
+      // Phase 0.2-0.45: curve across the top to the right
+      if (t < 0.45) {
+        const p = (t - 0.2) / 0.25;
+        const ease = p;
+        const x = w * 0.25 + ease * w * 0.55;
+        const y = h * 0.4 - Math.sin(p * Math.PI) * h * 0.25;
+        const prevX = w * 0.25 + (ease - 0.01) * w * 0.55;
+        const prevY = h * 0.4 - Math.sin((p - 0.01) * Math.PI) * h * 0.25;
+        const angle = Math.atan2(y - prevY, x - prevX);
+        return { x, y, angle };
+      }
+      // Phase 0.45-0.65: swoop down right side
+      if (t < 0.65) {
+        const p = (t - 0.45) / 0.2;
+        const x = w * 0.8 + Math.sin(p * Math.PI * 0.5) * w * 0.1;
+        const y = h * 0.4 + p * h * 0.35;
+        const prevX = w * 0.8 + Math.sin((p - 0.01) * Math.PI * 0.5) * w * 0.1;
+        const prevY = h * 0.4 + (p - 0.01) * h * 0.35;
+        const angle = Math.atan2(y - prevY, x - prevX);
+        return { x, y, angle };
+      }
+      // Phase 0.65-0.85: curve back across to the left
+      if (t < 0.85) {
+        const p = (t - 0.65) / 0.2;
+        const x = w * 0.9 - p * w * 0.6;
+        const y = h * 0.75 - Math.sin(p * Math.PI) * h * 0.15;
+        const prevX = w * 0.9 - (p - 0.01) * w * 0.6;
+        const prevY = h * 0.75 - Math.sin((p - 0.01) * Math.PI) * h * 0.15;
+        const angle = Math.atan2(y - prevY, x - prevX);
+        return { x, y, angle };
+      }
+      // Phase 0.85-1.0: blast off upward to space
+      const p = (t - 0.85) / 0.15;
+      const ease = p * p;
+      const x = w * 0.3 - ease * w * 0.1;
+      const y = h * 0.75 - ease * (h + 200);
+      const angle = -Math.PI / 2 - ease * 0.2;
+      return { x, y, angle };
+    }
+
+    // ── Draw rocket shape ──
+    function drawRocket(x: number, y: number, angle: number, scale: number) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(angle + Math.PI / 2); // nose points in direction of travel
+      const s = scale;
+
+      // ── Rocket body ──
+      ctx.beginPath();
+      ctx.moveTo(0, -22 * s);        // nose
+      ctx.quadraticCurveTo(8 * s, -14 * s, 8 * s, 5 * s);   // right side
+      ctx.lineTo(14 * s, 18 * s);    // right fin
+      ctx.lineTo(5 * s, 12 * s);     // fin join right
+      ctx.lineTo(-5 * s, 12 * s);    // fin join left
+      ctx.lineTo(-14 * s, 18 * s);   // left fin
+      ctx.lineTo(-8 * s, 5 * s);     // left side
+      ctx.quadraticCurveTo(-8 * s, -14 * s, 0, -22 * s);
+      ctx.closePath();
+
+      // Body gradient
+      const bodyGrad = ctx.createLinearGradient(-8 * s, 0, 8 * s, 0);
+      bodyGrad.addColorStop(0, "#d4d4d4");
+      bodyGrad.addColorStop(0.3, "#ffffff");
+      bodyGrad.addColorStop(0.7, "#e8e8e8");
+      bodyGrad.addColorStop(1, "#b0b0b0");
+      ctx.fillStyle = bodyGrad;
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,0.3)";
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+
+      // ── Nose cone ──
+      ctx.beginPath();
+      ctx.moveTo(0, -22 * s);
+      ctx.quadraticCurveTo(6 * s, -16 * s, 6 * s, -8 * s);
+      ctx.lineTo(-6 * s, -8 * s);
+      ctx.quadraticCurveTo(-6 * s, -16 * s, 0, -22 * s);
+      ctx.fillStyle = "#ff6b35";
+      ctx.fill();
+
+      // ── Window ──
+      ctx.beginPath();
+      ctx.arc(0, -4 * s, 3 * s, 0, Math.PI * 2);
+      ctx.fillStyle = "#1a3a5c";
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(-0.8 * s, -4.8 * s, 1.2 * s, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(150,200,255,0.4)";
+      ctx.fill();
+
+      // ── Fins accent ──
+      ctx.beginPath();
+      ctx.moveTo(14 * s, 18 * s);
+      ctx.lineTo(5 * s, 12 * s);
+      ctx.lineTo(7 * s, 5 * s);
+      ctx.fillStyle = "#ff6b35";
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(-14 * s, 18 * s);
+      ctx.lineTo(-5 * s, 12 * s);
+      ctx.lineTo(-7 * s, 5 * s);
+      ctx.fillStyle = "#ff6b35";
+      ctx.fill();
+
+      // ── Eclipse logo "E" on body ──
+      ctx.fillStyle = "rgba(255, 107, 53, 0.6)";
+      ctx.font = `bold ${8 * s}px sans-serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("E", 0, 4 * s);
+
+      ctx.restore();
+    }
+
+    let lastTime = performance.now();
+
+    function draw(now: number) {
+      const dt = Math.min((now - lastTime) / 1000, 0.05);
+      lastTime = now;
+
+      ctx.clearRect(0, 0, w, h);
+
+      const t = scrollProgress.current;
+      if (t < 0.06) { animId = requestAnimationFrame(draw); return; }
+
+      const { x, y, angle } = getRocketPos(t);
+      const visible = y > -80 && y < h + 80 && x > -80 && x < w + 80;
+
+      // ── Spawn trail particles ──
+      if (visible && t > 0.08) {
+        const thrustX = -Math.cos(angle) * 2;
+        const thrustY = -Math.sin(angle) * 2;
+        // Fire particles
+        for (let i = 0; i < 3; i++) {
+          trail.push({
+            x: x + thrustX * 12 + (Math.random() - 0.5) * 6,
+            y: y + thrustY * 12 + (Math.random() - 0.5) * 6,
+            vx: thrustX * (80 + Math.random() * 60) + (Math.random() - 0.5) * 30,
+            vy: thrustY * (80 + Math.random() * 60) + (Math.random() - 0.5) * 30,
+            life: 0, maxLife: 0.3 + Math.random() * 0.4,
+            size: 2 + Math.random() * 4,
+            type: "fire",
+          });
+        }
+        // Smoke particles (less frequent)
+        if (Math.random() > 0.5) {
+          trail.push({
+            x: x + thrustX * 16 + (Math.random() - 0.5) * 10,
+            y: y + thrustY * 16 + (Math.random() - 0.5) * 10,
+            vx: thrustX * (30 + Math.random() * 20) + (Math.random() - 0.5) * 15,
+            vy: thrustY * (30 + Math.random() * 20) + (Math.random() - 0.5) * 15,
+            life: 0, maxLife: 0.8 + Math.random() * 0.8,
+            size: 4 + Math.random() * 8,
+            type: "smoke",
+          });
+        }
+      }
+
+      // ── Update and draw trail ──
+      for (let i = trail.length - 1; i >= 0; i--) {
+        const p = trail[i];
+        p.life += dt;
+        if (p.life > p.maxLife) { trail.splice(i, 1); continue; }
+
+        p.x += p.vx * dt;
+        p.y += p.vy * dt;
+        p.vx *= 0.96;
+        p.vy *= 0.96;
+        if (p.type === "smoke") { p.size += dt * 12; }
+
+        const progress = p.life / p.maxLife;
+        const alpha = progress < 0.1 ? progress * 10 : Math.max(0, 1 - (progress - 0.1) / 0.9);
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size * (1 - progress * 0.3), 0, Math.PI * 2);
+
+        if (p.type === "fire") {
+          const r = 255;
+          const g = Math.floor(80 + (180 - 80) * progress);
+          const b = Math.floor(20 + progress * 40);
+          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha * 0.7})`;
+          // Inner glow
+          ctx.shadowColor = `rgba(255, 107, 53, ${alpha * 0.5})`;
+          ctx.shadowBlur = 8;
+        } else {
+          ctx.fillStyle = `rgba(180, 160, 140, ${alpha * 0.15})`;
+          ctx.shadowColor = "transparent";
+          ctx.shadowBlur = 0;
+        }
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+
+      // ── Engine glow ──
+      if (visible && t > 0.08) {
+        const glowX = x + -Math.cos(angle) * 18;
+        const glowY = y + -Math.sin(angle) * 18;
+        const engineGlow = ctx.createRadialGradient(glowX, glowY, 0, glowX, glowY, 35);
+        engineGlow.addColorStop(0, "rgba(255, 160, 50, 0.6)");
+        engineGlow.addColorStop(0.3, "rgba(255, 107, 53, 0.3)");
+        engineGlow.addColorStop(1, "transparent");
+        ctx.fillStyle = engineGlow;
+        ctx.fillRect(glowX - 40, glowY - 40, 80, 80);
+      }
+
+      // ── Draw rocket ──
+      if (visible) {
+        drawRocket(x, y, angle, 1.3);
+      }
+
+      // Limit trail array
+      if (trail.length > 300) trail.splice(0, trail.length - 300);
+
+      animId = requestAnimationFrame(draw);
+    }
+
+    animId = requestAnimationFrame(draw);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="pointer-events-none fixed inset-0 z-[50]"
+      style={{ willChange: "transform" }}
+    />
   );
 }
 
@@ -909,6 +1252,7 @@ export default function V2Page() {
   return (
     <main className="bg-[#0a0a0a] text-[#e8e8e8] min-h-screen cursor-none">
       <CustomCursor />
+      <ScrollRocket />
       <HeroSection />
       <AboutSection />
       <ServicesSection />
