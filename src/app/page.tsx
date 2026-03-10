@@ -911,40 +911,93 @@ function ScrollRocket() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SECTION: About — Large editorial text
+   Shared: Space background canvas for sections
+   Draws subtle stars + nebula behind content sections
+   ═══════════════════════════════════════════════════════════ */
+function SectionStars({ density = 40, className = "" }: { density?: number; className?: string }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const c = canvasRef.current;
+    if (!c) return;
+    const ctx = c.getContext("2d")!;
+    const dpr = Math.min(window.devicePixelRatio, 2);
+    const resize = () => {
+      c.width = c.clientWidth * dpr;
+      c.height = c.clientHeight * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      draw();
+    };
+    const stars = Array.from({ length: density }, () => ({
+      x: Math.random(), y: Math.random(),
+      r: 0.3 + Math.random() * 1.2,
+      a: 0.15 + Math.random() * 0.5,
+    }));
+    function draw() {
+      ctx.clearRect(0, 0, c!.clientWidth, c!.clientHeight);
+      for (const s of stars) {
+        ctx.beginPath();
+        ctx.arc(s.x * c!.clientWidth, s.y * c!.clientHeight, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,245,230,${s.a})`;
+        ctx.fill();
+      }
+    }
+    resize();
+    window.addEventListener("resize", resize);
+    return () => window.removeEventListener("resize", resize);
+  }, [density]);
+  return <canvas ref={canvasRef} className={`absolute inset-0 w-full h-full pointer-events-none ${className}`} />;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SECTION: About — Rocket reveal, space-themed intro
    ═══════════════════════════════════════════════════════════ */
 function AboutSection() {
   return (
-    <section data-rocket-reveal className="relative py-40 md:py-56">
-      <div className="mx-auto max-w-[1100px] px-5 md:px-8">
-        {/* Large editorial statement */}
-        <h2 className="font-heading text-[clamp(1.8rem,4.5vw,4rem)] font-bold leading-[1.15] tracking-tight" data-reveal>
+    <section data-rocket-reveal className="relative py-24 md:py-40 overflow-hidden">
+      {/* Subtle nebula glow */}
+      <div className="absolute top-0 right-0 w-[60%] h-[60%] pointer-events-none opacity-30" style={{
+        background: "radial-gradient(ellipse at 80% 20%, rgba(255,107,53,0.08) 0%, transparent 60%)",
+      }} />
+      <SectionStars density={30} />
+
+      <div className="relative mx-auto max-w-[1100px] px-5 md:px-8">
+        {/* Big statement */}
+        <h2 className="font-heading text-[clamp(1.5rem,4vw,3.5rem)] font-bold leading-[1.15] tracking-tight max-w-4xl" data-reveal>
           <span className="text-white">We bring visions to life through </span>
           <span className="text-[#ff6b35]">strategy, design, </span>
           <span className="text-white/40">and relentless creativity.</span>
         </h2>
 
-        <div className="mt-4 h-px w-full origin-left bg-white/[0.06]" data-line />
+        <div className="mt-6 h-px w-full origin-left bg-gradient-to-r from-[#ff6b35]/20 to-transparent" data-line />
 
-        <div className="mt-16 grid gap-12 md:grid-cols-3">
+        {/* Story text */}
+        <div className="mt-12 grid gap-8 md:grid-cols-3 md:gap-12">
           {aboutContent.story.map((p, i) => (
-            <p key={i} className="text-sm leading-relaxed text-white/40" data-fade={i * 0.15}>
+            <p key={i} className="text-sm leading-[1.8] text-white/35" data-fade={i * 0.15}>
               {p}
             </p>
           ))}
         </div>
 
-        {/* Stats */}
-        <div className="mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/[0.06] md:grid-cols-4">
+        {/* Stats — floating cards with glow */}
+        <div className="mt-16 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
           {[
-            { value: "200+", label: "Projects" },
-            { value: "50+", label: "Clients" },
-            { value: "8+", label: "Years" },
-            { value: "15+", label: "Experts" },
+            { value: "200+", label: "Projects", icon: "🚀" },
+            { value: "50+", label: "Clients", icon: "🌍" },
+            { value: "8+", label: "Years", icon: "⭐" },
+            { value: "15+", label: "Experts", icon: "👨‍🚀" },
           ].map((stat, i) => (
-            <div key={stat.label} className="bg-white/[0.02] p-8 text-center md:p-10" data-fade={i * 0.1}>
-              <p className="font-heading text-3xl font-bold text-white md:text-4xl">{stat.value}</p>
-              <p className="mt-2 text-xs uppercase tracking-[0.15em] text-white/25">{stat.label}</p>
+            <div
+              key={stat.label}
+              data-fade={i * 0.12}
+              className="group relative rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 text-center transition-all duration-500 hover:border-[#ff6b35]/20 hover:bg-[#ff6b35]/[0.03] md:p-8"
+            >
+              <div className="absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{
+                background: "radial-gradient(circle at 50% 50%, rgba(255,107,53,0.06) 0%, transparent 70%)",
+              }} />
+              <span className="text-2xl">{stat.icon}</span>
+              <p className="mt-3 font-heading text-2xl font-bold text-white md:text-3xl">{stat.value}</p>
+              <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-white/25">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -954,55 +1007,59 @@ function AboutSection() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SECTION: Services — Clean numbered list
+   SECTION: Services — Space cards with orbital connectors
    ═══════════════════════════════════════════════════════════ */
 function ServicesSection() {
-  const [active, setActive] = useState<number | null>(null);
-
   return (
-    <section className="relative py-32 md:py-44">
-      <div className="mx-auto max-w-[1100px] px-5 md:px-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#ff6b35]/60 mb-4" data-fade>Solutions</p>
-        <h2 className="font-heading text-3xl font-bold text-white md:text-5xl" data-reveal>What We Do</h2>
-        <div className="mt-4 h-px w-full origin-left bg-white/[0.06]" data-line />
+    <section className="relative py-24 md:py-40 overflow-hidden">
+      {/* Left nebula */}
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[40%] h-[80%] pointer-events-none opacity-20" style={{
+        background: "radial-gradient(ellipse at 10% 50%, rgba(255,107,53,0.1) 0%, transparent 60%)",
+      }} />
+      <SectionStars density={25} />
 
-        <div className="mt-12">
+      <div className="relative mx-auto max-w-[1100px] px-5 md:px-8">
+        <div className="text-center mb-16">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-[#ff6b35]/50 mb-3 md:text-xs" data-fade>Our Solutions</p>
+          <h2 className="font-heading text-[clamp(1.8rem,4vw,3.5rem)] font-bold text-white" data-reveal>What We Do</h2>
+          <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-[#ff6b35]/30 to-transparent" data-line />
+        </div>
+
+        {/* Service cards grid */}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 md:gap-6">
           {servicesOverview.map((service, i) => (
-            <Link href={`/solutions/${service.slug}`} key={service.id}>
+            <Link href={`/solutions/${service.slug}`} key={service.id} className="block">
               <div
-                data-cursor="View"
-                data-fade={i * 0.08}
-                className="group relative border-b border-white/[0.06] py-8 md:py-10 transition-colors duration-500 hover:bg-white/[0.02]"
-                onMouseEnter={() => setActive(i)}
-                onMouseLeave={() => setActive(null)}
+                data-fade={i * 0.1}
+                className="group relative h-full rounded-2xl border border-white/[0.06] bg-[rgba(255,255,255,0.015)] p-6 md:p-8 transition-all duration-500 hover:border-[#ff6b35]/25 hover:bg-[rgba(255,107,53,0.03)] hover:translate-y-[-4px] hover:shadow-[0_20px_60px_rgba(255,107,53,0.08)]"
               >
-                <div className="flex items-start gap-6 md:items-center md:gap-12">
-                  {/* Number */}
-                  <span className="shrink-0 font-heading text-sm font-bold text-white/15 md:text-base">
+                {/* Glow on hover */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" style={{
+                  background: "radial-gradient(circle at 30% 20%, rgba(255,107,53,0.08) 0%, transparent 60%)",
+                }} />
+
+                {/* Number badge */}
+                <div className="relative flex items-center justify-between mb-6">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ff6b35]/10 font-heading text-sm font-bold text-[#ff6b35] transition-colors group-hover:bg-[#ff6b35]/20">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-
-                  {/* Title */}
-                  <h3 className="font-heading text-xl font-bold text-white transition-colors duration-300 group-hover:text-[#ff6b35] md:text-3xl">
-                    {service.title}
-                  </h3>
-
-                  {/* Description (shows on hover) */}
-                  <p
-                    className="ml-auto hidden max-w-sm text-right text-sm leading-relaxed text-white/30 transition-opacity duration-500 md:block"
-                    style={{ opacity: active === i ? 1 : 0 }}
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+                    className="text-white/10 transition-all duration-300 group-hover:text-[#ff6b35] group-hover:translate-x-1 group-hover:-translate-y-1"
                   >
-                    {service.description}
-                  </p>
-
-                  {/* Arrow */}
-                  <svg
-                    width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
-                    className="shrink-0 text-white/10 transition-all duration-300 group-hover:text-[#ff6b35] group-hover:translate-x-1"
-                  >
-                    <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M7 17L17 7M17 7H7M17 7v10" />
                   </svg>
                 </div>
+
+                {/* Content */}
+                <h3 className="relative font-heading text-lg font-bold text-white transition-colors group-hover:text-[#ff6b35] md:text-xl">
+                  {service.title}
+                </h3>
+                <p className="relative mt-3 text-sm leading-relaxed text-white/30 group-hover:text-white/40 transition-colors">
+                  {service.description}
+                </p>
+
+                {/* Bottom accent line */}
+                <div className="mt-6 h-px w-0 bg-gradient-to-r from-[#ff6b35] to-[#f7931e] transition-all duration-700 group-hover:w-full" />
               </div>
             </Link>
           ))}
@@ -1013,22 +1070,48 @@ function ServicesSection() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SECTION: Portfolio — Horizontal scroll
+   SECTION: Portfolio — Horizontal scroll with space theme
    ═══════════════════════════════════════════════════════════ */
 function PortfolioSection() {
   return (
-    <section className="relative py-20">
-      <div className="mx-auto max-w-[1100px] px-5 md:px-8 mb-16">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#ff6b35]/60 mb-4" data-fade>Selected Work</p>
-        <h2 className="font-heading text-3xl font-bold text-white md:text-5xl" data-reveal>Featured Projects</h2>
-        <div className="mt-4 h-px w-full origin-left bg-white/[0.06]" data-line />
+    <section className="relative py-24 md:py-32 overflow-hidden">
+      <SectionStars density={20} />
+      {/* Top/bottom borders */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+
+      <div className="relative mx-auto max-w-[1100px] px-5 md:px-8 mb-12 md:mb-16">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <div>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-[#ff6b35]/50 mb-3 md:text-xs" data-fade>Selected Work</p>
+            <h2 className="font-heading text-[clamp(1.8rem,4vw,3.5rem)] font-bold text-white" data-reveal>Featured Projects</h2>
+          </div>
+          <Link href="/portfolio" className="inline-flex items-center gap-2 text-sm text-white/30 transition-colors hover:text-[#ff6b35]" data-fade="0.3">
+            View all projects
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </Link>
+        </div>
+        <div className="mt-4 h-px w-full origin-left bg-gradient-to-r from-[#ff6b35]/20 to-transparent" data-line />
       </div>
 
-      {/* Horizontal scroll container */}
-      <div data-h-scroll className="relative h-screen">
-        <div data-h-track className="flex h-full items-center gap-8 pl-8 pr-[50vw] md:pl-16 md:gap-12">
+      {/* Horizontal scroll — desktop only, stack on mobile */}
+      <div className="hidden md:block">
+        <div data-h-scroll className="relative h-[80vh]">
+          <div data-h-track className="flex h-full items-center gap-10 pl-[max(2rem,calc((100vw-1100px)/2+1.25rem))] pr-[50vw]">
+            {portfolioItems.map((item) => (
+              <ProjectCard key={item.id} item={item} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile: vertical scroll cards */}
+      <div className="md:hidden px-5">
+        <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory hide-scrollbar">
           {portfolioItems.map((item) => (
-            <ProjectCard key={item.id} item={item} />
+            <div key={item.id} className="snap-center shrink-0" style={{ width: "80vw" }}>
+              <ProjectCard item={item} />
+            </div>
           ))}
         </div>
       </div>
@@ -1037,34 +1120,34 @@ function PortfolioSection() {
 }
 
 function ProjectCard({ item }: { item: (typeof portfolioItems)[number] }) {
-  const [hover, setHover] = useState(false);
-
   return (
-    <Link href={item.href || "#"} target={item.target} className="block shrink-0">
-      <div
-        data-cursor="View"
-        className="group relative overflow-hidden rounded-xl"
-        style={{ width: "min(75vw, 600px)" }}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
+    <Link href={item.href || "#"} target={item.target} className="block shrink-0 group">
+      <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] transition-all duration-500 hover:border-[#ff6b35]/20 hover:shadow-[0_20px_80px_rgba(255,107,53,0.1)]"
+        style={{ width: "min(70vw, 550px)" }}
       >
         <div className="relative aspect-[4/3] overflow-hidden bg-white/[0.02]">
           <Image
             src={item.image} alt={item.title}
             width={1200} height={900} unoptimized
-            className="h-full w-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
-            style={{ transform: hover ? "scale(1.08)" : "scale(1)" }}
+            className="h-full w-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-[1.08]"
           />
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+
+          {/* Corner accent */}
+          <div className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/[0.08] backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0 translate-x-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M7 17L17 7M17 7H7M17 7v10" />
+            </svg>
+          </div>
         </div>
 
         {/* Info */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-          <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/40">
+        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-7">
+          <span className="inline-block rounded-full bg-[#ff6b35]/10 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.15em] text-[#ff6b35]/70 mb-3">
             {item.category}
           </span>
-          <h3 className="mt-1 font-heading text-xl font-bold text-white md:text-2xl transition-colors duration-300 group-hover:text-[#ff6b35]">
+          <h3 className="font-heading text-lg font-bold text-white md:text-xl transition-colors duration-300 group-hover:text-[#ff6b35]">
             {item.title}
           </h3>
         </div>
@@ -1074,22 +1157,53 @@ function ProjectCard({ item }: { item: (typeof portfolioItems)[number] }) {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SECTION: Process — Minimal numbered steps
+   SECTION: Process — Rocket flight path timeline
    ═══════════════════════════════════════════════════════════ */
 function ProcessSection() {
   return (
-    <section className="relative py-32 md:py-44">
-      <div className="mx-auto max-w-[1100px] px-5 md:px-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#ff6b35]/60 mb-4" data-fade>How We Work</p>
-        <h2 className="font-heading text-3xl font-bold text-white md:text-5xl" data-reveal>Our Process</h2>
-        <div className="mt-4 h-px w-full origin-left bg-white/[0.06]" data-line />
+    <section className="relative py-24 md:py-40 overflow-hidden">
+      <SectionStars density={20} />
+      {/* Center nebula */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] pointer-events-none opacity-15" style={{
+        background: "radial-gradient(circle, rgba(255,107,53,0.08) 0%, transparent 50%)",
+      }} />
 
-        <div className="mt-16 grid gap-0 md:grid-cols-5">
+      <div className="relative mx-auto max-w-[1100px] px-5 md:px-8">
+        <div className="text-center mb-16 md:mb-20">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-[#ff6b35]/50 mb-3 md:text-xs" data-fade>How We Work</p>
+          <h2 className="font-heading text-[clamp(1.8rem,4vw,3.5rem)] font-bold text-white" data-reveal>Our Process</h2>
+          <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-[#ff6b35]/30 to-transparent" data-line />
+        </div>
+
+        {/* Timeline */}
+        <div className="relative">
+          {/* Vertical line — desktop */}
+          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#ff6b35]/15 to-transparent" />
+
           {processSteps.map((step, i) => (
-            <div key={step.number} className="relative border-b border-white/[0.04] py-8 md:border-b-0 md:border-r md:border-white/[0.04] md:px-6 md:py-0 last:border-0" data-fade={i * 0.1}>
-              <span className="font-heading text-4xl font-bold text-white/[0.04] md:text-5xl">{step.number}</span>
-              <h3 className="mt-3 font-heading text-lg font-bold text-white">{step.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/30">{step.description}</p>
+            <div
+              key={step.number}
+              data-fade={i * 0.12}
+              className={`relative flex flex-col md:flex-row items-start gap-6 mb-12 last:mb-0 md:mb-20 ${
+                i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+              }`}
+            >
+              {/* Content card */}
+              <div className={`flex-1 ${i % 2 === 0 ? "md:text-right md:pr-16" : "md:pl-16"}`}>
+                <div className="group rounded-2xl border border-white/[0.06] bg-white/[0.015] p-6 md:p-8 transition-all duration-500 hover:border-[#ff6b35]/20 hover:bg-[rgba(255,107,53,0.02)]">
+                  <span className="font-heading text-4xl font-bold text-[#ff6b35]/10 md:text-5xl">{step.number}</span>
+                  <h3 className="mt-2 font-heading text-xl font-bold text-white md:text-2xl">{step.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-white/30">{step.description}</p>
+                </div>
+              </div>
+
+              {/* Center node — desktop */}
+              <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 top-8 h-4 w-4 items-center justify-center">
+                <div className="h-3 w-3 rounded-full bg-[#ff6b35]/40 ring-4 ring-[#ff6b35]/10" />
+              </div>
+
+              {/* Empty spacer for other side */}
+              <div className="hidden md:block flex-1" />
             </div>
           ))}
         </div>
@@ -1099,34 +1213,54 @@ function ProcessSection() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SECTION: Testimonials — Editorial quotes
+   SECTION: Testimonials — Floating space cards
    ═══════════════════════════════════════════════════════════ */
 function TestimonialsSection() {
   return (
-    <section className="relative py-32 md:py-44 overflow-hidden">
-      <div className="mx-auto max-w-[1100px] px-5 md:px-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#ff6b35]/60 mb-4" data-fade>Testimonials</p>
-        <h2 className="font-heading text-3xl font-bold text-white md:text-5xl mb-16" data-reveal>What They Say</h2>
+    <section className="relative py-24 md:py-40 overflow-hidden">
+      <SectionStars density={25} />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
 
-        <div className="grid gap-8 md:grid-cols-2">
+      <div className="relative mx-auto max-w-[1100px] px-5 md:px-8">
+        <div className="text-center mb-16">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-[#ff6b35]/50 mb-3 md:text-xs" data-fade>Testimonials</p>
+          <h2 className="font-heading text-[clamp(1.8rem,4vw,3.5rem)] font-bold text-white" data-reveal>What They Say</h2>
+          <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-[#ff6b35]/30 to-transparent" data-line />
+        </div>
+
+        {/* Testimonial cards — scrollable on mobile, grid on desktop */}
+        <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory hide-scrollbar md:grid md:grid-cols-2 md:overflow-visible md:pb-0">
           {testimonials.slice(0, 4).map((t, i) => (
-            <div key={i} className="rounded-2xl border border-white/[0.06] bg-white/[0.015] p-8 md:p-10" data-fade={i * 0.1}>
+            <div
+              key={i}
+              data-fade={i * 0.1}
+              className="group shrink-0 snap-center w-[85vw] sm:w-[70vw] md:w-auto rounded-2xl border border-white/[0.06] bg-[rgba(255,255,255,0.015)] p-6 md:p-8 transition-all duration-500 hover:border-[#ff6b35]/15 hover:bg-[rgba(255,107,53,0.02)]"
+            >
+              {/* Glow */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" style={{
+                background: "radial-gradient(circle at 50% 0%, rgba(255,107,53,0.05) 0%, transparent 50%)",
+              }} />
+
               {/* Stars */}
-              <div className="mb-5 flex gap-1">
+              <div className="mb-4 flex gap-1">
                 {Array.from({ length: t.rating }).map((_, j) => (
-                  <svg key={j} width="14" height="14" viewBox="0 0 24 24" fill="#ff6b35" stroke="none">
+                  <svg key={j} width="14" height="14" viewBox="0 0 24 24" fill="#ff6b35" stroke="none" className="opacity-60">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" />
                   </svg>
                 ))}
               </div>
-              <p className="text-[15px] leading-relaxed text-white/50 italic">&ldquo;{t.quote}&rdquo;</p>
+
+              {/* Quote */}
+              <p className="relative text-sm leading-[1.8] text-white/45 italic md:text-[15px]">&ldquo;{t.quote}&rdquo;</p>
+
+              {/* Author */}
               <div className="mt-6 flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#ff6b35]/10 text-xs font-bold text-[#ff6b35]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#ff6b35]/20 to-[#f7931e]/10 text-sm font-bold text-[#ff6b35]">
                   {t.name.charAt(0)}
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-white">{t.name}</p>
-                  <p className="text-xs text-white/25">{t.title}</p>
+                  <p className="text-xs text-white/20">{t.title}</p>
                 </div>
               </div>
             </div>
@@ -1138,25 +1272,42 @@ function TestimonialsSection() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SECTION: CTA — Full-width statement
+   SECTION: CTA — Eclipse-themed call to action
    ═══════════════════════════════════════════════════════════ */
 function CTASection() {
   return (
-    <section className="relative py-40 md:py-56">
-      <div className="mx-auto max-w-[1100px] px-5 md:px-8 text-center">
-        <h2 className="font-heading text-[clamp(2rem,5vw,5rem)] font-bold leading-[1.05] tracking-tight" data-reveal>
+    <section className="relative py-32 md:py-48 overflow-hidden">
+      <SectionStars density={40} />
+
+      {/* Central eclipse glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none" style={{
+        background: "radial-gradient(circle, rgba(255,107,53,0.06) 0%, rgba(255,107,53,0.02) 30%, transparent 60%)",
+      }} />
+
+      {/* Orbital ring decoration */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(90vw,500px)] h-[min(90vw,500px)] rounded-full border border-white/[0.03] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(70vw,380px)] h-[min(70vw,380px)] rounded-full border border-[#ff6b35]/[0.06] pointer-events-none" />
+
+      <div className="relative mx-auto max-w-[800px] px-5 md:px-8 text-center">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-[#ff6b35]/50 mb-4 md:text-xs" data-fade>Get Started</p>
+        <h2 className="font-heading text-[clamp(1.8rem,5vw,4rem)] font-bold leading-[1.05] tracking-tight" data-reveal>
           <span className="text-white">Ready to eclipse </span>
           <span className="bg-gradient-to-r from-[#ff6b35] to-[#f7931e] bg-clip-text text-transparent">
             your competition?
           </span>
         </h2>
-        <p className="mx-auto mt-6 max-w-md text-sm text-white/35 md:text-base" data-fade="0.2">
-          Let&apos;s create something extraordinary together.
+        <p className="mx-auto mt-5 max-w-md text-sm text-white/30 md:text-base" data-fade="0.2">
+          Let&apos;s create something extraordinary together. Your brand deserves to shine.
         </p>
-        <div className="mt-10" data-fade="0.4">
-          <MagneticLink href="/contact" cursor="Go" className="inline-flex rounded-full bg-[#ff6b35] px-10 py-4 text-sm font-semibold text-white transition-shadow duration-300 hover:shadow-[0_0_50px_rgba(255,107,53,0.35)]">
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4" data-fade="0.4">
+          <Link href="/contact" className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#ff6b35] to-[#f7931e] px-8 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:shadow-[0_0_50px_rgba(255,107,53,0.35)] hover:translate-y-[-2px]">
             Start a Project
-          </MagneticLink>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </Link>
+          <a href={`https://wa.me/${siteConfig.whatsapp}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/10 px-8 py-3.5 text-sm font-semibold text-white/50 transition-all duration-300 hover:border-[#25D366]/30 hover:text-[#25D366]">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Chat with Us
+          </a>
         </div>
       </div>
     </section>
