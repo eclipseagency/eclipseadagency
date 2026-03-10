@@ -121,23 +121,6 @@ function useScrollAnimations() {
         });
       }
 
-      // ── Paper tear reveal: hero tears open to reveal About section ──
-      const tearLeft = document.querySelector("[data-tear-left]");
-      const tearRight = document.querySelector("[data-tear-right]");
-      const tearContainer = document.querySelector("[data-tear]");
-      if (tearLeft && tearRight && tearContainer) {
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: tearContainer,
-            start: "top 70%",
-            end: "top 10%",
-            scrub: 1,
-          },
-        });
-        tl.to(tearLeft, { xPercent: -110, rotate: -3, ease: "power2.in" }, 0);
-        tl.to(tearRight, { xPercent: 110, rotate: 3, ease: "power2.in" }, 0);
-      }
-
       // ── Line draw on scroll ──
       document.querySelectorAll("[data-line]").forEach((el) => {
         gsap.fromTo(el,
@@ -921,66 +904,365 @@ function ScrollRocket() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   Paper Tear — Hero tears open to reveal next section
-   Two halves split apart with jagged edges and orange glow
+   Rocket Preloader — Full-screen intro that tears apart
+   Rocket flies down center, rips the screen open with orange
+   glow, revealing the homepage hero beneath
    ═══════════════════════════════════════════════════════════ */
-function PaperTear() {
-  // Jagged edge path — random tear pattern
-  const tearPath = useMemo(() => {
-    const points: string[] = [];
-    const segments = 30;
+function RocketPreloader({ onComplete }: { onComplete: () => void }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef(0);
+  const [done, setDone] = useState(false);
+
+  // Generate jagged tear edge points (stable across renders)
+  const tearPoints = useMemo(() => {
+    const pts: { x: number; y: number }[] = [];
+    const segments = 60;
     for (let i = 0; i <= segments; i++) {
-      const y = (i / segments) * 100;
-      const jag = (Math.sin(i * 2.7) * 3 + Math.sin(i * 5.1) * 1.5 + Math.sin(i * 8.3) * 0.8);
-      points.push(`${50 + jag},${y}`);
+      const y = i / segments;
+      const jag = (Math.sin(i * 2.7) * 12 + Math.sin(i * 5.1) * 6 + Math.sin(i * 8.3) * 3);
+      pts.push({ x: jag, y });
     }
-    return points.join(" ");
+    return pts;
   }, []);
 
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
+    const ctx = canvas.getContext("2d")!;
+    let w = 0, h = 0, dpr = 1;
+    let animId = 0;
+
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio, 2);
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas!.width = w * dpr;
+      canvas!.height = h * dpr;
+      canvas!.style.width = w + "px";
+      canvas!.style.height = h + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    // Prevent scroll during preloader
+    document.body.style.overflow = "hidden";
+
+    // ── Animation timeline via GSAP ──
+    const proxy = { progress: 0, split: 0, fade: 1 };
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        document.body.style.overflow = "";
+        setDone(true);
+        onComplete();
+      },
+    });
+
+    // Phase 1: Rocket descends and tears (0 → 1)
+    tl.to(proxy, { progress: 1, duration: 2, ease: "power2.inOut" }, 0.3);
+    // Phase 2: Split halves apart
+    tl.to(proxy, { split: 1, duration: 0.9, ease: "power3.in" }, 2.0);
+    // Phase 3: Fade out
+    tl.to(proxy, { fade: 0, duration: 0.4, ease: "power2.in" }, 2.6);
+
+    // Sync progress ref
+    gsap.ticker.add(() => {
+      progressRef.current = proxy.progress;
+    });
+
+    // ── Draw rocket ──
+    function drawRocket(x: number, y: number, angle: number, scale: number) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(angle);
+      const s = scale;
+
+      // Body
+      ctx.beginPath();
+      ctx.moveTo(0, -22 * s);
+      ctx.quadraticCurveTo(8 * s, -14 * s, 8 * s, 5 * s);
+      ctx.lineTo(14 * s, 18 * s);
+      ctx.lineTo(5 * s, 12 * s);
+      ctx.lineTo(-5 * s, 12 * s);
+      ctx.lineTo(-14 * s, 18 * s);
+      ctx.lineTo(-8 * s, 5 * s);
+      ctx.quadraticCurveTo(-8 * s, -14 * s, 0, -22 * s);
+      ctx.closePath();
+      const bodyGrad = ctx.createLinearGradient(-8 * s, 0, 8 * s, 0);
+      bodyGrad.addColorStop(0, "#d4d4d4");
+      bodyGrad.addColorStop(0.3, "#ffffff");
+      bodyGrad.addColorStop(0.7, "#e8e8e8");
+      bodyGrad.addColorStop(1, "#b0b0b0");
+      ctx.fillStyle = bodyGrad;
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,0.3)";
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+
+      // Nose cone
+      ctx.beginPath();
+      ctx.moveTo(0, -22 * s);
+      ctx.quadraticCurveTo(6 * s, -16 * s, 6 * s, -8 * s);
+      ctx.lineTo(-6 * s, -8 * s);
+      ctx.quadraticCurveTo(-6 * s, -16 * s, 0, -22 * s);
+      ctx.fillStyle = "#ff6b35";
+      ctx.fill();
+
+      // Window
+      ctx.beginPath();
+      ctx.arc(0, -4 * s, 3 * s, 0, Math.PI * 2);
+      ctx.fillStyle = "#1a3a5c";
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(-0.8 * s, -4.8 * s, 1.2 * s, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(150,200,255,0.4)";
+      ctx.fill();
+
+      // Fins
+      ctx.beginPath();
+      ctx.moveTo(14 * s, 18 * s);
+      ctx.lineTo(5 * s, 12 * s);
+      ctx.lineTo(7 * s, 5 * s);
+      ctx.fillStyle = "#ff6b35";
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(-14 * s, 18 * s);
+      ctx.lineTo(-5 * s, 12 * s);
+      ctx.lineTo(-7 * s, 5 * s);
+      ctx.fillStyle = "#ff6b35";
+      ctx.fill();
+
+      // "E" logo
+      ctx.fillStyle = "rgba(255, 107, 53, 0.6)";
+      ctx.font = `bold ${8 * s}px sans-serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("E", 0, 4 * s);
+
+      ctx.restore();
+    }
+
+    // ── Fire/smoke trail particles ──
+    const particles: { x: number; y: number; vx: number; vy: number; life: number; maxLife: number; size: number; type: "fire" | "smoke" }[] = [];
+    let lastTime = performance.now();
+
+    function draw(now: number) {
+      const dt = Math.min((now - lastTime) / 1000, 0.05);
+      lastTime = now;
+      const p = proxy.progress;
+      const split = proxy.split;
+      const fade = proxy.fade;
+
+      if (fade <= 0) { animId = requestAnimationFrame(draw); return; }
+
+      ctx.clearRect(0, 0, w, h);
+      ctx.globalAlpha = fade;
+
+      const cx = w / 2;
+      // Rocket Y position: from top (-60px) to bottom (h + 60px)
+      const rocketY = -60 + (h + 120) * p;
+
+      // ── Draw the two dark halves ──
+      const splitOffset = split * (w * 0.55);
+      const tearWidth = split * 60 + 2; // gap grows as split increases
+
+      // Left half
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(-splitOffset, 0);
+      for (const pt of tearPoints) {
+        ctx.lineTo(cx - tearWidth / 2 + pt.x - splitOffset, pt.y * h);
+      }
+      ctx.lineTo(-splitOffset, h);
+      ctx.closePath();
+      ctx.fillStyle = "#050508";
+      ctx.fill();
+
+      // Left tear edge glow
+      if (p > 0.05) {
+        const glowHeight = Math.min(p * 1.2, 1) * h;
+        for (const pt of tearPoints) {
+          if (pt.y * h > glowHeight) break;
+          const ex = cx - tearWidth / 2 + pt.x - splitOffset;
+          const ey = pt.y * h;
+          ctx.beginPath();
+          ctx.arc(ex, ey, 3 + split * 8, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 107, 53, ${0.15 * (1 - pt.y * 0.5)})`;
+          ctx.fill();
+        }
+      }
+      ctx.restore();
+
+      // Right half
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(w + splitOffset, 0);
+      for (const pt of tearPoints) {
+        ctx.lineTo(cx + tearWidth / 2 - pt.x + splitOffset, pt.y * h);
+      }
+      ctx.lineTo(w + splitOffset, h);
+      ctx.closePath();
+      ctx.fillStyle = "#050508";
+      ctx.fill();
+
+      // Right tear edge glow
+      if (p > 0.05) {
+        const glowHeight = Math.min(p * 1.2, 1) * h;
+        for (const pt of tearPoints) {
+          if (pt.y * h > glowHeight) break;
+          const ex = cx + tearWidth / 2 - pt.x + splitOffset;
+          const ey = pt.y * h;
+          ctx.beginPath();
+          ctx.arc(ex, ey, 3 + split * 8, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 107, 53, ${0.15 * (1 - pt.y * 0.5)})`;
+          ctx.fill();
+        }
+      }
+      ctx.restore();
+
+      // ── Orange glow through the tear gap ──
+      if (p > 0.05 && split < 0.8) {
+        const glowHeight = Math.min(p * 1.2, 1) * h;
+        const glowGrad = ctx.createLinearGradient(cx, 0, cx, glowHeight);
+        glowGrad.addColorStop(0, "rgba(255,107,53,0.4)");
+        glowGrad.addColorStop(0.5, "rgba(247,147,30,0.25)");
+        glowGrad.addColorStop(1, "rgba(255,107,53,0.1)");
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(cx - tearWidth / 2 - 20, 0, tearWidth + 40, glowHeight);
+        ctx.fillStyle = glowGrad;
+        ctx.filter = "blur(12px)";
+        ctx.fill();
+        ctx.filter = "none";
+        ctx.restore();
+
+        // Thin bright center line
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(cx, 0);
+        ctx.lineTo(cx, glowHeight);
+        ctx.strokeStyle = `rgba(255,107,53,${0.6 * (1 - split)})`;
+        ctx.lineWidth = 2;
+        ctx.shadowColor = "rgba(255,107,53,0.8)";
+        ctx.shadowBlur = 15;
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+        ctx.restore();
+      }
+
+      // ── Spawn fire/smoke particles behind rocket ──
+      if (p > 0.02 && p < 0.98 && split < 0.3) {
+        for (let i = 0; i < 4; i++) {
+          particles.push({
+            x: cx + (Math.random() - 0.5) * 8,
+            y: rocketY + 30 + Math.random() * 10,
+            vx: (Math.random() - 0.5) * 40,
+            vy: -50 - Math.random() * 80,
+            life: 0, maxLife: 0.3 + Math.random() * 0.4,
+            size: 2 + Math.random() * 4,
+            type: "fire",
+          });
+        }
+        if (Math.random() > 0.4) {
+          particles.push({
+            x: cx + (Math.random() - 0.5) * 12,
+            y: rocketY + 35 + Math.random() * 15,
+            vx: (Math.random() - 0.5) * 25,
+            vy: -20 - Math.random() * 40,
+            life: 0, maxLife: 0.6 + Math.random() * 0.6,
+            size: 4 + Math.random() * 8,
+            type: "smoke",
+          });
+        }
+      }
+
+      // Update and draw particles
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const pt = particles[i];
+        pt.life += dt;
+        if (pt.life > pt.maxLife) { particles.splice(i, 1); continue; }
+        pt.x += pt.vx * dt;
+        pt.y += pt.vy * dt;
+        pt.vx *= 0.96;
+        pt.vy *= 0.96;
+        if (pt.type === "smoke") pt.size += dt * 15;
+
+        const prog = pt.life / pt.maxLife;
+        const alpha = prog < 0.1 ? prog * 10 : Math.max(0, 1 - (prog - 0.1) / 0.9);
+
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, pt.size * (1 - prog * 0.3), 0, Math.PI * 2);
+        if (pt.type === "fire") {
+          ctx.fillStyle = `rgba(255, ${80 + Math.floor(100 * prog)}, ${20 + Math.floor(40 * prog)}, ${alpha * 0.7})`;
+          ctx.shadowColor = `rgba(255,107,53,${alpha * 0.5})`;
+          ctx.shadowBlur = 8;
+        } else {
+          ctx.fillStyle = `rgba(180,160,140,${alpha * 0.12})`;
+          ctx.shadowBlur = 0;
+        }
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+      if (particles.length > 200) particles.splice(0, particles.length - 200);
+
+      // ── Engine glow ──
+      if (p > 0.02 && p < 0.98 && split < 0.3) {
+        const glowR = ctx.createRadialGradient(cx, rocketY + 25, 0, cx, rocketY + 25, 40);
+        glowR.addColorStop(0, "rgba(255,160,50,0.6)");
+        glowR.addColorStop(0.3, "rgba(255,107,53,0.3)");
+        glowR.addColorStop(1, "transparent");
+        ctx.fillStyle = glowR;
+        ctx.fillRect(cx - 45, rocketY - 15, 90, 80);
+      }
+
+      // ── Draw rocket (pointing down) ──
+      if (p < 0.98 && split < 0.5) {
+        drawRocket(cx, rocketY, Math.PI, 1.5);
+      }
+
+      // ── "Eclipse Agency" text before tear starts ──
+      if (p < 0.3) {
+        const textAlpha = p < 0.05 ? p * 20 : Math.max(0, 1 - (p - 0.15) / 0.15);
+        if (textAlpha > 0) {
+          ctx.save();
+          ctx.fillStyle = `rgba(255,255,255,${textAlpha * 0.7})`;
+          ctx.font = "600 11px 'Plus Jakarta Sans', sans-serif";
+          ctx.textAlign = "center";
+          ctx.letterSpacing = "0.4em";
+          ctx.fillText("ECLIPSE AGENCY", cx, h * 0.45);
+          ctx.fillStyle = `rgba(255,107,53,${textAlpha * 0.5})`;
+          ctx.font = "400 9px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillText("FROM SHADOW TO SPOTLIGHT", cx, h * 0.45 + 22);
+          ctx.restore();
+        }
+      }
+
+      ctx.globalAlpha = 1;
+      animId = requestAnimationFrame(draw);
+    }
+
+    animId = requestAnimationFrame(draw);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      tl.kill();
+      window.removeEventListener("resize", resize);
+      document.body.style.overflow = "";
+    };
+  }, [tearPoints, onComplete]);
+
+  if (done) return null;
+
   return (
-    <div data-tear className="relative h-[40vh] md:h-[50vh] -mt-[10vh] z-[4] overflow-hidden">
-      {/* Left half */}
-      <div
-        data-tear-left
-        className="absolute inset-0 origin-center-right"
-        style={{ clipPath: "polygon(0 0, 50% 0, 50% 100%, 0 100%)", willChange: "transform" }}
-      >
-        <div className="absolute inset-0 bg-[#050508]" />
-        {/* Torn edge glow — right side of left half */}
-        <div className="absolute top-0 bottom-0 right-0 w-8 pointer-events-none" style={{
-          background: "linear-gradient(to left, rgba(255,107,53,0.3), transparent)",
-          filter: "blur(4px)",
-        }} />
-        {/* Jagged edge SVG */}
-        <svg className="absolute top-0 right-0 h-full w-4 translate-x-1/2" viewBox="0 0 100 100" preserveAspectRatio="none" style={{ filter: "drop-shadow(2px 0 6px rgba(255,107,53,0.4))" }}>
-          <polyline points={tearPath} fill="none" stroke="#ff6b35" strokeWidth="3" vectorEffect="non-scaling-stroke" />
-        </svg>
-      </div>
-
-      {/* Right half */}
-      <div
-        data-tear-right
-        className="absolute inset-0 origin-center-left"
-        style={{ clipPath: "polygon(50% 0, 100% 0, 100% 100%, 50% 100%)", willChange: "transform" }}
-      >
-        <div className="absolute inset-0 bg-[#050508]" />
-        {/* Torn edge glow — left side of right half */}
-        <div className="absolute top-0 bottom-0 left-0 w-8 pointer-events-none" style={{
-          background: "linear-gradient(to right, rgba(255,107,53,0.3), transparent)",
-          filter: "blur(4px)",
-        }} />
-        {/* Jagged edge SVG */}
-        <svg className="absolute top-0 left-0 h-full w-4 -translate-x-1/2" viewBox="0 0 100 100" preserveAspectRatio="none" style={{ filter: "drop-shadow(-2px 0 6px rgba(255,107,53,0.4))" }}>
-          <polyline points={tearPath} fill="none" stroke="#ff6b35" strokeWidth="3" vectorEffect="non-scaling-stroke" />
-        </svg>
-      </div>
-
-      {/* Center glow line — visible as halves separate */}
-      <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1 pointer-events-none" style={{
-        background: "linear-gradient(to bottom, transparent, rgba(255,107,53,0.5) 30%, rgba(255,107,53,0.5) 70%, transparent)",
-        filter: "blur(3px)",
-        boxShadow: "0 0 20px 4px rgba(255,107,53,0.15)",
-      }} />
+    <div ref={containerRef} className="fixed inset-0 z-[100] pointer-events-auto">
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0"
+        style={{ willChange: "transform" }}
+      />
     </div>
   );
 }
@@ -1469,22 +1751,25 @@ function WhatsAppButton() {
    PAGE
    ═══════════════════════════════════════════════════════════ */
 export default function HomePage() {
+  const [preloaderDone, setPreloaderDone] = useState(false);
   useSmoothScroll();
   useScrollAnimations();
 
   return (
-    <main className="bg-[#0a0a0a] text-[#e8e8e8] min-h-screen">
-      <ScrollRocket />
-      <WhatsAppButton />
-      <HeroSection />
-      <PaperTear />
-      <AboutSection />
-      <ServicesSection />
-      <PortfolioSection />
-      <ProcessSection />
-      <TestimonialsSection />
-      <CTASection />
-      <Footer />
-    </main>
+    <>
+      <RocketPreloader onComplete={() => setPreloaderDone(true)} />
+      <main className="bg-[#0a0a0a] text-[#e8e8e8] min-h-screen">
+        {preloaderDone && <ScrollRocket />}
+        <WhatsAppButton />
+        <HeroSection />
+        <AboutSection />
+        <ServicesSection />
+        <PortfolioSection />
+        <ProcessSection />
+        <TestimonialsSection />
+        <CTASection />
+        <Footer />
+      </main>
+    </>
   );
 }
