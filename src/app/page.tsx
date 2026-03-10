@@ -638,9 +638,16 @@ function ScrollRocket() {
     resize();
     window.addEventListener("resize", resize);
 
+    let prevProgress = 0;
+    let isScrolling = false;
+    let scrollTimeout = 0;
+
     const onScroll = () => {
       const docH = document.documentElement.scrollHeight - window.innerHeight;
       scrollProgress.current = Math.min(window.scrollY / docH, 1);
+      isScrolling = true;
+      clearTimeout(scrollTimeout);
+      scrollTimeout = window.setTimeout(() => { isScrolling = false; }, 80);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
@@ -804,8 +811,12 @@ function ScrollRocket() {
       const { x, y, angle } = getRocketPos(t);
       const visible = y > -80 && y < h + 80 && x > -80 && x < w + 80;
 
-      // ── Spawn trail particles ──
-      if (visible && t > 0.08) {
+      // ── Spawn trail particles only while scrolling ──
+      const scrollDelta = Math.abs(t - prevProgress);
+      prevProgress = t;
+      const moving = isScrolling && scrollDelta > 0.0001;
+
+      if (visible && t > 0.08 && moving) {
         const thrustX = -Math.cos(angle) * 2;
         const thrustY = -Math.sin(angle) * 2;
         // Fire particles
@@ -869,8 +880,8 @@ function ScrollRocket() {
         ctx.shadowBlur = 0;
       }
 
-      // ── Engine glow ──
-      if (visible && t > 0.08) {
+      // ── Engine glow (only while moving) ──
+      if (visible && t > 0.08 && moving) {
         const glowX = x + -Math.cos(angle) * 18;
         const glowY = y + -Math.sin(angle) * 18;
         const engineGlow = ctx.createRadialGradient(glowX, glowY, 0, glowX, glowY, 35);
