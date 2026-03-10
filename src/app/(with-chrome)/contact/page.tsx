@@ -6,9 +6,9 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { MailIcon, PhoneIcon, MapPinIcon } from "@/components/ui/Icons";
 
 export const metadata: Metadata = {
-  title: "Contact Us — Get a Free Quote | Eclipse Agency Cairo",
+  title: "Contact Us — Get a Free Quote | Eclipse Agency Riyadh",
   description:
-    "Contact Eclipse Agency for branding, digital marketing, web development, and video production. Free consultation available. Based in Cairo, serving Egypt, Saudi Arabia & UAE.",
+    "Contact Eclipse Agency for branding, digital marketing, web development, and video production in Riyadh. Free consultation available. Serving Saudi Arabia, UAE & the Middle East.",
   alternates: { canonical: "/contact" },
 };
 

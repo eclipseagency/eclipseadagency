@@ -7,7 +7,7 @@ import { CtaBanner } from "@/components/sections/CtaBanner";
 export const metadata: Metadata = {
   title: "Our Services — Branding, Marketing, Web Dev & Production",
   description:
-    "Explore Eclipse Agency's full-service creative solutions: branding & identity, digital marketing & SEO, web & app development, video production, 3D design, and animation in Cairo.",
+    "Explore Eclipse Agency's full-service creative solutions: branding & identity, digital marketing & SEO, web & app development, video production, 3D design, and animation in Riyadh, Saudi Arabia.",
   alternates: { canonical: "/solutions" },
 };
 

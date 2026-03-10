@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!service) return {};
   return {
     title: `${service.title} Services — Eclipse Agency Cairo`,
-    description: `${service.description} Get a free quote from Eclipse Agency, Cairo's leading creative agency.`,
+    description: `${service.description} Get a free quote from Eclipse Agency, Riyadh's leading creative agency.`,
     alternates: { canonical: `/solutions/${slug}` },
   };
 }

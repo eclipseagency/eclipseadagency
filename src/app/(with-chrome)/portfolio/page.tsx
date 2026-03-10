@@ -6,7 +6,7 @@ import { CtaBanner } from "@/components/sections/CtaBanner";
 export const metadata: Metadata = {
   title: "Portfolio — Our Creative Work & Case Studies",
   description:
-    "See Eclipse Agency's portfolio of branding, web development, digital marketing, video production, and 3D design projects delivered for clients across Egypt & Saudi Arabia.",
+    "See Eclipse Agency's portfolio of branding, web development, digital marketing, video production, and 3D design projects delivered for clients across Saudi Arabia & the Middle East.",
   alternates: { canonical: "/portfolio" },
 };
 

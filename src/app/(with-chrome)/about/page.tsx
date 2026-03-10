@@ -12,9 +12,9 @@ import type { PortfolioProject } from "@/components/ui/PortfolioGrid";
 import { ValuesGrid } from "./ValuesGrid";
 
 export const metadata: Metadata = {
-  title: "About Us — Creative Agency in Cairo, Egypt",
+  title: "About Us — Creative Agency in Riyadh, Saudi Arabia",
   description:
-    "Meet Eclipse Agency — a full-service creative team in Cairo with 8+ years of experience, 200+ projects delivered, and 50+ happy clients across Egypt, Saudi Arabia & the UAE.",
+    "Meet Eclipse Agency — a full-service creative team in Riyadh with 8+ years of experience, 200+ projects delivered, and 50+ happy clients across Saudi Arabia & the Middle East.",
   alternates: { canonical: "/about" },
 };
 

@@ -7,7 +7,7 @@ export const siteConfig = {
   ogImage: "/images/og-image.svg",
   email: "marketing@eclipseadagency.com",
   phone: "01129560357",
-  address: "28 Sayed Afifi St., Al Golf, Heliopolis, Cairo, Egypt 11586",
+  address: "Riyadh, Saudi Arabia",
   whatsapp: "201129560357",
   social: {
     linkedin: "https://linkedin.com/company/eclipseadagency/",

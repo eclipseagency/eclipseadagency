@@ -10,7 +10,7 @@ import { formatDate } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Blog — Branding, Marketing & Design Insights",
   description:
-    "Expert articles on branding, digital marketing, SEO, web development, video production, and creative strategy from Eclipse Agency's team in Cairo.",
+    "Expert articles on branding, digital marketing, SEO, web development, video production, and creative strategy from Eclipse Agency's team in Riyadh.",
   alternates: { canonical: "/blog" },
 };
 
