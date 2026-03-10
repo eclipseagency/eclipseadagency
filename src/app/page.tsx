@@ -2283,7 +2283,7 @@ export default function HomePage() {
             loop
             playsInline
             className="h-[260px] w-auto mix-blend-screen md:h-[380px]"
-            style={{ transform: "translateX(20px)" }}
+            style={{ transform: "translateX(20px) translateY(-40px)" }}
           />
         </div>
         <AboutSection />
