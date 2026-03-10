@@ -587,6 +587,81 @@ function OrbitingSolutions() {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   Journey Button — Auto-scrolls the page smoothly
+   ═══════════════════════════════════════════════════════════ */
+function JourneyButton() {
+  const scrollingRef = useRef(false);
+  const animRef = useRef(0);
+
+  const startJourney = useCallback(() => {
+    if (scrollingRef.current) {
+      // Stop if already scrolling
+      scrollingRef.current = false;
+      cancelAnimationFrame(animRef.current);
+      return;
+    }
+    scrollingRef.current = true;
+    const speed = 1.2; // pixels per frame (~72px/sec at 60fps)
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+    function step() {
+      if (!scrollingRef.current) return;
+      const current = window.scrollY;
+      if (current >= maxScroll - 2) {
+        scrollingRef.current = false;
+        return;
+      }
+      window.scrollBy(0, speed);
+      animRef.current = requestAnimationFrame(step);
+    }
+    animRef.current = requestAnimationFrame(step);
+
+    // Stop on user interaction
+    const stop = () => {
+      scrollingRef.current = false;
+      cancelAnimationFrame(animRef.current);
+      window.removeEventListener("wheel", stop);
+      window.removeEventListener("touchstart", stop);
+      window.removeEventListener("keydown", stop);
+    };
+    window.addEventListener("wheel", stop, { once: true, passive: true });
+    window.addEventListener("touchstart", stop, { once: true, passive: true });
+    window.addEventListener("keydown", stop, { once: true });
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      scrollingRef.current = false;
+      cancelAnimationFrame(animRef.current);
+    };
+  }, []);
+
+  return (
+    <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-20">
+      <button
+        onClick={startJourney}
+        className="group flex flex-col items-center gap-3 cursor-pointer"
+      >
+        <span className="text-[9px] font-semibold uppercase tracking-[0.3em] text-white/30 group-hover:text-[#ff6b35]/70 transition-colors duration-500 md:text-[10px]">
+          Start the Journey
+        </span>
+        {/* Animated chevron pulse */}
+        <div className="relative flex flex-col items-center gap-0.5">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+            className="text-white/20 group-hover:text-[#ff6b35]/60 transition-colors animate-bounce" style={{ animationDuration: "2s" }}>
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+            className="text-white/10 group-hover:text-[#ff6b35]/40 transition-colors animate-bounce" style={{ animationDuration: "2s", animationDelay: "0.15s" }}>
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </div>
+      </button>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
    SECTION: Hero
    ═══════════════════════════════════════════════════════════ */
 function HeroSection() {
@@ -608,9 +683,6 @@ function HeroSection() {
         boxShadow: "inset 0 0 200px 80px rgba(5,5,8,0.8)",
       }} />
 
-      {/* ── Bottom gradient fade ── */}
-      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent pointer-events-none z-[2]" />
-
       {/* ── Title centered inside the eclipse sphere ── */}
       <div data-hero-content className="absolute inset-0 z-10 pointer-events-none" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
         <div data-hero-text className="text-center" style={{ marginTop: "-16vh" }}>
@@ -627,6 +699,12 @@ function HeroSection() {
           </p>
         </div>
       </div>
+
+      {/* ── Auto-scroll journey button ── */}
+      <JourneyButton />
+
+      {/* ── Bottom gradient fade ── */}
+      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent pointer-events-none z-[2]" />
     </section>
   );
 }
@@ -2063,7 +2141,7 @@ function Footer() {
         <div className="grid gap-10 md:grid-cols-3">
           {/* Brand */}
           <div>
-            <p className="font-heading text-lg font-bold text-white">{siteConfig.name}</p>
+            <Image src="https://eclipseadagency.com/wp-content/uploads/2025/12/eclipse-logo-source-1.png" alt={siteConfig.name} width={160} height={40} className="h-8 w-auto object-contain mb-3" />
             <p className="mt-1 text-xs text-white/25">{siteConfig.tagline}</p>
             <p className="mt-4 text-xs leading-relaxed text-white/30">
               Customized marketing solutions for businesses across the Middle East.
