@@ -1494,41 +1494,140 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   Shared: Space background canvas for sections
-   Draws subtle stars + nebula behind content sections
+   Space Background — Full-page fixed starfield with parallax
+   Creates a continuous space journey feel while scrolling
    ═══════════════════════════════════════════════════════════ */
-function SectionStars({ density = 40, className = "" }: { density?: number; className?: string }) {
+function SpaceBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
   useEffect(() => {
-    const c = canvasRef.current;
-    if (!c) return;
-    const ctx = c.getContext("2d")!;
-    const dpr = Math.min(window.devicePixelRatio, 2);
-    const resize = () => {
-      c.width = c.clientWidth * dpr;
-      c.height = c.clientHeight * dpr;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d")!;
+    let w = 0, h = 0, dpr = 1;
+    let animId = 0;
+
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio, 2);
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas!.width = w * dpr;
+      canvas!.height = h * dpr;
+      canvas!.style.width = w + "px";
+      canvas!.style.height = h + "px";
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      draw();
-    };
-    const stars = Array.from({ length: density }, () => ({
-      x: Math.random(), y: Math.random(),
-      r: 0.3 + Math.random() * 1.2,
-      a: 0.15 + Math.random() * 0.5,
-    }));
-    function draw() {
-      ctx.clearRect(0, 0, c!.clientWidth, c!.clientHeight);
-      for (const s of stars) {
-        ctx.beginPath();
-        ctx.arc(s.x * c!.clientWidth, s.y * c!.clientHeight, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,245,230,${s.a})`;
-        ctx.fill();
-      }
     }
     resize();
     window.addEventListener("resize", resize);
-    return () => window.removeEventListener("resize", resize);
-  }, [density]);
-  return <canvas ref={canvasRef} className={`absolute inset-0 w-full h-full pointer-events-none ${className}`} />;
+
+    // Three parallax star layers — far (slow), mid, near (fast)
+    const farStars = Array.from({ length: 100 }, () => ({
+      x: Math.random() * 1.2 - 0.1, y: Math.random(),
+      size: 0.3 + Math.random() * 0.8,
+      brightness: 0.12 + Math.random() * 0.2,
+      phase: Math.random() * Math.PI * 2,
+    }));
+    const midStars = Array.from({ length: 60 }, () => ({
+      x: Math.random() * 1.2 - 0.1, y: Math.random(),
+      size: 0.5 + Math.random() * 1.2,
+      brightness: 0.15 + Math.random() * 0.3,
+      phase: Math.random() * Math.PI * 2,
+    }));
+    const nearStars = Array.from({ length: 25 }, () => ({
+      x: Math.random() * 1.2 - 0.1, y: Math.random(),
+      size: 0.8 + Math.random() * 1.5,
+      brightness: 0.2 + Math.random() * 0.4,
+      phase: Math.random() * Math.PI * 2,
+    }));
+
+    // Subtle nebula wisps — very faint color patches
+    const nebulae = [
+      { x: 0.2, y: 0.25, rx: 250, ry: 150, color: "rgba(100,50,180,0.015)", parallax: 0.05 },
+      { x: 0.75, y: 0.55, rx: 300, ry: 180, color: "rgba(255,80,30,0.012)", parallax: 0.08 },
+      { x: 0.5, y: 0.8, rx: 200, ry: 130, color: "rgba(50,120,200,0.01)", parallax: 0.06 },
+    ];
+
+    let scrollY = 0;
+    const onScroll = () => { scrollY = window.scrollY; };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    function draw(now: number) {
+      ctx.clearRect(0, 0, w, h);
+      const t = now * 0.001;
+      const docH = Math.max(1, document.documentElement.scrollHeight - h);
+      const scrollFrac = scrollY / docH;
+
+      // ── Nebula wisps (parallax shifted) ──
+      for (const n of nebulae) {
+        const ny = (n.y - scrollFrac * n.parallax * 3) * h;
+        const grad = ctx.createRadialGradient(n.x * w, ny, 0, n.x * w, ny, n.rx);
+        grad.addColorStop(0, n.color);
+        grad.addColorStop(1, "transparent");
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, w, h);
+      }
+
+      // ── Far stars (slowest parallax) ──
+      for (const s of farStars) {
+        const sy = ((s.y - scrollFrac * 0.03) % 1.0 + 1.0) % 1.0;
+        const twinkle = 0.7 + 0.3 * Math.sin(t * 0.4 + s.phase);
+        ctx.beginPath();
+        ctx.arc(s.x * w, sy * h, s.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,245,235,${s.brightness * twinkle})`;
+        ctx.fill();
+      }
+
+      // ── Mid stars ──
+      for (const s of midStars) {
+        const sy = ((s.y - scrollFrac * 0.08) % 1.0 + 1.0) % 1.0;
+        const twinkle = 0.6 + 0.4 * Math.sin(t * 0.7 + s.phase);
+        ctx.beginPath();
+        ctx.arc(s.x * w, sy * h, s.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,248,240,${s.brightness * twinkle})`;
+        ctx.fill();
+        // Subtle glow on brighter ones
+        if (s.brightness > 0.3) {
+          ctx.beginPath();
+          ctx.arc(s.x * w, sy * h, s.size * 3, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,220,180,${s.brightness * twinkle * 0.06})`;
+          ctx.fill();
+        }
+      }
+
+      // ── Near stars (fastest parallax) ──
+      for (const s of nearStars) {
+        const sy = ((s.y - scrollFrac * 0.15) % 1.0 + 1.0) % 1.0;
+        const twinkle = 0.5 + 0.5 * Math.sin(t * 1.2 + s.phase);
+        ctx.beginPath();
+        ctx.arc(s.x * w, sy * h, s.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,250,245,${s.brightness * twinkle})`;
+        ctx.fill();
+        // Soft glow
+        ctx.beginPath();
+        ctx.arc(s.x * w, sy * h, s.size * 4, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,200,150,${s.brightness * twinkle * 0.04})`;
+        ctx.fill();
+      }
+
+      animId = requestAnimationFrame(draw);
+    }
+
+    animId = requestAnimationFrame(draw);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="pointer-events-none fixed inset-0 z-[1]"
+      style={{ willChange: "transform" }}
+    />
+  );
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1541,7 +1640,7 @@ function AboutSection() {
       <div className="absolute top-0 right-0 w-[60%] h-[60%] pointer-events-none opacity-30" style={{
         background: "radial-gradient(ellipse at 80% 20%, rgba(255,107,53,0.08) 0%, transparent 60%)",
       }} />
-      <SectionStars density={30} />
+
 
       <div className="relative mx-auto max-w-[1100px] px-5 md:px-8">
         {/* Big statement */}
@@ -1599,7 +1698,7 @@ function ServicesSection() {
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[40%] h-[80%] pointer-events-none opacity-20" style={{
         background: "radial-gradient(ellipse at 10% 50%, rgba(255,107,53,0.1) 0%, transparent 60%)",
       }} />
-      <SectionStars density={25} />
+
 
       <div className="relative mx-auto max-w-[1100px] px-5 md:px-8">
         <div className="text-center mb-16">
@@ -1658,7 +1757,7 @@ function ServicesSection() {
 function PortfolioSection() {
   return (
     <section className="relative py-24 md:py-32 overflow-hidden">
-      <SectionStars density={20} />
+
       {/* Top/bottom borders */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
@@ -1745,7 +1844,7 @@ function ProjectCard({ item }: { item: (typeof portfolioItems)[number] }) {
 function ProcessSection() {
   return (
     <section className="relative py-24 md:py-40 overflow-hidden">
-      <SectionStars density={20} />
+
       {/* Center nebula */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] pointer-events-none opacity-15" style={{
         background: "radial-gradient(circle, rgba(255,107,53,0.08) 0%, transparent 50%)",
@@ -1801,7 +1900,7 @@ function ProcessSection() {
 function TestimonialsSection() {
   return (
     <section className="relative py-24 md:py-40 overflow-hidden">
-      <SectionStars density={25} />
+
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
 
       <div className="relative mx-auto max-w-[1100px] px-5 md:px-8">
@@ -1860,7 +1959,7 @@ function TestimonialsSection() {
 function CTASection() {
   return (
     <section className="relative py-32 md:py-48 overflow-hidden">
-      <SectionStars density={40} />
+
 
       {/* Central eclipse glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none" style={{
@@ -1985,6 +2084,7 @@ export default function HomePage() {
     <>
       <RocketPreloader onComplete={() => setPreloaderDone(true)} />
       <main className="bg-[#0a0a0a] text-[#e8e8e8] min-h-screen">
+        <SpaceBackground />
         <ScrollRocket visible={preloaderDone} />
         <WhatsAppButton />
         <HeroSection />
