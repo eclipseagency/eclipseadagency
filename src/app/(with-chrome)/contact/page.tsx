@@ -4,6 +4,7 @@ import { ContactForm } from "./ContactForm";
 import { siteConfig } from "@/data/site";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { MailIcon, PhoneIcon, MapPinIcon } from "@/components/ui/Icons";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Contact Us - Get a Free Quote | Eclipse Agency Riyadh",
@@ -55,6 +56,12 @@ export default function ContactPage() {
       />
 
       <SectionWrapper>
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Contact" },
+          ]}
+        />
         <div className="grid gap-12 lg:grid-cols-5 lg:gap-20">
           {/* Contact info */}
           <div className="lg:col-span-2">

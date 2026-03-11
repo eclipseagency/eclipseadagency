@@ -80,6 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap"
           rel="stylesheet"
         />
+        <link rel="alternate" type="application/rss+xml" title="Eclipse Agency Blog" href="https://www.eclipseagency.net/feed.xml" />
         <script src="https://player.vimeo.com/api/player.js" async />
       </head>
       <body className="min-h-screen bg-bg font-body text-text antialiased">

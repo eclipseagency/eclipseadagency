@@ -9,7 +9,9 @@ import { MissionVision } from "@/components/sections/MissionVision";
 import { ImageCarousel } from "@/components/ui/ImageCarousel";
 import { PortfolioGrid } from "@/components/ui/PortfolioGrid";
 import type { PortfolioProject } from "@/components/ui/PortfolioGrid";
+import { ShowreelPlayer } from "@/components/ui/ShowreelPlayer";
 import { ValuesGrid } from "./ValuesGrid";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "About Us - Creative Agency in Riyadh, Saudi Arabia",
@@ -142,6 +144,12 @@ export default function AboutPage() {
 
       {/* ── Story ── */}
       <SectionWrapper dark>
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "About" },
+          ]}
+        />
         <SectionHeader
           badge="Our Story"
           title="From Bold Idea to Creative Powerhouse"
@@ -171,15 +179,12 @@ export default function AboutPage() {
       {/* ── Showreel 2024 ── */}
       <SectionWrapper>
         <SectionHeader badge="Showreel" title="Showreel 2024" />
-        <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-border">
-          <div className="relative" style={{ paddingTop: "56.25%" }}>
-            <iframe
-              src="https://player.vimeo.com/video/1051203598?h=a43672f073&badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&background=1"
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-              className="absolute inset-0 h-full w-full"
-              title="Eclipse Agency - Showreel 2024"
-            />
-          </div>
+        <div className="mx-auto max-w-4xl">
+          <ShowreelPlayer
+            vimeoUrl="https://player.vimeo.com/video/1051203598?h=a43672f073&badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1"
+            thumbnailUrl="https://vumbnail.com/1051203598.jpg"
+            title="Eclipse Agency - Showreel 2024"
+          />
         </div>
       </SectionWrapper>
 

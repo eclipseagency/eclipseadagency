@@ -5,6 +5,9 @@ import { notFound } from "next/navigation";
 import { blogPosts } from "@/data/site";
 import { formatDate } from "@/lib/utils";
 import { ArrowRightIcon } from "@/components/ui/Icons";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import ReadingProgress from "./ReadingProgress";
+import ShareButtons from "./ShareButtons";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -46,10 +49,53 @@ export default async function BlogPostPage({ params }: Props) {
 
   if (!post) notFound();
 
+  const canonicalUrl = `https://www.eclipseagency.net/blog/${slug}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    image: post.image,
+    author: {
+      "@type": "Organization",
+      name: "Eclipse Agency",
+      url: "https://www.eclipseagency.net",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Eclipse Agency",
+      url: "https://www.eclipseagency.net",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.eclipseagency.net/logo.png",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": canonicalUrl,
+    },
+    articleSection: post.category,
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <ReadingProgress />
+
       <section className="relative px-5 pt-32 pb-16 md:px-8 md:pt-40">
         <div className="mx-auto max-w-3xl">
+          <Breadcrumbs
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Blog", href: "/blog" },
+              { label: post.title },
+            ]}
+          />
           <Link
             href="/blog"
             className="mb-6 inline-flex items-center gap-2 text-sm text-text-muted transition-colors hover:text-primary"
@@ -108,6 +154,11 @@ export default async function BlogPostPage({ params }: Props) {
               you turn strategy into results. Get in touch to start the conversation.
             </p>
           </article>
+
+          {/* Social sharing */}
+          <div className="mt-12 border-t border-border pt-8">
+            <ShareButtons url={canonicalUrl} title={post.title} />
+          </div>
         </div>
       </section>
     </>

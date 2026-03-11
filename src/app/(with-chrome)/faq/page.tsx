@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { FaqAccordion } from "./FaqAccordion";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "FAQ - Frequently Asked Questions | Eclipse Agency Riyadh",
@@ -77,6 +78,12 @@ export default function FaqPage() {
       />
 
       <SectionWrapper>
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "FAQ" },
+          ]}
+        />
         <FaqAccordion items={faqItems} />
       </SectionWrapper>
     </>
