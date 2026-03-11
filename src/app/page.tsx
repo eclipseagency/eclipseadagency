@@ -1918,8 +1918,8 @@ function PortfolioSection() {
 
       {/* Horizontal scroll — desktop only */}
       <div className="hidden md:block">
-        <div data-h-scroll className="relative h-[80vh]">
-          <div data-h-track className="flex h-full items-center gap-10 pl-[max(2rem,calc((100vw-1100px)/2+1.25rem))] pr-[50vw]">
+        <div data-h-scroll className="relative h-[70vh]">
+          <div data-h-track className="flex h-full items-center gap-8 pl-[max(2rem,calc((100vw-1100px)/2+1.25rem))] pr-[20vw]">
             {portfolioVideos.map((v) => (
               <VideoCard key={v.id} video={v} />
             ))}
@@ -1950,7 +1950,7 @@ function VideoCard({ video }: { video: (typeof portfolioVideos)[number] }) {
     if (!el) return;
     const io = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { setVisible(true); io.disconnect(); } },
-      { rootMargin: "200px" },
+      { rootMargin: "600px" },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -1965,13 +1965,14 @@ function VideoCard({ video }: { video: (typeof portfolioVideos)[number] }) {
     <div ref={ref} className="block shrink-0 group">
       <div
         className="relative overflow-hidden rounded-2xl border border-white/[0.06] transition-all duration-500 hover:border-[#ff6b35]/20 hover:shadow-[0_20px_80px_rgba(255,107,53,0.1)]"
-        style={{ width: "min(70vw, 500px)" }}
+        style={{ width: "min(55vw, 400px)" }}
       >
         {/* Uniform 1:1 square aspect for all cards */}
         <div className="relative overflow-hidden bg-white/[0.02]" style={{ paddingTop: "100%" }}>
           {visible && video.vimeoId ? (
             <iframe
               src={vimeoSrc}
+              loading="lazy"
               allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
               referrerPolicy="strict-origin-when-cross-origin"
               className="absolute inset-0 h-full w-full border-0"
