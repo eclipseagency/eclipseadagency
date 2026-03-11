@@ -290,7 +290,8 @@ export function TeamBuilder() {
                 return (
                   <div
                     key={role.id}
-                    className={`rounded-xl border-2 p-4 transition-all duration-200 ${
+                    onClick={() => toggleRole(role.id)}
+                    className={`cursor-pointer rounded-xl border-2 p-4 transition-all duration-200 ${
                       active
                         ? "border-primary bg-primary/5"
                         : "border-border bg-bg-elevated/30 hover:border-border-hover"
@@ -298,8 +299,7 @@ export function TeamBuilder() {
                   >
                     <div className="flex flex-wrap items-center gap-3">
                       {/* Toggle */}
-                      <button
-                        onClick={() => toggleRole(role.id)}
+                      <div
                         className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md border-2 transition-all ${
                           active
                             ? "border-primary bg-primary text-white"
@@ -311,7 +311,7 @@ export function TeamBuilder() {
                             <polyline points="20 6 9 17 4 12" />
                           </svg>
                         )}
-                      </button>
+                      </div>
 
                       {/* Title + price */}
                       <div className="flex-1">
@@ -328,7 +328,7 @@ export function TeamBuilder() {
 
                       {/* Level + Count (only when active) */}
                       {active && (
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-3" onClick={(e) => e.stopPropagation()}>
                           {/* Junior/Senior toggle */}
                           <div className="flex rounded-lg border border-border overflow-hidden">
                             <button
