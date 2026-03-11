@@ -19,7 +19,7 @@ export const siteConfig = {
   },
   nav: [
     { label: "Home", href: "/" },
-    { label: "Profile", href: "/about" },
+    { label: "About", href: "/about" },
     {
       label: "Solutions",
       href: "/solutions",
@@ -32,6 +32,8 @@ export const siteConfig = {
         { label: "3D Creations", href: "/solutions/3d-creations" },
       ],
     },
+    { label: "Portfolio", href: "/portfolio" },
+    { label: "Team", href: "/team" },
     { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
   ],

@@ -5,6 +5,31 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ── Respect reduced motion preferences ── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  /* Hide heavy canvas animations entirely */
+  canvas {
+    display: none !important;
+  }
+}
+
+/* ── Focus styles for keyboard navigation ── */
+:focus-visible {
+  outline: 2px solid #ff6b35;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 /* ── Custom theme tokens ── */
 :root {
   --color-bg: #0a0a0a;

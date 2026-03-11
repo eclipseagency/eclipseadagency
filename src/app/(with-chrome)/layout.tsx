@@ -10,7 +10,7 @@ export default function ChromeLayout({ children }: { children: React.ReactNode }
       <CustomCursor />
       <WireframeBackground />
       <Header />
-      <main className="relative z-10">{children}</main>
+      <main id="main-content" className="relative z-10">{children}</main>
       <Footer />
     </>
   );

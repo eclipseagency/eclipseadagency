@@ -45,7 +45,6 @@ export const metadata: Metadata = {
       "Full-service creative agency in Riyadh specializing in branding, digital marketing, web development, production, 3D design, and animation. 200+ projects delivered.",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: `${siteConfig.name} - Creative Agency in Riyadh, Saudi Arabia` }],
     locale: "en_US",
     type: "website",
   },
@@ -54,7 +53,6 @@ export const metadata: Metadata = {
     title: `${siteConfig.name} - Creative Agency in Riyadh`,
     description:
       "Full-service creative agency specializing in branding, digital marketing, web development, production, 3D design, and animation.",
-    images: [siteConfig.ogImage],
   },
   robots: {
     index: true,
@@ -85,6 +83,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script src="https://player.vimeo.com/api/player.js" async />
       </head>
       <body className="min-h-screen bg-bg font-body text-text antialiased">
+        {/* Skip to content — accessibility for keyboard users */}
+        <a
+          href="#main-content"
+          className="fixed left-2 top-2 z-[200] -translate-y-20 rounded-lg bg-[#ff6b35] px-4 py-2 text-sm font-semibold text-white transition-transform focus:translate-y-0"
+        >
+          Skip to main content
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

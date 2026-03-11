@@ -29,7 +29,7 @@ export function CookieConsent() {
 
   return (
     <div
-      className={`fixed bottom-5 right-5 z-[9999] max-w-sm rounded-2xl border border-white/10 bg-[#0a0a0a] p-5 shadow-2xl transition-all duration-500 ease-out ${
+      className={`fixed bottom-20 left-5 z-[9999] max-w-sm rounded-2xl border border-white/10 bg-[#0a0a0a] p-5 shadow-2xl transition-all duration-500 ease-out ${
         visible
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-8 opacity-0"
