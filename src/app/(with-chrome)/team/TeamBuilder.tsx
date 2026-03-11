@@ -61,8 +61,8 @@ const officeOptions: { id: OfficeType; title: string; desc: string; perPersonUSD
   },
 ];
 
-// Pre-built smart team: 10,000 SAR/month = $2,667 USD
-const smartTeamUSD = 2667;
+// Pre-built smart team: $3,000 USD/month
+const smartTeamUSD = 3000;
 
 /* ------------------------------------------------------------------ */
 /*  Selection state                                                    */
@@ -183,7 +183,7 @@ export function TeamBuilder() {
             <h3 className="font-heading text-lg font-bold">Smart Team</h3>
           </div>
           <p className="mb-3 text-sm text-text-secondary">
-            Ready-made 10-person digital marketing team. Starts within 1 week after payment.
+            Ready-made 9-person digital marketing team. Starts within 1 week after payment.
           </p>
           <div className="font-heading text-2xl font-bold text-primary">
             {fmt(smartTeamUSD)}
@@ -237,16 +237,13 @@ export function TeamBuilder() {
             </div>
             <div className="grid gap-2 sm:grid-cols-2">
               {[
-                "Social Media Manager",
+                "2x Graphic Designer",
+                "2x Social Media Specialist",
                 "Content Creator",
-                "Graphic Designer",
-                "Media Buyer",
                 "Video Editor",
-                "Copywriter",
                 "Account Manager",
                 "Motion Designer",
                 "SEO Specialist",
-                "Community Manager",
               ].map((role) => (
                 <div key={role} className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm">
                   <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary">
@@ -269,7 +266,7 @@ export function TeamBuilder() {
               </div>
             </div>
             <p className="mt-4 text-center text-xs text-text-muted">
-              10 team members. Fully managed & on-site. Self-started — ready to work on any project.
+              9 team members. Fully managed & on-site. Self-started — ready to work on any project.
             </p>
           </div>
         </div>
@@ -469,7 +466,7 @@ export function TeamBuilder() {
                   )}
                 </>
               )}
-              {mode === "smart" && <p>10 team members — Ready in 1 week</p>}
+              {mode === "smart" && <p>9 team members — Ready in 1 week</p>}
             </div>
           </div>
         </div>
