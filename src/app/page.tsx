@@ -1944,8 +1944,9 @@ function PortfolioSection() {
 function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; index: number }) {
   const [activated, setActivated] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
-  // Auto-activate first video after short delay
+  // Auto-activate first video after short delay (desktop)
   useEffect(() => {
     if (index === 0) {
       const t = setTimeout(() => setActivated(true), 1500);
@@ -1953,8 +1954,22 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
     }
   }, [index]);
 
+  // Mobile: auto-activate when card scrolls into view
+  useEffect(() => {
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    if (!isMobile || !cardRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setActivated(true);
+      },
+      { threshold: 0.6 }
+    );
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   const handleMouseEnter = () => {
-    // Load iframe on hover with small delay to avoid accidental triggers
     timerRef.current = setTimeout(() => setActivated(true), 300);
   };
   const handleMouseLeave = () => {
@@ -1968,6 +1983,7 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
 
   return (
     <div
+      ref={cardRef}
       className="block shrink-0 group"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -2308,14 +2324,14 @@ export default function HomePage() {
         <WhatsAppButton />
         <BackToTop />
         <HeroSection />
-        <div className="relative z-30 flex justify-center pointer-events-none select-none" style={{ marginBottom: "-160px" }}>
+        <div className="relative z-30 hidden md:flex justify-center pointer-events-none select-none" style={{ marginBottom: "-160px" }}>
           <video
             src="https://eclipseadagency.com/wp-content/uploads/2024/08/Inflatable-Tube-Man.webm"
             autoPlay
             muted
             loop
             playsInline
-            className="h-[260px] w-auto mix-blend-screen md:h-[380px]"
+            className="h-[380px] w-auto mix-blend-screen"
             style={{ transform: "translateX(20px) translateY(-40px)" }}
           />
         </div>
