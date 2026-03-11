@@ -1943,31 +1943,17 @@ function PortfolioSection() {
 
 function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; index: number }) {
   const [activated, setActivated] = useState(false);
+  const [iframeReady, setIframeReady] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  // Auto-activate first video after short delay (desktop)
+  // Auto-activate first video after short delay (desktop only)
   useEffect(() => {
-    if (index === 0) {
+    if (index === 0 && window.matchMedia("(min-width: 768px)").matches) {
       const t = setTimeout(() => setActivated(true), 1500);
       return () => clearTimeout(t);
     }
   }, [index]);
-
-  // Mobile: auto-activate when card scrolls into view
-  useEffect(() => {
-    const isMobile = window.matchMedia("(max-width: 767px)").matches;
-    if (!isMobile || !cardRef.current) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setActivated(true);
-      },
-      { threshold: 0.6 }
-    );
-    observer.observe(cardRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   const handleMouseEnter = () => {
     timerRef.current = setTimeout(() => setActivated(true), 300);
@@ -1995,29 +1981,37 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
       >
         {/* Uniform 1:1 square aspect for all cards */}
         <div className="relative overflow-hidden bg-white/[0.02]" style={{ paddingTop: "100%" }}>
-          {/* Thumbnail - always rendered, hidden when video plays */}
+          {/* Thumbnail - stays visible until iframe is actually ready */}
           {video.thumb && (
             <img
               src={video.thumb}
               alt=""
-              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${activated ? "opacity-0" : "opacity-100"}`}
+              className={`absolute inset-0 z-10 h-full w-full object-cover transition-opacity duration-700 ${iframeReady ? "opacity-0 pointer-events-none" : "opacity-100"}`}
             />
           )}
 
           {/* Play icon overlay on thumbnail */}
-          {!activated && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-opacity hover:bg-black/10">
+          {!iframeReady && (
+            <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/20 transition-opacity hover:bg-black/10">
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                {activated ? (
+                  <div className="h-5 w-5 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+                ) : (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                )}
               </div>
             </div>
           )}
 
-          {/* Vimeo iframe - only loads when activated */}
+          {/* Vimeo iframe - loads when activated, thumbnail hides on iframe load */}
           {activated && video.vimeoId && (
             <iframe
               src={vimeoSrc}
               loading="lazy"
+              onLoad={() => {
+                // Give Vimeo a moment to start rendering after iframe loads
+                setTimeout(() => setIframeReady(true), 800);
+              }}
               allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
               referrerPolicy="strict-origin-when-cross-origin"
               className="absolute inset-0 h-full w-full border-0"
@@ -2029,6 +2023,7 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
             <video
               src={video.src}
               autoPlay muted loop playsInline
+              onPlaying={() => setIframeReady(true)}
               className="absolute inset-0 h-full w-full object-cover"
             />
           )}
