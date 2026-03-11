@@ -1932,7 +1932,6 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
   const [activated, setActivated] = useState(false);
   const [iframeReady, setIframeReady] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   // Activate all cards when the portfolio section scrolls into view
   useEffect(() => {
@@ -1942,8 +1941,7 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // Stagger activation so iframes don't all load at once
-          const t = setTimeout(() => setActivated(true), index * 400);
+          const t = setTimeout(() => setActivated(true), index * 300);
           observer.disconnect();
           return () => clearTimeout(t);
         }
@@ -1954,32 +1952,6 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
     return () => observer.disconnect();
   }, [index]);
 
-  // Use Vimeo Player API to detect actual playback
-  useEffect(() => {
-    if (!activated || !iframeRef.current || !video.vimeoId) return;
-
-    let cancelled = false;
-
-    // Wait for Vimeo API to be available
-    const tryInit = () => {
-      // @ts-expect-error - Vimeo Player loaded via external script
-      const Vimeo = window.Vimeo;
-      if (!Vimeo?.Player) {
-        // API not loaded yet, fallback to timeout
-        if (!cancelled) setTimeout(() => setIframeReady(true), 3000);
-        return;
-      }
-
-      const player = new Vimeo.Player(iframeRef.current!);
-      player.on("playing", () => { if (!cancelled) setIframeReady(true); });
-      player.play().catch(() => {});
-    };
-
-    // Small delay to let iframe initialize
-    const t = setTimeout(tryInit, 500);
-    return () => { cancelled = true; clearTimeout(t); };
-  }, [activated, video.vimeoId]);
-
   const handleMouseEnter = () => {
     timerRef.current = setTimeout(() => setActivated(true), 300);
   };
@@ -1987,23 +1959,7 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
     if (timerRef.current) clearTimeout(timerRef.current);
   };
 
-  const handleTap = () => {
-    setActivated(true);
-    // If iframe already loaded but not playing, use Vimeo API to play
-    if (iframeRef.current && !iframeReady) {
-      // @ts-expect-error - Vimeo Player loaded via external script
-      const Vimeo = window.Vimeo;
-      if (Vimeo?.Player) {
-        const player = new Vimeo.Player(iframeRef.current);
-        player.play().catch(() => {});
-        player.on("playing", () => setIframeReady(true));
-      }
-    }
-  };
-
-  // Remove background=1 — it blocks autoplay on many mobile browsers.
-  // Without it, Vimeo still respects autoplay+muted+controls=0 for a clean chromeless look.
-  const vimeoParams = `badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&quality=auto`;
+  const vimeoParams = `badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&background=1&quality=auto`;
   const vimeoSrc = video.vimeoId
     ? `https://player.vimeo.com/video/${video.vimeoId}?${video.vimeoHash ? `h=${video.vimeoHash}&` : ""}${vimeoParams}`
     : "";
@@ -2013,7 +1969,7 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
       className="block shrink-0 group"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={handleTap}
+      onClick={() => setActivated(true)}
     >
       <div
         className="relative overflow-hidden rounded-2xl border border-white/[0.06] transition-all duration-500 hover:border-[#ff6b35]/20 hover:shadow-[0_20px_80px_rgba(255,107,53,0.1)]"
@@ -2021,7 +1977,7 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
       >
         {/* Uniform 1:1 square aspect for all cards */}
         <div className="relative overflow-hidden bg-white/[0.02]" style={{ paddingTop: "100%" }}>
-          {/* Thumbnail - stays visible until video is actually playing */}
+          {/* Thumbnail - visible until iframe reports loaded */}
           {video.thumb && (
             <img
               src={video.thumb}
@@ -2043,12 +1999,15 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
             </div>
           )}
 
-          {/* Vimeo iframe - loads when activated */}
+          {/* Vimeo iframe */}
           {activated && video.vimeoId && (
             <iframe
-              ref={iframeRef}
               src={vimeoSrc}
               loading="lazy"
+              onLoad={() => {
+                // Hide thumbnail after iframe loads + buffer for Vimeo to render
+                setTimeout(() => setIframeReady(true), 1200);
+              }}
               allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
               referrerPolicy="strict-origin-when-cross-origin"
               className="absolute inset-0 h-full w-full border-0"
