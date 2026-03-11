@@ -56,8 +56,8 @@ const officeOptions: { id: OfficeType; title: string; desc: string; perPersonUSD
   {
     id: "registered",
     title: "New Registered Office",
-    desc: "A new company registered in Egypt under your name — with bank accounts, legal entity, and full compliance. Includes office equipment & PCs.",
-    perPersonUSD: 500,
+    desc: "A new company registered in Egypt under your name — with bank accounts, legal entity, full compliance, office equipment & PCs.",
+    perPersonUSD: 700,
   },
 ];
 
@@ -141,7 +141,7 @@ export function TeamBuilder() {
       officeType === "extension"
         ? "Extension of Eclipse Office"
         : "New Registered Office";
-    const setupMsg = oneTimeSetupUSD > 0 ? `\nOne-time setup: ${fmt(oneTimeSetupUSD)} (${headcount} x ${fmt(500)} for equipment & PCs)` : "";
+    const setupMsg = oneTimeSetupUSD > 0 ? `\nOne-time setup: ${fmt(oneTimeSetupUSD)} (${headcount} x ${fmt(700)} for equipment, PCs, legal & registration)` : "";
     return `Hi Mustafa, I'd like to build a custom team:\n\n${lines.join("\n")}\n\nOffice: ${office}\nMonthly: ${fmt(totalUSD)}/month${setupMsg}\n\nLet's discuss!`;
   };
 
@@ -430,7 +430,7 @@ export function TeamBuilder() {
                   <p className="text-sm font-bold text-primary">
                     {opt.perPersonUSD === 0
                       ? "No extra cost"
-                      : `+${fmt(opt.perPersonUSD)} per person (one-time setup)`}
+                      : `+${fmt(opt.perPersonUSD)} per person (one-time — equipment, PCs, legal & registration)`}
                   </p>
                 </button>
               ))}
@@ -461,7 +461,7 @@ export function TeamBuilder() {
                   <p>{officeType === "registered" ? "New Registered Office" : "Eclipse Office Extension"}</p>
                   {oneTimeSetupUSD > 0 && (
                     <p className="mt-1 font-medium text-primary">
-                      + {fmt(oneTimeSetupUSD)} one-time setup ({headcount} x {fmt(500)})
+                      + {fmt(oneTimeSetupUSD)} one-time setup ({headcount} x {fmt(700)})
                     </p>
                   )}
                 </>
@@ -493,7 +493,7 @@ export function TeamBuilder() {
             <p className="text-sm">
               <span className="text-text-muted">One-time setup: </span>
               <span className="font-bold text-primary">{fmt(oneTimeSetupUSD)}</span>
-              <span className="text-text-muted"> ({headcount} x {fmt(500)} for equipment & PCs)</span>
+              <span className="text-text-muted"> ({headcount} x {fmt(700)} for equipment, PCs, legal & registration)</span>
             </p>
           </div>
         )}
