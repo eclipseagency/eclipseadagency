@@ -105,7 +105,6 @@ export function Lightbox({ images, index, onClose, onPrev, onNext }: LightboxPro
             alt={current.alt}
             width={1400}
             height={900}
-            unoptimized
             className="max-h-[85vh] w-auto object-contain"
             priority
           />

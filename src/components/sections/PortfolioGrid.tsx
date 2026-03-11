@@ -147,7 +147,6 @@ function TunnelCard({
             alt={item.title}
             width={1200}
             height={675}
-            unoptimized
             className="h-full w-full object-cover transition-transform duration-700 ease-out"
             style={{
               transform: hover && isFocused ? "scale(1.06)" : "scale(1)",

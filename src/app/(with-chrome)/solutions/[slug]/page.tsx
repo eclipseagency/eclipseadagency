@@ -69,7 +69,6 @@ export default async function SolutionPage({ params }: Props) {
               alt={service.title}
               width={800}
               height={600}
-              unoptimized
               className="h-full w-full object-cover"
             />
           </div>
@@ -143,7 +142,6 @@ export default async function SolutionPage({ params }: Props) {
                   alt={s.title}
                   width={600}
                   height={340}
-                  unoptimized
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />

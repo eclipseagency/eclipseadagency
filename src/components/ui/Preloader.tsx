@@ -152,7 +152,6 @@ export function Preloader() {
           width={280}
           height={280}
           priority
-          unoptimized
           className="preloader-logo"
         />
 

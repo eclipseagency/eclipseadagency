@@ -48,7 +48,6 @@ export default function VolumePage() {
             alt="Volume branding presentation showcase"
             width={1200}
             height={3000}
-            unoptimized
             className="h-auto w-full"
           />
         </div>

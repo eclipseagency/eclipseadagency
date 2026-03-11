@@ -80,7 +80,6 @@ export default async function BlogPostPage({ params }: Props) {
               alt={post.title}
               width={800}
               height={450}
-              unoptimized
               className="h-full w-full object-cover"
               priority
             />

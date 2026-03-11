@@ -15,31 +15,8 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ═══════════════════════════════════════════════════════════
-   Smooth Scroll (Lenis)
-   ═══════════════════════════════════════════════════════════ */
-function useSmoothScroll() {
-  useEffect(() => {
-    let lenis: InstanceType<typeof import("@studio-freight/lenis").default> | undefined;
-    let tickerCb: ((time: number) => void) | undefined;
-
-    async function init() {
-      const Lenis = (await import("@studio-freight/lenis")).default;
-      lenis = new Lenis({ duration: 1.2, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-
-      lenis.on("scroll", ScrollTrigger.update);
-      tickerCb = (time: number) => lenis!.raf(time * 1000);
-      gsap.ticker.add(tickerCb);
-      gsap.ticker.lagSmoothing(0);
-    }
-
-    init();
-    return () => {
-      if (lenis) lenis.destroy();
-      if (tickerCb) gsap.ticker.remove(tickerCb);
-    };
-  }, []);
-}
+/* Lenis smooth scroll removed — native CSS scroll-behavior: smooth is sufficient
+   and saves ~15KB of JS + animation frame overhead on mobile */
 
 
 /* ═══════════════════════════════════════════════════════════
@@ -203,8 +180,9 @@ function useHeroCanvas() {
     };
     window.addEventListener("mousemove", onMove, { passive: true });
 
-    // ── Stars ──
-    const STAR_COUNT = 120;
+    // ── Reduce particle counts on mobile to save CPU/battery ──
+    const isMobile = w < 768;
+    const STAR_COUNT = isMobile ? 40 : 120;
     const stars = Array.from({ length: STAR_COUNT }, () => ({
       x: Math.random(), y: Math.random(),
       size: 0.3 + Math.random() * 1.5,
@@ -214,7 +192,7 @@ function useHeroCanvas() {
     }));
 
     // ── Orbiting particles around eclipse ──
-    const ORBIT_COUNT = 50;
+    const ORBIT_COUNT = isMobile ? 15 : 50;
     const orbitals = Array.from({ length: ORBIT_COUNT }, () => ({
       angle: Math.random() * Math.PI * 2,
       radius: 80 + Math.random() * 160,
@@ -231,7 +209,7 @@ function useHeroCanvas() {
     let shootTimer = 0;
 
     // ── Floating dust/particles that react to mouse ──
-    const DUST_COUNT = 35;
+    const DUST_COUNT = isMobile ? 10 : 35;
     const dust = Array.from({ length: DUST_COUNT }, () => ({
       x: Math.random(), y: Math.random(),
       vx: 0, vy: 0,
@@ -1618,19 +1596,20 @@ function SpaceBackground() {
     window.addEventListener("resize", resize);
 
     // Three parallax star layers - far (slow), mid, near (fast)
-    const farStars = Array.from({ length: 100 }, () => ({
+    const mobile = w < 768;
+    const farStars = Array.from({ length: mobile ? 35 : 100 }, () => ({
       x: Math.random() * 1.2 - 0.1, y: Math.random(),
       size: 0.3 + Math.random() * 0.8,
       brightness: 0.12 + Math.random() * 0.2,
       phase: Math.random() * Math.PI * 2,
     }));
-    const midStars = Array.from({ length: 60 }, () => ({
+    const midStars = Array.from({ length: mobile ? 20 : 60 }, () => ({
       x: Math.random() * 1.2 - 0.1, y: Math.random(),
       size: 0.5 + Math.random() * 1.2,
       brightness: 0.15 + Math.random() * 0.3,
       phase: Math.random() * Math.PI * 2,
     }));
-    const nearStars = Array.from({ length: 25 }, () => ({
+    const nearStars = Array.from({ length: mobile ? 8 : 25 }, () => ({
       x: Math.random() * 1.2 - 0.1, y: Math.random(),
       size: 0.8 + Math.random() * 1.5,
       brightness: 0.2 + Math.random() * 0.4,
@@ -2303,7 +2282,6 @@ function BackToTop() {
 export default function HomePage() {
   const [preloaderDone, setPreloaderDone] = useState(false);
   const onPreloaderComplete = useCallback(() => setPreloaderDone(true), []);
-  useSmoothScroll();
   useScrollAnimations();
 
   return (

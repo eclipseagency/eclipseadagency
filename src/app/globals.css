@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* ── Smooth scroll (replaces Lenis JS) ── */
+html {
+  scroll-behavior: smooth;
+}
+
 /* ── Custom theme tokens ── */
 :root {
   --color-bg: #0a0a0a;

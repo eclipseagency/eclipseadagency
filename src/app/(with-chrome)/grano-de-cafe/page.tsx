@@ -40,7 +40,6 @@ export default function GranoDeCafePage() {
             alt="Grano de Café branding presentation showcase"
             width={1200}
             height={3000}
-            unoptimized
             className="h-auto w-full"
           />
         </div>

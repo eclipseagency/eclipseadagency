@@ -81,7 +81,6 @@ export function AboutUsHome() {
               alt="Eclipse astronaut - About Eclipse Agency"
               width={560}
               height={560}
-              unoptimized
               className="hero-flying-character relative h-auto"
               style={{
                 width: "min(55vw, 420px)",
