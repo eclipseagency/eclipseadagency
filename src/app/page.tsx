@@ -1920,8 +1920,8 @@ function PortfolioSection() {
       <div className="hidden md:block">
         <div data-h-scroll className="relative h-[70vh]">
           <div data-h-track className="flex h-full items-center gap-8 pl-[max(2rem,calc((100vw-1100px)/2+1.25rem))] pr-[20vw]">
-            {portfolioVideos.map((v) => (
-              <VideoCard key={v.id} video={v} />
+            {portfolioVideos.map((v, i) => (
+              <VideoCard key={v.id} video={v} index={i} />
             ))}
           </div>
         </div>
@@ -1930,9 +1930,9 @@ function PortfolioSection() {
       {/* Mobile: horizontal scroll cards */}
       <div className="md:hidden px-5">
         <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory hide-scrollbar">
-          {portfolioVideos.map((v) => (
+          {portfolioVideos.map((v, i) => (
             <div key={v.id} className="snap-center shrink-0" style={{ width: "85vw" }}>
-              <VideoCard video={v} />
+              <VideoCard video={v} index={i} />
             </div>
           ))}
         </div>
@@ -1941,22 +1941,36 @@ function PortfolioSection() {
   );
 }
 
-function VideoCard({ video }: { video: (typeof portfolioVideos)[number] }) {
+function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(false);
 
   useEffect(() => {
+    // Load first 2 immediately, stagger the rest
+    if (index < 2) {
+      setShouldLoad(true);
+      return;
+    }
+
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setVisible(true); io.disconnect(); } },
-      { rootMargin: "600px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
 
-  const vimeoParams = `badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&background=1`;
+    // Check actual horizontal position — only load when card is near the visible area
+    let raf: number;
+    const check = () => {
+      const rect = el.getBoundingClientRect();
+      // Load when the card is within 1 screen width of the viewport
+      if (rect.left < window.innerWidth * 2 && rect.right > -window.innerWidth) {
+        setShouldLoad(true);
+        return;
+      }
+      raf = requestAnimationFrame(check);
+    };
+    raf = requestAnimationFrame(check);
+    return () => cancelAnimationFrame(raf);
+  }, [index]);
+
+  const vimeoParams = `badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&background=1&quality=auto`;
   const vimeoSrc = video.vimeoId
     ? `https://player.vimeo.com/video/${video.vimeoId}?${video.vimeoHash ? `h=${video.vimeoHash}&` : ""}${vimeoParams}`
     : "";
@@ -1969,7 +1983,7 @@ function VideoCard({ video }: { video: (typeof portfolioVideos)[number] }) {
       >
         {/* Uniform 1:1 square aspect for all cards */}
         <div className="relative overflow-hidden bg-white/[0.02]" style={{ paddingTop: "100%" }}>
-          {visible && video.vimeoId ? (
+          {shouldLoad && video.vimeoId ? (
             <iframe
               src={vimeoSrc}
               loading="lazy"
@@ -1977,7 +1991,7 @@ function VideoCard({ video }: { video: (typeof portfolioVideos)[number] }) {
               referrerPolicy="strict-origin-when-cross-origin"
               className="absolute inset-0 h-full w-full border-0"
             />
-          ) : visible && video.src ? (
+          ) : shouldLoad && video.src ? (
             <video
               src={video.src}
               autoPlay
@@ -1987,7 +2001,7 @@ function VideoCard({ video }: { video: (typeof portfolioVideos)[number] }) {
               className="absolute inset-0 h-full w-full object-cover"
             />
           ) : (
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center bg-white/[0.02]">
               <div className="h-8 w-8 rounded-full border-2 border-[#ff6b35]/30 border-t-[#ff6b35] animate-spin" />
             </div>
           )}
