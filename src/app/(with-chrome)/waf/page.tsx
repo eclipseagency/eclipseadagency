@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Waf — Brand Identity | Eclipse Agency",
+  title: "Waf - Brand Identity | Eclipse Agency",
   description:
     "Waf: Sleek and Professional Branding for Business Excellence. A bold identity showcasing innovation with sleek, vibrant visuals.",
 };

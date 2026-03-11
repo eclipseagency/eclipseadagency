@@ -3,7 +3,7 @@ import Image from "next/image";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 
 export const metadata: Metadata = {
-  title: "Noon Studio — Brand Identity | Eclipse Agency",
+  title: "Noon Studio - Brand Identity | Eclipse Agency",
   description:
     "Noon Studio's brand identity reflects a modern, energetic character, combining bold patterns, dynamic shapes, and a harmonious color palette that embodies creativity and innovation.",
 };

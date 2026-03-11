@@ -77,7 +77,7 @@ export function Header() {
           />
         </Link>
 
-        {/* Desktop nav — centered */}
+        {/* Desktop nav - centered */}
         <nav className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-0.5 lg:flex">
           {siteConfig.nav.map((item) =>
             item.children ? (
@@ -170,7 +170,7 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile nav — frosted glass overlay */}
+      {/* Mobile nav - frosted glass overlay */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div

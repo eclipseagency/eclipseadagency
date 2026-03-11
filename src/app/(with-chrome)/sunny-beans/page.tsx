@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Sunny Beans — Brand Identity | Eclipse Agency",
+  title: "Sunny Beans - Brand Identity | Eclipse Agency",
   description:
     "Sunny Beans: Brewing Warmth, Joy, and Community. A brand identity radiating warmth with earthy tones and a sun-inspired logo.",
 };
@@ -36,7 +36,7 @@ export default function SunnyBeansPage() {
           <p>
             The branding extends to packaging, social media, in-store visuals,
             and merchandise, each piece carrying the same warmth and vibrancy.
-            Sunny Beans isn&apos;t just a coffee brand—it&apos;s a celebration of
+            Sunny Beans isn&apos;t just a coffee brand - it&apos;s a celebration of
             community, good vibes, and shared moments over a delicious brew.
           </p>
         </div>

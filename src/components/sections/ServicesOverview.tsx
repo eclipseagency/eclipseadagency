@@ -49,7 +49,7 @@ export function ServicesOverview() {
         <div className="mt-6 flex max-w-2xl items-start gap-3">
           <QuoteIcon size={24} className="mt-0.5 shrink-0 text-primary/40" />
           <p className="text-base leading-relaxed italic text-text-secondary md:text-lg">
-            Eclipsing the competition, one campaign at a time—where bold ideas meet cosmic results.
+            Eclipsing the competition, one campaign at a time - where bold ideas meet cosmic results.
           </p>
         </div>
       </div>

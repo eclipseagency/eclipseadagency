@@ -6,9 +6,9 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { TeamBuilder } from "./TeamBuilder";
 
 export const metadata: Metadata = {
-  title: "Build Your Team in Egypt — Managed Creative & Tech Teams | Eclipse Agency",
+  title: "Build Your Team in Egypt -Managed Creative & Tech Teams | Eclipse Agency",
   description:
-    "Get a fully managed, on-site creative and tech team in Egypt at 70% less cost. Designers, developers, marketers & video editors — working from our office under your direction. Starting from $3,000/month.",
+    "Get a fully managed, on-site creative and tech team in Egypt at 70% less cost. Designers, developers, marketers & video editors -working from our office under your direction. Starting from $3,000/month.",
   alternates: { canonical: "/team" },
   keywords: [
     "outsource creative team Egypt",
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     "توظيف فريق إبداعي",
   ],
   openGraph: {
-    title: "Build Your Managed Team in Egypt — 70% Less Cost | Eclipse Agency",
+    title: "Build Your Managed Team in Egypt -70% Less Cost | Eclipse Agency",
     description:
-      "Fully managed creative & tech teams working on-site in Egypt. Branding, marketing, web dev, video production — starting from $3,000/month. No freelancers, no remote unknowns.",
+      "Fully managed creative & tech teams working on-site in Egypt. Branding, marketing, web dev, video production -starting from $3,000/month. No freelancers, no remote unknowns.",
     url: "https://www.eclipseagency.net/team",
     siteName: "Eclipse Agency",
     type: "website",
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Build Your Team in Egypt — From $3,000/month | Eclipse Agency",
+    title: "Build Your Team in Egypt -From $3,000/month | Eclipse Agency",
     description:
-      "Fully managed creative & tech teams. Designers, developers, marketers — working from our office. 70% less than hiring locally in Saudi Arabia.",
+      "Fully managed creative & tech teams. Designers, developers, marketers -working from our office. 70% less than hiring locally in Saudi Arabia.",
     images: ["/images/team-office/WhatsApp Image 2026-03-08 at 2.20.25 AM (1).jpeg"],
   },
 };
@@ -133,7 +133,7 @@ const challenges = [
       </svg>
     ),
     title: "Capital Intensive",
-    desc: "Setting up an in-house team demands significant upfront investment — office space, equipment, recruitment fees, and months of ramp-up before seeing results.",
+    desc: "Setting up an in-house team demands significant upfront investment -office space, equipment, recruitment fees, and months of ramp-up before seeing results.",
   },
   {
     icon: (
@@ -235,7 +235,7 @@ const steps = [
   {
     num: "04",
     title: "Launch & Integration",
-    desc: "Your team is operational within weeks — integrated into your workflows with daily reporting and direct communication.",
+    desc: "Your team is operational within weeks -integrated into your workflows with daily reporting and direct communication.",
   },
 ];
 
@@ -291,7 +291,7 @@ export default function TeamPage() {
       <PageHero
         badge="Your Team, Our Office"
         title="Your On-Site Creative & Tech Team in Egypt"
-        subtitle="A fully managed, dedicated team working from our office — under your direction, at a fraction of the cost. No freelancers. No remote unknowns. Real people, real office, real results."
+        subtitle="A fully managed, dedicated team working from our office -under your direction, at a fraction of the cost. No freelancers. No remote unknowns. Real people, real office, real results."
         image="/images/team-office/910d3c1a-642b-4b33-bcb3-d6590d5ee527.jpeg"
       />
 
@@ -342,7 +342,7 @@ export default function TeamPage() {
             </h2>
             <p className="mt-5 leading-relaxed text-text-secondary md:text-lg">
               We provide you with a dedicated team of creative and tech
-              professionals — hired, trained, and managed by us — working
+              professionals -hired, trained, and managed by us -working
               full-time from our physical office in Egypt. You get direct access
               and oversight without any of the operational burden.
             </p>
@@ -354,7 +354,7 @@ export default function TeamPage() {
                 },
                 {
                   t: "Direct Oversight",
-                  d: "Daily standups, real-time communication, shared project tools — you're always in the loop.",
+                  d: "Daily standups, real-time communication, shared project tools -you're always in the loop.",
                 },
                 {
                   t: "Proven System",
@@ -423,7 +423,7 @@ export default function TeamPage() {
             {
               stat: "2-4",
               label: "Weeks to Launch",
-              desc: "From agreement to a fully operational team — including recruitment, onboarding, and integration.",
+              desc: "From agreement to a fully operational team -including recruitment, onboarding, and integration.",
             },
           ].map((s) => (
             <div key={s.label} className="text-center">
@@ -450,7 +450,7 @@ export default function TeamPage() {
           </h2>
           <p className="mt-4 max-w-2xl text-text-secondary md:text-lg">
             Your team can cover any combination of roles across four core
-            disciplines — all managed from a single office.
+            disciplines -all managed from a single office.
           </p>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -520,7 +520,7 @@ export default function TeamPage() {
             </h2>
             <p className="mt-5 leading-relaxed text-text-secondary md:text-lg">
               Your dedicated team doesn&apos;t work in isolation. They sit
-              alongside our full creative studio — giving you on-demand access
+              alongside our full creative studio -giving you on-demand access
               to specialized expertise without adding headcount.
             </p>
             <div className="mt-6 space-y-3">
@@ -564,7 +564,7 @@ export default function TeamPage() {
             <span className="gradient-text">See the Cost Instantly</span>
           </h2>
           <p className="mt-4 text-text-secondary md:text-lg">
-            Choose the ready-made Smart Team or build your own — pick roles,
+            Choose the ready-made Smart Team or build your own -pick roles,
             seniority levels, and office setup. Real-time pricing in SAR, USD &
             AED.
           </p>
@@ -631,7 +631,7 @@ export default function TeamPage() {
             <p className="mt-5 leading-relaxed text-text-secondary md:text-lg">
               Eclipse Agency itself is the best proof that this model works. Our
               entire team of 30+ professionals operates from a single managed
-              office — serving clients across Saudi Arabia, UAE, and the Middle
+              office -serving clients across Saudi Arabia, UAE, and the Middle
               East.
             </p>
             <div className="mt-6 grid grid-cols-3 gap-4">
@@ -729,7 +729,7 @@ export default function TeamPage() {
           </h2>
           <p className="mt-5 text-text-secondary md:text-lg">
             Let&apos;s discuss your needs and put together a team structure
-            tailored to your business. No commitment — just a conversation.
+            tailored to your business. No commitment -just a conversation.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">

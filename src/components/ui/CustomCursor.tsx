@@ -83,7 +83,7 @@ export function CustomCursor() {
   // Don't render on touch devices (SSR-safe)
   return (
     <>
-      {/* Main cursor — Eclipse crescent icon */}
+      {/* Main cursor - Eclipse crescent icon */}
       <div
         ref={cursorRef}
         aria-hidden="true"
@@ -120,7 +120,7 @@ export function CustomCursor() {
         </svg>
       </div>
 
-      {/* Center dot — stays exactly on mouse position */}
+      {/* Center dot - stays exactly on mouse position */}
       <div
         ref={dotRef}
         aria-hidden="true"

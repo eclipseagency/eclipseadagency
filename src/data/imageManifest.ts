@@ -2,7 +2,7 @@
  * Image Manifest
  * ─────────────
  * Lists every image used on the site and where it appears.
- * Swap images by replacing the files in /public/images/ — no layout code changes required.
+ * Swap images by replacing the files in /public/images/ - no layout code changes required.
  *
  * All images are referenced via the `src` field (relative to /public).
  */

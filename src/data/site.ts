@@ -216,7 +216,7 @@ export const portfolioItems: {
     title: "Sparkle",
     category: "Branding",
     description:
-      "Where Magic Happens — a captivating visual identity reflecting innovation, energy, and magic through immersive space design.",
+      "Where Magic Happens - a captivating visual identity reflecting innovation, energy, and magic through immersive space design.",
     image:
       "https://eclipseadagency.com/wp-content/uploads/2024/12/sparkle-brand-presentation.png",
     tags: ["Brand Identity", "Space Design", "Visual Language"],
@@ -227,7 +227,7 @@ export const portfolioItems: {
     title: "Volume",
     category: "Branding",
     description:
-      "Where Sophistication Meets Style — an elegant brand identity merging luxury and modern sophistication for a refined haircare brand.",
+      "Where Sophistication Meets Style - an elegant brand identity merging luxury and modern sophistication for a refined haircare brand.",
     image:
       "https://eclipseadagency.com/wp-content/uploads/2024/12/volume-branding-presentation_11zon-1.png",
     tags: ["Brand Identity", "Luxury Design", "Visual Language"],
@@ -239,7 +239,7 @@ export const portfolioItems: {
     title: "Sunny Beans",
     category: "Branding",
     description:
-      "Brewing Warmth, Joy, and Community — a brand identity radiating earthy tones, playful patterns, and a sun-inspired logo for coffee lovers.",
+      "Brewing Warmth, Joy, and Community - a brand identity radiating earthy tones, playful patterns, and a sun-inspired logo for coffee lovers.",
     image:
       "https://eclipseadagency.com/wp-content/uploads/2024/12/sunny-beans-branding.png",
     tags: ["Brand Identity", "Packaging", "Coffee Culture"],
@@ -263,7 +263,7 @@ export const portfolioItems: {
     title: "For Cup",
     category: "Branding",
     description:
-      "Modern minimalism with a playful edge — clean typography and bold iconography for a fresh, contemporary take on coffee culture.",
+      "Modern minimalism with a playful edge - clean typography and bold iconography for a fresh, contemporary take on coffee culture.",
     image:
       "https://eclipseadagency.com/wp-content/uploads/2024/12/for-cup-branding-presentation-1.png",
     tags: ["Brand Identity", "Minimalism", "Coffee Culture"],
@@ -323,7 +323,7 @@ export const testimonials = [
   },
   {
     quote:
-      "They don't just build websites — they build experiences. Our conversion rate doubled after the redesign. Truly exceptional work.",
+      "They don't just build websites - they build experiences. Our conversion rate doubled after the redesign. Truly exceptional work.",
     name: "Ahmed Nasser",
     title: "CTO, Pulse Fitness",
     avatar: "/images/testimonials/avatar-04.svg",
@@ -354,7 +354,7 @@ export const aboutContent = {
     "To be a beacon of creativity in the advertising industry, inspiring brands to reach new heights through originality and strategic excellence.",
   story: [
     "Eclipse Agency was born from a belief that every brand deserves to shine. Founded by a team of passionate creatives and strategists, we set out to bridge the gap between bold ideas and real-world results.",
-    "Over the years, we've grown from a small studio into a full-service creative powerhouse, serving clients across industries — from startups finding their voice to established enterprises reimagining their presence.",
+    "Over the years, we've grown from a small studio into a full-service creative powerhouse, serving clients across industries - from startups finding their voice to established enterprises reimagining their presence.",
     "Our approach is simple: we listen deeply, think strategically, and create fearlessly. Every project is a partnership, and every outcome is measured not just in aesthetics, but in impact.",
   ],
   values: [
@@ -388,7 +388,7 @@ export const blogPosts = [
     slug: "ai-marketing-trends-2025",
     title: "How AI Is Reshaping Digital Marketing in 2025",
     excerpt:
-      "Artificial intelligence is no longer a buzzword — it's the backbone of modern campaigns. Here's what marketers need to know.",
+      "Artificial intelligence is no longer a buzzword - it's the backbone of modern campaigns. Here's what marketers need to know.",
     category: "Digital Marketing",
     date: "2025-01-15",
     image: "/images/blog/blog-01.svg",
@@ -408,7 +408,7 @@ export const blogPosts = [
     slug: "video-content-strategy",
     title: "Why Video Content Dominates Social Engagement",
     excerpt:
-      "Short-form, long-form, live — video is the language of engagement. Learn how to make it work for your brand.",
+      "Short-form, long-form, live - video is the language of engagement. Learn how to make it work for your brand.",
     category: "Content Strategy",
     date: "2024-12-20",
     image: "/images/blog/blog-03.svg",

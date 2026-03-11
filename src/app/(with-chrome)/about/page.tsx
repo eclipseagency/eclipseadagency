@@ -12,12 +12,12 @@ import type { PortfolioProject } from "@/components/ui/PortfolioGrid";
 import { ValuesGrid } from "./ValuesGrid";
 
 export const metadata: Metadata = {
-  title: "About Us — Creative Agency in Riyadh, Saudi Arabia",
+  title: "About Us - Creative Agency in Riyadh, Saudi Arabia",
   description:
-    "Meet Eclipse Agency — a full-service creative team in Riyadh with 8+ years of experience, 200+ projects delivered, and 50+ happy clients across Saudi Arabia & the Middle East.",
+    "Meet Eclipse Agency - a full-service creative team in Riyadh with 8+ years of experience, 200+ projects delivered, and 50+ happy clients across Saudi Arabia & the Middle East.",
   alternates: { canonical: "/about" },
   openGraph: {
-    title: "About Eclipse Agency — Creative Team in Riyadh",
+    title: "About Eclipse Agency - Creative Team in Riyadh",
     description: "Full-service creative agency in Riyadh with 8+ years of experience. 200+ projects delivered, 50+ happy clients across Saudi Arabia & the Middle East.",
     url: "https://www.eclipseagency.net/about",
     siteName: "Eclipse Agency",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Eclipse Agency — Creative Team in Riyadh",
+    title: "About Eclipse Agency - Creative Team in Riyadh",
     description: "Full-service creative agency in Riyadh. 200+ projects, 50+ clients, 8+ years of experience.",
   },
 };
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 const profileImages = [
   {
     src: "/images/about/story-illustration.svg",
-    alt: "Eclipse Agency story — from bold idea to creative powerhouse",
+    alt: "Eclipse Agency story - from bold idea to creative powerhouse",
   },
   {
     src: "https://eclipseadagency.com/wp-content/uploads/2024/11/DSC_7529-1536x1025.jpg",
@@ -177,7 +177,7 @@ export default function AboutPage() {
               src="https://player.vimeo.com/video/1051203598?h=a43672f073&badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&background=1"
               allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
               className="absolute inset-0 h-full w-full"
-              title="Eclipse Agency — Showreel 2024"
+              title="Eclipse Agency - Showreel 2024"
             />
           </div>
         </div>

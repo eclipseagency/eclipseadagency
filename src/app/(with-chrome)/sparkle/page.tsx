@@ -3,9 +3,9 @@ import Image from "next/image";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 
 export const metadata: Metadata = {
-  title: "Sparkle — Brand Identity | Eclipse Agency",
+  title: "Sparkle - Brand Identity | Eclipse Agency",
   description:
-    "Sparkle Branding Project — Where Magic Happens. A captivating visual identity reflecting innovation, energy, and magic.",
+    "Sparkle Branding Project - Where Magic Happens. A captivating visual identity reflecting innovation, energy, and magic.",
 };
 
 export default function SparklePage() {

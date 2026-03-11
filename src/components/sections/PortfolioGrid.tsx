@@ -80,17 +80,17 @@ function TunnelCard({
   const absDepth = Math.abs(depth);
   const behind = depth > 0;
 
-  // Z position — cards in front are closer, behind are further
+  // Z position - cards in front are closer, behind are further
   const z = -absDepth * 1200;
-  // Scale — focused is largest
+  // Scale - focused is largest
   const scale = Math.max(0.3, 1 - absDepth * 0.7);
-  // Opacity — focused is full, others fade
+  // Opacity - focused is full, others fade
   const opacity = behind
     ? Math.max(0, 1 - absDepth * 3)
     : Math.max(0.08, 1 - absDepth * 1.2);
-  // Blur — distance creates depth-of-field
+  // Blur - distance creates depth-of-field
   const blur = isFocused ? 0 : Math.min(absDepth * 10, 8);
-  // Vertical offset — cards drift up/down as they approach
+  // Vertical offset - cards drift up/down as they approach
   const yOff = depth * -40;
 
   // Don't render cards too far away
@@ -154,7 +154,7 @@ function TunnelCard({
             }}
           />
 
-          {/* Gradient overlay — deeper when not focused */}
+          {/* Gradient overlay - deeper when not focused */}
           <div
             className="absolute inset-0 transition-opacity duration-500"
             style={{
@@ -174,7 +174,7 @@ function TunnelCard({
             />
           )}
 
-          {/* Content — only visible when approaching focus */}
+          {/* Content - only visible when approaching focus */}
           <div className="absolute inset-0 z-10 flex flex-col justify-end p-7 md:p-9">
             {/* Category badge */}
             <motion.span
@@ -197,7 +197,7 @@ function TunnelCard({
               {item.title}
             </motion.h3>
 
-            {/* Description — only when focused */}
+            {/* Description - only when focused */}
             <motion.p
               className="mt-3 max-w-lg text-sm leading-relaxed text-white/50 md:text-base"
               animate={{
@@ -209,7 +209,7 @@ function TunnelCard({
               {item.description}
             </motion.p>
 
-            {/* Tags — only when focused + hovering */}
+            {/* Tags - only when focused + hovering */}
             <motion.div
               className="mt-3 flex flex-wrap gap-2"
               animate={{
@@ -298,7 +298,7 @@ function TunnelProgress({
 }
 
 /* ═══════════════════════════════════════════════════════
-   Main — 3D tunnel driven by scroll
+   Main - 3D tunnel driven by scroll
    ═══════════════════════════════════════════════════════ */
 export function PortfolioGrid({ limit, showCta = true }: PortfolioGridProps) {
   const items = limit ? portfolioItems.slice(0, limit) : portfolioItems;
@@ -391,7 +391,7 @@ export function PortfolioGrid({ limit, showCta = true }: PortfolioGridProps) {
           {/* Noise */}
           <div className="page-hero-noise absolute inset-0" style={{ opacity: 0.025 }} />
 
-          {/* Cards — render furthest first for proper layering */}
+          {/* Cards - render furthest first for proper layering */}
           <div
             className="relative h-full w-full"
             style={{ transformStyle: "preserve-3d" }}
@@ -410,7 +410,7 @@ export function PortfolioGrid({ limit, showCta = true }: PortfolioGridProps) {
           </div>
         </div>
 
-        {/* Section header — fades out */}
+        {/* Section header - fades out */}
         <motion.div
           className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-5 pointer-events-none"
           style={{ opacity: headerOpacity, y: headerY }}

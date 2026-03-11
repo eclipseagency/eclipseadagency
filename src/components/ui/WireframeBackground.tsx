@@ -4,7 +4,7 @@
  * Deep black canvas with a soft, diffused golden glow (#c28a14)
  * emanating from the bottom-right / lower-center area.
  * Subtle noise grain overlay for a premium cinematic feel.
- * Pure CSS — zero JS, zero animation frames, maximum performance.
+ * Pure CSS - zero JS, zero animation frames, maximum performance.
  */
 
 export function WireframeBackground() {
@@ -16,7 +16,7 @@ export function WireframeBackground() {
       {/* ── Layer 1: Deep black base ── */}
       <div className="absolute inset-0 bg-black" />
 
-      {/* ── Layer 2: Primary golden glow — bottom-right / lower-center ── */}
+      {/* ── Layer 2: Primary golden glow - bottom-right / lower-center ── */}
       <div
         className="absolute inset-0"
         style={{
@@ -27,7 +27,7 @@ export function WireframeBackground() {
         }}
       />
 
-      {/* ── Layer 3: Secondary softer spread — fills more area with very faint warmth ── */}
+      {/* ── Layer 3: Secondary softer spread - fills more area with very faint warmth ── */}
       <div
         className="absolute inset-0"
         style={{

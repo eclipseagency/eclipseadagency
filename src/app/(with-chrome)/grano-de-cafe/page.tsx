@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Grano de Café — Brand Identity | Eclipse Agency",
+  title: "Grano de Café - Brand Identity | Eclipse Agency",
   description:
     "Grano de Café: Authentic Branding for Colombian Coffee Heritage. A rich, earthy identity celebrating the story of Colombian coffee.",
 };

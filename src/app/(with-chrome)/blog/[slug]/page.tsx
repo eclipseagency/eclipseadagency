@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = blogPosts.find((p) => p.slug === slug);
   if (!post) return {};
   return {
-    title: `${post.title} — Blog | Eclipse Agency`,
+    title: `${post.title} - Blog | Eclipse Agency`,
     description: post.excerpt,
     alternates: { canonical: `/blog/${slug}` },
     openGraph: {

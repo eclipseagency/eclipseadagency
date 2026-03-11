@@ -43,7 +43,7 @@ export function AboutUsHome() {
   return (
     <SectionWrapper id="about">
       <div ref={sectionRef} className="grid items-center gap-12 md:gap-16 lg:grid-cols-2">
-        {/* ── Astronaut visual — 3D scroll entrance ── */}
+        {/* ── Astronaut visual - 3D scroll entrance ── */}
         <div className="relative flex items-center justify-center" style={{ perspective: "1000px" }}>
           {/* Ambient glow behind astronaut */}
           <div
@@ -78,7 +78,7 @@ export function AboutUsHome() {
           >
             <Image
               src="/images/hero-character.webp"
-              alt="Eclipse astronaut — About Eclipse Agency"
+              alt="Eclipse astronaut - About Eclipse Agency"
               width={560}
               height={560}
               unoptimized
@@ -126,7 +126,7 @@ export function AboutUsHome() {
             className="mt-4 max-w-xl text-[15px] leading-relaxed text-text-muted"
           >
             We blend data-driven strategy with bold creative thinking to craft campaigns
-            that don&apos;t just look good — they deliver real, measurable results. From
+            that don&apos;t just look good - they deliver real, measurable results. From
             building powerful brand identities to running high-converting ad campaigns,
             we&apos;re your full-spectrum growth partner.
           </motion.p>

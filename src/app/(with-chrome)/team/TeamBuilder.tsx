@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 /* ------------------------------------------------------------------ */
-/*  Pricing data — base prices in USD (converted from EGP / 50)       */
+/*  Pricing data -base prices in USD (converted from EGP / 50)       */
 /* ------------------------------------------------------------------ */
 
 interface Role {
@@ -15,13 +15,13 @@ interface Role {
 }
 
 const roles: Role[] = [
-  { id: "graphic-designer", title: "Graphic Designer", tooltip: "Creates visual content — social media posts, branding materials, ads, packaging, and print designs", juniorUSD: 300, seniorUSD: 500 },
-  { id: "smm-specialist", title: "Social Media Specialist", tooltip: "Manages your social media accounts — content planning, scheduling, engagement, and community growth", juniorUSD: 240, seniorUSD: 400 },
+  { id: "graphic-designer", title: "Graphic Designer", tooltip: "Creates visual content -social media posts, branding materials, ads, packaging, and print designs", juniorUSD: 300, seniorUSD: 500 },
+  { id: "smm-specialist", title: "Social Media Specialist", tooltip: "Manages your social media accounts -content planning, scheduling, engagement, and community growth", juniorUSD: 240, seniorUSD: 400 },
   { id: "account-moderator", title: "Account Moderator", tooltip: "Handles client communication, replies to comments & DMs, and maintains brand voice across platforms", juniorUSD: 200, seniorUSD: 300 },
-  { id: "motion-designer", title: "Motion Designer", tooltip: "Creates animated content — motion graphics, logo animations, explainer videos, and animated ads", juniorUSD: 300, seniorUSD: 600 },
-  { id: "video-editor", title: "Video Editor", tooltip: "Edits and produces video content — reels, commercials, product videos, and long-form content", juniorUSD: 240, seniorUSD: 500 },
-  { id: "web-developer", title: "Web Developer (Powered by Claude)", tooltip: "Builds websites, web apps, e-commerce stores, and custom software — AI-assisted for faster delivery", juniorUSD: 300, seniorUSD: 800 },
-  { id: "media-buyer", title: "Media Buyer", tooltip: "Manages paid advertising — Google Ads, Meta Ads, TikTok Ads — optimizing budgets for maximum ROI", juniorUSD: 240, seniorUSD: 500 },
+  { id: "motion-designer", title: "Motion Designer", tooltip: "Creates animated content -motion graphics, logo animations, explainer videos, and animated ads", juniorUSD: 300, seniorUSD: 600 },
+  { id: "video-editor", title: "Video Editor", tooltip: "Edits and produces video content -reels, commercials, product videos, and long-form content", juniorUSD: 240, seniorUSD: 500 },
+  { id: "web-developer", title: "Web Developer (Powered by Claude)", tooltip: "Builds websites, web apps, e-commerce stores, and custom software -AI-assisted for faster delivery", juniorUSD: 300, seniorUSD: 800 },
+  { id: "media-buyer", title: "Media Buyer", tooltip: "Manages paid advertising -Google Ads, Meta Ads, TikTok Ads -optimizing budgets for maximum ROI", juniorUSD: 240, seniorUSD: 500 },
 ];
 
 const includedFree = [
@@ -57,7 +57,7 @@ const officeOptions: { id: OfficeType; title: string; desc: string; perPersonUSD
   {
     id: "registered",
     title: "New Registered Office",
-    desc: "A new company registered in Egypt under your name — with bank accounts, legal entity, full compliance, office equipment & PCs.",
+    desc: "A new company registered in Egypt under your name -with bank accounts, legal entity, full compliance, office equipment & PCs.",
     perPersonUSD: 700,
   },
 ];
@@ -152,7 +152,7 @@ export function TeamBuilder() {
       return `- ${sel.count}x ${role.title} (${sel.level})`;
     });
     if (customRoles.length > 0) {
-      customRoles.forEach((r) => lines.push(`- ${r} (custom role — pricing TBD)`));
+      customRoles.forEach((r) => lines.push(`- ${r} (custom role -pricing TBD)`));
     }
     const office =
       officeType === "extension"
@@ -283,7 +283,7 @@ export function TeamBuilder() {
               </div>
             </div>
             <p className="mt-4 text-center text-xs text-text-muted">
-              9 team members. Fully managed & on-site. Self-started — ready to work on any project.
+              9 team members. Fully managed & on-site. Self-started -ready to work on any project.
             </p>
           </div>
         </div>
@@ -338,7 +338,7 @@ export function TeamBuilder() {
                           </span>
                         </p>
                         <p className="text-xs text-text-muted">
-                          Junior: {fmt(role.juniorUSD)} — Senior: {fmt(role.seniorUSD)}
+                          Junior: {fmt(role.juniorUSD)} -Senior: {fmt(role.seniorUSD)}
                         </p>
                       </div>
 
@@ -442,7 +442,7 @@ export function TeamBuilder() {
           <div className="rounded-2xl border border-border bg-bg-card p-6 md:p-8">
             <h3 className="mb-1 font-heading text-xl font-bold">Included at No Extra Cost</h3>
             <p className="mb-4 text-sm text-text-secondary">
-              Powered by Eclipse — zero headache to run your team.
+              Powered by Eclipse -zero headache to run your team.
             </p>
             <div className="flex flex-wrap gap-3">
               {includedFree.map((item) => (
@@ -494,7 +494,7 @@ export function TeamBuilder() {
                   <p className="text-sm font-bold text-primary">
                     {opt.perPersonUSD === 0
                       ? "No extra cost"
-                      : `+${fmt(opt.perPersonUSD)} per person (one-time — equipment, PCs, legal & registration)`}
+                      : `+${fmt(opt.perPersonUSD)} per person (one-time -equipment, PCs, legal & registration)`}
                   </p>
                 </button>
               ))}
@@ -530,7 +530,7 @@ export function TeamBuilder() {
                   )}
                 </>
               )}
-              {mode === "smart" && <p>9 team members — Ready in 1 week</p>}
+              {mode === "smart" && <p>9 team members -Ready in 1 week</p>}
             </div>
           </div>
         </div>

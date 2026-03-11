@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { ChevronDownIcon } from "@/components/ui/Icons";
 
 /* ═══════════════════════════════════════════════════════
-   Star field — randomly placed twinkle particles
+   Star field - randomly placed twinkle particles
    ═══════════════════════════════════════════════════════ */
 function StarField() {
   const stars = useMemo(
@@ -46,7 +46,7 @@ function StarField() {
 }
 
 /* ═══════════════════════════════════════════════════════
-   Light rays — emanating upward from below the astronaut
+   Light rays - emanating upward from below the astronaut
    ═══════════════════════════════════════════════════════ */
 function LightRays() {
   const rays = useMemo(
@@ -90,7 +90,7 @@ function LightRays() {
 }
 
 /* ═══════════════════════════════════════════════════════
-   useMouseParallax — smooth mouse-tracking offset
+   useMouseParallax - smooth mouse-tracking offset
    ═══════════════════════════════════════════════════════ */
 function useMouseParallax(strength: number = 25) {
   const ref = useRef<HTMLDivElement>(null);
@@ -130,7 +130,7 @@ function useMouseParallax(strength: number = 25) {
 }
 
 /* ═══════════════════════════════════════════════════════
-   Main hero — cinematic astronaut space composition
+   Main hero - cinematic astronaut space composition
    ═══════════════════════════════════════════════════════ */
 export function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -266,7 +266,7 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* ─── Astronaut image — floating in space + mouse tracking ─── */}
+        {/* ─── Astronaut image - floating in space + mouse tracking ─── */}
         <div ref={mouseRef} style={{ willChange: "transform" }}>
         <motion.div
           className="relative z-[2] hero-space-float"
@@ -296,7 +296,7 @@ export function Hero() {
 
           <Image
             src="/images/hero-astronaut-new.png"
-            alt="Eclipse astronaut floating in space — From Shadow to Spotlight"
+            alt="Eclipse astronaut floating in space - From Shadow to Spotlight"
             width={740}
             height={740}
             priority
@@ -310,7 +310,7 @@ export function Hero() {
         </div>
       </div>
 
-      {/* ── Bottom content — tagline + CTA ── */}
+      {/* ── Bottom content - tagline + CTA ── */}
       <motion.div
         className="absolute bottom-0 left-0 right-0 z-20 flex flex-col items-center text-center px-5 pb-10 md:pb-14"
         style={{ opacity: bottomFade }}

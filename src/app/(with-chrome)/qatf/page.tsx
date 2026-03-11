@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Qatf — Brand Identity | Eclipse Agency",
+  title: "Qatf - Brand Identity | Eclipse Agency",
   description:
     "Qatf: Fresh Branding for Premium Agricultural Products. A modern identity emphasizing sustainability and natural excellence.",
 };

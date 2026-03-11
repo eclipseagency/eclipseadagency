@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Forcup — Brand Identity | Eclipse Agency",
+  title: "Forcup - Brand Identity | Eclipse Agency",
   description:
     "Forcup: Sophisticated Branding for a Premium Coffee Experience. Modern minimalism with a playful edge for a fresh take on coffee culture.",
 };

@@ -171,7 +171,7 @@ function MagneticLink({
 }
 
 /* ═══════════════════════════════════════════════════════════
-   Hero Canvas — Interactive space eclipse with mouse reactivity
+   Hero Canvas - Interactive space eclipse with mouse reactivity
    ═══════════════════════════════════════════════════════════ */
 function useHeroCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -480,7 +480,7 @@ function useHeroCanvas() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   Orbiting Solutions — Labels orbiting the eclipse
+   Orbiting Solutions - Labels orbiting the eclipse
    ═══════════════════════════════════════════════════════════ */
 function OrbitingSolutions() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -510,7 +510,7 @@ function OrbitingSolutions() {
         const ry = rx * 0.38;
         const x = Math.cos(angle) * rx;
         const y = Math.sin(angle) * ry;
-        // Depth effect — items at back are smaller and dimmer
+        // Depth effect - items at back are smaller and dimmer
         const depth = Math.sin(angle); // -1 = back, 1 = front
         const scale = 0.55 + (depth + 1) * 0.25;
         const opacity = 0.15 + (depth + 1) * 0.35;
@@ -586,7 +586,7 @@ function OrbitingSolutions() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   Journey Button — Auto-scrolls the page smoothly
+   Journey Button - Auto-scrolls the page smoothly
    ═══════════════════════════════════════════════════════════ */
 function JourneyButton() {
   const scrollingRef = useRef(false);
@@ -706,14 +706,14 @@ function HeroSection() {
   );
 }
 /* ═══════════════════════════════════════════════════════════
-   Scroll Rocket — Canvas rocket that flies naturally between sections
+   Scroll Rocket - Canvas rocket that flies naturally between sections
    Reveals content as it swoops through, with fire trail + smoke
    ═══════════════════════════════════════════════════════════ */
 function ScrollRocket({ visible }: { visible: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const scrollProgress = useRef(0);
   const visibleRef = useRef(false);
-  // Sync ref on every render — this runs synchronously during render
+  // Sync ref on every render - this runs synchronously during render
   if (visible) visibleRef.current = true;
 
   useEffect(() => {
@@ -759,7 +759,7 @@ function ScrollRocket({ visible }: { visible: boolean }) {
     // ── Trail particles ──
     const trail: { x: number; y: number; vx: number; vy: number; life: number; maxLife: number; size: number; type: "fire" | "smoke" }[] = [];
 
-    // ── Rocket path — natural flight weaving between sections ──
+    // ── Rocket path - natural flight weaving between sections ──
     // Uses cubic bezier interpolation for smooth, organic curves
     function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
     function ease(t: number) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
@@ -787,7 +787,7 @@ function ScrollRocket({ visible }: { visible: boolean }) {
       [0.97, 0.50, -0.30], // blast off to space!
     ];
 
-    // Ascending path (scrolling up) — y INCREASES with t so that
+    // Ascending path (scrolling up) - y INCREASES with t so that
     // when t decreases (scroll up), the rocket consistently moves UPWARD.
     // Gentle horizontal weaving for visual interest.
     const waypointsUp = [
@@ -810,7 +810,7 @@ function ScrollRocket({ visible }: { visible: boolean }) {
       [0.97, 0.50, 1.10],  // off-screen bottom
     ];
 
-    // Active waypoints — switches based on scroll direction
+    // Active waypoints - switches based on scroll direction
     let activeWaypoints = waypointsDown;
 
     function getRocketPos(t: number): { x: number; y: number; angle: number } {
@@ -1075,7 +1075,7 @@ function ScrollRocket({ visible }: { visible: boolean }) {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   Rocket Preloader — Full-screen intro that tears apart
+   Rocket Preloader - Full-screen intro that tears apart
    Rocket flies down center, rips the screen open with orange
    glow, revealing the homepage hero beneath
    ═══════════════════════════════════════════════════════════ */
@@ -1103,7 +1103,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
     return pts;
   }, []);
 
-  // Cosmic tear stars — tiny stars visible through the rift
+  // Cosmic tear stars - tiny stars visible through the rift
   const cosmicStars = useMemo(() =>
     Array.from({ length: 120 }, () => ({
       x: (Math.random() - 0.5) * 80,
@@ -1146,7 +1146,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
     resize();
     window.addEventListener("resize", resize);
 
-    // Prevent scroll during preloader — use fixed position to avoid scrollbar shift
+    // Prevent scroll during preloader - use fixed position to avoid scrollbar shift
     document.body.style.position = "fixed";
     document.body.style.inset = "0";
     document.body.style.overflowY = "scroll";
@@ -1156,7 +1156,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
 
     const tl = gsap.timeline();
 
-    // Phase 1: Rocket descends and tears (0 → 1) — starts at 1s to let text be read
+    // Phase 1: Rocket descends and tears (0 → 1) - starts at 1s to let text be read
     tl.to(proxy, { progress: 1, duration: 2.2, ease: "power2.inOut" }, 1.0);
     // Phase 2: Split halves apart
     tl.to(proxy, { split: 1, duration: 0.9, ease: "power3.in" }, 2.8);
@@ -1166,7 +1166,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
     tl.call(() => { onComplete(); }, [], 3.8);
     // Phase 4: Fade out preloader canvas (ScrollRocket already visible beneath)
     tl.to(proxy, { fade: 0, duration: 0.5, ease: "power2.in" }, 4.0);
-    // Phase 5: Cleanup — unlock body scroll, unmount preloader
+    // Phase 5: Cleanup - unlock body scroll, unmount preloader
     tl.call(() => {
       document.body.style.position = "";
       document.body.style.inset = "";
@@ -1277,7 +1277,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
       const eclipseCenterY = h * 0.26;
       const returnStartY = h + 60;
       const returnStartX = cx;
-      // Curved return path — arcs to the right then back to center
+      // Curved return path - arcs to the right then back to center
       const returnT = rocketReturn;
       const returnX = returnStartX + Math.sin(returnT * Math.PI) * w * 0.15;
       const returnY = returnStartY + (eclipseCenterY - returnStartY) * returnT;
@@ -1304,11 +1304,11 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
       const glowHeight = Math.min(p * 1.2, 1) * h;
       const time = now * 0.001;
 
-      // ── Cosmic rift visible through the tear — no clip, just soft radials ──
+      // ── Cosmic rift visible through the tear - no clip, just soft radials ──
       if (p > 0.03) {
         ctx.save();
 
-        // Warm glow in the rift gap — contained by tight radial
+        // Warm glow in the rift gap - contained by tight radial
         const riftW = tearWidth / 2 + 10;
         const riftBg = ctx.createRadialGradient(cx, glowHeight * 0.4, 0, cx, glowHeight * 0.4, Math.max(riftW, 20));
         riftBg.addColorStop(0, "rgba(50, 18, 5, 0.6)");
@@ -1317,7 +1317,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
         ctx.fillStyle = riftBg;
         ctx.fillRect(cx - riftW * 2, -10, riftW * 4, glowHeight + 20);
 
-        // Nebula glow — tight to rift width
+        // Nebula glow - tight to rift width
         const nebR = Math.max(riftW * 1.5, 20);
         const nebula1 = ctx.createRadialGradient(cx, glowHeight * 0.3, 0, cx, glowHeight * 0.3, nebR);
         nebula1.addColorStop(0, "rgba(255, 120, 40, 0.2)");
@@ -1333,7 +1333,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
         ctx.fillStyle = nebula2;
         ctx.fillRect(cx - nebR, 0, nebR * 2, glowHeight);
 
-        // Stars twinkling inside — with edge fade
+        // Stars twinkling inside - with edge fade
         const riftHalfW = tearWidth / 2 + 8;
         for (const star of cosmicStars) {
           const sy = star.y * glowHeight;
@@ -1359,7 +1359,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
           }
         }
 
-        // Cosmic energy streaks — softer, with transparency falloff
+        // Cosmic energy streaks - softer, with transparency falloff
         ctx.globalCompositeOperation = "screen";
         for (let i = 0; i < 5; i++) {
           const streakY = (glowHeight * (i + 0.5)) / 5;
@@ -1378,7 +1378,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
         ctx.restore();
       }
 
-      // Overall opacity fade for split phase — smoothly dissolves the halves
+      // Overall opacity fade for split phase - smoothly dissolves the halves
       const halvesAlpha = split > 0.3 ? Math.max(0, 1 - (split - 0.3) / 0.7) : 1;
 
       // Left half
@@ -1416,7 +1416,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
       ctx.globalAlpha = fade;
       ctx.restore();
 
-      // ── Torn edge glow — soft cosmic energy bleeding from rift edges ──
+      // ── Torn edge glow - soft cosmic energy bleeding from rift edges ──
       if (p > 0.05) {
         // Sample every 3rd point for smoother, softer glow (less granular = less harsh)
         for (let idx = 0; idx < tearPoints.length; idx += 3) {
@@ -1425,7 +1425,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
           const edgeGlow = 5 + split * 14;
           const yFade = Math.min(1, pt.y * h / 30) * Math.min(1, (glowHeight - pt.y * h) / 40);
           const alpha = 0.15 * (1 - pt.y * 0.3) * yFade;
-          // Left edge — orange glow
+          // Left edge - orange glow
           const exL = cx - tearWidth / 2 + pt.x - splitOffset;
           const glL = ctx.createRadialGradient(exL, pt.y * h, 0, exL, pt.y * h, edgeGlow);
           glL.addColorStop(0, `rgba(255, 180, 80, ${alpha * 0.5})`);
@@ -1433,7 +1433,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
           glL.addColorStop(1, "transparent");
           ctx.fillStyle = glL;
           ctx.fillRect(exL - edgeGlow, pt.y * h - edgeGlow, edgeGlow * 2, edgeGlow * 2);
-          // Right edge — orange glow
+          // Right edge - orange glow
           const exR = cx + tearWidth / 2 - pt.x + splitOffset;
           const glR = ctx.createRadialGradient(exR, pt.y * h, 0, exR, pt.y * h, edgeGlow);
           glR.addColorStop(0, `rgba(255, 160, 80, ${alpha * 0.5})`);
@@ -1444,7 +1444,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
         }
       }
 
-      // ── Central energy line — bright orange core ──
+      // ── Central energy line - bright orange core ──
       if (p > 0.05 && split < 0.6) {
         ctx.save();
         ctx.beginPath();
@@ -1456,7 +1456,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
         ctx.shadowColor = "rgba(255, 107, 53, 0.9)";
         ctx.shadowBlur = 20;
         ctx.stroke();
-        // Second pass — bright white inner core
+        // Second pass - bright white inner core
         ctx.strokeStyle = `rgba(255, 230, 200, ${Math.max(0, lineAlpha * 0.5)})`;
         ctx.lineWidth = 0.8;
         ctx.shadowColor = "rgba(255, 180, 80, 0.7)";
@@ -1542,7 +1542,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
         drawRocket(rocketX, rocketY, rocketAngle, 1.5);
       }
 
-      // ── "Eclipse Agency" text — stays until rocket reaches it ──
+      // ── "Eclipse Agency" text - stays until rocket reaches it ──
       // Rocket reaches center (h*0.45) when p ≈ 0.45, so fade out starting at p=0.35
       if (p < 0.55) {
         const fadeIn = Math.min(1, p / 0.08); // fade in over first 8%
@@ -1591,7 +1591,7 @@ function RocketPreloader({ onComplete }: { onComplete: () => void }) {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   Space Background — Full-page fixed starfield with parallax
+   Space Background - Full-page fixed starfield with parallax
    Creates a continuous space journey feel while scrolling
    ═══════════════════════════════════════════════════════════ */
 function SpaceBackground() {
@@ -1617,7 +1617,7 @@ function SpaceBackground() {
     resize();
     window.addEventListener("resize", resize);
 
-    // Three parallax star layers — far (slow), mid, near (fast)
+    // Three parallax star layers - far (slow), mid, near (fast)
     const farStars = Array.from({ length: 100 }, () => ({
       x: Math.random() * 1.2 - 0.1, y: Math.random(),
       size: 0.3 + Math.random() * 0.8,
@@ -1637,7 +1637,7 @@ function SpaceBackground() {
       phase: Math.random() * Math.PI * 2,
     }));
 
-    // Subtle nebula wisps — very faint color patches
+    // Subtle nebula wisps - very faint color patches
     const nebulae = [
       { x: 0.2, y: 0.25, rx: 250, ry: 150, color: "rgba(180,80,20,0.015)", parallax: 0.05 },
       { x: 0.75, y: 0.55, rx: 300, ry: 180, color: "rgba(255,80,30,0.012)", parallax: 0.08 },
@@ -1727,7 +1727,7 @@ function SpaceBackground() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SECTION: About — Rocket reveal, space-themed intro
+   SECTION: About - Rocket reveal, space-themed intro
    ═══════════════════════════════════════════════════════════ */
 function AboutSection() {
   return (
@@ -1757,7 +1757,7 @@ function AboutSection() {
           ))}
         </div>
 
-        {/* Stats — floating cards with glow */}
+        {/* Stats - floating cards with glow */}
         <div className="mt-12 md:mt-16 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-6">
           {[
             { value: "200+", label: "Projects", icon: "🚀" },
@@ -1785,7 +1785,7 @@ function AboutSection() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SECTION: Services — Space cards with orbital connectors
+   SECTION: Services - Space cards with orbital connectors
    ═══════════════════════════════════════════════════════════ */
 function ServicesSection() {
   return (
@@ -1847,7 +1847,7 @@ function ServicesSection() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SECTION: Partners — Certified partner badges
+   SECTION: Partners - Certified partner badges
    ═══════════════════════════════════════════════════════════ */
 function PartnersSection() {
   const partners = [
@@ -1882,7 +1882,7 @@ function PartnersSection() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SECTION: Portfolio — Video showreel horizontal scroll
+   SECTION: Portfolio - Video showreel horizontal scroll
    ═══════════════════════════════════════════════════════════ */
 const portfolioVideos: { id: string; vimeoId?: string; vimeoHash?: string; src?: string; thumb?: string }[] = [
   { id: "showreel", vimeoId: "1051203598", vimeoHash: "a43672f073", thumb: "https://vumbnail.com/1051203598.jpg" },
@@ -1916,7 +1916,7 @@ function PortfolioSection() {
         <div className="mt-4 h-px w-full origin-left bg-gradient-to-r from-[#ff6b35]/20 to-transparent" data-line />
       </div>
 
-      {/* Horizontal scroll — desktop only */}
+      {/* Horizontal scroll - desktop only */}
       <div className="hidden md:block">
         <div data-h-scroll className="relative h-[70vh]">
           <div data-h-track className="flex h-full items-center gap-8 pl-[max(2rem,calc((100vw-1100px)/2+1.25rem))] pr-[20vw]">
@@ -1979,7 +1979,7 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
       >
         {/* Uniform 1:1 square aspect for all cards */}
         <div className="relative overflow-hidden bg-white/[0.02]" style={{ paddingTop: "100%" }}>
-          {/* Thumbnail — always rendered, hidden when video plays */}
+          {/* Thumbnail - always rendered, hidden when video plays */}
           {video.thumb && (
             <img
               src={video.thumb}
@@ -1997,7 +1997,7 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
             </div>
           )}
 
-          {/* Vimeo iframe — only loads when activated */}
+          {/* Vimeo iframe - only loads when activated */}
           {activated && video.vimeoId && (
             <iframe
               src={vimeoSrc}
@@ -2030,7 +2030,7 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SECTION: Process — Rocket flight path timeline
+   SECTION: Process - Rocket flight path timeline
    ═══════════════════════════════════════════════════════════ */
 function ProcessSection() {
   return (
@@ -2050,7 +2050,7 @@ function ProcessSection() {
 
         {/* Timeline */}
         <div className="relative">
-          {/* Vertical line — desktop */}
+          {/* Vertical line - desktop */}
           <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#ff6b35]/15 to-transparent" />
 
           {processSteps.map((step, i) => (
@@ -2070,7 +2070,7 @@ function ProcessSection() {
                 </div>
               </div>
 
-              {/* Center node — desktop */}
+              {/* Center node - desktop */}
               <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 top-8 h-4 w-4 items-center justify-center">
                 <div className="h-3 w-3 rounded-full bg-[#ff6b35]/40 ring-4 ring-[#ff6b35]/10" />
               </div>
@@ -2086,7 +2086,7 @@ function ProcessSection() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SECTION: Testimonials — Floating space cards
+   SECTION: Testimonials - Floating space cards
    ═══════════════════════════════════════════════════════════ */
 function TestimonialsSection() {
   return (
@@ -2101,7 +2101,7 @@ function TestimonialsSection() {
           <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-[#ff6b35]/30 to-transparent" data-line />
         </div>
 
-        {/* Testimonial cards — scrollable on mobile, grid on desktop */}
+        {/* Testimonial cards - scrollable on mobile, grid on desktop */}
         <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory hide-scrollbar md:grid md:grid-cols-2 md:overflow-visible md:pb-0">
           {testimonials.slice(0, 4).map((t, i) => (
             <div
@@ -2145,7 +2145,7 @@ function TestimonialsSection() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SECTION: CTA — Eclipse-themed call to action
+   SECTION: CTA - Eclipse-themed call to action
    ═══════════════════════════════════════════════════════════ */
 function CTASection() {
   return (
@@ -2264,7 +2264,7 @@ function WhatsAppButton() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   Back to Top Button — appears after scrolling down
+   Back to Top Button - appears after scrolling down
    ═══════════════════════════════════════════════════════════ */
 function BackToTop() {
   const [show, setShow] = useState(false);

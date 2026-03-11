@@ -12,7 +12,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: `${siteConfig.name} — Creative Agency in Riyadh | Branding, Marketing & Web Development`,
+    default: `${siteConfig.name} - Creative Agency in Riyadh | Branding, Marketing & Web Development`,
     template: `%s | ${siteConfig.name}`,
   },
   description:
@@ -38,18 +38,18 @@ export const metadata: Metadata = {
     canonical: siteConfig.url,
   },
   openGraph: {
-    title: `${siteConfig.name} — Creative Agency in Riyadh | Branding, Marketing & Web Development`,
+    title: `${siteConfig.name} - Creative Agency in Riyadh | Branding, Marketing & Web Development`,
     description:
       "Full-service creative agency in Riyadh specializing in branding, digital marketing, web development, production, 3D design, and animation. 200+ projects delivered.",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: `${siteConfig.name} — Creative Agency in Riyadh, Saudi Arabia` }],
+    images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: `${siteConfig.name} - Creative Agency in Riyadh, Saudi Arabia` }],
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — Creative Agency in Riyadh`,
+    title: `${siteConfig.name} - Creative Agency in Riyadh`,
     description:
       "Full-service creative agency specializing in branding, digital marketing, web development, production, 3D design, and animation.",
     images: [siteConfig.ogImage],

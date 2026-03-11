@@ -1,9 +1,9 @@
 /**
- * SunlightGlow — volumetric sun-ray overlay for dark sections.
+ * SunlightGlow - volumetric sun-ray overlay for dark sections.
  *
  * Renders bright conic light beams radiating from the top-centre,
  * matching the reference visual of warm amber light shafts through haze.
- * Pure CSS animations — zero JS runtime cost.
+ * Pure CSS animations - zero JS runtime cost.
  */
 export function SunlightGlow() {
   /**
@@ -35,7 +35,7 @@ export function SunlightGlow() {
       className="pointer-events-none absolute inset-0 overflow-hidden"
       style={{ zIndex: 0 }}
     >
-      {/* Top source glow — bright warm spot where rays originate */}
+      {/* Top source glow - bright warm spot where rays originate */}
       <div
         className="absolute left-1/2 -translate-x-1/2"
         style={{

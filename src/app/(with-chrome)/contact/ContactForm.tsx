@@ -106,7 +106,7 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="rounded-2xl border border-border bg-bg-card p-8 md:p-10" noValidate>
-      {/* Honeypot — hidden from real users */}
+      {/* Honeypot - hidden from real users */}
       <div className="absolute -left-[9999px]" aria-hidden="true">
         <label htmlFor="website">Website</label>
         <input

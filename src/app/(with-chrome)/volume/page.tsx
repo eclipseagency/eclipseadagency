@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Volume — Brand Identity | Eclipse Agency",
+  title: "Volume - Brand Identity | Eclipse Agency",
   description:
     "Volume: Where Sophistication Meets Style. A brand identity that exudes luxury and modern sophistication for a refined haircare brand.",
 };

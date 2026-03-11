@@ -4,7 +4,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { SunlightGlow } from "@/components/ui/SunlightGlow";
 import { wallCards, type TestimonialItem } from "@/data/testimonials";
 
-/* ── Inline SVG icons (project pattern — no external icon lib) ── */
+/* ── Inline SVG icons (project pattern - no external icon lib) ── */
 
 function HeartIcon({ className }: { className?: string }) {
   return (
