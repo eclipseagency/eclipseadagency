@@ -317,7 +317,7 @@ export function TeamBuilder() {
                       <div className="flex-1">
                         <p className="font-bold group/tip relative cursor-help">
                           {role.title}
-                          <span className="pointer-events-none absolute -top-2 left-0 z-50 w-64 -translate-y-full rounded-lg border border-border bg-bg-card px-3 py-2 text-xs font-normal leading-relaxed text-text-secondary opacity-0 shadow-xl transition-opacity duration-200 group-hover/tip:opacity-100">
+                          <span className="pointer-events-none absolute -top-2 left-0 z-50 hidden w-64 -translate-y-full rounded-lg border border-border bg-[#1a1a1a] px-3 py-2 text-xs font-normal leading-relaxed text-white shadow-xl group-hover/tip:block">
                             {role.tooltip}
                           </span>
                         </p>
