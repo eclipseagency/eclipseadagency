@@ -1946,6 +1946,8 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
   const [iframeReady, setIframeReady] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const playerRef = useRef<any>(null);
 
   // Auto-activate first video after short delay (desktop)
   useEffect(() => {
@@ -1973,11 +1975,50 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
     return () => observer.disconnect();
   }, []);
 
+  // Use Vimeo Player API to detect actual playback (not just iframe load)
+  useEffect(() => {
+    if (!activated || !iframeRef.current || !video.vimeoId) return;
+    // @ts-expect-error - Vimeo Player loaded via external script
+    const Vimeo = window.Vimeo;
+    if (!Vimeo?.Player) {
+      // Fallback if Vimeo API not loaded yet
+      setTimeout(() => setIframeReady(true), 2000);
+      return;
+    }
+
+    const player = new Vimeo.Player(iframeRef.current);
+    playerRef.current = player;
+
+    player.on("playing", () => setIframeReady(true));
+
+    // Fallback: if autoplay is blocked (common on mobile), try to play on user interaction
+    player.play().catch(() => {
+      // Autoplay blocked — keep thumbnail & play icon visible, user will tap
+    });
+
+    return () => {
+      player.off("playing");
+      player.destroy?.();
+      playerRef.current = null;
+    };
+  }, [activated, video.vimeoId]);
+
   const handleMouseEnter = () => {
     timerRef.current = setTimeout(() => setActivated(true), 300);
   };
   const handleMouseLeave = () => {
     if (timerRef.current) clearTimeout(timerRef.current);
+  };
+
+  const handleTap = () => {
+    if (!activated) {
+      setActivated(true);
+      return;
+    }
+    // If activated but not playing (autoplay blocked), force play via API
+    if (playerRef.current && !iframeReady) {
+      playerRef.current.play().catch(() => {});
+    }
   };
 
   const vimeoParams = `badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&background=1&quality=auto`;
@@ -1991,7 +2032,7 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
       className="block shrink-0 group"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={() => setActivated(true)}
+      onClick={handleTap}
     >
       <div
         className="relative overflow-hidden rounded-2xl border border-white/[0.06] transition-all duration-500 hover:border-[#ff6b35]/20 hover:shadow-[0_20px_80px_rgba(255,107,53,0.1)]"
@@ -1999,7 +2040,7 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
       >
         {/* Uniform 1:1 square aspect for all cards */}
         <div className="relative overflow-hidden bg-white/[0.02]" style={{ paddingTop: "100%" }}>
-          {/* Thumbnail - stays visible until iframe is actually ready */}
+          {/* Thumbnail - stays visible until video is actually playing */}
           {video.thumb && (
             <img
               src={video.thumb}
@@ -2021,15 +2062,12 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
             </div>
           )}
 
-          {/* Vimeo iframe - loads when activated, thumbnail hides on iframe load */}
+          {/* Vimeo iframe - loads when activated, thumbnail hides when actually playing */}
           {activated && video.vimeoId && (
             <iframe
+              ref={iframeRef}
               src={vimeoSrc}
               loading="lazy"
-              onLoad={() => {
-                // Give Vimeo a moment to start rendering after iframe loads
-                setTimeout(() => setIframeReady(true), 800);
-              }}
               allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
               referrerPolicy="strict-origin-when-cross-origin"
               className="absolute inset-0 h-full w-full border-0"
