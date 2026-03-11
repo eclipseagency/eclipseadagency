@@ -1916,24 +1916,11 @@ function PortfolioSection() {
         <div className="mt-4 h-px w-full origin-left bg-gradient-to-r from-[#ff6b35]/20 to-transparent" data-line />
       </div>
 
-      {/* Horizontal scroll - desktop only */}
-      <div className="hidden md:block">
-        <div data-h-scroll className="relative h-[70vh]">
-          <div data-h-track className="flex h-full items-center gap-8 pl-[max(2rem,calc((100vw-1100px)/2+1.25rem))] pr-[20vw]">
-            {portfolioVideos.map((v, i) => (
-              <VideoCard key={v.id} video={v} index={i} />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile: horizontal scroll cards */}
-      <div className="md:hidden px-5">
-        <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory hide-scrollbar">
+      {/* Horizontal scroll - GSAP driven on all screen sizes */}
+      <div data-h-scroll className="relative h-[60vh] md:h-[70vh]">
+        <div data-h-track className="flex h-full items-center gap-4 md:gap-8 pl-5 md:pl-[max(2rem,calc((100vw-1100px)/2+1.25rem))] pr-[30vw] md:pr-[20vw]">
           {portfolioVideos.map((v, i) => (
-            <div key={v.id} className="snap-center shrink-0" style={{ width: "85vw" }}>
-              <VideoCard video={v} index={i} />
-            </div>
+            <VideoCard key={v.id} video={v} index={i} />
           ))}
         </div>
       </div>
@@ -1945,62 +1932,52 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
   const [activated, setActivated] = useState(false);
   const [iframeReady, setIframeReady] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const playerRef = useRef<any>(null);
 
-  // Auto-activate first video after short delay (desktop)
+  // Activate all cards when the portfolio section scrolls into view
   useEffect(() => {
-    if (index === 0 && window.matchMedia("(min-width: 768px)").matches) {
-      const t = setTimeout(() => setActivated(true), 1500);
-      return () => clearTimeout(t);
-    }
-  }, [index]);
-
-  // Mobile: auto-activate when card scrolls into center view
-  useEffect(() => {
-    const isMobile = window.matchMedia("(max-width: 767px)").matches;
-    if (!isMobile || !cardRef.current) return;
+    const section = document.getElementById("portfolio");
+    if (!section) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setActivated(true);
+          // Stagger activation so iframes don't all load at once
+          const t = setTimeout(() => setActivated(true), index * 400);
           observer.disconnect();
+          return () => clearTimeout(t);
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.1 }
     );
-    observer.observe(cardRef.current);
+    observer.observe(section);
     return () => observer.disconnect();
-  }, []);
+  }, [index]);
 
-  // Use Vimeo Player API to detect actual playback (not just iframe load)
+  // Use Vimeo Player API to detect actual playback
   useEffect(() => {
     if (!activated || !iframeRef.current || !video.vimeoId) return;
-    // @ts-expect-error - Vimeo Player loaded via external script
-    const Vimeo = window.Vimeo;
-    if (!Vimeo?.Player) {
-      // Fallback if Vimeo API not loaded yet
-      setTimeout(() => setIframeReady(true), 2000);
-      return;
-    }
 
-    const player = new Vimeo.Player(iframeRef.current);
-    playerRef.current = player;
+    let cancelled = false;
 
-    player.on("playing", () => setIframeReady(true));
+    // Wait for Vimeo API to be available
+    const tryInit = () => {
+      // @ts-expect-error - Vimeo Player loaded via external script
+      const Vimeo = window.Vimeo;
+      if (!Vimeo?.Player) {
+        // API not loaded yet, fallback to timeout
+        if (!cancelled) setTimeout(() => setIframeReady(true), 3000);
+        return;
+      }
 
-    // Fallback: if autoplay is blocked (common on mobile), try to play on user interaction
-    player.play().catch(() => {
-      // Autoplay blocked — keep thumbnail & play icon visible, user will tap
-    });
-
-    return () => {
-      player.off("playing");
-      player.destroy?.();
-      playerRef.current = null;
+      const player = new Vimeo.Player(iframeRef.current!);
+      player.on("playing", () => { if (!cancelled) setIframeReady(true); });
+      player.play().catch(() => {});
     };
+
+    // Small delay to let iframe initialize
+    const t = setTimeout(tryInit, 500);
+    return () => { cancelled = true; clearTimeout(t); };
   }, [activated, video.vimeoId]);
 
   const handleMouseEnter = () => {
@@ -2011,24 +1988,28 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
   };
 
   const handleTap = () => {
-    if (!activated) {
-      setActivated(true);
-      return;
-    }
-    // If activated but not playing (autoplay blocked), force play via API
-    if (playerRef.current && !iframeReady) {
-      playerRef.current.play().catch(() => {});
+    setActivated(true);
+    // If iframe already loaded but not playing, use Vimeo API to play
+    if (iframeRef.current && !iframeReady) {
+      // @ts-expect-error - Vimeo Player loaded via external script
+      const Vimeo = window.Vimeo;
+      if (Vimeo?.Player) {
+        const player = new Vimeo.Player(iframeRef.current);
+        player.play().catch(() => {});
+        player.on("playing", () => setIframeReady(true));
+      }
     }
   };
 
-  const vimeoParams = `badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&background=1&quality=auto`;
+  // Remove background=1 — it blocks autoplay on many mobile browsers.
+  // Without it, Vimeo still respects autoplay+muted+controls=0 for a clean chromeless look.
+  const vimeoParams = `badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&quality=auto`;
   const vimeoSrc = video.vimeoId
     ? `https://player.vimeo.com/video/${video.vimeoId}?${video.vimeoHash ? `h=${video.vimeoHash}&` : ""}${vimeoParams}`
     : "";
 
   return (
     <div
-      ref={cardRef}
       className="block shrink-0 group"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -2062,7 +2043,7 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
             </div>
           )}
 
-          {/* Vimeo iframe - loads when activated, thumbnail hides when actually playing */}
+          {/* Vimeo iframe - loads when activated */}
           {activated && video.vimeoId && (
             <iframe
               ref={iframeRef}
