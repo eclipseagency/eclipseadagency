@@ -9,18 +9,19 @@ import { useState } from "react";
 interface Role {
   id: string;
   title: string;
+  tooltip: string;
   juniorUSD: number;
   seniorUSD: number;
 }
 
 const roles: Role[] = [
-  { id: "graphic-designer", title: "Graphic Designer", juniorUSD: 300, seniorUSD: 500 },
-  { id: "smm-specialist", title: "Social Media Specialist", juniorUSD: 240, seniorUSD: 400 },
-  { id: "account-moderator", title: "Account Moderator", juniorUSD: 200, seniorUSD: 300 },
-  { id: "motion-designer", title: "Motion Designer", juniorUSD: 300, seniorUSD: 600 },
-  { id: "video-editor", title: "Video Editor", juniorUSD: 240, seniorUSD: 500 },
-  { id: "web-developer", title: "Web Developer (Powered by Claude)", juniorUSD: 300, seniorUSD: 800 },
-  { id: "media-buyer", title: "Media Buyer", juniorUSD: 240, seniorUSD: 500 },
+  { id: "graphic-designer", title: "Graphic Designer", tooltip: "Creates visual content — social media posts, branding materials, ads, packaging, and print designs", juniorUSD: 300, seniorUSD: 500 },
+  { id: "smm-specialist", title: "Social Media Specialist", tooltip: "Manages your social media accounts — content planning, scheduling, engagement, and community growth", juniorUSD: 240, seniorUSD: 400 },
+  { id: "account-moderator", title: "Account Moderator", tooltip: "Handles client communication, replies to comments & DMs, and maintains brand voice across platforms", juniorUSD: 200, seniorUSD: 300 },
+  { id: "motion-designer", title: "Motion Designer", tooltip: "Creates animated content — motion graphics, logo animations, explainer videos, and animated ads", juniorUSD: 300, seniorUSD: 600 },
+  { id: "video-editor", title: "Video Editor", tooltip: "Edits and produces video content — reels, commercials, product videos, and long-form content", juniorUSD: 240, seniorUSD: 500 },
+  { id: "web-developer", title: "Web Developer (Powered by Claude)", tooltip: "Builds websites, web apps, e-commerce stores, and custom software — AI-assisted for faster delivery", juniorUSD: 300, seniorUSD: 800 },
+  { id: "media-buyer", title: "Media Buyer", tooltip: "Manages paid advertising — Google Ads, Meta Ads, TikTok Ads — optimizing budgets for maximum ROI", juniorUSD: 240, seniorUSD: 500 },
 ];
 
 const includedFree = [
@@ -314,7 +315,12 @@ export function TeamBuilder() {
 
                       {/* Title + price */}
                       <div className="flex-1">
-                        <p className="font-bold">{role.title}</p>
+                        <p className="font-bold group/tip relative cursor-help">
+                          {role.title}
+                          <span className="pointer-events-none absolute -top-2 left-0 z-50 w-64 -translate-y-full rounded-lg border border-border bg-bg-card px-3 py-2 text-xs font-normal leading-relaxed text-text-secondary opacity-0 shadow-xl transition-opacity duration-200 group-hover/tip:opacity-100">
+                            {role.tooltip}
+                          </span>
+                        </p>
                         <p className="text-xs text-text-muted">
                           Junior: {fmt(role.juniorUSD)} — Senior: {fmt(role.seniorUSD)}
                         </p>
