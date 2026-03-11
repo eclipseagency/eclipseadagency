@@ -1884,14 +1884,14 @@ function PartnersSection() {
 /* ═══════════════════════════════════════════════════════════
    SECTION: Portfolio — Video showreel horizontal scroll
    ═══════════════════════════════════════════════════════════ */
-const portfolioVideos: { id: string; vimeoId?: string; vimeoHash?: string; src?: string }[] = [
-  { id: "showreel", vimeoId: "1051203598", vimeoHash: "a43672f073" },
-  { id: "branding-1", vimeoId: "1144863160" },
-  { id: "branding-2", vimeoId: "1144863671" },
-  { id: "branding-3", vimeoId: "1147623451" },
-  { id: "webdev-1", vimeoId: "1144880936" },
-  { id: "webdev-2", vimeoId: "1144881841" },
-  { id: "webdev-3", vimeoId: "1054176209", vimeoHash: "e8b82880e0" },
+const portfolioVideos: { id: string; vimeoId?: string; vimeoHash?: string; src?: string; thumb?: string }[] = [
+  { id: "showreel", vimeoId: "1051203598", vimeoHash: "a43672f073", thumb: "https://vumbnail.com/1051203598.jpg" },
+  { id: "branding-1", vimeoId: "1144863160", thumb: "https://vumbnail.com/1144863160.jpg" },
+  { id: "branding-2", vimeoId: "1144863671", thumb: "https://vumbnail.com/1144863671.jpg" },
+  { id: "branding-3", vimeoId: "1147623451", thumb: "https://vumbnail.com/1147623451.jpg" },
+  { id: "webdev-1", vimeoId: "1144880936", thumb: "https://vumbnail.com/1144880936.jpg" },
+  { id: "webdev-2", vimeoId: "1144881841", thumb: "https://vumbnail.com/1144881841.jpg" },
+  { id: "webdev-3", vimeoId: "1054176209", vimeoHash: "e8b82880e0", thumb: "https://vumbnail.com/1054176209.jpg" },
 ];
 
 function PortfolioSection() {
@@ -1942,33 +1942,24 @@ function PortfolioSection() {
 }
 
 function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [shouldLoad, setShouldLoad] = useState(false);
+  const [activated, setActivated] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Auto-activate first video after short delay
   useEffect(() => {
-    // Load first 2 immediately, stagger the rest
-    if (index < 2) {
-      setShouldLoad(true);
-      return;
+    if (index === 0) {
+      const t = setTimeout(() => setActivated(true), 1500);
+      return () => clearTimeout(t);
     }
-
-    const el = ref.current;
-    if (!el) return;
-
-    // Check actual horizontal position — only load when card is near the visible area
-    let raf: number;
-    const check = () => {
-      const rect = el.getBoundingClientRect();
-      // Load when the card is within 1 screen width of the viewport
-      if (rect.left < window.innerWidth * 2 && rect.right > -window.innerWidth) {
-        setShouldLoad(true);
-        return;
-      }
-      raf = requestAnimationFrame(check);
-    };
-    raf = requestAnimationFrame(check);
-    return () => cancelAnimationFrame(raf);
   }, [index]);
+
+  const handleMouseEnter = () => {
+    // Load iframe on hover with small delay to avoid accidental triggers
+    timerRef.current = setTimeout(() => setActivated(true), 300);
+  };
+  const handleMouseLeave = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+  };
 
   const vimeoParams = `badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&background=1&quality=auto`;
   const vimeoSrc = video.vimeoId
@@ -1976,14 +1967,38 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
     : "";
 
   return (
-    <div ref={ref} className="block shrink-0 group">
+    <div
+      className="block shrink-0 group"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={() => setActivated(true)}
+    >
       <div
         className="relative overflow-hidden rounded-2xl border border-white/[0.06] transition-all duration-500 hover:border-[#ff6b35]/20 hover:shadow-[0_20px_80px_rgba(255,107,53,0.1)]"
         style={{ width: "min(55vw, 400px)" }}
       >
         {/* Uniform 1:1 square aspect for all cards */}
         <div className="relative overflow-hidden bg-white/[0.02]" style={{ paddingTop: "100%" }}>
-          {shouldLoad && video.vimeoId ? (
+          {/* Thumbnail — always rendered, hidden when video plays */}
+          {video.thumb && (
+            <img
+              src={video.thumb}
+              alt=""
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${activated ? "opacity-0" : "opacity-100"}`}
+            />
+          )}
+
+          {/* Play icon overlay on thumbnail */}
+          {!activated && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-opacity hover:bg-black/10">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          )}
+
+          {/* Vimeo iframe — only loads when activated */}
+          {activated && video.vimeoId && (
             <iframe
               src={vimeoSrc}
               loading="lazy"
@@ -1991,17 +2006,20 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
               referrerPolicy="strict-origin-when-cross-origin"
               className="absolute inset-0 h-full w-full border-0"
             />
-          ) : shouldLoad && video.src ? (
+          )}
+
+          {/* Native video fallback */}
+          {activated && video.src && (
             <video
               src={video.src}
-              autoPlay
-              muted
-              loop
-              playsInline
+              autoPlay muted loop playsInline
               className="absolute inset-0 h-full w-full object-cover"
             />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center bg-white/[0.02]">
+          )}
+
+          {/* No thumbnail fallback */}
+          {!video.thumb && !activated && (
+            <div className="absolute inset-0 flex items-center justify-center">
               <div className="h-8 w-8 rounded-full border-2 border-[#ff6b35]/30 border-t-[#ff6b35] animate-spin" />
             </div>
           )}
