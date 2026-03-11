@@ -84,6 +84,8 @@ export function TeamBuilder() {
   const [currency, setCurrency] = useState<Currency>("SAR");
   const [selections, setSelections] = useState<RoleSelection[]>([]);
   const [officeType, setOfficeType] = useState<OfficeType>("extension");
+  const [customRoles, setCustomRoles] = useState<string[]>([]);
+  const [customInput, setCustomInput] = useState("");
 
   /* helpers */
   const fmt = (usd: number) => {
@@ -117,6 +119,17 @@ export function TeamBuilder() {
     );
   };
 
+  const addCustomRole = () => {
+    const trimmed = customInput.trim();
+    if (!trimmed || customRoles.includes(trimmed)) return;
+    setCustomRoles((prev) => [...prev, trimmed]);
+    setCustomInput("");
+  };
+
+  const removeCustomRole = (role: string) => {
+    setCustomRoles((prev) => prev.filter((r) => r !== role));
+  };
+
   /* totals */
   const rolesTotal = selections.reduce((sum, sel) => {
     const role = roles.find((r) => r.id === sel.roleId)!;
@@ -138,6 +151,9 @@ export function TeamBuilder() {
       const role = roles.find((r) => r.id === sel.roleId)!;
       return `- ${sel.count}x ${role.title} (${sel.level})`;
     });
+    if (customRoles.length > 0) {
+      customRoles.forEach((r) => lines.push(`- ${r} (custom role — pricing TBD)`));
+    }
     const office =
       officeType === "extension"
         ? "Extension of Eclipse Office"
@@ -377,6 +393,48 @@ export function TeamBuilder() {
                   </div>
                 );
               })}
+            </div>
+
+            {/* Custom roles */}
+            <div className="mt-6 rounded-xl border border-dashed border-border p-4">
+              <p className="mb-3 text-sm font-bold">Need a specialist role?</p>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={customInput}
+                  onChange={(e) => setCustomInput(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && addCustomRole()}
+                  placeholder="e.g. UI/UX Designer, Photographer..."
+                  className="flex-1 rounded-lg border border-border bg-bg-elevated px-3 py-2 text-sm text-white placeholder:text-text-muted outline-none focus:border-primary"
+                />
+                <button
+                  onClick={addCustomRole}
+                  className="shrink-0 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-primary/90"
+                >
+                  Add
+                </button>
+              </div>
+              {customRoles.length > 0 && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {customRoles.map((role) => (
+                    <span
+                      key={role}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary"
+                    >
+                      {role}
+                      <button
+                        onClick={() => removeCustomRole(role)}
+                        className="ml-0.5 hover:text-white"
+                      >
+                        &times;
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              )}
+              <p className="mt-2 text-[11px] text-text-muted">
+                Custom roles will be quoted after discussion. Add as many as you need.
+              </p>
             </div>
           </div>
 
