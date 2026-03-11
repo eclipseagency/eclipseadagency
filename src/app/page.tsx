@@ -1947,13 +1947,31 @@ function VideoCard({ video, index }: { video: (typeof portfolioVideos)[number]; 
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  // Auto-activate first video after short delay (desktop only)
+  // Auto-activate first video after short delay (desktop)
   useEffect(() => {
     if (index === 0 && window.matchMedia("(min-width: 768px)").matches) {
       const t = setTimeout(() => setActivated(true), 1500);
       return () => clearTimeout(t);
     }
   }, [index]);
+
+  // Mobile: auto-activate when card scrolls into center view
+  useEffect(() => {
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    if (!isMobile || !cardRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setActivated(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const handleMouseEnter = () => {
     timerRef.current = setTimeout(() => setActivated(true), 300);
