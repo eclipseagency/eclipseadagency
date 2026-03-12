@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Analytics } from "@vercel/analytics/next";
+
 import { siteConfig } from "@/data/site";
 import { CookieConsent } from "@/components/CookieConsent";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
@@ -221,7 +221,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </ErrorBoundary>
         <CookieConsent />
-        <Analytics />
+        {/* Statcounter */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              var sc_project=13210168;
+              var sc_invisible=1;
+              var sc_security="ecb1f29a";
+            `,
+          }}
+        />
+        <script src="https://www.statcounter.com/counter/counter.js" async />
+        <noscript>
+          <div className="statcounter">
+            <a title="Web Analytics Made Easy - Statcounter" href="https://statcounter.com/" target="_blank" rel="noreferrer">
+              <img
+                className="statcounter"
+                src="https://c.statcounter.com/13210168/0/ecb1f29a/1/"
+                alt="Web Analytics Made Easy - Statcounter"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </a>
+          </div>
+        </noscript>
       </body>
     </html>
   );
