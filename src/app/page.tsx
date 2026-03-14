@@ -96,10 +96,11 @@ function useScrollAnimations() {
           ease: "none",
           scrollTrigger: {
             trigger: hScroll,
-            start: "top top",
-            end: () => `+=${totalWidth}`,
-            scrub: 0.3,
+            start: "top 10%",
+            end: () => `+=${totalWidth * 1.1}`,
+            scrub: 0.6,
             pin: true,
+            anticipatePin: 1,
           },
         });
       }
