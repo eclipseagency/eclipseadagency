@@ -1,6 +1,44 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
+// --- Simple in-memory rate limiter ---
+const RATE_LIMIT_WINDOW = 15 * 60 * 1000; // 15 minutes
+const RATE_LIMIT_MAX = 5;
+const ipMap = new Map<string, number[]>();
+let requestCount = 0;
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+
+  // Periodic cleanup every 100 requests
+  requestCount++;
+  if (requestCount % 100 === 0) {
+    for (const [key, timestamps] of ipMap) {
+      const valid = timestamps.filter((t) => now - t < RATE_LIMIT_WINDOW);
+      if (valid.length === 0) ipMap.delete(key);
+      else ipMap.set(key, valid);
+    }
+  }
+
+  const timestamps = (ipMap.get(ip) || []).filter(
+    (t) => now - t < RATE_LIMIT_WINDOW
+  );
+
+  if (timestamps.length >= RATE_LIMIT_MAX) return true;
+
+  timestamps.push(now);
+  ipMap.set(ip, timestamps);
+  return false;
+}
+
+function getClientIp(request: NextRequest): string {
+  return (
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-real-ip") ||
+    "unknown"
+  );
+}
+
 interface ContactPayload {
   name: string;
   email: string;
@@ -30,6 +68,14 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function POST(request: NextRequest) {
+  const ip = getClientIp(request);
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      { status: 429 }
+    );
+  }
+
   try {
     const body: ContactPayload = await request.json();
 
