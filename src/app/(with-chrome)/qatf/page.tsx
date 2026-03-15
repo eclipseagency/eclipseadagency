@@ -34,7 +34,7 @@ export default function QatfPage() {
 
         <div className="mt-12 overflow-hidden rounded-2xl border border-border">
           <Image
-            src="https://eclipseadagency.com/wp-content/uploads/2024/12/qatf-branding-presentation.png"
+            src="/images/portfolio/qatf.png"
             alt="Qatf branding presentation showcase"
             width={1200}
             height={3000}

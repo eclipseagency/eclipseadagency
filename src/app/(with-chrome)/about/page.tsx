@@ -38,25 +38,25 @@ const profileImages = [
     alt: "Eclipse Agency story - from bold idea to creative powerhouse",
   },
   {
-    src: "https://eclipseadagency.com/wp-content/uploads/2024/11/DSC_7529-1536x1025.jpg",
+    src: "/images/about/office.jpg",
     alt: "Eclipse Agency office",
   },
 ];
 
 const projectImages = [
-  "https://eclipseadagency.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-19-at-2.15.58-PM.jpeg",
-  "https://eclipseadagency.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-19-at-2.16.25-PM.jpeg",
-  "https://eclipseadagency.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-19-at-2.16.16-PM.jpeg",
-  "https://eclipseadagency.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-19-at-2.16.15-PM.jpeg",
-  "https://eclipseadagency.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-19-at-2.16.22-PM-1.jpeg",
-  "https://eclipseadagency.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-19-at-2.16.18-PM.jpeg",
-  "https://eclipseadagency.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-19-at-2.16.18-PM-1.jpeg",
-  "https://eclipseadagency.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-19-at-2.16.25-PM-1.jpeg",
-  "https://eclipseadagency.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-19-at-2.16.19-PM.jpeg",
-  "https://eclipseadagency.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-19-at-2.16.23-PM.jpeg",
-  "https://eclipseadagency.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-19-at-2.16.22-PM.jpeg",
-  "https://eclipseadagency.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-19-at-2.16.17-PM.jpeg",
-  "https://eclipseadagency.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-19-at-2.16.00-PM.jpeg",
+  "/images/about/gallery/01.jpeg",
+  "/images/about/gallery/02.jpeg",
+  "/images/about/gallery/03.jpeg",
+  "/images/about/gallery/04.jpeg",
+  "/images/about/gallery/05.jpeg",
+  "/images/about/gallery/06.jpeg",
+  "/images/about/gallery/07.jpeg",
+  "/images/about/gallery/08.jpeg",
+  "/images/about/gallery/09.jpeg",
+  "/images/about/gallery/10.jpeg",
+  "/images/about/gallery/11.jpeg",
+  "/images/about/gallery/12.jpeg",
+  "/images/about/gallery/13.jpeg",
 ];
 
 const portfolioProjects: PortfolioProject[] = [
@@ -65,7 +65,7 @@ const portfolioProjects: PortfolioProject[] = [
     description:
       "The branding for Noon Studio reflects a modern and vibrant identity, featuring bold patterns, dynamic shapes, and a harmonious color palette that embodies creativity and innovation.",
     image:
-      "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-4.png",
+      "/images/about/cover-4.png",
     href: "/noon-studio",
   },
   {
@@ -73,7 +73,7 @@ const portfolioProjects: PortfolioProject[] = [
     description:
       'Crafted a bold, modern identity for Sparkle, featuring vibrant patterns and immersive design elements that bring their tagline, "Where Magic Happens," to life.',
     image:
-      "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-5.png",
+      "/images/about/cover-5.png",
     href: "/sparkle",
   },
   {
@@ -81,7 +81,7 @@ const portfolioProjects: PortfolioProject[] = [
     description:
       "The branding for Volume merges sophistication and style, showcasing elegant typography and luxurious design elements that perfectly complement the product's refined essence.",
     image:
-      "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-6.png",
+      "/images/about/cover-6.png",
     href: "/volume/",
     target: "_blank",
   },
@@ -90,7 +90,7 @@ const portfolioProjects: PortfolioProject[] = [
     description:
       "The branding for Sunny Beans radiates warmth and joy, featuring earthy tones, playful patterns, and a sun-inspired logo that captures the spirit of community and a love for coffee.",
     image:
-      "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-7.png",
+      "/images/about/cover-7.png",
     href: "/sunny-beans/",
     target: "_blank",
   },
@@ -99,7 +99,7 @@ const portfolioProjects: PortfolioProject[] = [
     description:
       "The branding for Grano de Café captures the authentic essence of Colombian coffee with a rich, earthy color palette and traditional design elements, emphasizing quality and heritage.",
     image:
-      "https://eclipseadagency.com/wp-content/uploads/2024/12/Grano-de-cafe-cover-12.png",
+      "/images/about/granodecafe-cover.png",
     href: "/grano-de-cafe/",
     target: "_blank",
   },
@@ -108,7 +108,7 @@ const portfolioProjects: PortfolioProject[] = [
     description:
       "The branding for For Cup blends modern minimalism with a playful edge, featuring clean typography and bold iconography that reflects a fresh and contemporary take on coffee culture.",
     image:
-      "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-1.png",
+      "/images/about/cover-1.png",
     href: "/forcup/",
     target: "_blank",
   },
@@ -117,7 +117,7 @@ const portfolioProjects: PortfolioProject[] = [
     description:
       "A fresh, modern brand identity emphasizing premium agricultural products with clean visuals and an organic aesthetic.",
     image:
-      "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-2.png",
+      "/images/about/cover-2.png",
     href: "/qatf/",
     target: "_blank",
   },
@@ -126,7 +126,7 @@ const portfolioProjects: PortfolioProject[] = [
     description:
       "A bold, professional brand design showcasing innovation and excellence in business services with sleek, vibrant visuals.",
     image:
-      "https://eclipseadagency.com/wp-content/uploads/2024/12/cover-3.png",
+      "/images/about/cover-3.png",
     href: "/waf/",
     target: "_blank",
   },
@@ -181,8 +181,8 @@ export default function AboutPage() {
         <SectionHeader badge="Showreel" title="Showreel 2024" />
         <div className="mx-auto max-w-4xl">
           <ShowreelPlayer
-            vimeoUrl="https://player.vimeo.com/video/1051203598?h=a43672f073&badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1"
-            thumbnailUrl="https://vumbnail.com/1051203598.jpg"
+            videoUrl="/videos/showreel.mp4"
+            thumbnailUrl="/images/about/cover-4.png"
             title="Eclipse Agency - Showreel 2024"
           />
         </div>
@@ -208,7 +208,7 @@ export default function AboutPage() {
             className="h-full w-full object-cover"
           >
             <source
-              src="https://eclipseadagency.com/wp-content/uploads/2024/08/WEBSITE-VIDEO-MOTION.mp4"
+              src="/videos/motion-reel.mp4"
               type="video/mp4"
             />
           </video>

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-const LAST_UPDATED = "March 11, 2026";
+const LAST_UPDATED = "March 16, 2026";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -133,18 +133,19 @@ export default function PrivacyPolicyPage() {
             <p>We use the following third-party services on our Site:</p>
             <ul className="list-disc space-y-3 pl-6">
               <li>
-                <strong className="text-white">Vercel Analytics:</strong> We use
-                Vercel Analytics to collect anonymized usage data about Site
-                performance and visitor behavior. Vercel Analytics does not use
-                cookies and does not collect personally identifiable information.
-                See{" "}
+                <strong className="text-white">Statcounter:</strong> We use
+                Statcounter (project ID 13210168) to collect anonymized usage
+                data about Site performance and visitor behavior. Statcounter
+                does not use cookies for tracking by default, operating in a
+                cookie-free tracking mode, and does not collect personally
+                identifiable information. See{" "}
                 <a
-                  href="https://vercel.com/docs/analytics/privacy-policy"
+                  href="https://statcounter.com/about/legal/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white underline underline-offset-2"
                 >
-                  Vercel&apos;s privacy policy
+                  Statcounter&apos;s privacy policy
                 </a>
                 .
               </li>

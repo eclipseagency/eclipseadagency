@@ -193,7 +193,7 @@ export default function HomePage() {
         <HeroSection />
         <div className="relative z-30 hidden md:flex justify-center pointer-events-none select-none" style={{ marginBottom: "-160px" }}>
           <video
-            src="https://eclipseadagency.com/wp-content/uploads/2024/08/Inflatable-Tube-Man.webm"
+            src="/videos/tube-man.webm"
             autoPlay
             muted
             loop

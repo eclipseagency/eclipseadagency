@@ -26,7 +26,7 @@ export default function NoonStudioPage() {
 
         <div className="mt-12 overflow-hidden rounded-2xl border border-border">
           <Image
-            src="https://eclipseadagency.com/wp-content/uploads/2024/12/noon-studio-branding.png"
+            src="/images/portfolio/noon-studio.png"
             alt="Noon Studio brand identity showcase"
             width={1200}
             height={3000}

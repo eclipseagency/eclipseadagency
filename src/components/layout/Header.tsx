@@ -164,6 +164,7 @@ export function Header() {
             className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full text-white transition-all hover:bg-white/[0.08] lg:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
           >
             {mobileOpen ? <XIcon size={22} /> : <MenuIcon size={22} />}
           </button>

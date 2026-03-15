@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-const LAST_UPDATED = "March 11, 2026";
+const LAST_UPDATED = "March 16, 2026";
 
 export default function TermsOfServicePage() {
   return (
@@ -150,8 +150,9 @@ export default function TermsOfServicePage() {
               party&apos;s own terms and policies.
             </p>
             <p>
-              Our Site is hosted on Vercel and uses Vercel Analytics for
-              anonymized performance monitoring.
+              Our Site is hosted on Vercel and uses Statcounter for
+              anonymized performance monitoring. Statcounter operates in a
+              cookie-free tracking mode by default.
             </p>
           </div>
         </div>

@@ -10,6 +10,15 @@ interface ContactPayload {
   message: string;
 }
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST || "secure.emailsrvr.com",
   port: Number(process.env.SMTP_PORT) || 465,
@@ -51,15 +60,15 @@ export async function POST(request: NextRequest) {
             New Contact Form Submission
           </h2>
           <table style="width:100%;border-collapse:collapse">
-            <tr><td style="padding:8px 0;font-weight:bold;color:#666">Name</td><td style="padding:8px 0">${body.name}</td></tr>
-            <tr><td style="padding:8px 0;font-weight:bold;color:#666">Email</td><td style="padding:8px 0"><a href="mailto:${body.email}">${body.email}</a></td></tr>
-            ${body.company ? `<tr><td style="padding:8px 0;font-weight:bold;color:#666">Company</td><td style="padding:8px 0">${body.company}</td></tr>` : ""}
-            ${body.service ? `<tr><td style="padding:8px 0;font-weight:bold;color:#666">Service</td><td style="padding:8px 0">${body.service}</td></tr>` : ""}
-            ${body.budget ? `<tr><td style="padding:8px 0;font-weight:bold;color:#666">Budget</td><td style="padding:8px 0">${body.budget}</td></tr>` : ""}
+            <tr><td style="padding:8px 0;font-weight:bold;color:#666">Name</td><td style="padding:8px 0">${escapeHtml(body.name)}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:bold;color:#666">Email</td><td style="padding:8px 0"><a href="mailto:${encodeURIComponent(body.email)}">${escapeHtml(body.email)}</a></td></tr>
+            ${body.company ? `<tr><td style="padding:8px 0;font-weight:bold;color:#666">Company</td><td style="padding:8px 0">${escapeHtml(body.company)}</td></tr>` : ""}
+            ${body.service ? `<tr><td style="padding:8px 0;font-weight:bold;color:#666">Service</td><td style="padding:8px 0">${escapeHtml(body.service)}</td></tr>` : ""}
+            ${body.budget ? `<tr><td style="padding:8px 0;font-weight:bold;color:#666">Budget</td><td style="padding:8px 0">${escapeHtml(body.budget)}</td></tr>` : ""}
           </table>
           <div style="margin-top:20px;padding:15px;background:#f5f5f5;border-radius:8px">
             <strong style="color:#666">Message:</strong>
-            <p style="margin:10px 0 0;line-height:1.6">${body.message.replace(/\n/g, "<br>")}</p>
+            <p style="margin:10px 0 0;line-height:1.6">${escapeHtml(body.message).replace(/\n/g, "<br>")}</p>
           </div>
           <p style="margin-top:20px;font-size:12px;color:#999">
             Sent from eclipseagency.net contact form on ${new Date().toLocaleString("en-US", { timeZone: "Asia/Riyadh" })}

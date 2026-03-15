@@ -28,7 +28,7 @@ export default function ForcupPage() {
 
         <div className="mt-12 overflow-hidden rounded-2xl border border-border">
           <Image
-            src="https://eclipseadagency.com/wp-content/uploads/2024/12/for-cup-branding-presentation-1.png"
+            src="/images/portfolio/forcup.png"
             alt="Forcup branding presentation showcase"
             width={1200}
             height={3000}

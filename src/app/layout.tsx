@@ -81,7 +81,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
         <link rel="alternate" type="application/rss+xml" title="Eclipse Agency Blog" href="https://www.eclipseagency.net/feed.xml" />
-        <script src="https://player.vimeo.com/api/player.js" async />
       </head>
       <body className="min-h-screen bg-bg font-body text-text antialiased">
         {/* Skip to content — accessibility for keyboard users */}
@@ -104,11 +103,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 url: siteConfig.url,
                 logo: {
                   "@type": "ImageObject",
-                  url: "https://eclipseadagency.com/wp-content/uploads/2025/12/eclipse-logo-source-1.png",
+                  url: `${siteConfig.url}/images/eclipse-logo.png`,
                   width: 512,
                   height: 512,
                 },
-                image: "https://eclipseadagency.com/wp-content/uploads/2025/12/eclipse-logo-source-1.png",
+                image: `${siteConfig.url}/images/eclipse-logo.png`,
                 description: siteConfig.description,
                 foundingDate: "2017",
                 numberOfEmployees: { "@type": "QuantitativeValue", minValue: 10, maxValue: 20 },

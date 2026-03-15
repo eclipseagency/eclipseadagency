@@ -44,7 +44,7 @@ export default function VolumePage() {
 
         <div className="mt-12 overflow-hidden rounded-2xl border border-border">
           <Image
-            src="https://eclipseadagency.com/wp-content/uploads/2024/12/volume-branding-presentation_11zon-1.png"
+            src="/images/portfolio/volume.png"
             alt="Volume branding presentation showcase"
             width={1200}
             height={3000}

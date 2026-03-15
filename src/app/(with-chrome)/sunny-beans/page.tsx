@@ -43,7 +43,7 @@ export default function SunnyBeansPage() {
 
         <div className="mt-12 overflow-hidden rounded-2xl border border-border">
           <Image
-            src="https://eclipseadagency.com/wp-content/uploads/2024/12/sunny-beans-branding.png"
+            src="/images/portfolio/sunny-beans.png"
             alt="Sunny Beans branding presentation showcase"
             width={1200}
             height={3000}
