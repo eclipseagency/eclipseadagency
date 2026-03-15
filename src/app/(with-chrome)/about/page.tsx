@@ -38,25 +38,25 @@ const profileImages = [
     alt: "Eclipse Agency story - from bold idea to creative powerhouse",
   },
   {
-    src: "/images/about/office.jpg",
+    src: "/images/about/office.webp",
     alt: "Eclipse Agency office",
   },
 ];
 
 const projectImages = [
-  "/images/about/gallery/01.jpeg",
-  "/images/about/gallery/02.jpeg",
-  "/images/about/gallery/03.jpeg",
-  "/images/about/gallery/04.jpeg",
-  "/images/about/gallery/05.jpeg",
-  "/images/about/gallery/06.jpeg",
-  "/images/about/gallery/07.jpeg",
-  "/images/about/gallery/08.jpeg",
-  "/images/about/gallery/09.jpeg",
-  "/images/about/gallery/10.jpeg",
-  "/images/about/gallery/11.jpeg",
-  "/images/about/gallery/12.jpeg",
-  "/images/about/gallery/13.jpeg",
+  "/images/about/gallery/01.webp",
+  "/images/about/gallery/02.webp",
+  "/images/about/gallery/03.webp",
+  "/images/about/gallery/04.webp",
+  "/images/about/gallery/05.webp",
+  "/images/about/gallery/06.webp",
+  "/images/about/gallery/07.webp",
+  "/images/about/gallery/08.webp",
+  "/images/about/gallery/09.webp",
+  "/images/about/gallery/10.webp",
+  "/images/about/gallery/11.webp",
+  "/images/about/gallery/12.webp",
+  "/images/about/gallery/13.webp",
 ];
 
 const portfolioProjects: PortfolioProject[] = [
@@ -65,7 +65,7 @@ const portfolioProjects: PortfolioProject[] = [
     description:
       "The branding for Noon Studio reflects a modern and vibrant identity, featuring bold patterns, dynamic shapes, and a harmonious color palette that embodies creativity and innovation.",
     image:
-      "/images/about/cover-4.png",
+      "/images/about/cover-4.webp",
     href: "/noon-studio",
   },
   {
@@ -73,7 +73,7 @@ const portfolioProjects: PortfolioProject[] = [
     description:
       'Crafted a bold, modern identity for Sparkle, featuring vibrant patterns and immersive design elements that bring their tagline, "Where Magic Happens," to life.',
     image:
-      "/images/about/cover-5.png",
+      "/images/about/cover-5.webp",
     href: "/sparkle",
   },
   {
@@ -81,7 +81,7 @@ const portfolioProjects: PortfolioProject[] = [
     description:
       "The branding for Volume merges sophistication and style, showcasing elegant typography and luxurious design elements that perfectly complement the product's refined essence.",
     image:
-      "/images/about/cover-6.png",
+      "/images/about/cover-6.webp",
     href: "/volume/",
     target: "_blank",
   },
@@ -90,7 +90,7 @@ const portfolioProjects: PortfolioProject[] = [
     description:
       "The branding for Sunny Beans radiates warmth and joy, featuring earthy tones, playful patterns, and a sun-inspired logo that captures the spirit of community and a love for coffee.",
     image:
-      "/images/about/cover-7.png",
+      "/images/about/cover-7.webp",
     href: "/sunny-beans/",
     target: "_blank",
   },
@@ -99,7 +99,7 @@ const portfolioProjects: PortfolioProject[] = [
     description:
       "The branding for Grano de Café captures the authentic essence of Colombian coffee with a rich, earthy color palette and traditional design elements, emphasizing quality and heritage.",
     image:
-      "/images/about/granodecafe-cover.png",
+      "/images/about/granodecafe-cover.webp",
     href: "/grano-de-cafe/",
     target: "_blank",
   },
@@ -108,7 +108,7 @@ const portfolioProjects: PortfolioProject[] = [
     description:
       "The branding for For Cup blends modern minimalism with a playful edge, featuring clean typography and bold iconography that reflects a fresh and contemporary take on coffee culture.",
     image:
-      "/images/about/cover-1.png",
+      "/images/about/cover-1.webp",
     href: "/forcup/",
     target: "_blank",
   },
@@ -117,7 +117,7 @@ const portfolioProjects: PortfolioProject[] = [
     description:
       "A fresh, modern brand identity emphasizing premium agricultural products with clean visuals and an organic aesthetic.",
     image:
-      "/images/about/cover-2.png",
+      "/images/about/cover-2.webp",
     href: "/qatf/",
     target: "_blank",
   },
@@ -126,7 +126,7 @@ const portfolioProjects: PortfolioProject[] = [
     description:
       "A bold, professional brand design showcasing innovation and excellence in business services with sleek, vibrant visuals.",
     image:
-      "/images/about/cover-3.png",
+      "/images/about/cover-3.webp",
     href: "/waf/",
     target: "_blank",
   },
@@ -182,7 +182,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-4xl">
           <ShowreelPlayer
             videoUrl="/videos/showreel.mp4"
-            thumbnailUrl="/images/about/cover-4.png"
+            thumbnailUrl="/images/about/cover-4.webp"
             title="Eclipse Agency - Showreel 2024"
           />
         </div>

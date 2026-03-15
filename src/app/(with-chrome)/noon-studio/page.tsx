@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     type: "article",
     images: [
       {
-        url: "https://www.eclipseagency.net/images/portfolio/noon-studio.png",
+        url: "https://www.eclipseagency.net/images/portfolio/noon-studio.webp",
         width: 1200,
         height: 630,
       },
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "Noon Studio - Brand Identity | Eclipse Agency",
     description:
       "Noon Studio's brand identity reflects a modern, energetic character, combining bold patterns, dynamic shapes, and a harmonious color palette that embodies creativity and innovation.",
-    images: ["https://www.eclipseagency.net/images/portfolio/noon-studio.png"],
+    images: ["https://www.eclipseagency.net/images/portfolio/noon-studio.webp"],
   },
 };
 
@@ -45,7 +45,7 @@ export default function NoonStudioPage() {
             description:
               "Noon Studio's brand identity reflects a modern, energetic character, combining bold patterns, dynamic shapes, and a harmonious color palette that embodies creativity and innovation.",
             image:
-              "https://www.eclipseagency.net/images/portfolio/noon-studio.png",
+              "https://www.eclipseagency.net/images/portfolio/noon-studio.webp",
             creator: {
               "@type": "Organization",
               name: "Eclipse Agency",
@@ -70,7 +70,7 @@ export default function NoonStudioPage() {
 
         <div className="mt-12 overflow-hidden rounded-2xl border border-border">
           <Image
-            src="/images/portfolio/noon-studio.png"
+            src="/images/portfolio/noon-studio.webp"
             alt="Noon Studio brand identity showcase"
             width={1200}
             height={3000}

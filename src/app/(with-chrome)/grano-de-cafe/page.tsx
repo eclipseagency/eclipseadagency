@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: "article",
     images: [
       {
-        url: "https://www.eclipseagency.net/images/portfolio/granodecafe.png",
+        url: "https://www.eclipseagency.net/images/portfolio/granodecafe.webp",
         width: 1200,
         height: 630,
       },
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "Grano de Café - Brand Identity | Eclipse Agency",
     description:
       "Grano de Café: Authentic Branding for Colombian Coffee Heritage. A rich, earthy identity celebrating the story of Colombian coffee.",
-    images: ["https://www.eclipseagency.net/images/portfolio/granodecafe.png"],
+    images: ["https://www.eclipseagency.net/images/portfolio/granodecafe.webp"],
   },
 };
 
@@ -44,7 +44,7 @@ export default function GranoDeCafePage() {
             description:
               "Grano de Cafe: Authentic Branding for Colombian Coffee Heritage. A rich, earthy identity celebrating the story of Colombian coffee.",
             image:
-              "https://www.eclipseagency.net/images/portfolio/granodecafe.png",
+              "https://www.eclipseagency.net/images/portfolio/granodecafe.webp",
             creator: {
               "@type": "Organization",
               name: "Eclipse Agency",
@@ -80,7 +80,7 @@ export default function GranoDeCafePage() {
 
         <div className="mt-12 overflow-hidden rounded-2xl border border-border">
           <Image
-            src="/images/portfolio/granodecafe.png"
+            src="/images/portfolio/granodecafe.webp"
             alt="Grano de Café branding presentation showcase"
             width={1200}
             height={3000}

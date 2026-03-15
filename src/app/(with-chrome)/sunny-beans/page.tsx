@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: "article",
     images: [
       {
-        url: "https://www.eclipseagency.net/images/portfolio/sunny-beans.png",
+        url: "https://www.eclipseagency.net/images/portfolio/sunny-beans.webp",
         width: 1200,
         height: 630,
       },
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "Sunny Beans - Brand Identity | Eclipse Agency",
     description:
       "Sunny Beans: Brewing Warmth, Joy, and Community. A brand identity radiating warmth with earthy tones and a sun-inspired logo.",
-    images: ["https://www.eclipseagency.net/images/portfolio/sunny-beans.png"],
+    images: ["https://www.eclipseagency.net/images/portfolio/sunny-beans.webp"],
   },
 };
 
@@ -44,7 +44,7 @@ export default function SunnyBeansPage() {
             description:
               "Sunny Beans: Brewing Warmth, Joy, and Community. A brand identity radiating warmth with earthy tones and a sun-inspired logo.",
             image:
-              "https://www.eclipseagency.net/images/portfolio/sunny-beans.png",
+              "https://www.eclipseagency.net/images/portfolio/sunny-beans.webp",
             creator: {
               "@type": "Organization",
               name: "Eclipse Agency",
@@ -87,7 +87,7 @@ export default function SunnyBeansPage() {
 
         <div className="mt-12 overflow-hidden rounded-2xl border border-border">
           <Image
-            src="/images/portfolio/sunny-beans.png"
+            src="/images/portfolio/sunny-beans.webp"
             alt="Sunny Beans branding presentation showcase"
             width={1200}
             height={3000}

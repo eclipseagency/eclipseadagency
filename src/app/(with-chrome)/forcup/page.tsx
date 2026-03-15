@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: "article",
     images: [
       {
-        url: "https://www.eclipseagency.net/images/portfolio/forcup.png",
+        url: "https://www.eclipseagency.net/images/portfolio/forcup.webp",
         width: 1200,
         height: 630,
       },
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "Forcup - Brand Identity | Eclipse Agency",
     description:
       "Forcup: Sophisticated Branding for a Premium Coffee Experience. Modern minimalism with a playful edge for a fresh take on coffee culture.",
-    images: ["https://www.eclipseagency.net/images/portfolio/forcup.png"],
+    images: ["https://www.eclipseagency.net/images/portfolio/forcup.webp"],
   },
 };
 
@@ -44,7 +44,7 @@ export default function ForcupPage() {
             description:
               "Forcup: Sophisticated Branding for a Premium Coffee Experience. Modern minimalism with a playful edge for a fresh take on coffee culture.",
             image:
-              "https://www.eclipseagency.net/images/portfolio/forcup.png",
+              "https://www.eclipseagency.net/images/portfolio/forcup.webp",
             creator: {
               "@type": "Organization",
               name: "Eclipse Agency",
@@ -72,7 +72,7 @@ export default function ForcupPage() {
 
         <div className="mt-12 overflow-hidden rounded-2xl border border-border">
           <Image
-            src="/images/portfolio/forcup.png"
+            src="/images/portfolio/forcup.webp"
             alt="Forcup branding presentation showcase"
             width={1200}
             height={3000}

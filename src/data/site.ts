@@ -219,7 +219,7 @@ export const portfolioItems: {
     description:
       "A bold brand identity for a vibrant creative vision, combining dynamic shapes and a harmonious color palette.",
     image:
-      "/images/portfolio/noon-studio.png",
+      "/images/portfolio/noon-studio.webp",
     tags: ["Brand Identity", "Visual Design", "Creative Direction"],
     href: "/noon-studio",
   },
@@ -230,7 +230,7 @@ export const portfolioItems: {
     description:
       "Where Magic Happens - a captivating visual identity reflecting innovation, energy, and magic through immersive space design.",
     image:
-      "/images/portfolio/sparkle.png",
+      "/images/portfolio/sparkle.webp",
     tags: ["Brand Identity", "Space Design", "Visual Language"],
     href: "/sparkle",
   },
@@ -241,7 +241,7 @@ export const portfolioItems: {
     description:
       "Where Sophistication Meets Style - an elegant brand identity merging luxury and modern sophistication for a refined haircare brand.",
     image:
-      "/images/portfolio/volume.png",
+      "/images/portfolio/volume.webp",
     tags: ["Brand Identity", "Luxury Design", "Visual Language"],
     href: "/volume/",
     target: "_blank",
@@ -253,7 +253,7 @@ export const portfolioItems: {
     description:
       "Brewing Warmth, Joy, and Community - a brand identity radiating earthy tones, playful patterns, and a sun-inspired logo for coffee lovers.",
     image:
-      "/images/portfolio/sunny-beans.png",
+      "/images/portfolio/sunny-beans.webp",
     tags: ["Brand Identity", "Packaging", "Coffee Culture"],
     href: "/sunny-beans/",
     target: "_blank",
@@ -265,7 +265,7 @@ export const portfolioItems: {
     description:
       "Authentic branding for Colombian coffee heritage, blending tradition with modern design through a rich, earthy color palette.",
     image:
-      "/images/portfolio/granodecafe.png",
+      "/images/portfolio/granodecafe.webp",
     tags: ["Brand Identity", "Heritage", "Coffee Culture"],
     href: "/grano-de-cafe/",
     target: "_blank",
@@ -277,7 +277,7 @@ export const portfolioItems: {
     description:
       "Modern minimalism with a playful edge - clean typography and bold iconography for a fresh, contemporary take on coffee culture.",
     image:
-      "/images/portfolio/forcup.png",
+      "/images/portfolio/forcup.webp",
     tags: ["Brand Identity", "Minimalism", "Coffee Culture"],
     href: "/forcup/",
     target: "_blank",
@@ -289,7 +289,7 @@ export const portfolioItems: {
     description:
       "Fresh branding for premium agricultural products with clean visuals and an organic aesthetic emphasizing sustainability.",
     image:
-      "/images/portfolio/qatf.png",
+      "/images/portfolio/qatf.webp",
     tags: ["Brand Identity", "Agriculture", "Organic Design"],
     href: "/qatf/",
     target: "_blank",
@@ -301,7 +301,7 @@ export const portfolioItems: {
     description:
       "Sleek and professional branding showcasing innovation and excellence in business services with vibrant, dynamic visuals.",
     image:
-      "/images/portfolio/waf.png",
+      "/images/portfolio/waf.webp",
     tags: ["Brand Identity", "Business", "Professional Design"],
     href: "/waf/",
     target: "_blank",

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: "article",
     images: [
       {
-        url: "https://www.eclipseagency.net/images/portfolio/qatf.png",
+        url: "https://www.eclipseagency.net/images/portfolio/qatf.webp",
         width: 1200,
         height: 630,
       },
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "Qatf - Brand Identity | Eclipse Agency",
     description:
       "Qatf: Fresh Branding for Premium Agricultural Products. A modern identity emphasizing sustainability and natural excellence.",
-    images: ["https://www.eclipseagency.net/images/portfolio/qatf.png"],
+    images: ["https://www.eclipseagency.net/images/portfolio/qatf.webp"],
   },
 };
 
@@ -44,7 +44,7 @@ export default function QatfPage() {
             description:
               "Qatf: Fresh Branding for Premium Agricultural Products. A modern identity emphasizing sustainability and natural excellence.",
             image:
-              "https://www.eclipseagency.net/images/portfolio/qatf.png",
+              "https://www.eclipseagency.net/images/portfolio/qatf.webp",
             creator: {
               "@type": "Organization",
               name: "Eclipse Agency",
@@ -78,7 +78,7 @@ export default function QatfPage() {
 
         <div className="mt-12 overflow-hidden rounded-2xl border border-border">
           <Image
-            src="/images/portfolio/qatf.png"
+            src="/images/portfolio/qatf.webp"
             alt="Qatf branding presentation showcase"
             width={1200}
             height={3000}

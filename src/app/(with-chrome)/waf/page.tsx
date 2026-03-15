@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: "article",
     images: [
       {
-        url: "https://www.eclipseagency.net/images/portfolio/waf.png",
+        url: "https://www.eclipseagency.net/images/portfolio/waf.webp",
         width: 1200,
         height: 630,
       },
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "Waf - Brand Identity | Eclipse Agency",
     description:
       "Waf: Sleek and Professional Branding for Business Excellence. A bold identity showcasing innovation with sleek, vibrant visuals.",
-    images: ["https://www.eclipseagency.net/images/portfolio/waf.png"],
+    images: ["https://www.eclipseagency.net/images/portfolio/waf.webp"],
   },
 };
 
@@ -44,7 +44,7 @@ export default function WafPage() {
             description:
               "Waf: Sleek and Professional Branding for Business Excellence. A bold identity showcasing innovation with sleek, vibrant visuals.",
             image:
-              "https://www.eclipseagency.net/images/portfolio/waf.png",
+              "https://www.eclipseagency.net/images/portfolio/waf.webp",
             creator: {
               "@type": "Organization",
               name: "Eclipse Agency",
@@ -79,7 +79,7 @@ export default function WafPage() {
 
         <div className="mt-12 overflow-hidden rounded-2xl border border-border">
           <Image
-            src="/images/portfolio/waf.png"
+            src="/images/portfolio/waf.webp"
             alt="Waf branding presentation showcase"
             width={1200}
             height={3000}

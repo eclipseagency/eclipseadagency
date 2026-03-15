@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     type: "article",
     images: [
       {
-        url: "https://www.eclipseagency.net/images/portfolio/sparkle.png",
+        url: "https://www.eclipseagency.net/images/portfolio/sparkle.webp",
         width: 1200,
         height: 630,
       },
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "Sparkle - Brand Identity | Eclipse Agency",
     description:
       "Sparkle Branding Project - Where Magic Happens. A captivating visual identity reflecting innovation, energy, and magic.",
-    images: ["https://www.eclipseagency.net/images/portfolio/sparkle.png"],
+    images: ["https://www.eclipseagency.net/images/portfolio/sparkle.webp"],
   },
 };
 
@@ -45,7 +45,7 @@ export default function SparklePage() {
             description:
               "Sparkle Branding Project - Where Magic Happens. A captivating visual identity reflecting innovation, energy, and magic.",
             image:
-              "https://www.eclipseagency.net/images/portfolio/sparkle.png",
+              "https://www.eclipseagency.net/images/portfolio/sparkle.webp",
             creator: {
               "@type": "Organization",
               name: "Eclipse Agency",
@@ -103,7 +103,7 @@ export default function SparklePage() {
 
         <div className="mt-12 overflow-hidden rounded-2xl border border-border">
           <Image
-            src="/images/portfolio/sparkle.png"
+            src="/images/portfolio/sparkle.webp"
             alt="Sparkle brand presentation showcase"
             width={1200}
             height={3000}

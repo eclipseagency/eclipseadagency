@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: "article",
     images: [
       {
-        url: "https://www.eclipseagency.net/images/portfolio/volume.png",
+        url: "https://www.eclipseagency.net/images/portfolio/volume.webp",
         width: 1200,
         height: 630,
       },
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "Volume - Brand Identity | Eclipse Agency",
     description:
       "Volume: Where Sophistication Meets Style. A brand identity that exudes luxury and modern sophistication for a refined haircare brand.",
-    images: ["https://www.eclipseagency.net/images/portfolio/volume.png"],
+    images: ["https://www.eclipseagency.net/images/portfolio/volume.webp"],
   },
 };
 
@@ -44,7 +44,7 @@ export default function VolumePage() {
             description:
               "Volume: Where Sophistication Meets Style. A brand identity that exudes luxury and modern sophistication for a refined haircare brand.",
             image:
-              "https://www.eclipseagency.net/images/portfolio/volume.png",
+              "https://www.eclipseagency.net/images/portfolio/volume.webp",
             creator: {
               "@type": "Organization",
               name: "Eclipse Agency",
@@ -88,7 +88,7 @@ export default function VolumePage() {
 
         <div className="mt-12 overflow-hidden rounded-2xl border border-border">
           <Image
-            src="/images/portfolio/volume.png"
+            src="/images/portfolio/volume.webp"
             alt="Volume branding presentation showcase"
             width={1200}
             height={3000}
