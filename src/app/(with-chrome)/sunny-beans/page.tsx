@@ -5,11 +5,55 @@ export const metadata: Metadata = {
   title: "Sunny Beans - Brand Identity | Eclipse Agency",
   description:
     "Sunny Beans: Brewing Warmth, Joy, and Community. A brand identity radiating warmth with earthy tones and a sun-inspired logo.",
+  alternates: {
+    canonical: "https://www.eclipseagency.net/sunny-beans",
+  },
+  openGraph: {
+    title: "Sunny Beans - Brand Identity | Eclipse Agency",
+    description:
+      "Sunny Beans: Brewing Warmth, Joy, and Community. A brand identity radiating warmth with earthy tones and a sun-inspired logo.",
+    url: "https://www.eclipseagency.net/sunny-beans",
+    type: "article",
+    images: [
+      {
+        url: "https://www.eclipseagency.net/images/portfolio/sunny-beans.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sunny Beans - Brand Identity | Eclipse Agency",
+    description:
+      "Sunny Beans: Brewing Warmth, Joy, and Community. A brand identity radiating warmth with earthy tones and a sun-inspired logo.",
+    images: ["https://www.eclipseagency.net/images/portfolio/sunny-beans.png"],
+  },
 };
 
 export default function SunnyBeansPage() {
   return (
-    <main className="px-5 py-20 md:px-8 md:py-28">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            name: "Sunny Beans - Brand Identity",
+            description:
+              "Sunny Beans: Brewing Warmth, Joy, and Community. A brand identity radiating warmth with earthy tones and a sun-inspired logo.",
+            image:
+              "https://www.eclipseagency.net/images/portfolio/sunny-beans.png",
+            creator: {
+              "@type": "Organization",
+              name: "Eclipse Agency",
+              url: "https://www.eclipseagency.net",
+            },
+          }),
+        }}
+      />
+      <main className="px-5 py-20 md:px-8 md:py-28">
       <div className="mx-auto max-w-4xl">
         <h1 className="font-heading text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
           Sunny Beans: Brewing Warmth, Joy, and Community
@@ -51,6 +95,7 @@ export default function SunnyBeansPage() {
           />
         </div>
       </div>
-    </main>
+      </main>
+    </>
   );
 }

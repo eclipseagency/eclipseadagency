@@ -5,11 +5,55 @@ export const metadata: Metadata = {
   title: "Volume - Brand Identity | Eclipse Agency",
   description:
     "Volume: Where Sophistication Meets Style. A brand identity that exudes luxury and modern sophistication for a refined haircare brand.",
+  alternates: {
+    canonical: "https://www.eclipseagency.net/volume",
+  },
+  openGraph: {
+    title: "Volume - Brand Identity | Eclipse Agency",
+    description:
+      "Volume: Where Sophistication Meets Style. A brand identity that exudes luxury and modern sophistication for a refined haircare brand.",
+    url: "https://www.eclipseagency.net/volume",
+    type: "article",
+    images: [
+      {
+        url: "https://www.eclipseagency.net/images/portfolio/volume.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Volume - Brand Identity | Eclipse Agency",
+    description:
+      "Volume: Where Sophistication Meets Style. A brand identity that exudes luxury and modern sophistication for a refined haircare brand.",
+    images: ["https://www.eclipseagency.net/images/portfolio/volume.png"],
+  },
 };
 
 export default function VolumePage() {
   return (
-    <main className="px-5 py-20 md:px-8 md:py-28">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            name: "Volume - Brand Identity",
+            description:
+              "Volume: Where Sophistication Meets Style. A brand identity that exudes luxury and modern sophistication for a refined haircare brand.",
+            image:
+              "https://www.eclipseagency.net/images/portfolio/volume.png",
+            creator: {
+              "@type": "Organization",
+              name: "Eclipse Agency",
+              url: "https://www.eclipseagency.net",
+            },
+          }),
+        }}
+      />
+      <main className="px-5 py-20 md:px-8 md:py-28">
       <div className="mx-auto max-w-4xl">
         <h1 className="font-heading text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
           Volume: Where Sophistication Meets Style
@@ -52,6 +96,7 @@ export default function VolumePage() {
           />
         </div>
       </div>
-    </main>
+      </main>
+    </>
   );
 }

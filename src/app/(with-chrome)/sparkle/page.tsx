@@ -6,11 +6,55 @@ export const metadata: Metadata = {
   title: "Sparkle - Brand Identity | Eclipse Agency",
   description:
     "Sparkle Branding Project - Where Magic Happens. A captivating visual identity reflecting innovation, energy, and magic.",
+  alternates: {
+    canonical: "https://www.eclipseagency.net/sparkle",
+  },
+  openGraph: {
+    title: "Sparkle - Brand Identity | Eclipse Agency",
+    description:
+      "Sparkle Branding Project - Where Magic Happens. A captivating visual identity reflecting innovation, energy, and magic.",
+    url: "https://www.eclipseagency.net/sparkle",
+    type: "article",
+    images: [
+      {
+        url: "https://www.eclipseagency.net/images/portfolio/sparkle.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sparkle - Brand Identity | Eclipse Agency",
+    description:
+      "Sparkle Branding Project - Where Magic Happens. A captivating visual identity reflecting innovation, energy, and magic.",
+    images: ["https://www.eclipseagency.net/images/portfolio/sparkle.png"],
+  },
 };
 
 export default function SparklePage() {
   return (
-    <main className="px-5 py-20 md:px-8 md:py-28">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            name: "Sparkle - Brand Identity",
+            description:
+              "Sparkle Branding Project - Where Magic Happens. A captivating visual identity reflecting innovation, energy, and magic.",
+            image:
+              "https://www.eclipseagency.net/images/portfolio/sparkle.png",
+            creator: {
+              "@type": "Organization",
+              name: "Eclipse Agency",
+              url: "https://www.eclipseagency.net",
+            },
+          }),
+        }}
+      />
+      <main className="px-5 py-20 md:px-8 md:py-28">
       <div className="mx-auto max-w-4xl">
         <h1 className="font-heading text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
           Sparkle Branding Project – Where Magic Happens.
@@ -69,6 +113,7 @@ export default function SparklePage() {
       </div>
 
       <CtaBanner />
-    </main>
+      </main>
+    </>
   );
 }

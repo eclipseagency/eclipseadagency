@@ -5,11 +5,55 @@ export const metadata: Metadata = {
   title: "Grano de Café - Brand Identity | Eclipse Agency",
   description:
     "Grano de Café: Authentic Branding for Colombian Coffee Heritage. A rich, earthy identity celebrating the story of Colombian coffee.",
+  alternates: {
+    canonical: "https://www.eclipseagency.net/grano-de-cafe",
+  },
+  openGraph: {
+    title: "Grano de Café - Brand Identity | Eclipse Agency",
+    description:
+      "Grano de Café: Authentic Branding for Colombian Coffee Heritage. A rich, earthy identity celebrating the story of Colombian coffee.",
+    url: "https://www.eclipseagency.net/grano-de-cafe",
+    type: "article",
+    images: [
+      {
+        url: "https://www.eclipseagency.net/images/portfolio/granodecafe.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Grano de Café - Brand Identity | Eclipse Agency",
+    description:
+      "Grano de Café: Authentic Branding for Colombian Coffee Heritage. A rich, earthy identity celebrating the story of Colombian coffee.",
+    images: ["https://www.eclipseagency.net/images/portfolio/granodecafe.png"],
+  },
 };
 
 export default function GranoDeCafePage() {
   return (
-    <main className="px-5 py-20 md:px-8 md:py-28">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            name: "Grano de Cafe - Brand Identity",
+            description:
+              "Grano de Cafe: Authentic Branding for Colombian Coffee Heritage. A rich, earthy identity celebrating the story of Colombian coffee.",
+            image:
+              "https://www.eclipseagency.net/images/portfolio/granodecafe.png",
+            creator: {
+              "@type": "Organization",
+              name: "Eclipse Agency",
+              url: "https://www.eclipseagency.net",
+            },
+          }),
+        }}
+      />
+      <main className="px-5 py-20 md:px-8 md:py-28">
       <div className="mx-auto max-w-4xl">
         <h1 className="font-heading text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
           Grano de Café: Authentic Branding for Colombian Coffee Heritage
@@ -44,6 +88,7 @@ export default function GranoDeCafePage() {
           />
         </div>
       </div>
-    </main>
+      </main>
+    </>
   );
 }

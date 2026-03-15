@@ -5,11 +5,55 @@ export const metadata: Metadata = {
   title: "Waf - Brand Identity | Eclipse Agency",
   description:
     "Waf: Sleek and Professional Branding for Business Excellence. A bold identity showcasing innovation with sleek, vibrant visuals.",
+  alternates: {
+    canonical: "https://www.eclipseagency.net/waf",
+  },
+  openGraph: {
+    title: "Waf - Brand Identity | Eclipse Agency",
+    description:
+      "Waf: Sleek and Professional Branding for Business Excellence. A bold identity showcasing innovation with sleek, vibrant visuals.",
+    url: "https://www.eclipseagency.net/waf",
+    type: "article",
+    images: [
+      {
+        url: "https://www.eclipseagency.net/images/portfolio/waf.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Waf - Brand Identity | Eclipse Agency",
+    description:
+      "Waf: Sleek and Professional Branding for Business Excellence. A bold identity showcasing innovation with sleek, vibrant visuals.",
+    images: ["https://www.eclipseagency.net/images/portfolio/waf.png"],
+  },
 };
 
 export default function WafPage() {
   return (
-    <main className="px-5 py-20 md:px-8 md:py-28">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            name: "Waf - Brand Identity",
+            description:
+              "Waf: Sleek and Professional Branding for Business Excellence. A bold identity showcasing innovation with sleek, vibrant visuals.",
+            image:
+              "https://www.eclipseagency.net/images/portfolio/waf.png",
+            creator: {
+              "@type": "Organization",
+              name: "Eclipse Agency",
+              url: "https://www.eclipseagency.net",
+            },
+          }),
+        }}
+      />
+      <main className="px-5 py-20 md:px-8 md:py-28">
       <div className="mx-auto max-w-4xl">
         <h1 className="font-heading text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
           Waf: Sleek and Professional Branding for Business Excellence
@@ -43,6 +87,7 @@ export default function WafPage() {
           />
         </div>
       </div>
-    </main>
+      </main>
+    </>
   );
 }

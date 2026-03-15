@@ -5,11 +5,55 @@ export const metadata: Metadata = {
   title: "Qatf - Brand Identity | Eclipse Agency",
   description:
     "Qatf: Fresh Branding for Premium Agricultural Products. A modern identity emphasizing sustainability and natural excellence.",
+  alternates: {
+    canonical: "https://www.eclipseagency.net/qatf",
+  },
+  openGraph: {
+    title: "Qatf - Brand Identity | Eclipse Agency",
+    description:
+      "Qatf: Fresh Branding for Premium Agricultural Products. A modern identity emphasizing sustainability and natural excellence.",
+    url: "https://www.eclipseagency.net/qatf",
+    type: "article",
+    images: [
+      {
+        url: "https://www.eclipseagency.net/images/portfolio/qatf.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Qatf - Brand Identity | Eclipse Agency",
+    description:
+      "Qatf: Fresh Branding for Premium Agricultural Products. A modern identity emphasizing sustainability and natural excellence.",
+    images: ["https://www.eclipseagency.net/images/portfolio/qatf.png"],
+  },
 };
 
 export default function QatfPage() {
   return (
-    <main className="px-5 py-20 md:px-8 md:py-28">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            name: "Qatf - Brand Identity",
+            description:
+              "Qatf: Fresh Branding for Premium Agricultural Products. A modern identity emphasizing sustainability and natural excellence.",
+            image:
+              "https://www.eclipseagency.net/images/portfolio/qatf.png",
+            creator: {
+              "@type": "Organization",
+              name: "Eclipse Agency",
+              url: "https://www.eclipseagency.net",
+            },
+          }),
+        }}
+      />
+      <main className="px-5 py-20 md:px-8 md:py-28">
       <div className="mx-auto max-w-4xl">
         <h1 className="font-heading text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
           Qatf: Fresh Branding for Premium Agricultural Products
@@ -42,6 +86,7 @@ export default function QatfPage() {
           />
         </div>
       </div>
-    </main>
+      </main>
+    </>
   );
 }
