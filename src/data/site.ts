@@ -165,30 +165,40 @@ export const processSteps = [
     title: "Discovery",
     description:
       "We learn about your brand, audience, goals, and market landscape to build a strong strategic foundation.",
+    icon: "search",
+    accent: "#ff6b35",
   },
   {
     number: "02",
     title: "Strategy",
     description:
       "Using insights from discovery, we develop a tailored plan that aligns creative direction with your business objectives.",
+    icon: "compass",
+    accent: "#ff8c5a",
   },
   {
     number: "03",
     title: "Create",
     description:
       "Our team brings the strategy to life through design, development, and content creation across every touchpoint.",
+    icon: "pen",
+    accent: "#ffad7e",
   },
   {
     number: "04",
     title: "Launch",
     description:
       "We deploy your project with precision, ensuring everything performs flawlessly across all platforms and devices.",
+    icon: "rocket",
+    accent: "#ff6b35",
   },
   {
     number: "05",
     title: "Optimize",
     description:
       "We monitor performance, gather data, and continuously refine to maximize impact and deliver lasting results.",
+    icon: "chart",
+    accent: "#ff8c5a",
   },
 ];
 
