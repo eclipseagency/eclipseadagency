@@ -177,7 +177,7 @@ function TunnelCard({
           <div className="absolute inset-0 z-10 flex flex-col justify-end p-7 md:p-9">
             {/* Category badge */}
             <motion.span
-              className="mb-auto self-start rounded-full border border-white/10 bg-black/30 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-white/60 backdrop-blur-sm"
+              className="mb-auto self-start rounded-full border border-white/10 bg-black/30 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-white/75 backdrop-blur-sm"
               animate={{ opacity: absDepth < 0.35 ? 1 : 0 }}
               transition={{ duration: 0.3 }}
             >
@@ -198,7 +198,7 @@ function TunnelCard({
 
             {/* Description - only when focused */}
             <motion.p
-              className="mt-3 max-w-lg text-sm leading-relaxed text-white/50 md:text-base"
+              className="mt-3 max-w-lg text-sm leading-relaxed text-white/65 md:text-base"
               animate={{
                 opacity: isFocused ? 1 : 0,
                 y: isFocused ? 0 : 10,

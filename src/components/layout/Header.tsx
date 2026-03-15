@@ -205,7 +205,10 @@ export function Header() {
                     <Link
                       key={child.label}
                       href={child.href}
-                      className="text-sm text-white/40 transition-colors hover:text-primary"
+                      className={cn(
+                        "text-sm transition-colors hover:text-primary",
+                        pathname === child.href ? "text-primary" : "text-white/60"
+                      )}
                     >
                       {child.label}
                     </Link>

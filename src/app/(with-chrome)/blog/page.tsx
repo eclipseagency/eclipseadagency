@@ -54,7 +54,7 @@ export default function BlogPage() {
                 />
               </div>
               <div className="p-6">
-                <div className="mb-3 flex items-center gap-3 text-xs text-text-muted">
+                <div className="mb-3 flex items-center gap-3 text-xs text-text-secondary">
                   <span className="rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 font-bold uppercase tracking-wider text-primary">
                     {post.category}
                   </span>

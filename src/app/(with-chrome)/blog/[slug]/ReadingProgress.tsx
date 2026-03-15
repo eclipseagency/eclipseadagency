@@ -21,7 +21,7 @@ export default function ReadingProgress() {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 z-[100] h-[3px] w-full">
+    <div className="pointer-events-none fixed top-0 left-0 z-[100] h-[3px] w-full">
       <div
         className="h-full transition-[width] duration-100 ease-out"
         style={{
