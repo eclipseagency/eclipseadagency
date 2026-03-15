@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { blogPosts } from "@/data/site";
+import { blogArticles } from "@/data/blogContent";
+import { blogArticles2 } from "@/data/blogContent2";
 import { formatDate } from "@/lib/utils";
 import { ArrowRightIcon } from "@/components/ui/Icons";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
@@ -131,28 +133,8 @@ export default async function BlogPostPage({ params }: Props) {
             />
           </div>
 
-          {/* Placeholder article content */}
           <article className="prose prose-invert mx-auto max-w-none space-y-6 text-text-secondary">
-            <p className="text-lg leading-relaxed">
-              This is a placeholder for the full article content. In a production environment,
-              this would be populated with rich content from a CMS or markdown files.
-            </p>
-            <p className="leading-relaxed">
-              The article would explore the topic of &ldquo;{post.title}&rdquo; in detail,
-              providing actionable insights, data-backed recommendations, and practical
-              strategies for marketing professionals and business leaders.
-            </p>
-            <h2 className="font-heading text-2xl font-bold text-text">Key Takeaways</h2>
-            <ul className="list-disc space-y-2 pl-6">
-              <li>Strategic insight related to {post.category}</li>
-              <li>Practical implementation steps for teams</li>
-              <li>Industry benchmarks and best practices</li>
-              <li>Case study examples and real-world results</li>
-            </ul>
-            <p className="leading-relaxed">
-              Ready to apply these insights to your brand? Our team at Eclipse Agency can help
-              you turn strategy into results. Get in touch to start the conversation.
-            </p>
+            {blogArticles[slug] || blogArticles2[slug]}
           </article>
 
           {/* Social sharing */}
