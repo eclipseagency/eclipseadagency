@@ -31,6 +31,7 @@ export function SpaceBackground() {
 
     // Three parallax star layers - far (slow), mid, near (fast)
     const mobile = w < 768;
+    let frameSkip = 0;
     const farStars = Array.from({ length: mobile ? 35 : 100 }, () => ({
       x: Math.random() * 1.2 - 0.1, y: Math.random(),
       size: 0.3 + Math.random() * 0.8,
@@ -61,7 +62,26 @@ export function SpaceBackground() {
     const onScroll = () => { scrollY = window.scrollY; };
     window.addEventListener("scroll", onScroll, { passive: true });
 
+    let paused = false;
+    const onVisibility = () => {
+      if (document.hidden) {
+        paused = true;
+        cancelAnimationFrame(animId);
+      } else {
+        paused = false;
+        animId = requestAnimationFrame(draw);
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
     function draw(now: number) {
+      if (mobile) {
+        frameSkip++;
+        if (frameSkip % 2 !== 0) {
+          animId = requestAnimationFrame(draw);
+          return;
+        }
+      }
       ctx.clearRect(0, 0, w, h);
       const t = now * 0.001;
       const docH = Math.max(1, document.documentElement.scrollHeight - h);
@@ -128,6 +148,7 @@ export function SpaceBackground() {
       cancelAnimationFrame(animId);
       window.removeEventListener("resize", resize);
       window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
 

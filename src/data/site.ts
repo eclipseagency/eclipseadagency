@@ -62,7 +62,7 @@ export const servicesOverview = [
     title: "Branding & Identity",
     image: "/images/solutions/branding.svg",
     description:
-      "We build visual identities that resonate. From logos to full brand systems, we create cohesive brands that stand out in crowded markets.",
+      "Define your market position with a brand identity that builds trust, drives recognition, and makes competitors irrelevant.",
     features: [
       "Logo Design",
       "Brand Guidelines",
@@ -79,7 +79,7 @@ export const servicesOverview = [
     title: "Digital Marketing",
     image: "/images/solutions/digital-marketing.svg",
     description:
-      "Data-driven campaigns that deliver measurable results. We combine analytics with creativity to maximize your digital presence and ROI.",
+      "Turn ad spend into predictable revenue with campaigns engineered for conversions, not just clicks.",
     features: [
       "Social Media Management",
       "SEO & SEM",
@@ -96,7 +96,7 @@ export const servicesOverview = [
     title: "Web & App Development",
     image: "/images/solutions/web-apps.svg",
     description:
-      "Custom web and mobile solutions built for performance and scale. Responsive, fast, and designed to convert visitors into customers.",
+      "Launch fast, conversion-optimized websites and apps that turn visitors into paying customers from day one.",
     features: [
       "Web Applications",
       "E-Commerce Solutions",
@@ -113,7 +113,7 @@ export const servicesOverview = [
     title: "Motion & Animation",
     image: "/images/solutions/animation.svg",
     description:
-      "Dynamic motion graphics and character animation that engage and explain. We animate ideas into compelling visual narratives.",
+      "Grab attention in the first second with motion graphics that simplify complex ideas and keep audiences watching.",
     features: [
       "Motion Graphics",
       "Explainer Videos",
@@ -130,7 +130,7 @@ export const servicesOverview = [
     title: "Production",
     image: "/images/solutions/production.svg",
     description:
-      "Cinematic video production and photography that tells your brand story. From concept to final cut, we deliver visual content that converts.",
+      "Tell your brand story with cinematic video and photography that stops the scroll and drives action.",
     features: [
       "Commercial Production",
       "Corporate Videos",
@@ -147,7 +147,7 @@ export const servicesOverview = [
     title: "3D Creations",
     image: "/images/solutions/3d-creations.svg",
     description:
-      "Stunning three-dimensional visuals that bring products and concepts to life. Photorealistic renders and immersive 3D environments.",
+      "Showcase products before they exist with photorealistic 3D renders that sell ideas and accelerate buyer decisions.",
     features: [
       "3D Modeling",
       "Product Visualization",

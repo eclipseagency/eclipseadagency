@@ -14,8 +14,8 @@ export function HomeFooter() {
           {/* Brand */}
           <div>
             <Image src="https://eclipseadagency.com/wp-content/uploads/2025/12/eclipse-logo-source-1.png" alt={siteConfig.name} width={160} height={40} className="h-8 w-auto object-contain mb-3" />
-            <p className="mt-1 text-xs text-white/25">{siteConfig.tagline}</p>
-            <p className="mt-4 text-xs leading-relaxed text-white/30">
+            <p className="mt-1 text-xs text-white/35">{siteConfig.tagline}</p>
+            <p className="mt-4 text-xs leading-relaxed text-white/40">
               Customized marketing solutions for businesses across the Middle East.
             </p>
           </div>
@@ -48,11 +48,11 @@ export function HomeFooter() {
         </div>
         <div className="mt-12 h-px bg-white/[0.04]" />
         <div className="mt-6 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-          <p className="text-xs text-white/15">
+          <p className="text-xs text-white/25">
             &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </p>
-          <p className="text-xs text-white/10">
-            Mon–Fri, 10:00 AM – 5:00 PM
+          <p className="text-xs text-white/20">
+            Mon–Fri, 10:00 AM – 5:00 PM (AST)
           </p>
         </div>
       </div>

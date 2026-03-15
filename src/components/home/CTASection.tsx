@@ -29,11 +29,11 @@ export function CTASection() {
           </span>
         </h2>
         <p className="mx-auto mt-5 max-w-md text-sm text-white/30 md:text-base" data-fade="0.2">
-          Let&apos;s create something extraordinary together. Your brand deserves to shine.
+          Tell us about your project and get a free consultation.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4" data-fade="0.4">
           <Link href="/contact" className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#ff6b35] to-[#f7931e] px-6 py-3 md:px-8 md:py-3.5 min-h-[44px] text-sm font-semibold text-white transition-all duration-300 hover:shadow-[0_0_50px_rgba(255,107,53,0.35)] hover:translate-y-[-2px]">
-            Start a Project
+            Book a Consultation
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </Link>
           <a href={`https://wa.me/${siteConfig.whatsapp}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/10 px-6 py-3 md:px-8 md:py-3.5 min-h-[44px] text-sm font-semibold text-white/50 transition-all duration-300 hover:border-[#25D366]/30 hover:text-[#25D366]">
@@ -41,6 +41,7 @@ export function CTASection() {
             Chat with Us
           </a>
         </div>
+        <p className="text-xs text-white/20 mt-6">Trusted by 50+ brands across the Middle East</p>
       </div>
     </section>
   );

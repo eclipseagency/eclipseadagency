@@ -14,13 +14,13 @@ export function TestimonialsSection() {
       <div className="relative mx-auto max-w-[1100px] px-5 md:px-8">
         <div className="text-center mb-16">
           <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-[#ff6b35]/50 mb-3 md:text-xs" data-fade>Testimonials</p>
-          <h2 className="font-heading text-[clamp(1.8rem,4vw,3.5rem)] font-bold text-white" data-reveal>What They Say</h2>
+          <h2 className="font-heading text-[clamp(1.8rem,4vw,3.5rem)] font-bold text-white" data-reveal>Client Stories</h2>
           <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-[#ff6b35]/30 to-transparent" data-line />
         </div>
 
         {/* Testimonial cards - scrollable on mobile, grid on desktop */}
-        <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory hide-scrollbar md:grid md:grid-cols-2 md:overflow-visible md:pb-0">
-          {testimonials.slice(0, 4).map((t, i) => (
+        <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory hide-scrollbar md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
+          {testimonials.slice(0, 6).map((t, i) => (
             <div
               key={i}
               data-fade={i * 0.1}
@@ -41,7 +41,7 @@ export function TestimonialsSection() {
               </div>
 
               {/* Quote */}
-              <p className="relative text-sm leading-[1.8] text-white/45 italic md:text-[15px]">&ldquo;{t.quote}&rdquo;</p>
+              <p className="relative text-sm leading-[1.8] text-white/60 italic md:text-[15px]">&ldquo;{t.quote}&rdquo;</p>
 
               {/* Author */}
               <div className="mt-6 flex items-center gap-3">
@@ -50,7 +50,7 @@ export function TestimonialsSection() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-white">{t.name}</p>
-                  <p className="text-xs text-white/20">{t.title}</p>
+                  <p className="text-xs text-white/30">{t.title}</p>
                 </div>
               </div>
             </div>
