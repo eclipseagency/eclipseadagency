@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState, useMemo } from "react";
+import { useRef, useEffect, useState, useMemo, useCallback } from "react";
 import gsap from "gsap";
 
 /* ═══════════════════════════════════════════════════════════
@@ -12,7 +12,9 @@ export function RocketPreloader({ onComplete }: { onComplete: () => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef(0);
+  const tlRef = useRef<gsap.core.Timeline | null>(null);
   const [done, setDone] = useState(false);
+  const [showSkip, setShowSkip] = useState(false);
 
   // Skip preloader for returning visitors in the same session
   const [shouldSkip] = useState(() => {
@@ -84,6 +86,10 @@ export function RocketPreloader({ onComplete }: { onComplete: () => void }) {
     const proxy = { progress: 0, split: 0, rocketReturn: 0, fade: 1 };
 
     const tl = gsap.timeline();
+    tlRef.current = tl;
+
+    // Show skip button after 1 second
+    const skipTimer = setTimeout(() => setShowSkip(true), 1000);
 
     // Phase 1: Rocket descends and tears (0 → 1) - starts at 1s to let text be read
     tl.to(proxy, { progress: 1, duration: 2.2, ease: "power2.inOut" }, 1.0);
@@ -497,6 +503,7 @@ export function RocketPreloader({ onComplete }: { onComplete: () => void }) {
     animId = requestAnimationFrame(draw);
 
     return () => {
+      clearTimeout(skipTimer);
       cancelAnimationFrame(animId);
       tl.kill();
       window.removeEventListener("resize", resize);
@@ -505,6 +512,16 @@ export function RocketPreloader({ onComplete }: { onComplete: () => void }) {
       document.body.style.overflowY = "";
     };
   }, [tearPoints, cosmicStars, onComplete, shouldSkip]);
+
+  const handleSkip = useCallback(() => {
+    if (tlRef.current) tlRef.current.kill();
+    onComplete();
+    document.body.style.position = "";
+    document.body.style.inset = "";
+    document.body.style.overflowY = "";
+    try { sessionStorage.setItem("eclipse-preloader-seen", "1"); } catch {}
+    setDone(true);
+  }, [onComplete]);
 
   if (done) return null;
 
@@ -515,6 +532,18 @@ export function RocketPreloader({ onComplete }: { onComplete: () => void }) {
         className="absolute inset-0"
         style={{ willChange: "transform" }}
       />
+      {showSkip && (
+        <button
+          onClick={handleSkip}
+          className="pointer-events-auto absolute bottom-6 right-6 flex items-center gap-1.5 text-xs text-white/30 hover:text-white/60 transition-all duration-300 animate-[fadeIn_0.4s_ease-out]"
+          style={{ zIndex: 101 }}
+        >
+          Skip
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </button>
+      )}
     </div>
   );
 }
