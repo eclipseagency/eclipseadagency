@@ -10,6 +10,23 @@ import { MenuIcon, XIcon, ChevronDownIcon } from "@/components/ui/Icons";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/i18n/LocaleContext";
 
+// Map English nav labels to translation keys
+const navTranslationKeys: Record<string, string> = {
+  Home: "nav.home",
+  About: "nav.about",
+  Solutions: "nav.solutions",
+  Portfolio: "nav.portfolio",
+  Team: "nav.team",
+  Blog: "nav.blog",
+  Contact: "nav.contact",
+  Branding: "nav.branding",
+  "Digital Marketing": "nav.digitalMarketing",
+  "Web & Apps": "nav.webApps",
+  Animation: "nav.animation",
+  Production: "nav.production",
+  "3D Creations": "nav.3dCreations",
+};
+
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -18,6 +35,12 @@ export function Header() {
   const { locale, setLocale, t } = useLocale();
 
   const toggleLocale = () => setLocale(locale === "en" ? "ar" : "en");
+
+  // Translate a nav label
+  const tNav = (label: string) => {
+    const key = navTranslationKeys[label];
+    return key ? t(key) : label;
+  };
 
   useEffect(() => {
     let ticking = false;
@@ -46,9 +69,7 @@ export function Header() {
       transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-        scrolled
-          ? "py-3"
-          : "py-5"
+        scrolled ? "py-3" : "py-5"
       )}
     >
       {/* Glassmorphism background */}
@@ -100,7 +121,7 @@ export function Header() {
                       : "text-white/60 hover:text-white hover:bg-white/[0.05]"
                   )}
                 >
-                  {item.label}
+                  {tNav(item.label)}
                   <ChevronDownIcon
                     size={13}
                     className={cn(
@@ -129,7 +150,7 @@ export function Header() {
                           href={child.href}
                           className="block rounded-xl px-4 py-2.5 text-[13px] text-white/60 transition-all duration-200 hover:bg-white/[0.06] hover:text-white"
                         >
-                          {child.label}
+                          {tNav(child.label)}
                         </Link>
                       ))}
                     </motion.div>
@@ -147,7 +168,7 @@ export function Header() {
                     : "text-white/60 hover:text-white hover:bg-white/[0.05]"
                 )}
               >
-                {item.label}
+                {tNav(item.label)}
               </Link>
             )
           )}
@@ -167,7 +188,17 @@ export function Header() {
             className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-[#ff6b35] to-[#f7931e] px-5 py-2.5 text-[13px] font-semibold text-white transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,53,0.35)] lg:inline-flex"
           >
             {t("nav.getStarted")}
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className={cn(locale === "ar" && "rotate-180")}
+            >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </Link>
@@ -210,7 +241,7 @@ export function Header() {
                     href={item.href}
                     className="text-lg font-semibold text-white/60 transition-colors hover:text-white"
                   >
-                    {item.label}
+                    {tNav(item.label)}
                   </Link>
                   {item.children.map((child) => (
                     <Link
@@ -218,10 +249,12 @@ export function Header() {
                       href={child.href}
                       className={cn(
                         "text-sm transition-colors hover:text-primary",
-                        pathname === child.href ? "text-primary" : "text-white/60"
+                        pathname === child.href
+                          ? "text-primary"
+                          : "text-white/60"
                       )}
                     >
-                      {child.label}
+                      {tNav(child.label)}
                     </Link>
                   ))}
                 </motion.div>
@@ -241,7 +274,7 @@ export function Header() {
                         : "text-white/60 hover:text-white"
                     )}
                   >
-                    {item.label}
+                    {tNav(item.label)}
                   </Link>
                 </motion.div>
               )
@@ -255,7 +288,7 @@ export function Header() {
                 href="/contact"
                 className="mt-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#ff6b35] to-[#f7931e] px-8 py-3 text-sm font-semibold text-white"
               >
-                Get Started
+                {t("nav.getStarted")}
               </Link>
             </motion.div>
           </motion.div>

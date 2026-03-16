@@ -15,6 +15,7 @@ import {
   BehanceIcon,
   PinterestIcon,
 } from "@/components/ui/Icons";
+import { useLocale } from "@/i18n/LocaleContext";
 
 const socialIcons = [
   { Icon: LinkedInIcon, href: siteConfig.social.linkedin, label: "LinkedIn" },
@@ -26,6 +27,7 @@ const socialIcons = [
 ];
 
 export function Footer() {
+  const { t } = useLocale();
   return (
     <footer
       className="relative overflow-hidden px-5 pt-20 pb-8 md:px-8"
@@ -53,7 +55,7 @@ export function Footer() {
           {/* Services */}
           <div>
             <h4 className="mb-5 text-sm font-semibold text-white/80">
-              Services
+              {t("footer.services")}
             </h4>
             <ul className="space-y-3">
               {footerContent.links.services.map((link) => (
@@ -72,7 +74,7 @@ export function Footer() {
           {/* Company */}
           <div>
             <h4 className="mb-5 text-sm font-semibold text-white/80">
-              Company
+              {t("footer.quickLinks")}
             </h4>
             <ul className="space-y-3">
               {footerContent.links.company.map((link) => (
@@ -91,7 +93,7 @@ export function Footer() {
           {/* Contact info */}
           <div>
             <h4 className="mb-5 text-sm font-semibold text-white/80">
-              Contact
+              {t("footer.connect")}
             </h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-sm text-white/40">
@@ -131,14 +133,14 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/[0.05] pt-8 md:flex-row">
           <p className="text-xs text-white/30">
-            &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+            &copy; {new Date().getFullYear()} {siteConfig.name}. {t("footer.rights")}
           </p>
           <div className="flex gap-6 text-xs text-white/30">
             <Link href="/privacy" className="transition-colors duration-300 hover:text-white/60">
-              Privacy Policy
+              {t("footer.privacy")}
             </Link>
             <Link href="/terms" className="transition-colors duration-300 hover:text-white/60">
-              Terms of Service
+              {t("footer.terms")}
             </Link>
           </div>
         </div>
