@@ -227,12 +227,30 @@ export function ScrollRocket({ visible }: { visible: boolean }) {
     }
 
     let lastTime = performance.now();
+    let lastDrawTime = 0;
+    let lastScrollP = -1;
+    const mobile = w < 768;
+
+    // Pause when tab is hidden
+    let paused = false;
+    const onVisibility = () => {
+      if (document.hidden) {
+        paused = true;
+        cancelAnimationFrame(animId);
+      } else {
+        paused = false;
+        lastTime = performance.now();
+        animId = requestAnimationFrame(draw);
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibility);
 
     function draw(now: number) {
-      const dt = Math.min((now - lastTime) / 1000, 0.05);
-      lastTime = now;
-
-      ctx.clearRect(0, 0, w, h);
+      // Throttle to ~30fps
+      if (now - lastDrawTime < 33) {
+        animId = requestAnimationFrame(draw);
+        return;
+      }
 
       // Don't render until preloader is done
       if (!visibleRef.current) {
@@ -240,13 +258,24 @@ export function ScrollRocket({ visible }: { visible: boolean }) {
         return;
       }
 
+      // Skip redraw if scroll hasn't changed and no active particles
+      const t = scrollProgress.current;
+      if (Math.abs(t - lastScrollP) < 0.0001 && trail.length === 0) {
+        animId = requestAnimationFrame(draw);
+        return;
+      }
+      lastScrollP = t;
+
+      const dt = Math.min((now - lastDrawTime) / 1000, 0.05);
+      lastDrawTime = now;
+
+      ctx.clearRect(0, 0, w, h);
+
       // Recalculate scroll on first visible frame to avoid stale values
       if (!hasInitialized) {
         hasInitialized = true;
         onScroll();
       }
-
-      const t = scrollProgress.current;
 
       // ── Detect scroll direction from progress delta ──
       const rawDelta = t - prevProgress;
@@ -269,8 +298,9 @@ export function ScrollRocket({ visible }: { visible: boolean }) {
       if (visible && t > 0.002 && moving) {
         const thrustX = -Math.cos(angle) * 2;
         const thrustY = -Math.sin(angle) * 2;
-        // Fire particles
-        for (let i = 0; i < 3; i++) {
+        // Fire particles (fewer on mobile)
+        const fireCount = mobile ? 1 : 3;
+        for (let i = 0; i < fireCount; i++) {
           trail.push({
             x: x + thrustX * 12 + (Math.random() - 0.5) * 6,
             y: y + thrustY * 12 + (Math.random() - 0.5) * 6,
@@ -348,8 +378,9 @@ export function ScrollRocket({ visible }: { visible: boolean }) {
         drawRocket(x, y, angle, rocketScale);
       }
 
-      // Limit trail array
-      if (trail.length > 300) trail.splice(0, trail.length - 300);
+      // Limit trail array (tighter on mobile)
+      const maxTrail = mobile ? 80 : 200;
+      if (trail.length > maxTrail) trail.splice(0, trail.length - maxTrail);
 
       animId = requestAnimationFrame(draw);
     }
@@ -360,6 +391,7 @@ export function ScrollRocket({ visible }: { visible: boolean }) {
       cancelAnimationFrame(animId);
       window.removeEventListener("resize", resize);
       window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
 
@@ -367,6 +399,7 @@ export function ScrollRocket({ visible }: { visible: boolean }) {
     <canvas
       ref={canvasRef}
       className="pointer-events-none fixed inset-0 z-[50]"
+      style={{ willChange: "transform" }}
     />
   );
 }

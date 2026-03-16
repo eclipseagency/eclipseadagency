@@ -52,13 +52,13 @@ import { Header } from "@/components/layout/Header";
 function useScrollAnimations() {
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // ── Text reveals ──
+      // ── Text reveals (transform + opacity only — avoids expensive clipPath repaints) ──
       document.querySelectorAll("[data-reveal]").forEach((el) => {
         gsap.fromTo(el,
-          { y: 80, opacity: 0, clipPath: "inset(100% 0 0 0)" },
+          { y: 60, opacity: 0 },
           {
-            y: 0, opacity: 1, clipPath: "inset(0% 0 0 0)",
-            duration: 1.2, ease: "power3.out",
+            y: 0, opacity: 1,
+            duration: 1.0, ease: "power3.out",
             scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" },
           }
         );
@@ -83,7 +83,7 @@ function useScrollAnimations() {
         gsap.to(el, {
           y: speed,
           ease: "none",
-          scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
+          scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: 1.5 },
         });
       });
 
@@ -121,7 +121,7 @@ function useScrollAnimations() {
         gsap.to("[data-hero-content]", {
           y: -100, opacity: 0, scale: 0.95,
           ease: "none",
-          scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: true },
+          scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1 },
         });
       }
 

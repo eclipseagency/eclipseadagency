@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { processSteps } from "@/data/site";
+import { useLocale } from "@/i18n/LocaleContext";
 
 /* ═══════════════════════════════════════════════════════════
    SECTION: Process - Interactive step-by-step flow
@@ -38,6 +39,7 @@ const icons: Record<string, React.ReactNode> = {
 };
 
 export function ProcessSection() {
+  const { t, locale } = useLocale();
   const [active, setActive] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const [revealed, setRevealed] = useState(false);
@@ -78,8 +80,8 @@ export function ProcessSection() {
 
       <div className="relative mx-auto max-w-[1100px] px-5 md:px-8">
         <div className="text-center mb-12 md:mb-20">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-[#ff6b35]/50 mb-3 md:text-xs" data-fade>How We Work</p>
-          <h2 className="font-heading text-[clamp(1.8rem,4vw,3.5rem)] font-bold text-white" data-reveal>Our Process</h2>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-[#ff6b35]/50 mb-3 md:text-xs" data-fade>{t("process.badge")}</p>
+          <h2 className="font-heading text-[clamp(1.8rem,4vw,3.5rem)] font-bold text-white" data-reveal>{t("process.title")}</h2>
           <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-[#ff6b35]/30 to-transparent" data-line />
         </div>
 
@@ -117,7 +119,7 @@ export function ProcessSection() {
                 <span className={`text-xs font-semibold uppercase tracking-wider transition-colors duration-500 ${
                   i === active ? "text-[#ff6b35]" : "text-white/25 group-hover:text-white/40"
                 }`}>
-                  {step.title}
+                  {t(`process.step${i + 1}.title`)}
                 </span>
               </button>
             ))}
@@ -130,10 +132,10 @@ export function ProcessSection() {
                 {processSteps[active]?.number}
               </span>
               <h3 className="font-heading text-2xl font-bold text-white mb-4">
-                {processSteps[active]?.title}
+                {t(`process.step${active + 1}.title`)}
               </h3>
               <p className="text-base leading-relaxed text-white/40 max-w-md mx-auto">
-                {processSteps[active]?.description}
+                {t(`process.step${active + 1}.desc`)}
               </p>
             </div>
           </div>
@@ -176,7 +178,7 @@ export function ProcessSection() {
                       <h3 className={`text-sm font-bold transition-colors duration-500 ${
                         i === active ? "text-white" : "text-white/40"
                       }`}>
-                        {step.title}
+                        {t(`process.step${i + 1}.title`)}
                       </h3>
                     </div>
                   </div>
@@ -202,7 +204,7 @@ export function ProcessSection() {
                   }}
                 >
                   <p className="text-xs leading-relaxed text-white/35 pl-[52px]">
-                    {step.description}
+                    {t(`process.step${i + 1}.desc`)}
                   </p>
                 </div>
               </div>

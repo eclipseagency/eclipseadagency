@@ -74,14 +74,23 @@ export function SpaceBackground() {
     };
     document.addEventListener("visibilitychange", onVisibility);
 
+    // Only redraw when scroll position actually changes
+    let lastScrollY = -1;
+    let lastDrawTime = 0;
+
     function draw(now: number) {
-      if (mobile) {
-        frameSkip++;
-        if (frameSkip % 2 !== 0) {
-          animId = requestAnimationFrame(draw);
-          return;
-        }
+      // Throttle: max 30fps on all devices, skip if scroll hasn't changed
+      if (now - lastDrawTime < 33) {
+        animId = requestAnimationFrame(draw);
+        return;
       }
+      // Skip redraw if scroll hasn't changed (static = no work)
+      if (scrollY === lastScrollY && now - lastDrawTime < 200) {
+        animId = requestAnimationFrame(draw);
+        return;
+      }
+      lastScrollY = scrollY;
+      lastDrawTime = now;
       ctx.clearRect(0, 0, w, h);
       const t = now * 0.001;
       const docH = Math.max(1, document.documentElement.scrollHeight - h);
@@ -156,6 +165,7 @@ export function SpaceBackground() {
     <canvas
       ref={canvasRef}
       className="pointer-events-none fixed inset-0 z-[1]"
+      style={{ willChange: "transform" }}
     />
   );
 }
