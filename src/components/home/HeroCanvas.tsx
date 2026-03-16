@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useMemo } from "react";
 import Link from "next/link";
+import { useLocale } from "@/i18n/LocaleContext";
 
 /* ═══════════════════════════════════════════════════════════
    Hero Canvas - Interactive space eclipse with mouse reactivity
@@ -423,6 +424,7 @@ function OrbitingSolutions() {
    Hero CTA - Primary and secondary action buttons
    ═══════════════════════════════════════════════════════════ */
 function HeroCTA() {
+  const { t } = useLocale();
   return (
     <div className="absolute bottom-16 md:bottom-20 left-1/2 -translate-x-1/2 z-20 pointer-events-auto">
       <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
@@ -430,13 +432,13 @@ function HeroCTA() {
           href="/contact"
           className="group relative px-7 py-3 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-[#ff6b35] to-[#f7931e] transition-all duration-300 hover:shadow-[0_0_25px_rgba(255,107,53,0.4)] hover:scale-105"
         >
-          Book a Consultation
+          {t("hero.cta1")}
         </Link>
         <Link
           href="/portfolio"
           className="px-7 py-3 rounded-full text-sm font-medium text-white/50 border border-white/15 transition-all duration-300 hover:border-[#ff6b35]/30 hover:text-white/70"
         >
-          View Our Work
+          {t("hero.cta2")}
         </Link>
       </div>
     </div>
@@ -448,6 +450,7 @@ function HeroCTA() {
    ═══════════════════════════════════════════════════════════ */
 export function HeroSection() {
   const canvasRef = useHeroCanvas();
+  const { t } = useLocale();
 
   return (
     <section id="hero" data-hero className="relative h-[100svh] overflow-hidden bg-[#050508]">
@@ -470,14 +473,12 @@ export function HeroSection() {
         <div data-hero-text className="text-center" style={{ marginTop: "-10vh" }}>
           <p className="text-white/60 text-[clamp(0.6rem,1.2vw,0.85rem)] font-semibold uppercase tracking-[0.4em] mb-3">Eclipse Agency</p>
           <h1 className="font-heading text-[clamp(1.4rem,3.5vw,2.8rem)] font-bold leading-[1.15] tracking-tight">
-            <span className="text-white">From Shadow</span>
-            <br />
-            <span className="bg-gradient-to-r from-[#ff6b35] to-[#f7931e] bg-clip-text text-transparent">
-              to Spotlight
+            <span className="bg-gradient-to-r from-white via-white to-[#ff6b35] bg-clip-text text-transparent">
+              {t("hero.tagline")}
             </span>
           </h1>
-          <p className="mx-auto mt-3 max-w-[280px] text-[10px] leading-relaxed text-white/40 md:text-xs">
-            Marketing Built on Strategy,<br />Driven by Creativity.
+          <p className="mx-auto mt-3 max-w-[320px] text-[10px] leading-relaxed text-white/40 md:text-xs">
+            {t("hero.subheading")}
           </p>
         </div>
       </div>
