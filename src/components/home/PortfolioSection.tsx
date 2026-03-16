@@ -21,21 +21,24 @@ const portfolioVideos = [
 export function PortfolioSection() {
   const progressRef = useRef<HTMLDivElement>(null);
 
-  // Drive progress bar from GSAP ScrollTrigger
+  // Drive progress bar from ScrollTrigger onUpdate (only fires during scroll)
   useEffect(() => {
     const el = progressRef.current;
     if (!el) return;
 
-    const update = () => {
+    // Wait for GSAP ScrollTrigger to initialize
+    const timer = setTimeout(() => {
       const hScroll = document.querySelector("[data-h-scroll]");
       if (!hScroll) return;
       const triggers = ScrollTrigger.getAll();
       const st = triggers.find((t) => t.trigger === hScroll);
-      if (st) el.style.transform = `scaleX(${st.progress})`;
-    };
-
-    gsap.ticker.add(update);
-    return () => { gsap.ticker.remove(update); };
+      if (st) {
+        st.vars.onUpdate = (self: ScrollTrigger) => {
+          el.style.transform = `scaleX(${self.progress})`;
+        };
+      }
+    }, 500);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -83,8 +86,9 @@ function VideoCard({ video, index }: { video: { id: string; src: string; feature
   const cardRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [visible, setVisible] = useState(false);
+  const [loadSrc, setLoadSrc] = useState(false);
 
-  // Stagger reveal + play/pause based on visibility
+  // Stagger reveal + lazy-load video src + play/pause based on visibility
   useEffect(() => {
     const card = cardRef.current;
     if (!card) return;
@@ -93,6 +97,8 @@ function VideoCard({ video, index }: { video: { id: string; src: string; feature
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          // Load the video source when first visible
+          if (!loadSrc) setLoadSrc(true);
           if (!visible) {
             revealTimer = setTimeout(() => setVisible(true), index * 150);
           }
@@ -101,14 +107,14 @@ function VideoCard({ video, index }: { video: { id: string; src: string; feature
           videoRef.current?.pause();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.05, rootMargin: "200px" }
     );
     observer.observe(card);
     return () => {
       clearTimeout(revealTimer);
       observer.disconnect();
     };
-  }, [index, visible]);
+  }, [index, visible, loadSrc]);
 
   return (
     <div
@@ -125,12 +131,12 @@ function VideoCard({ video, index }: { video: { id: string; src: string; feature
         <div className="relative overflow-hidden bg-white/[0.02]" style={{ paddingTop: "56.25%" }}>
           <video
             ref={videoRef}
-            src={video.src}
+            src={loadSrc ? video.src : undefined}
             muted
             loop
             playsInline
-            preload="metadata"
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out will-change-transform group-hover:scale-[1.03]"
+            preload="none"
+            className="absolute inset-0 h-full w-full object-cover"
           />
 
           {/* Subtle bottom vignette */}

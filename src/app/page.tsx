@@ -99,7 +99,7 @@ function useScrollAnimations() {
             trigger: hScroll,
             start: "top 10%",
             end: () => `+=${totalWidth * 1.1}`,
-            scrub: 0.6,
+            scrub: 1.5,
             pin: true,
             anticipatePin: 1,
           },
