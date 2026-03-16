@@ -2,11 +2,13 @@
 
 import Image from "next/image";
 import { siteConfig } from "@/data/site";
+import { useLocale } from "@/i18n/LocaleContext";
 
 /* ═══════════════════════════════════════════════════════════
    Footer
    ═══════════════════════════════════════════════════════════ */
 export function HomeFooter() {
+  const { t } = useLocale();
   return (
     <footer className="border-t border-white/[0.06] py-16">
       <div className="mx-auto max-w-[1100px] px-5 md:px-8">
@@ -16,13 +18,13 @@ export function HomeFooter() {
             <Image src="/images/eclipse-logo.png" alt={siteConfig.name} width={160} height={40} className="h-8 w-auto object-contain mb-3" />
             <p className="mt-1 text-xs text-white/35">{siteConfig.tagline}</p>
             <p className="mt-4 text-xs leading-relaxed text-white/40">
-              Customized marketing solutions for businesses across the Middle East.
+              {t("footer.description")}
             </p>
           </div>
 
           {/* Contact */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/40 mb-4">Contact</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/40 mb-4">{t("footer.connect")}</p>
             <div className="space-y-3">
               <a href={`mailto:${siteConfig.email}`} className="block text-sm text-white/40 transition-colors hover:text-[#ff6b35]">
                 {siteConfig.email}
@@ -49,7 +51,7 @@ export function HomeFooter() {
         <div className="mt-12 h-px bg-white/[0.04]" />
         <div className="mt-6 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
           <p className="text-xs text-white/25">
-            &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+            &copy; {new Date().getFullYear()} {siteConfig.name}. {t("footer.rights")}
           </p>
           <p className="text-xs text-white/20">
             Mon–Fri, 10:00 AM – 5:00 PM (AST)
