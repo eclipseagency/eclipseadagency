@@ -680,4 +680,539 @@ export const blogArticles2: Record<string, React.ReactNode> = {
       </p>
     </>
   ),
+
+  "motion-graphics-brand-storytelling": (
+    <>
+      <p className="text-lg leading-relaxed">
+        In a digital landscape where the average person encounters over 6,000 brand messages per
+        day, static content is fighting a losing battle for attention. Motion graphics &mdash; the
+        intersection of graphic design and animation &mdash; have emerged as one of the most
+        effective tools for brand storytelling because they do what static imagery cannot: they
+        create rhythm, build suspense, guide the eye, and deliver complex ideas in seconds. For
+        brands competing in fast-scroll environments like Instagram, TikTok, and LinkedIn, motion
+        design is not a luxury. It is a competitive necessity.
+      </p>
+      <p className="leading-relaxed">
+        This article explores how motion graphics transform brand narratives, the specific
+        applications that drive results, and how to integrate motion design into your content
+        strategy effectively.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Why Motion Captures Attention Better Than Anything Else
+      </h2>
+      <p className="leading-relaxed">
+        The human visual system is wired to detect motion. This is an evolutionary trait &mdash;
+        movement in our peripheral vision triggers an involuntary attention response that predates
+        language, culture, and marketing. In digital environments, this means animated content
+        earns attention before the viewer consciously decides to engage. Research from Microsoft
+        found that animated social content receives{" "}
+        <strong className="text-white">2.5x more engagement</strong> than static equivalents
+        across all major platforms.
+      </p>
+      <p className="leading-relaxed">
+        But attention is only the first step. The real power of motion graphics lies in{" "}
+        <strong className="text-white">comprehension</strong>. Animated infographics help viewers
+        understand data 50% faster than static charts. Explainer animations reduce cognitive load
+        by showing processes step by step rather than requiring the viewer to imagine them. Logo
+        animations create stronger brand recall because the brain encodes movement as an additional
+        memory cue alongside shape and color.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        The Core Applications of Motion Graphics in Branding
+      </h2>
+      <h3 className="font-heading text-xl font-semibold text-text">Brand Identity Animation</h3>
+      <p className="leading-relaxed">
+        A static logo is one-dimensional. An animated logo tells a micro-story in two to three
+        seconds &mdash; how the brand moves, breathes, and feels. The animation style becomes part
+        of the brand identity itself: is the motion sharp and precise, or fluid and organic? Does
+        it build gradually or appear with impact? These decisions communicate personality as
+        powerfully as color and typography choices.
+      </p>
+      <p className="leading-relaxed">
+        Brand animation extends beyond the logo to include transition styles, loading animations,
+        hover states, and scroll-triggered reveals on websites. When these micro-interactions follow
+        a consistent motion language, they create a cohesive brand experience that feels considered
+        and premium.
+      </p>
+
+      <h3 className="font-heading text-xl font-semibold text-text">Explainer and Product Videos</h3>
+      <p className="leading-relaxed">
+        Motion graphics excel at making the complex simple. A SaaS product with dozens of features
+        becomes comprehensible in a 60-second animated explainer. A financial service with
+        complicated pricing tiers becomes clear when animated step by step. The format works because
+        it controls pacing &mdash; unlike live-action video where the viewer&rsquo;s attention
+        wanders, motion graphics direct the eye exactly where it needs to go at every moment.
+      </p>
+
+      <h3 className="font-heading text-xl font-semibold text-text">Social Media Content</h3>
+      <p className="leading-relaxed">
+        Short-form motion graphics are the highest-performing organic content format on Instagram,
+        LinkedIn, and TikTok. Animated quote cards, data visualizations, process breakdowns, and
+        tip carousels with motion elements consistently outperform static equivalents in engagement
+        rate. For brands posting daily or multiple times per week, templated motion graphics systems
+        allow rapid production without sacrificing quality.
+      </p>
+
+      <h3 className="font-heading text-xl font-semibold text-text">Presentation and Pitch Decks</h3>
+      <p className="leading-relaxed">
+        In competitive pitch environments &mdash; whether pitching investors in Riyadh or presenting
+        to enterprise clients in Dubai &mdash; motion-enhanced presentations create a perception of
+        professionalism and preparedness that static slides cannot match. Animated data
+        visualizations, transition effects, and kinetic typography transform a standard deck into a
+        narrative experience.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Motion Design Principles That Drive Results
+      </h2>
+      <p className="leading-relaxed">
+        Effective motion graphics follow principles that separate professional brand animation from
+        amateur After Effects experiments:
+      </p>
+      <ul className="list-disc space-y-2 pl-6">
+        <li>
+          <strong className="text-white">Purpose over decoration.</strong> Every animation should
+          serve a communication goal. If the motion does not clarify, emphasize, or guide, it is
+          visual noise.
+        </li>
+        <li>
+          <strong className="text-white">Consistent easing.</strong> How elements accelerate and
+          decelerate defines the feel of the motion. Ease-in-out curves feel natural and polished.
+          Linear motion feels mechanical and cheap. The easing library should be defined in the
+          brand guidelines and applied consistently.
+        </li>
+        <li>
+          <strong className="text-white">Timing hierarchy.</strong> Important elements should
+          animate first or with more prominent motion. Secondary elements follow. This creates
+          visual priority and guides the viewer through the content in the intended sequence.
+        </li>
+        <li>
+          <strong className="text-white">Sound design integration.</strong> Motion graphics paired
+          with intentional sound design create a multi-sensory brand experience. The click of a
+          button, the whoosh of a transition, the subtle tone of a logo resolve &mdash; these
+          audio cues reinforce brand recognition and improve content retention.
+        </li>
+      </ul>
+
+      <blockquote className="border-l-2 border-primary pl-6 italic text-white/60">
+        &ldquo;Motion design is not about making things move. It is about making things
+        communicate through movement.&rdquo;
+      </blockquote>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Motion Graphics in the Middle East Market
+      </h2>
+      <p className="leading-relaxed">
+        The Gulf region has embraced motion design with particular enthusiasm. Major Saudi brands,
+        government entities, and entertainment properties invest heavily in animated content for
+        campaigns around Riyadh Season, Saudi National Day, and Vision 2030 initiatives. The
+        production quality bar in the region is exceptionally high, driven by world-class events
+        and an audience that consumes more video per capita than almost any other market globally.
+      </p>
+      <p className="leading-relaxed">
+        For brands operating in Arabic and English, motion graphics offer a unique advantage:
+        animation transcends language barriers. A well-designed motion piece communicates its core
+        message even before the text is read, making it effective across multilingual audiences
+        without requiring fundamentally different creative approaches.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Building Motion Into Your Brand System
+      </h2>
+      <p className="leading-relaxed">
+        Motion design should not be an afterthought added to finished static designs. The most
+        effective approach is to build a motion language as a core component of your brand identity
+        &mdash; defining animation styles, timing conventions, and transition behaviors alongside
+        your color palette and typography. This ensures consistency across every touchpoint and
+        allows your team or agency to produce motion content efficiently at scale.
+      </p>
+      <p className="leading-relaxed">
+        At Eclipse Agency, motion design is integral to how we build brands and create content. From
+        animated brand identities and explainer videos to social media motion systems and
+        interactive web animations, we bring stories to life through movement. If your brand is
+        still competing with static content in a motion-first world, let us show you what movement
+        can do for your narrative.
+      </p>
+    </>
+  ),
+
+  "google-ads-roi-guide": (
+    <>
+      <p className="text-lg leading-relaxed">
+        Google Ads is the most powerful demand-capture tool in digital marketing. When someone
+        searches for &ldquo;best accounting software for small business&rdquo; or &ldquo;interior
+        design company Riyadh,&rdquo; they are expressing intent. Google Ads lets you appear at the
+        exact moment that intent is expressed. But the gap between running Google Ads and running
+        them profitably is enormous. Most businesses waste 40&ndash;60% of their ad budget on
+        irrelevant clicks, poorly structured campaigns, and landing pages that fail to convert.
+      </p>
+      <p className="leading-relaxed">
+        This guide is a data-driven playbook for maximizing Google Ads ROI &mdash; covering
+        campaign structure, targeting, bidding, creative strategy, and the measurement framework
+        that separates guessing from knowing.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Campaign Structure: The Foundation Everything Else Depends On
+      </h2>
+      <p className="leading-relaxed">
+        Poor campaign structure is the root cause of most Google Ads waste. When campaigns are
+        organized around arbitrary groupings rather than business logic, budgets bleed into
+        irrelevant areas, reporting becomes useless, and optimization is impossible.
+      </p>
+      <p className="leading-relaxed">
+        The ideal structure mirrors your business: campaigns organized by product line or service
+        category, ad groups organized by intent cluster, and keywords organized by match type and
+        specificity. For a digital agency, this might look like separate campaigns for
+        &ldquo;web design,&rdquo; &ldquo;SEO services,&rdquo; and &ldquo;social media
+        management&rdquo; &mdash; each with ad groups targeting different intent levels and
+        geographic markets.
+      </p>
+      <h3 className="font-heading text-xl font-semibold text-text">
+        The Single Keyword Ad Group (SKAG) Debate
+      </h3>
+      <p className="leading-relaxed">
+        SKAGs were once considered best practice &mdash; creating a separate ad group for every
+        keyword to maximize relevance. In 2025, with Google&rsquo;s broad match algorithms and
+        smart bidding, this approach creates more complexity than value. Instead, focus on
+        intent-themed ad groups with three to seven closely related keywords each. Let
+        Google&rsquo;s machine learning handle the matching, while you maintain control through
+        negative keywords and audience signals.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Keyword Strategy: Intent, Not Volume
+      </h2>
+      <p className="leading-relaxed">
+        The biggest keyword mistake is chasing volume. High-volume keywords are expensive, often
+        have ambiguous intent, and attract clicks from people who are not in a buying mindset.
+        High-intent keywords &mdash; even with lower search volume &mdash; convert at dramatically
+        higher rates and produce far better ROI.
+      </p>
+      <ul className="list-disc space-y-2 pl-6">
+        <li>
+          <strong className="text-white">High intent:</strong> &ldquo;hire web development agency
+          Riyadh&rdquo; &mdash; this person is ready to buy. These keywords deserve aggressive
+          bids.
+        </li>
+        <li>
+          <strong className="text-white">Medium intent:</strong> &ldquo;best digital marketing
+          agencies Saudi Arabia&rdquo; &mdash; this person is comparing options. These keywords
+          need strong ad copy and a compelling landing page.
+        </li>
+        <li>
+          <strong className="text-white">Low intent:</strong> &ldquo;what is digital marketing&rdquo;
+          &mdash; this person is researching, not buying. Unless you have a content-driven funnel
+          that nurtures searchers into leads, these keywords drain budget.
+        </li>
+      </ul>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Negative Keywords: The Most Overlooked Lever
+      </h2>
+      <p className="leading-relaxed">
+        Negative keywords prevent your ads from showing for irrelevant searches. They are the
+        single most impactful optimization lever in Google Ads, yet most advertisers set them once
+        and never revisit them. A systematic approach involves reviewing search term reports weekly,
+        adding irrelevant terms as negatives, and building negative keyword lists by theme
+        (jobs-related terms, free-seekers, competitor names you do not want to target, educational
+        queries).
+      </p>
+      <p className="leading-relaxed">
+        For campaigns running in the Middle East, Arabic negative keywords require the same rigor
+        as English ones. Arabic search queries often include dialectal variations that can trigger
+        ads for completely unrelated intent. Monitoring and refining Arabic negative keywords is
+        essential for campaigns targeting Saudi, Emirati, and broader GCC audiences.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Smart Bidding: When to Trust the Algorithm
+      </h2>
+      <p className="leading-relaxed">
+        Google&rsquo;s smart bidding strategies &mdash; Target CPA, Target ROAS, Maximize
+        Conversions, and Maximize Conversion Value &mdash; use machine learning to set bids for
+        every auction based on hundreds of real-time signals. When they work well, they outperform
+        manual bidding significantly. When they work poorly, they can waste budget at an alarming
+        rate.
+      </p>
+      <p className="leading-relaxed">
+        Smart bidding works when: you have sufficient conversion data (at least 30 conversions per
+        month per campaign), your conversion tracking is accurate and complete, and your goals are
+        clearly defined. It struggles when: conversion volume is low, conversion actions are
+        inconsistently defined, or your landing page quality varies wildly across ad groups.
+      </p>
+
+      <blockquote className="border-l-2 border-primary pl-6 italic text-white/60">
+        &ldquo;Smart bidding is only as smart as the data you feed it. Garbage tracking in,
+        garbage performance out.&rdquo;
+      </blockquote>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Ad Creative: Writing Ads That Convert
+      </h2>
+      <p className="leading-relaxed">
+        Responsive Search Ads (RSAs) are now the default format, allowing you to provide up to 15
+        headlines and four descriptions that Google mixes and matches. The key to RSA performance
+        is providing genuinely diverse headline options:
+      </p>
+      <ul className="list-disc space-y-2 pl-6">
+        <li>
+          <strong className="text-white">Include the primary keyword</strong> in at least two to
+          three headlines for relevance.
+        </li>
+        <li>
+          <strong className="text-white">Lead with benefits, not features.</strong>
+          &ldquo;Increase Revenue by 40%&rdquo; outperforms &ldquo;Full-Service Marketing
+          Agency.&rdquo;
+        </li>
+        <li>
+          <strong className="text-white">Use numbers and specifics.</strong> &ldquo;Trusted by
+          200+ Saudi Businesses&rdquo; is more compelling than &ldquo;Trusted Agency.&rdquo;
+        </li>
+        <li>
+          <strong className="text-white">Include a clear CTA</strong> in at least one headline and
+          every description. &ldquo;Get a Free Audit,&rdquo; &ldquo;Request a Quote Today,&rdquo;
+          or &ldquo;Book a Strategy Call.&rdquo;
+        </li>
+        <li>
+          <strong className="text-white">Test emotional vs. rational angles.</strong> Some
+          audiences respond better to &ldquo;Stop Wasting Ad Budget&rdquo; (pain) while others
+          prefer &ldquo;Scale Your Revenue with Confidence&rdquo; (aspiration).
+        </li>
+      </ul>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Landing Pages: Where ROI Is Won or Lost
+      </h2>
+      <p className="leading-relaxed">
+        The best Google Ads campaign in the world will fail if the landing page does not convert.
+        Sending ad traffic to your homepage is almost always wrong. Each campaign should drive to a
+        dedicated landing page that matches the specific intent of the ad group. The page should
+        deliver on the promise made in the ad copy, include a single clear CTA, load in under two
+        seconds, and be mobile-optimized for the over 75% of Saudi searches that happen on phones.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Measurement: Tracking What Matters
+      </h2>
+      <p className="leading-relaxed">
+        The most dangerous metric in Google Ads is cost per click. Low CPCs feel good but mean
+        nothing if those clicks do not convert. The metrics that matter are: cost per acquisition
+        (CPA), return on ad spend (ROAS), conversion rate by campaign and ad group, and customer
+        lifetime value (LTV) relative to acquisition cost.
+      </p>
+      <p className="leading-relaxed">
+        Proper conversion tracking is non-negotiable. Implement Google Tag Manager, set up both
+        macro-conversions (purchases, form submissions) and micro-conversions (add to cart, time on
+        page), and use Google Analytics 4 attribution models to understand the full path to
+        conversion.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Turning Ad Spend Into Predictable Growth
+      </h2>
+      <p className="leading-relaxed">
+        Google Ads should not feel like gambling. When campaign structure, keyword strategy, bidding,
+        creative, landing pages, and measurement are all aligned, paid search becomes a predictable
+        growth engine where you can invest a dollar and know within a reasonable range what you will
+        get back. That predictability is what separates businesses that scale from businesses that
+        stall.
+      </p>
+      <p className="leading-relaxed">
+        At Eclipse Agency, we manage Google Ads for businesses across the Middle East with a focus on
+        measurable ROI. From campaign architecture and keyword research to landing page design and
+        conversion tracking, every decision is data-driven. If your current ad spend feels more
+        like a cost than an investment, we can change that.
+      </p>
+    </>
+  ),
+
+  "ux-design-principles-mena": (
+    <>
+      <p className="text-lg leading-relaxed">
+        Designing for the Middle East and North Africa is not simply a matter of flipping layouts
+        from left-to-right to right-to-left. RTL support is table stakes &mdash; the minimum
+        technical requirement. True UX design for MENA audiences requires understanding the
+        cultural, behavioral, and contextual factors that shape how people in this region interact
+        with digital products. Getting these right is the difference between a product that feels
+        native and one that feels like a poorly localized import.
+      </p>
+      <p className="leading-relaxed">
+        This guide covers the UX principles that matter most when designing for MENA audiences,
+        with particular focus on Saudi Arabia and the Gulf region where digital adoption and
+        consumer expectations are among the highest in the world.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Beyond RTL: The Full Scope of Bidirectional Design
+      </h2>
+      <p className="leading-relaxed">
+        Yes, Arabic is read right-to-left. But bidirectional design goes far beyond mirroring the
+        layout. Several elements that designers frequently get wrong:
+      </p>
+      <ul className="list-disc space-y-2 pl-6">
+        <li>
+          <strong className="text-white">Icons with directional meaning.</strong> A forward arrow
+          should point left in RTL contexts. A &ldquo;back&rdquo; button should point right.
+          Progress bars should fill from right to left. Carousels should advance in the opposite
+          direction. Getting these wrong creates cognitive friction that users feel even if they
+          cannot articulate why.
+        </li>
+        <li>
+          <strong className="text-white">Numbers remain LTR.</strong> Arabic text is RTL, but
+          numbers within Arabic text are still read left-to-right. Phone numbers, prices, dates,
+          and data tables follow LTR conventions even within an RTL interface. This creates
+          bidirectional text flows that must be handled carefully to avoid rendering bugs.
+        </li>
+        <li>
+          <strong className="text-white">Mixed-language content.</strong> Many MENA users are
+          bilingual, and interfaces often contain both Arabic and English text. The layout engine
+          must handle seamless transitions between RTL and LTR within the same paragraph, heading,
+          or form field without visual breakage.
+        </li>
+        <li>
+          <strong className="text-white">Not everything mirrors.</strong> Media controls (play,
+          pause, volume), checkmarks, and universal symbols should not be flipped. Knowing what to
+          mirror and what to leave requires cultural understanding, not just a CSS transform.
+        </li>
+      </ul>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Typography for Arabic Interfaces
+      </h2>
+      <p className="leading-relaxed">
+        Arabic typography has fundamentally different characteristics than Latin typography. Arabic
+        is a connected script &mdash; letters change form based on their position in a word
+        (initial, medial, final, isolated). This means Arabic text has a different visual density,
+        rhythm, and flow than English text. Designers who simply swap in an Arabic font without
+        adjusting the typographic system create interfaces that feel cramped, unbalanced, or
+        difficult to scan.
+      </p>
+      <h3 className="font-heading text-xl font-semibold text-text">Key Typography Considerations</h3>
+      <ul className="list-disc space-y-2 pl-6">
+        <li>
+          <strong className="text-white">Line height:</strong> Arabic text typically needs 1.6 to
+          1.8x line height compared to 1.4 to 1.5x for Latin. Diacritical marks (tashkeel) sit
+          above and below the baseline, requiring additional vertical space.
+        </li>
+        <li>
+          <strong className="text-white">Font size:</strong> Arabic characters at the same point
+          size as Latin characters often appear smaller due to x-height differences. Increase
+          Arabic font sizes by 10&ndash;15% relative to the English equivalent for optical parity.
+        </li>
+        <li>
+          <strong className="text-white">Font selection:</strong> Not all Arabic fonts are created
+          equal. High-quality Arabic typefaces like IBM Plex Arabic, Noto Sans Arabic, Tajawal, and
+          Cairo offer the weight ranges and OpenType features needed for professional interfaces.
+          Avoid defaulting to generic system Arabic fonts.
+        </li>
+        <li>
+          <strong className="text-white">Readability testing:</strong> What reads well in English
+          may not read well in Arabic and vice versa. Test with native Arabic readers, not just
+          visual inspection by non-Arabic-speaking designers.
+        </li>
+      </ul>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Cultural UX Patterns in the Gulf Region
+      </h2>
+      <p className="leading-relaxed">
+        User experience is cultural. What feels intuitive in one market may feel confusing or
+        inappropriate in another. Several cultural patterns significantly influence UX design for
+        Gulf audiences:
+      </p>
+      <h3 className="font-heading text-xl font-semibold text-text">
+        Trust Signals and Social Proof
+      </h3>
+      <p className="leading-relaxed">
+        Trust is built differently in the MENA region. While Western audiences respond to star
+        ratings and review counts, Gulf audiences place significant weight on{" "}
+        <strong className="text-white">personal recommendations and authority endorsements</strong>.
+        Government certifications, recognized brand partnerships, and testimonials from named
+        individuals (rather than anonymous reviews) carry disproportionate weight. Including
+        official registration numbers, chamber of commerce membership, and recognized quality marks
+        can significantly impact conversion rates for Saudi audiences.
+      </p>
+
+      <h3 className="font-heading text-xl font-semibold text-text">
+        Communication Preferences
+      </h3>
+      <p className="leading-relaxed">
+        WhatsApp is the default communication channel in the Gulf. A UX design that buries the
+        WhatsApp contact option in a footer link while prominently featuring an email form is
+        misaligned with user behavior. For service businesses, a floating WhatsApp button that
+        connects directly to a business account is often the highest-converting CTA on the page.
+        Phone calls also remain more common than in many Western markets &mdash; click-to-call
+        buttons should be prominent on mobile interfaces.
+      </p>
+
+      <h3 className="font-heading text-xl font-semibold text-text">
+        Content Density Preferences
+      </h3>
+      <p className="leading-relaxed">
+        Gulf audiences, particularly in Saudi Arabia, tend to engage well with rich, detailed
+        content. The Western trend toward extreme minimalism &mdash; sparse pages with large
+        whitespace &mdash; does not always translate. Product pages with comprehensive
+        specifications, detailed descriptions, and multiple information layers often perform better
+        than stripped-down minimal designs. This does not mean cluttered design; it means
+        information-rich design presented with clear hierarchy.
+      </p>
+
+      <blockquote className="border-l-2 border-primary pl-6 italic text-white/60">
+        &ldquo;Localization is not translation. It is redesigning the experience so it feels like
+        it was built for this audience from the start.&rdquo;
+      </blockquote>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Mobile-First Design for a Mobile-First Market
+      </h2>
+      <p className="leading-relaxed">
+        Saudi Arabia has one of the highest smartphone penetration rates in the world at over 98%.
+        Mobile is not a secondary screen &mdash; it is the primary screen for everything from
+        e-commerce to government services. UX design for this market must be mobile-first in the
+        truest sense: designed on mobile first, tested on mobile first, and optimized for the
+        mobile context first. Desktop becomes the responsive adaptation, not the other way around.
+      </p>
+      <p className="leading-relaxed">
+        Specific mobile UX considerations for MENA: gesture-based navigation is well-understood and
+        expected, bottom navigation patterns align with thumb-zone ergonomics, and biometric
+        authentication (Face ID, fingerprint) should be leveraged for returning users. App-like
+        progressive web apps (PWAs) resonate well in a market where mobile app usage is extremely
+        high.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Accessibility in Arabic Interfaces
+      </h2>
+      <p className="leading-relaxed">
+        Accessibility is often overlooked in Arabic digital design, but it is both an ethical
+        imperative and a practical one. Screen reader support for Arabic requires proper HTML
+        semantics, correct language attributes (<code>lang=&quot;ar&quot;</code>), and meaningful
+        alt text in Arabic. Color contrast requirements remain the same as WCAG standards, but
+        designers should be aware that certain Arabic fonts have thinner strokes that can reduce
+        legibility at smaller sizes, requiring larger minimum font sizes for accessibility
+        compliance.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Designing Digital Products That Feel Native
+      </h2>
+      <p className="leading-relaxed">
+        The MENA digital market is maturing rapidly. Saudi consumers and businesses are
+        increasingly sophisticated in their expectations. A poorly localized product that feels like
+        an afterthought will be rejected in favor of competitors who invested in a genuinely native
+        experience. The brands and products that succeed in this region are the ones that treat
+        MENA UX as a first-class design discipline, not a localization checkbox.
+      </p>
+      <p className="leading-relaxed">
+        At Eclipse Agency, designing for Arabic and English audiences is not an add-on service
+        &mdash; it is core to how we work. Our design team builds interfaces that feel native in
+        both languages, respects cultural UX patterns, and performs on the devices and networks our
+        audience actually uses. If your digital product needs to work for MENA audiences, we build
+        experiences that do not just function in Arabic &mdash; they feel like they were born in it.
+      </p>
+    </>
+  ),
 };

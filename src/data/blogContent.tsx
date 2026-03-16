@@ -639,4 +639,599 @@ export const blogArticles: Record<string, React.ReactNode> = {
       </p>
     </>
   ),
+
+  "seo-strategy-2025": (
+    <>
+      <p className="text-lg leading-relaxed">
+        Search engine optimization in 2025 looks almost nothing like the SEO that dominated agency
+        playbooks five years ago. The keyword-stuffing era is long dead, but so are many of the
+        tactics that replaced it. Google&rsquo;s algorithms have evolved to the point where they
+        reward genuine expertise, user satisfaction, and content that solves real problems &mdash;
+        and penalize everything that tries to game the system. If your SEO strategy still revolves
+        around churning out thin blog posts and building low-quality backlinks, you are not just
+        wasting effort &mdash; you are actively hurting your rankings.
+      </p>
+      <p className="leading-relaxed">
+        This guide covers what actually moves the needle in SEO today, based on what is working for
+        competitive brands in the Middle East and globally. No tricks. No hacks. Just the
+        fundamentals that compound over time.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        The Shift: From Keywords to Search Intent
+      </h2>
+      <p className="leading-relaxed">
+        The single biggest mindset shift in modern SEO is the move from keyword targeting to intent
+        matching. Google&rsquo;s natural language processing &mdash; powered by models like MUM and
+        the helpful content system &mdash; now understands what a searcher actually wants, not just
+        the words they typed. A search for &ldquo;best CRM for small business&rdquo; is not a
+        keyword to rank for. It is a question from a business owner at a specific stage of their
+        buying journey. The content that ranks is the content that best answers that question.
+      </p>
+      <p className="leading-relaxed">
+        Intent falls into four broad categories, and your content strategy needs to address all of
+        them:
+      </p>
+      <ul className="list-disc space-y-2 pl-6">
+        <li>
+          <strong className="text-white">Informational:</strong> The searcher wants to learn
+          something. These queries drive top-of-funnel traffic and establish authority. Think
+          &ldquo;how does programmatic advertising work&rdquo; or &ldquo;what is brand
+          positioning.&rdquo;
+        </li>
+        <li>
+          <strong className="text-white">Navigational:</strong> The searcher is looking for a
+          specific brand or page. Ensure your brand name, product names, and key pages are optimized
+          so you own these searches.
+        </li>
+        <li>
+          <strong className="text-white">Commercial investigation:</strong> The searcher is
+          comparing options before a purchase. Reviews, comparisons, and &ldquo;best of&rdquo;
+          content serve this intent.
+        </li>
+        <li>
+          <strong className="text-white">Transactional:</strong> The searcher is ready to buy or
+          take action. Product pages, service pages, and landing pages with clear CTAs serve this
+          intent.
+        </li>
+      </ul>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Content Quality: E-E-A-T Is Not Optional
+      </h2>
+      <p className="leading-relaxed">
+        Google&rsquo;s quality rater guidelines emphasize{" "}
+        <strong className="text-white">Experience, Expertise, Authoritativeness, and
+        Trustworthiness</strong> (E-E-A-T) as core signals for content evaluation. In practice,
+        this means Google is asking: does the person who wrote this actually know what they are
+        talking about? Has this content been produced by someone with real-world experience in the
+        subject?
+      </p>
+      <p className="leading-relaxed">
+        For businesses, the implication is clear. Content written by genuine subject-matter experts
+        &mdash; with author bios, credentials, and a track record of expertise &mdash; outperforms
+        generic content produced by writers who researched a topic for 30 minutes. This is
+        especially true in YMYL (Your Money or Your Life) categories: finance, health, legal, and
+        business services.
+      </p>
+      <blockquote className="border-l-2 border-primary pl-6 italic text-white/60">
+        &ldquo;The era of content farms is over. Google rewards depth, originality, and proof that
+        you actually know what you are writing about.&rdquo;
+      </blockquote>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Technical SEO: The Foundation That Makes Everything Else Work
+      </h2>
+      <p className="leading-relaxed">
+        No amount of great content will rank if your technical foundation is broken. Technical SEO
+        in 2025 focuses on three pillars:
+      </p>
+      <h3 className="font-heading text-xl font-semibold text-text">Core Web Vitals</h3>
+      <p className="leading-relaxed">
+        Page speed, interactivity, and visual stability are confirmed ranking factors. Sites that
+        pass all three Core Web Vitals thresholds have a measurable advantage in search results.
+        This means optimizing LCP under 2.5 seconds, INP under 200 milliseconds, and CLS under
+        0.1. For sites built on modern frameworks like Next.js with edge deployment, achieving these
+        targets is straightforward. For legacy WordPress sites loaded with plugins, it often
+        requires significant work.
+      </p>
+      <h3 className="font-heading text-xl font-semibold text-text">Crawlability and Indexing</h3>
+      <p className="leading-relaxed">
+        Google cannot rank what it cannot find. A clean site architecture, proper internal linking,
+        an up-to-date XML sitemap, and correct use of canonical tags ensure that your most
+        important pages are discovered and indexed efficiently. For large sites, crawl budget
+        management becomes critical &mdash; you do not want Googlebot wasting time on filtered
+        product pages when it should be crawling your category pages.
+      </p>
+      <h3 className="font-heading text-xl font-semibold text-text">Structured Data</h3>
+      <p className="leading-relaxed">
+        Schema markup helps Google understand the context of your content and can unlock rich
+        results in search &mdash; star ratings, FAQ dropdowns, how-to steps, product pricing, and
+        event details. Implementing structured data does not directly boost rankings, but it
+        significantly improves click-through rates from search results, which indirectly impacts
+        rankings through engagement signals.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Link Building in 2025: Quality Over Quantity
+      </h2>
+      <p className="leading-relaxed">
+        Backlinks remain a top-three ranking factor, but the way you earn them has changed
+        fundamentally. Mass outreach, guest post networks, and directory submissions are either
+        ineffective or actively harmful. What works is earning links through genuinely valuable
+        content that people want to reference.
+      </p>
+      <ul className="list-disc space-y-2 pl-6">
+        <li>
+          <strong className="text-white">Original research and data:</strong> Publish proprietary
+          data, surveys, or industry reports. These attract natural links because they provide
+          unique information that cannot be found elsewhere.
+        </li>
+        <li>
+          <strong className="text-white">Thought leadership:</strong> Expert commentary on
+          industry trends, published in your own content and syndicated to relevant publications.
+        </li>
+        <li>
+          <strong className="text-white">Digital PR:</strong> Creating newsworthy content or
+          campaigns that earn coverage from journalists and industry publications.
+        </li>
+        <li>
+          <strong className="text-white">Strategic partnerships:</strong> Co-created content with
+          complementary brands or industry organizations that naturally link to each other.
+        </li>
+      </ul>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Local SEO: Critical for the Saudi Market
+      </h2>
+      <p className="leading-relaxed">
+        For businesses operating in Saudi Arabia, local SEO is not a subset of your strategy
+        &mdash; it is often the entire strategy. Google Business Profile optimization, local
+        citations, Arabic-language content, and location-specific landing pages drive the majority
+        of discovery for service-based businesses. The competition for local search visibility in
+        Riyadh, Jeddah, and Dammam has intensified significantly as more Saudi businesses invest in
+        digital presence under Vision 2030.
+      </p>
+      <p className="leading-relaxed">
+        Key local SEO actions include: claiming and fully optimizing your Google Business Profile
+        with photos, posts, and accurate categories; building citations on Saudi-specific
+        directories; earning Google reviews (volume and recency both matter); and creating
+        location-specific content that serves the searcher&rsquo;s local context.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        AI and the Future of Search
+      </h2>
+      <p className="leading-relaxed">
+        Google&rsquo;s AI Overviews (formerly SGE) are reshaping the search results page. For many
+        informational queries, Google now generates an AI-synthesized answer at the top of results,
+        pulling from multiple sources. This has implications for SEO strategy: being cited in AI
+        Overviews becomes a new form of ranking, and the content most likely to be cited is
+        well-structured, factual, and authoritative.
+      </p>
+      <p className="leading-relaxed">
+        The practical response is not to panic but to double down on what has always worked: create
+        the best content on the topic, structure it clearly, back claims with data, and build
+        topical authority across your domain. Sites that do this well will be the sources AI
+        Overviews draw from.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Building an SEO Strategy That Compounds
+      </h2>
+      <p className="leading-relaxed">
+        SEO is not a campaign with a start and end date. It is an investment that compounds over
+        time. A blog post published today that ranks well will continue driving traffic for years. A
+        technical foundation built correctly supports every piece of content you create in the
+        future. The brands that win at SEO are the ones that commit to consistency, quality, and
+        patience.
+      </p>
+      <p className="leading-relaxed">
+        At Eclipse Agency, SEO is integrated into every web project and content strategy we deliver.
+        From technical audits and site architecture to content planning and link-building
+        campaigns, we build organic search visibility as a long-term growth engine &mdash; not a
+        quick fix. If your organic traffic has plateaued or your current SEO approach feels
+        outdated, we would welcome the opportunity to build a strategy that actually compounds.
+      </p>
+    </>
+  ),
+
+  "rebranding-guide": (
+    <>
+      <p className="text-lg leading-relaxed">
+        Rebranding is one of the highest-stakes decisions a company can make. Done right, it
+        revitalizes a business, attracts new audiences, and signals growth. Done wrong, it
+        alienates existing customers, wastes hundreds of thousands of dollars, and creates years of
+        brand confusion. The question is never simply &ldquo;should we rebrand?&rdquo; but rather
+        &ldquo;do we have a clear, strategic reason that justifies the cost and risk?&rdquo;
+      </p>
+      <p className="leading-relaxed">
+        This guide is for founders, marketing leaders, and executives who suspect their brand has
+        outgrown its current identity &mdash; but need a framework to make the decision rationally,
+        not emotionally.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Rebrand vs. Refresh: Know the Difference
+      </h2>
+      <p className="leading-relaxed">
+        Before committing to a full rebrand, determine whether you actually need one. There is a
+        significant difference between a brand refresh and a complete rebrand:
+      </p>
+      <ul className="list-disc space-y-2 pl-6">
+        <li>
+          <strong className="text-white">Brand refresh:</strong> Updating visual elements &mdash;
+          modernizing the logo, refining the color palette, upgrading typography, and tightening the
+          visual system &mdash; while keeping the core positioning, name, and brand architecture
+          intact. This is lower risk, lower cost, and appropriate when the brand foundation is
+          sound but the execution feels dated.
+        </li>
+        <li>
+          <strong className="text-white">Full rebrand:</strong> Redefining the brand from the
+          ground up &mdash; potentially including a new name, new positioning, new visual identity,
+          new messaging framework, and a fundamentally different market perception. This is
+          high-cost, high-risk, and appropriate when the existing brand is actively limiting
+          growth.
+        </li>
+      </ul>
+      <p className="leading-relaxed">
+        Most companies that think they need a rebrand actually need a refresh. The distinction
+        matters because a refresh can be executed in weeks, while a full rebrand typically takes 6
+        to 12 months and requires coordination across every customer touchpoint.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Five Signs It Is Actually Time to Rebrand
+      </h2>
+      <h3 className="font-heading text-xl font-semibold text-text">
+        1. Your Brand No Longer Reflects What You Do
+      </h3>
+      <p className="leading-relaxed">
+        Companies evolve. A business that started as a local web design shop and has grown into a
+        full-service digital agency has a fundamentally different value proposition than its
+        original brand was built to communicate. When prospects consistently misunderstand what you
+        offer based on your brand, the brand is a liability.
+      </p>
+      <h3 className="font-heading text-xl font-semibold text-text">
+        2. You Are Entering a New Market
+      </h3>
+      <p className="leading-relaxed">
+        Expanding into a new geographic market or a new industry vertical often exposes brand
+        limitations. A brand that resonates in one market may carry unintended connotations in
+        another. This is particularly relevant for companies expanding into or within the Middle
+        East, where cultural context, Arabic language integration, and regional perception all
+        influence brand effectiveness.
+      </p>
+      <h3 className="font-heading text-xl font-semibold text-text">
+        3. Your Brand Looks Like Everyone Else
+      </h3>
+      <p className="leading-relaxed">
+        Markets get crowded. If your visual identity, messaging, and market positioning are
+        indistinguishable from three or four competitors, your brand has a differentiation problem.
+        In saturated sectors &mdash; fintech, SaaS, e-commerce &mdash; this is increasingly
+        common. When customers cannot visually or verbally distinguish you from alternatives, price
+        becomes the only differentiator, and that is a race to the bottom.
+      </p>
+      <h3 className="font-heading text-xl font-semibold text-text">
+        4. You Have Been Through a Merger or Major Structural Change
+      </h3>
+      <p className="leading-relaxed">
+        Mergers, acquisitions, and major pivots often leave behind a frankensteined brand &mdash;
+        elements from multiple entities stitched together without a unifying vision. Post-merger
+        rebranding is not vanity; it is operational. Employees need a single identity to rally
+        around, and customers need clarity about what the combined entity stands for.
+      </p>
+      <h3 className="font-heading text-xl font-semibold text-text">
+        5. Your Brand Carries Negative Associations
+      </h3>
+      <p className="leading-relaxed">
+        Sometimes a brand is associated with a past failure, a PR crisis, or an outdated market
+        perception that no amount of marketing can overcome. In these cases, a clean break through
+        rebranding can be more effective than trying to rehabilitate the existing identity. This is
+        a last resort, but it is sometimes the right call.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        The Rebranding Process: What to Expect
+      </h2>
+      <p className="leading-relaxed">
+        A rigorous rebrand follows a structured process. Skipping steps is what leads to rebrands
+        that look good on a mood board but fail in the market.
+      </p>
+      <ul className="list-disc space-y-2 pl-6">
+        <li>
+          <strong className="text-white">Discovery and audit:</strong> Analyze the current brand
+          equity, customer perception, competitive landscape, and business objectives. What is
+          working? What is broken? What perception do you want to create?
+        </li>
+        <li>
+          <strong className="text-white">Strategy and positioning:</strong> Define the brand
+          positioning, value proposition, personality, and messaging architecture before any design
+          work begins. Strategy must precede aesthetics.
+        </li>
+        <li>
+          <strong className="text-white">Naming (if applicable):</strong> If the rebrand includes
+          a name change, this is the most complex and sensitive step. Legal availability, domain
+          availability, linguistic screening (critical for Arabic markets), and stakeholder
+          alignment all take time.
+        </li>
+        <li>
+          <strong className="text-white">Visual identity design:</strong> Logo, color system,
+          typography, visual elements, and brand guidelines. This should flow from the strategy,
+          not precede it.
+        </li>
+        <li>
+          <strong className="text-white">Verbal identity:</strong> Brand voice, tone guidelines,
+          key messaging, taglines, and copywriting frameworks.
+        </li>
+        <li>
+          <strong className="text-white">Rollout planning:</strong> The most overlooked phase. How
+          and when do you launch? What gets updated first? How do you communicate the change to
+          existing customers, partners, and employees?
+        </li>
+      </ul>
+
+      <blockquote className="border-l-2 border-primary pl-6 italic text-white/60">
+        &ldquo;A rebrand is not a logo project. It is a business strategy that happens to include
+        design.&rdquo;
+      </blockquote>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Common Rebranding Mistakes
+      </h2>
+      <p className="leading-relaxed">
+        The most frequent rebranding failures share common patterns:
+      </p>
+      <ul className="list-disc space-y-2 pl-6">
+        <li>
+          <strong className="text-white">Rebranding for the wrong reasons.</strong> Boredom is not
+          a strategy. A new CEO wanting to &ldquo;put their stamp on things&rdquo; is not a
+          strategy. If the business case is not clear, do not rebrand.
+        </li>
+        <li>
+          <strong className="text-white">Starting with design instead of strategy.</strong> Jumping
+          to logo concepts before defining positioning is the single most common mistake. The
+          result is a brand that looks different but still says the same nothing.
+        </li>
+        <li>
+          <strong className="text-white">Ignoring existing brand equity.</strong> If your current
+          brand has recognition and positive associations, throwing it away entirely is wasteful.
+          Evolution is usually smarter than revolution.
+        </li>
+        <li>
+          <strong className="text-white">Under-investing in the rollout.</strong> A new brand
+          identity sitting in a PDF while your website, social media, signage, and sales materials
+          still show the old brand creates confusion, not clarity.
+        </li>
+        <li>
+          <strong className="text-white">Not testing with real audiences.</strong> Internal
+          consensus is not enough. The brand exists in the minds of your customers, not your
+          boardroom. Validate with the people who actually buy from you.
+        </li>
+      </ul>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        The Cost Question
+      </h2>
+      <p className="leading-relaxed">
+        Rebranding costs vary enormously depending on scope. A visual refresh for a small business
+        might cost $10,000 to $30,000. A full rebrand for a mid-market company &mdash; including
+        strategy, naming, design, guidelines, and rollout &mdash; typically runs $50,000 to
+        $250,000 or more. Enterprise rebrands with global rollouts can reach seven figures.
+      </p>
+      <p className="leading-relaxed">
+        The real cost, however, is not the agency fee. It is the operational cost of updating every
+        touchpoint: website, marketing materials, signage, packaging, email templates, social
+        profiles, legal documents, and employee-facing materials. Plan for the total cost of
+        implementation, not just the cost of creation.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Making the Decision
+      </h2>
+      <p className="leading-relaxed">
+        If you have read this far and are still unsure, here is a simple test. Ask yourself: is our
+        current brand actively preventing us from achieving our business objectives? If the answer
+        is yes &mdash; because it misrepresents your offering, fails to differentiate you, or
+        carries baggage that marketing cannot overcome &mdash; then a rebrand is justified. If the
+        answer is &ldquo;it is a bit tired but still works,&rdquo; a refresh is probably the
+        smarter move.
+      </p>
+      <p className="leading-relaxed">
+        At Eclipse Agency, we guide companies through both paths. Whether you need a strategic
+        refresh that modernizes your existing equity or a ground-up rebrand that repositions your
+        business for its next chapter, we bring the strategic rigour and design craft to make the
+        investment pay off. If your brand has outgrown its identity, let us build what comes next.
+      </p>
+    </>
+  ),
+
+  "ecommerce-conversion-optimization": (
+    <>
+      <p className="text-lg leading-relaxed">
+        Traffic without conversion is the most expensive form of marketing failure. You have
+        invested in SEO, paid ads, social media, and content &mdash; people are visiting your
+        e-commerce store &mdash; but the sales are not following. The problem is rarely a lack of
+        demand. It is almost always a friction problem in the buying experience. Conversion rate
+        optimization (CRO) is the discipline of identifying and eliminating that friction, and it
+        is one of the highest-ROI investments an e-commerce business can make.
+      </p>
+      <p className="leading-relaxed">
+        This article goes beyond the basics. If you have already implemented trust badges and a
+        visible cart icon, this guide covers the data-driven UX changes that separate 1%
+        conversion rates from 4%+ conversion rates.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        The Conversion Equation: Understanding What Drives Purchases
+      </h2>
+      <p className="leading-relaxed">
+        Every purchase decision is the result of a simple equation: perceived value must exceed
+        perceived cost plus perceived risk. Conversion optimization works by increasing perceived
+        value, reducing perceived cost (not just price &mdash; also effort, time, and cognitive
+        load), and minimizing perceived risk (of making a wrong decision, of losing money, of
+        wasting time).
+      </p>
+      <p className="leading-relaxed">
+        Most e-commerce optimization focuses exclusively on reducing friction at checkout. That
+        matters, but it is only the final step. The buying journey has friction points at every
+        stage, and optimizing the entire funnel yields far greater returns than tweaking the
+        checkout page alone.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Product Page Optimization: Where Most Sales Are Won or Lost
+      </h2>
+      <p className="leading-relaxed">
+        The product page is the most critical page in e-commerce. This is where the purchase
+        decision is made or abandoned. High-converting product pages share several characteristics:
+      </p>
+      <h3 className="font-heading text-xl font-semibold text-text">Visual Hierarchy</h3>
+      <p className="leading-relaxed">
+        The eye should follow a natural path: product image, title and key differentiator, price,
+        and add-to-cart button. If the visitor has to search for the price or the buy button, you
+        are losing conversions. On mobile &mdash; where over 70% of e-commerce traffic now
+        originates in the Middle East &mdash; the add-to-cart button must be immediately accessible
+        without scrolling.
+      </p>
+      <h3 className="font-heading text-xl font-semibold text-text">Product Photography and Media</h3>
+      <p className="leading-relaxed">
+        Product images are the single most influential factor in online purchase decisions. Multiple
+        angles, zoom capability, lifestyle context shots, and increasingly, video demonstrations
+        and 3D viewers. For fashion and beauty brands in the Saudi market, showing products in
+        culturally relevant contexts significantly outperforms generic studio shots.
+      </p>
+      <h3 className="font-heading text-xl font-semibold text-text">Social Proof Placement</h3>
+      <p className="leading-relaxed">
+        Reviews and ratings should be visible near the top of the product page, not buried at the
+        bottom. A star rating adjacent to the product title provides immediate social validation.
+        Specific, detailed reviews with photos convert better than generic five-star ratings. For
+        the MENA market, Arabic-language reviews carry significantly more weight than English ones
+        for local audiences.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Site Search: The Highest-Intent Traffic You Are Probably Ignoring
+      </h2>
+      <p className="leading-relaxed">
+        Visitors who use site search convert at{" "}
+        <strong className="text-white">2&ndash;3x the rate</strong> of visitors who browse. They
+        know what they want. Your job is to not get in their way. Yet most e-commerce sites have
+        mediocre search experiences: no autocomplete, no typo tolerance, no synonym handling, and
+        irrelevant results for common queries.
+      </p>
+      <ul className="list-disc space-y-2 pl-6">
+        <li>
+          <strong className="text-white">Implement intelligent autocomplete</strong> that suggests
+          products, categories, and content as the user types.
+        </li>
+        <li>
+          <strong className="text-white">Add typo tolerance and synonym mapping.</strong> If
+          someone searches &ldquo;sneakers&rdquo; and your catalog uses &ldquo;trainers,&rdquo;
+          the search should still return relevant results.
+        </li>
+        <li>
+          <strong className="text-white">Merchandize search results.</strong> Best sellers and
+          high-margin products should appear first for ambiguous queries.
+        </li>
+        <li>
+          <strong className="text-white">Support Arabic search</strong> with proper morphological
+          handling. Arabic search is significantly more complex than English due to root-based word
+          formation, and generic search engines handle it poorly.
+        </li>
+      </ul>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Checkout Optimization: Eliminating the Final Friction
+      </h2>
+      <p className="leading-relaxed">
+        The average e-commerce cart abandonment rate is approximately{" "}
+        <strong className="text-white">70%</strong>. Seven out of ten people who add a product to
+        their cart leave without buying. The primary reasons, according to Baymard Institute
+        research, are: unexpected costs at checkout (48%), being required to create an account
+        (26%), a checkout process that is too long or complicated (22%), and concerns about payment
+        security (18%).
+      </p>
+      <p className="leading-relaxed">
+        Each of these is solvable with deliberate UX decisions:
+      </p>
+      <ul className="list-disc space-y-2 pl-6">
+        <li>
+          <strong className="text-white">Show total cost early.</strong> Include shipping,
+          taxes, and any fees on the product page or cart page, not as a surprise at the final
+          checkout step.
+        </li>
+        <li>
+          <strong className="text-white">Offer guest checkout.</strong> Account creation should be
+          optional and offered after purchase, not before.
+        </li>
+        <li>
+          <strong className="text-white">Minimize form fields.</strong> Every unnecessary field
+          increases abandonment. Use address autocomplete, pre-fill where possible, and only ask
+          for what is genuinely needed to fulfill the order.
+        </li>
+        <li>
+          <strong className="text-white">Support local payment methods.</strong> In Saudi Arabia
+          and the Gulf, Mada card support, Apple Pay, Tamara (buy now pay later), and STC Pay are
+          not optional &mdash; they are expected. Offering only Visa and Mastercard leaves money on
+          the table.
+        </li>
+      </ul>
+
+      <blockquote className="border-l-2 border-primary pl-6 italic text-white/60">
+        &ldquo;The best checkout is the shortest checkout. Every additional step is a decision
+        point where the customer can choose to leave.&rdquo;
+      </blockquote>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Mobile-First Is Not a Suggestion
+      </h2>
+      <p className="leading-relaxed">
+        In Saudi Arabia, mobile commerce accounts for over{" "}
+        <strong className="text-white">75% of e-commerce transactions</strong>. Designing for
+        desktop first and adapting to mobile is fundamentally the wrong approach. Mobile-first
+        means: thumb-zone-optimized button placement, larger tap targets (minimum 44px), simplified
+        navigation with clear category hierarchy, and fast loading on cellular connections.
+      </p>
+      <p className="leading-relaxed">
+        Test your mobile checkout on actual devices, not browser dev tools. The experience of
+        filling out a form on a small screen with an on-screen keyboard is qualitatively different
+        from clicking through it on a desktop simulator.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        A/B Testing: Making Decisions With Data
+      </h2>
+      <p className="leading-relaxed">
+        Every CRO recommendation in this article should be validated through A/B testing on your
+        specific audience. What works for one store may not work for another. The methodology is
+        straightforward: form a hypothesis, create a variation, split traffic evenly, run the test
+        until statistical significance is reached, and implement the winner.
+      </p>
+      <p className="leading-relaxed">
+        Common high-impact tests include: CTA button color and copy, product page layout,
+        checkout step count, free shipping threshold, and social proof placement. Start with
+        changes that affect the highest-traffic pages first &mdash; small percentage improvements
+        on high-traffic pages produce the largest absolute gains.
+      </p>
+
+      <h2 className="font-heading text-2xl font-bold text-text">
+        Turning Traffic Into Revenue
+      </h2>
+      <p className="leading-relaxed">
+        Conversion optimization is not a one-time project. It is a continuous process of
+        measurement, hypothesis, testing, and iteration. The brands that invest in CRO
+        systematically &mdash; treating it as an ongoing discipline rather than an occasional
+        audit &mdash; consistently outperform those that focus exclusively on driving more traffic
+        to an unoptimized experience.
+      </p>
+      <p className="leading-relaxed">
+        At Eclipse Agency, we build e-commerce experiences optimized for conversion from day one.
+        From UX research and information architecture to checkout flow design and A/B testing
+        frameworks, we help brands in the Middle East and beyond turn their traffic into measurable
+        revenue growth. If your store is getting visitors but not sales, that is a problem we know
+        how to solve.
+      </p>
+    </>
+  ),
 };

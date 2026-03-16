@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="bg07" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a12"/><stop offset="100%" style="stop-color:#12101e"/>
+    </linearGradient>
+    <filter id="glow07"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="soft07"><feGaussianBlur stdDeviation="30" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg07)"/>
+  <g opacity="0.03" stroke="#fff" stroke-width="0.5">
+    <line x1="0" y1="112" x2="800" y2="112"/><line x1="0" y1="225" x2="800" y2="225"/><line x1="0" y1="337" x2="800" y2="337"/>
+    <line x1="200" y1="0" x2="200" y2="450"/><line x1="400" y1="0" x2="400" y2="450"/><line x1="600" y1="0" x2="600" y2="450"/>
+  </g>
+  <circle cx="400" cy="215" r="160" fill="#ff6b35" opacity="0.04" filter="url(#soft07)"/>
+  <!-- Search/magnifying glass abstract -->
+  <circle cx="370" cy="200" r="80" stroke="#ff6b35" stroke-width="1.5" opacity="0.3"/>
+  <circle cx="370" cy="200" r="60" stroke="#ff8c42" stroke-width="0.8" opacity="0.15" stroke-dasharray="4 4"/>
+  <line x1="427" y1="257" x2="500" y2="330" stroke="#ff6b35" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <!-- Rising graph lines -->
+  <polyline points="180,310 260,290 340,260 400,200 460,230 530,180 610,150" stroke="#ff6b35" stroke-width="1.5" opacity="0.35" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="180,330 260,320 340,300 400,250 460,270 530,230 610,200" stroke="#ff8c42" stroke-width="1" opacity="0.2" fill="none" stroke-dasharray="3 3"/>
+  <!-- Data points on graph -->
+  <circle cx="340" cy="260" r="4" fill="#ff6b35" opacity="0.7" filter="url(#glow07)"/>
+  <circle cx="400" cy="200" r="5" fill="#ff6b35" opacity="0.9" filter="url(#glow07)"/>
+  <circle cx="530" cy="180" r="4" fill="#ff8c42" opacity="0.7" filter="url(#glow07)"/>
+  <circle cx="610" cy="150" r="4" fill="#ff6b35" opacity="0.6" filter="url(#glow07)"/>
+  <!-- Arrow up -->
+  <line x1="620" y1="140" x2="620" y2="100" stroke="#ff6b35" stroke-width="1.5" opacity="0.5"/>
+  <polyline points="612,112 620,100 628,112" stroke="#ff6b35" stroke-width="1.5" fill="none" opacity="0.5"/>
+  <text x="400" y="405" font-family="Inter,sans-serif" font-size="11" font-weight="600" letter-spacing="3" fill="#ff6b35" text-anchor="middle" opacity="0.35">SEARCH ENGINE OPTIMIZATION</text>
+  <g stroke="#ff6b35" stroke-width="1" opacity="0.18">
+    <line x1="24" y1="24" x2="60" y2="24"/><line x1="24" y1="24" x2="24" y2="60"/>
+    <line x1="740" y1="426" x2="776" y2="426"/><line x1="776" y1="390" x2="776" y2="426"/>
+  </g>
+</svg>

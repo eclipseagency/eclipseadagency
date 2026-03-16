@@ -456,6 +456,66 @@ export const blogPosts = [
     image: "/images/blog/blog-06.svg",
     readTime: "8 min",
   },
+  {
+    slug: "seo-strategy-2025",
+    title: "SEO in 2025: What Actually Moves the Needle",
+    excerpt:
+      "Forget outdated tricks. Here's what search engines reward now — and how to build an SEO strategy that compounds over time.",
+    category: "SEO",
+    date: "2024-11-01",
+    image: "/images/blog/blog-07.svg",
+    readTime: "7 min",
+  },
+  {
+    slug: "rebranding-guide",
+    title: "When to Rebrand: A No-BS Guide for Growing Companies",
+    excerpt:
+      "Rebranding is expensive and risky — but sometimes it's the best investment you can make. Here's how to know when it's time.",
+    category: "Branding",
+    date: "2024-10-18",
+    image: "/images/blog/blog-08.svg",
+    readTime: "6 min",
+  },
+  {
+    slug: "ecommerce-conversion-optimization",
+    title: "E-Commerce Conversion Optimization: Beyond the Basics",
+    excerpt:
+      "You're getting traffic but not sales. Here's how to fix your funnel with data-driven UX changes that actually convert.",
+    category: "Web Development",
+    date: "2024-10-05",
+    image: "/images/blog/blog-09.svg",
+    readTime: "8 min",
+  },
+  {
+    slug: "motion-graphics-brand-storytelling",
+    title: "Motion Graphics: The Secret Weapon of Brand Storytelling",
+    excerpt:
+      "Static content can't compete. How motion design transforms brand narratives into unforgettable visual experiences.",
+    category: "Motion & Video",
+    date: "2024-09-22",
+    image: "/images/blog/blog-10.svg",
+    readTime: "5 min",
+  },
+  {
+    slug: "google-ads-roi-guide",
+    title: "Maximizing Google Ads ROI: A Data-Driven Playbook",
+    excerpt:
+      "Stop wasting ad budget. Learn the targeting, bidding, and creative strategies that top-performing campaigns use.",
+    category: "Digital Marketing",
+    date: "2024-09-10",
+    image: "/images/blog/blog-11.svg",
+    readTime: "9 min",
+  },
+  {
+    slug: "ux-design-principles-mena",
+    title: "UX Design Principles for MENA Audiences",
+    excerpt:
+      "Designing for the Middle East means more than RTL layouts. Cultural UX considerations that make or break digital products.",
+    category: "Design",
+    date: "2024-08-28",
+    image: "/images/blog/blog-12.svg",
+    readTime: "6 min",
+  },
 ];
 
 export const clientLogos = [

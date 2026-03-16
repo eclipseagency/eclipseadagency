@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="bg12" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a12"/><stop offset="100%" style="stop-color:#12101e"/>
+    </linearGradient>
+    <filter id="glow12"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="soft12"><feGaussianBlur stdDeviation="30" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg12)"/>
+  <g opacity="0.03" stroke="#fff" stroke-width="0.5">
+    <line x1="0" y1="112" x2="800" y2="112"/><line x1="0" y1="225" x2="800" y2="225"/><line x1="0" y1="337" x2="800" y2="337"/>
+    <line x1="200" y1="0" x2="200" y2="450"/><line x1="400" y1="0" x2="400" y2="450"/><line x1="600" y1="0" x2="600" y2="450"/>
+  </g>
+  <circle cx="400" cy="210" r="170" fill="#ff6b35" opacity="0.04" filter="url(#soft12)"/>
+  <!-- Two phone screens (LTR and RTL) -->
+  <!-- LTR phone -->
+  <rect x="230" y="120" width="120" height="210" rx="12" stroke="#ff6b35" stroke-width="1" opacity="0.3"/>
+  <rect x="240" y="145" width="100" height="170" rx="4" fill="rgba(255,107,53,0.03)"/>
+  <rect x="270" y="130" width="40" height="4" rx="2" fill="#ff6b35" opacity="0.2"/>
+  <!-- LTR content lines (left-aligned) -->
+  <rect x="250" y="160" width="70" height="6" rx="2" fill="#ff6b35" opacity="0.3"/>
+  <rect x="250" y="175" width="80" height="4" rx="2" fill="#fff" opacity="0.06"/>
+  <rect x="250" y="186" width="60" height="4" rx="2" fill="#fff" opacity="0.05"/>
+  <rect x="250" y="205" width="80" height="30" rx="4" fill="rgba(255,107,53,0.06)" stroke="#ff6b35" stroke-width="0.5" opacity="0.25"/>
+  <rect x="250" y="245" width="50" height="4" rx="2" fill="#fff" opacity="0.05"/>
+  <rect x="250" y="256" width="70" height="4" rx="2" fill="#fff" opacity="0.04"/>
+  <rect x="250" y="280" width="80" height="20" rx="4" fill="#ff6b35" opacity="0.25"/>
+  <!-- RTL phone -->
+  <rect x="450" y="120" width="120" height="210" rx="12" stroke="#ff8c42" stroke-width="1" opacity="0.35"/>
+  <rect x="460" y="145" width="100" height="170" rx="4" fill="rgba(255,140,66,0.03)"/>
+  <rect x="490" y="130" width="40" height="4" rx="2" fill="#ff8c42" opacity="0.25"/>
+  <!-- RTL content lines (right-aligned) -->
+  <rect x="490" y="160" width="60" height="6" rx="2" fill="#ff8c42" opacity="0.35"/>
+  <rect x="480" y="175" width="70" height="4" rx="2" fill="#fff" opacity="0.06"/>
+  <rect x="500" y="186" width="50" height="4" rx="2" fill="#fff" opacity="0.05"/>
+  <rect x="470" y="205" width="80" height="30" rx="4" fill="rgba(255,140,66,0.06)" stroke="#ff8c42" stroke-width="0.5" opacity="0.25"/>
+  <rect x="500" y="245" width="50" height="4" rx="2" fill="#fff" opacity="0.05"/>
+  <rect x="480" y="256" width="70" height="4" rx="2" fill="#fff" opacity="0.04"/>
+  <rect x="470" y="280" width="80" height="20" rx="4" fill="#ff8c42" opacity="0.3"/>
+  <!-- Bidirectional arrow between phones -->
+  <line x1="360" y1="225" x2="440" y2="225" stroke="#ff6b35" stroke-width="1" opacity="0.25"/>
+  <polyline points="368,220 360,225 368,230" stroke="#ff6b35" stroke-width="1" fill="none" opacity="0.25"/>
+  <polyline points="432,220 440,225 432,230" stroke="#ff6b35" stroke-width="1" fill="none" opacity="0.25"/>
+  <!-- User dots around -->
+  <circle cx="200" cy="225" r="4" fill="#ff6b35" opacity="0.4" filter="url(#glow12)"/>
+  <circle cx="600" cy="225" r="4" fill="#ff8c42" opacity="0.4" filter="url(#glow12)"/>
+  <circle cx="400" cy="370" r="4" fill="#ff6b35" opacity="0.35" filter="url(#glow12)"/>
+  <!-- Arabic hint -->
+  <text x="508" y="170" font-family="Inter,sans-serif" font-size="8" fill="#ff8c42" opacity="0.25" text-anchor="end">RTL</text>
+  <text x="295" y="170" font-family="Inter,sans-serif" font-size="8" fill="#ff6b35" opacity="0.2">LTR</text>
+  <text x="400" y="405" font-family="Inter,sans-serif" font-size="11" font-weight="600" letter-spacing="3" fill="#ff6b35" text-anchor="middle" opacity="0.35">UX DESIGN &amp; MENA</text>
+  <g stroke="#ff6b35" stroke-width="1" opacity="0.18">
+    <line x1="24" y1="24" x2="60" y2="24"/><line x1="24" y1="24" x2="24" y2="60"/>
+    <line x1="740" y1="426" x2="776" y2="426"/><line x1="776" y1="390" x2="776" y2="426"/>
+  </g>
+</svg>
