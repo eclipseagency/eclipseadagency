@@ -44,6 +44,7 @@ import { CTASection } from "@/components/home/CTASection";
 import { HomeFooter } from "@/components/home/HomeFooter";
 import { WhatsAppButton } from "@/components/home/WhatsAppButton";
 import { BackToTop } from "@/components/home/BackToTop";
+import { Header } from "@/components/layout/Header";
 
 /* ═══════════════════════════════════════════════════════════
    GSAP Scroll Animations Hook
@@ -185,6 +186,7 @@ export default function HomePage() {
   return (
     <>
       <RocketPreloader onComplete={onPreloaderComplete} />
+      <Header />
       <main id="main-content" className="bg-[#0a0a0a] text-[#e8e8e8] min-h-screen">
         <SpaceBackground />
         <ScrollRocket visible={preloaderDone} />
