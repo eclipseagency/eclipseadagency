@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans, Tajawal } from "next/font/google";
 
 import { siteConfig } from "@/data/site";
 import { CookieConsent } from "@/components/CookieConsent";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { LocaleProvider } from "@/i18n/LocaleContext";
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -12,6 +13,13 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   style: ["normal", "italic"],
   display: "swap",
   variable: "--font-plus-jakarta",
+});
+
+const tajawal = Tajawal({
+  subsets: ["arabic"],
+  weight: ["400", "500", "700", "800"],
+  display: "swap",
+  variable: "--font-tajawal",
 });
 
 export const viewport: Viewport = {
@@ -89,7 +97,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={plusJakartaSans.variable}>
+    <html lang="en" className={`${plusJakartaSans.variable} ${tajawal.variable}`}>
       <head>
         <link rel="alternate" type="application/rss+xml" title="Eclipse Agency Blog" href="https://www.eclipseagency.net/feed.xml" />
       </head>
@@ -227,9 +235,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             ]),
           }}
         />
-        <ErrorBoundary>
-          {children}
-        </ErrorBoundary>
+        <LocaleProvider>
+          <ErrorBoundary>
+            {children}
+          </ErrorBoundary>
+        </LocaleProvider>
         <CookieConsent />
         {/* Statcounter */}
         <script

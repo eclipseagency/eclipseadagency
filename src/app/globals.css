@@ -84,6 +84,33 @@ body {
   color: #fff;
 }
 
+/* ── RTL / Arabic support ── */
+html.ar {
+  direction: rtl;
+}
+
+html.ar body {
+  font-family: "Tajawal", var(--font-body);
+}
+
+html.ar .font-heading {
+  font-family: "Tajawal", var(--font-heading);
+}
+
+/* Flip directional elements in RTL */
+html.ar .rtl\:flip {
+  transform: scaleX(-1);
+}
+
+/* Ensure text alignment follows direction */
+html.ar .text-left {
+  text-align: right;
+}
+
+html.ar .text-right {
+  text-align: left;
+}
+
 /* ── Glass card — frosted glassmorphism ── */
 .glass {
   background: rgba(255, 255, 255, 0.04);

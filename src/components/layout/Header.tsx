@@ -8,12 +8,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/data/site";
 import { MenuIcon, XIcon, ChevronDownIcon } from "@/components/ui/Icons";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/i18n/LocaleContext";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const pathname = usePathname();
+  const { locale, setLocale, t } = useLocale();
+
+  const toggleLocale = () => setLocale(locale === "en" ? "ar" : "en");
 
   useEffect(() => {
     let ticking = false;
@@ -149,13 +153,20 @@ export function Header() {
           )}
         </nav>
 
-        {/* CTA + mobile toggle */}
+        {/* Lang toggle + CTA + mobile toggle */}
         <div className="relative z-10 flex items-center gap-3">
+          <button
+            onClick={toggleLocale}
+            className="rounded-full border border-white/10 px-3 py-1.5 text-[12px] font-semibold text-white/60 transition-all hover:border-white/20 hover:text-white"
+            aria-label={`Switch to ${locale === "en" ? "Arabic" : "English"}`}
+          >
+            {t("lang.toggle")}
+          </button>
           <Link
             href="/contact"
             className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-[#ff6b35] to-[#f7931e] px-5 py-2.5 text-[13px] font-semibold text-white transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,107,53,0.35)] lg:inline-flex"
           >
-            Get Started
+            {t("nav.getStarted")}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
