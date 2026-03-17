@@ -101,6 +101,7 @@ export function ProcessSection() {
               <button
                 key={step.number}
                 onClick={() => setActive(i)}
+                aria-label={t(`process.step${i + 1}.title`)}
                 className="relative z-10 flex flex-col items-center gap-3 group"
               >
                 {/* Node */}
@@ -117,7 +118,7 @@ export function ProcessSection() {
                 </div>
                 {/* Label */}
                 <span className={`text-xs font-semibold uppercase tracking-wider transition-colors duration-500 ${
-                  i === active ? "text-[#ff6b35]" : "text-white/25 group-hover:text-white/40"
+                  i === active ? "text-[#ff6b35]" : "text-white/40 group-hover:text-white/50"
                 }`}>
                   {t(`process.step${i + 1}.title`)}
                 </span>
@@ -147,6 +148,7 @@ export function ProcessSection() {
             <button
               key={step.number}
               onClick={() => setActive(i)}
+              aria-label={t(`process.step${i + 1}.title`)}
               className="text-left w-full"
             >
               <div

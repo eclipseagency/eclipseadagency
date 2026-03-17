@@ -58,7 +58,7 @@ export function AboutSection() {
               }} />
               <div className="text-[#ff6b35]/40">{stat.icon}</div>
               <p className="mt-3 font-heading text-2xl font-bold text-white md:text-3xl">{stat.value}</p>
-              <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-white/25">{t(stat.labelKey)}</p>
+              <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-white/40">{t(stat.labelKey)}</p>
             </div>
           ))}
         </div>

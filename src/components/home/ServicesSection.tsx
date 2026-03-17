@@ -40,7 +40,7 @@ export function ServicesSection() {
             const desc = prefix ? t(`${prefix}.desc`) : service.description;
 
             return (
-              <Link href={`/solutions/${service.slug}`} key={service.id} className="block">
+              <Link href={`/solutions/${service.slug}`} key={service.id} className="block" aria-label={title}>
                 <div
                   data-fade={i * 0.1}
                   className="group relative h-full rounded-2xl border border-white/[0.06] bg-[rgba(255,255,255,0.015)] p-6 md:p-8 transition-all duration-500 hover:border-[#ff6b35]/25 hover:bg-[rgba(255,107,53,0.03)] hover:translate-y-[-4px] hover:shadow-[0_20px_60px_rgba(255,107,53,0.08)]"
