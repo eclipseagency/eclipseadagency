@@ -32,7 +32,7 @@ const partners = [
 export function PartnersSection() {
   const { t } = useLocale();
   return (
-    <section id="partners" className="relative py-10 md:py-14 overflow-hidden">
+    <section id="partners" className="relative z-10 bg-[#0a0a0a] py-10 md:py-14 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
       <div className="relative mx-auto max-w-[1100px] px-5 md:px-8">
         <p className="text-center text-[11px] font-semibold uppercase tracking-[0.4em] text-white/20 mb-8 md:text-xs" data-fade>

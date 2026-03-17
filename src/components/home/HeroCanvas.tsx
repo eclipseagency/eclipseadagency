@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useMemo } from "react";
+import { useRef, useEffect, useCallback, useMemo } from "react";
 import Link from "next/link";
 import { useLocale } from "@/i18n/LocaleContext";
 
@@ -421,25 +421,100 @@ function OrbitingSolutions() {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   Journey Button - Auto-scrolls the page smoothly
+   ═══════════════════════════════════════════════════════════ */
+function JourneyButton() {
+  const { t } = useLocale();
+  const scrollingRef = useRef(false);
+  const animRef = useRef(0);
+
+  const startJourney = useCallback(() => {
+    if (scrollingRef.current) {
+      scrollingRef.current = false;
+      cancelAnimationFrame(animRef.current);
+      return;
+    }
+    scrollingRef.current = true;
+    const speed = 2.5;
+    let currentPos = window.scrollY;
+
+    function step() {
+      if (!scrollingRef.current) return;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (currentPos >= maxScroll - 2) {
+        scrollingRef.current = false;
+        return;
+      }
+      currentPos = Math.min(currentPos + speed, maxScroll);
+      window.scrollTo(0, currentPos);
+      animRef.current = requestAnimationFrame(step);
+    }
+    animRef.current = requestAnimationFrame(step);
+
+    const stop = () => {
+      scrollingRef.current = false;
+      cancelAnimationFrame(animRef.current);
+      window.removeEventListener("wheel", stop);
+      window.removeEventListener("touchstart", stop);
+      window.removeEventListener("keydown", stop);
+    };
+    window.addEventListener("wheel", stop, { once: true, passive: true });
+    window.addEventListener("touchstart", stop, { once: true, passive: true });
+    window.addEventListener("keydown", stop, { once: true });
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      scrollingRef.current = false;
+      cancelAnimationFrame(animRef.current);
+    };
+  }, []);
+
+  return (
+    <button
+      onClick={startJourney}
+      className="group flex flex-col items-center gap-2 cursor-pointer px-6 py-3 min-h-[48px]"
+    >
+      <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/30 group-hover:text-[#ff6b35]/70 transition-colors duration-500 md:text-xs">
+        {t("hero.journey")}
+      </span>
+      <div className="relative flex flex-col items-center gap-0.5">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+          className="text-white/20 group-hover:text-[#ff6b35]/60 transition-colors animate-bounce" style={{ animationDuration: "2s" }}>
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+          className="text-white/10 group-hover:text-[#ff6b35]/40 transition-colors animate-bounce" style={{ animationDuration: "2s", animationDelay: "0.15s" }}>
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </div>
+    </button>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════
    Hero CTA - Primary and secondary action buttons
    ═══════════════════════════════════════════════════════════ */
 function HeroCTA() {
   const { t } = useLocale();
   return (
-    <div className="absolute bottom-16 md:bottom-20 left-1/2 -translate-x-1/2 z-20 pointer-events-auto">
-      <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
-        <Link
-          href="/contact"
-          className="group relative px-7 py-3 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-[#ff6b35] to-[#f7931e] transition-all duration-300 hover:shadow-[0_0_25px_rgba(255,107,53,0.4)] hover:scale-105"
-        >
-          {t("hero.cta1")}
-        </Link>
-        <Link
-          href="/portfolio"
-          className="px-7 py-3 rounded-full text-sm font-medium text-white/50 border border-white/15 transition-all duration-300 hover:border-[#ff6b35]/30 hover:text-white/70"
-        >
-          {t("hero.cta2")}
-        </Link>
+    <div className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-20 pointer-events-auto">
+      <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
+          <Link
+            href="/contact"
+            className="group relative px-7 py-3 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-[#ff6b35] to-[#f7931e] transition-all duration-300 hover:shadow-[0_0_25px_rgba(255,107,53,0.4)] hover:scale-105"
+          >
+            {t("hero.cta1")}
+          </Link>
+          <Link
+            href="/portfolio"
+            className="px-7 py-3 rounded-full text-sm font-medium text-white/50 border border-white/15 transition-all duration-300 hover:border-[#ff6b35]/30 hover:text-white/70"
+          >
+            {t("hero.cta2")}
+          </Link>
+        </div>
+        <JourneyButton />
       </div>
     </div>
   );

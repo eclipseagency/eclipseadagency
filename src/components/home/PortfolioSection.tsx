@@ -42,7 +42,7 @@ export function PortfolioSection() {
   }, []);
 
   return (
-    <section id="portfolio" className="relative py-12 md:py-24 overflow-hidden">
+    <section id="portfolio" className="relative z-[2] py-12 md:py-24 overflow-hidden">
       {/* Top/bottom borders */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />

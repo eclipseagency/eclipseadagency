@@ -10,7 +10,7 @@ import { useLocale } from "@/i18n/LocaleContext";
 export function ServicesSection() {
   const { t, locale } = useLocale();
   return (
-    <section id="services" className="relative pt-8 pb-16 md:pt-12 md:pb-24 overflow-hidden">
+    <section id="services" className="relative z-10 bg-[#0a0a0a] pt-8 pb-16 md:pt-12 md:pb-24 overflow-hidden">
       {/* Left nebula */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[40%] h-[80%] pointer-events-none opacity-20" style={{
         background: "radial-gradient(ellipse at 10% 50%, rgba(255,107,53,0.1) 0%, transparent 60%)",
