@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLocale } from "@/i18n/LocaleContext";
 
 /* ═══════════════════════════════════════════════════════════
    SECTION: Portfolio - Cinematic horizontal scroll gallery
@@ -19,6 +20,7 @@ const portfolioVideos = [
 ];
 
 export function PortfolioSection() {
+  const { t } = useLocale();
   const progressRef = useRef<HTMLDivElement>(null);
 
   // Drive progress bar from ScrollTrigger onUpdate (only fires during scroll)
@@ -50,11 +52,11 @@ export function PortfolioSection() {
       <div className="relative mx-auto max-w-[1100px] px-5 md:px-8 mb-8 md:mb-14">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-[#ff6b35]/50 mb-3 md:text-xs" data-fade>Selected Work</p>
-            <h2 className="font-heading text-[clamp(1.8rem,4vw,3.5rem)] font-bold text-white" data-reveal>Featured Projects</h2>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-[#ff6b35]/50 mb-3 md:text-xs" data-fade>{t("portfolio.badge")}</p>
+            <h2 className="font-heading text-[clamp(1.8rem,4vw,3.5rem)] font-bold text-white" data-reveal>{t("portfolio.title")}</h2>
           </div>
           <Link href="/portfolio" className="inline-flex items-center gap-2 text-sm text-white/30 transition-colors hover:text-[#ff6b35]" data-fade="0.3">
-            View all projects
+            {t("portfolio.viewAll")}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
           </Link>
         </div>
@@ -119,6 +121,7 @@ function VideoCard({ video, index }: { video: { id: string; src: string; feature
   return (
     <div
       ref={cardRef}
+      aria-label={`Portfolio video: ${video.id}`}
       className={`shrink-0 transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
       style={{
         width: video.featured

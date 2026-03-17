@@ -57,8 +57,9 @@
   "process.step5.title": "Growth",
   "process.step5.desc": "Monitor performance, optimize continuously, and scale what works to maximize ROI.",
 
-  "portfolio.badge": "Our Work",
+  "portfolio.badge": "Selected Work",
   "portfolio.title": "Featured Projects",
+  "portfolio.viewAll": "View all projects",
 
   "testimonials.badge": "Client Stories",
   "testimonials.title": "Client Stories",
@@ -69,6 +70,7 @@
   "cta.subtitle": "Tell us about your project and get a free consultation.",
   "cta.button": "Book a Consultation",
   "cta.trust": "Trusted by 50+ brands across the Middle East",
+  "cta.whatsapp": "Chat with Us",
 
   "footer.description": "Full-service creative agency in Riyadh, specializing in branding, digital marketing, web development, production, 3D design, and animation.",
   "footer.quickLinks": "Quick Links",
@@ -77,6 +79,9 @@
   "footer.rights": "All rights reserved.",
   "footer.privacy": "Privacy Policy",
   "footer.terms": "Terms of Service",
+  "footer.whatsapp": "Chat on WhatsApp",
+  "footer.follow": "Follow Us",
+  "footer.hours": "Mon–Fri, 10:00 AM – 5:00 PM (AST)",
 
   "contact.badge": "Get in Touch",
   "contact.title": "Let's Build Something Great",
