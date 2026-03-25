@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/sections/PageHero";
-import { PortfolioGrid } from "@/components/sections/PortfolioGrid";
-import { CtaBanner } from "@/components/sections/CtaBanner";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { PortfolioContent } from "./PortfolioContent";
 
 export const metadata: Metadata = {
   title: "Portfolio - Our Creative Work & Case Studies | Eclipse Agency",
@@ -24,24 +21,5 @@ export const metadata: Metadata = {
 };
 
 export default function PortfolioPage() {
-  return (
-    <>
-      <PageHero
-        badge="Portfolio"
-        title="Our Creative Work"
-        subtitle="A curated selection of projects that showcase our creative range and the results we deliver for our clients."
-        illustration="/images/hero-pages/portfolio-hero.svg"
-      />
-      <div className="mx-auto max-w-7xl px-5 pt-10 md:px-8">
-        <Breadcrumbs
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Portfolio" },
-          ]}
-        />
-      </div>
-      <PortfolioGrid showCta={false} />
-      <CtaBanner />
-    </>
-  );
+  return <PortfolioContent />;
 }
