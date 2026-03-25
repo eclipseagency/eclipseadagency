@@ -1,39 +1,16 @@
 "use client";
 
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* Lenis smooth scroll removed — native CSS scroll-behavior: smooth is sufficient
-   and saves ~15KB of JS + animation frame overhead on mobile */
-
 /* ═══════════════════════════════════════════════════════════
-   Dynamic imports for heavy canvas components (SSR disabled)
+   Section imports
    ═══════════════════════════════════════════════════════════ */
-const HeroSection = dynamic(
-  () => import("@/components/home/HeroCanvas").then((m) => ({ default: m.HeroSection })),
-  { ssr: false }
-);
-const ScrollRocket = dynamic(
-  () => import("@/components/home/ScrollRocket").then((m) => ({ default: m.ScrollRocket })),
-  { ssr: false }
-);
-const RocketPreloader = dynamic(
-  () => import("@/components/home/RocketPreloader").then((m) => ({ default: m.RocketPreloader })),
-  { ssr: false }
-);
-const SpaceBackground = dynamic(
-  () => import("@/components/home/SpaceBackground").then((m) => ({ default: m.SpaceBackground })),
-  { ssr: false }
-);
-
-/* ═══════════════════════════════════════════════════════════
-   Static section imports
-   ═══════════════════════════════════════════════════════════ */
+import { HeroSection } from "@/components/home/HeroSection";
 import { AboutSection } from "@/components/home/AboutSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { PartnersSection } from "@/components/home/PartnersSection";
@@ -52,7 +29,7 @@ import { Header } from "@/components/layout/Header";
 function useScrollAnimations() {
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // ── Text reveals (transform + opacity only — avoids expensive clipPath repaints) ──
+      // ── Text reveals ──
       document.querySelectorAll("[data-reveal]").forEach((el) => {
         gsap.fromTo(el,
           { y: 60, opacity: 0 },
@@ -106,20 +83,11 @@ function useScrollAnimations() {
         });
       }
 
-      // ── Scale-in hero text ──
-      const heroText = document.querySelector("[data-hero-text]");
-      if (heroText) {
-        gsap.fromTo(heroText,
-          { scale: 0.85, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 1.8, ease: "power3.out", delay: 0.3 }
-        );
-      }
-
-      // ── Hero scroll zoom ──
+      // ── Hero scroll fade ──
       const heroSection = document.querySelector("[data-hero]");
       if (heroSection) {
         gsap.to("[data-hero-content]", {
-          y: -100, opacity: 0, scale: 0.95,
+          y: -80, opacity: 0, scale: 0.97,
           ease: "none",
           scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1 },
         });
@@ -179,31 +147,15 @@ function MagneticLink({
    PAGE
    ═══════════════════════════════════════════════════════════ */
 export default function HomePage() {
-  const [preloaderDone, setPreloaderDone] = useState(false);
-  const onPreloaderComplete = useCallback(() => setPreloaderDone(true), []);
   useScrollAnimations();
 
   return (
     <>
-      <RocketPreloader onComplete={onPreloaderComplete} />
       <Header />
-      <main id="main-content" className="bg-[#0a0a0a] text-[#e8e8e8] min-h-screen">
-        <SpaceBackground />
-        <ScrollRocket visible={preloaderDone} />
+      <main id="main-content" className="min-h-screen bg-[#0a0a0a] text-[#e8e8e8]">
         <WhatsAppButton />
         <BackToTop />
         <HeroSection />
-        <div className="relative z-30 hidden md:flex justify-center pointer-events-none select-none" style={{ marginBottom: "-160px" }}>
-          <video
-            src="/videos/tube-man.webm"
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="h-[380px] w-auto mix-blend-screen"
-            style={{ transform: "translateX(20px) translateY(-40px)" }}
-          />
-        </div>
         <AboutSection />
         <ServicesSection />
         <PartnersSection />
