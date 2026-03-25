@@ -485,6 +485,12 @@ select option:checked {
   initial-value: 0deg;
 }
 
+@keyframes scrollLine {
+  0% { transform: translateY(-100%); }
+  50% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
 @keyframes border-rotate {
   to { --border-angle: 360deg; }
 }
