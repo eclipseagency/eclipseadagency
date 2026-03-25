@@ -110,18 +110,25 @@ const services = [
 ];
 
 const clientLogos = [
-  { src: "/images/clients/client-01.svg", alt: "Client" },
-  { src: "/images/clients/client-02.svg", alt: "Client" },
-  { src: "/images/clients/client-03.svg", alt: "Client" },
-  { src: "/images/clients/client-04.svg", alt: "Client" },
-  { src: "/images/clients/client-05.svg", alt: "Client" },
-  { src: "/images/clients/client-06.svg", alt: "Client" },
-  { src: "/images/clients/client-07.svg", alt: "Client" },
-  { src: "/images/clients/client-08.svg", alt: "Client" },
-  { src: "/images/clients/partner-01.png", alt: "Client" },
-  { src: "/images/clients/partner-02.png", alt: "Client" },
-  { src: "/images/clients/partner-03.png", alt: "Client" },
-  { src: "/images/clients/partner-04.png", alt: "Client" },
+  { src: "/images/profile/clients/iq.png", alt: "IQ" },
+  { src: "/images/profile/clients/dual-sports.png", alt: "Dual Sports" },
+  { src: "/images/profile/clients/room.png", alt: "@Room" },
+  { src: "/images/profile/clients/velan.png", alt: "Velan" },
+  { src: "/images/profile/clients/dr-mohammed.png", alt: "Dr. Mohammed" },
+  { src: "/images/profile/clients/owl.png", alt: "OWL Bowling" },
+  { src: "/images/profile/clients/faris.png", alt: "Faris Group" },
+  { src: "/images/profile/clients/enter10.png", alt: "Enter10" },
+  { src: "/images/profile/clients/alphagraphics.png", alt: "AlphaGraphics" },
+  { src: "/images/profile/clients/aramco.png", alt: "Aramco" },
+  { src: "/images/profile/clients/unik.png", alt: "UNIK" },
+  { src: "/images/profile/clients/hni.webp", alt: "HNI" },
+  { src: "/images/profile/clients/rqeem.webp", alt: "Rqeem" },
+  { src: "/images/profile/clients/tips.webp", alt: "Tips on Pips" },
+  { src: "/images/profile/clients/koryo.webp", alt: "Koryo" },
+  { src: "/images/profile/clients/fares.webp", alt: "Fares" },
+  { src: "/images/profile/clients/notary.webp", alt: "Notary" },
+  { src: "/images/profile/clients/moein.webp", alt: "Moein" },
+  { src: "/images/profile/clients/alkhamees.webp", alt: "Al-Khamees" },
 ];
 
 const officeImages = [
@@ -134,18 +141,18 @@ const officeImages = [
 ];
 
 const socialMediaProjects = [
-  "Dima Dental Centers",
-  "UTD PADEL",
-  "FilmBox",
-  "Dual Sport",
-  "@Room",
-  "SaudiKenz",
-  "Owl Bowling",
-  "Faris Group",
-  "Enter10 Jeddah",
-  "Eclipse Agency",
-  "Nick Saudi",
-  "Al-Khamees Jewellery",
+  { name: "Dima Dental Centers", image: "/images/profile/social/dima.jpeg" },
+  { name: "UTD PADEL", image: "/images/profile/social/utd-padel.jpeg" },
+  { name: "FilmBox", image: "/images/profile/social/filmbox.jpeg" },
+  { name: "Dual Sport", image: "/images/profile/social/thumb-1.jpg" },
+  { name: "@Room", image: "/images/profile/social/thumb-2.jpg" },
+  { name: "SaudiKenz", image: "/images/profile/social/thumb-4.jpg" },
+  { name: "Owl Bowling", image: "/images/profile/social/thumb-11.jpg" },
+  { name: "Faris Group", image: "/images/profile/social/thumb-0.jpg" },
+  { name: "Enter10", image: "/images/profile/social/thumb2-1.jpg" },
+  { name: "Eclipse Agency", image: "/images/profile/social/sm-1.jpg" },
+  { name: "Nick Saudi", image: "/images/profile/social/sm-2.jpg" },
+  { name: "Al-Khamees", image: "/images/profile/social/sm-3.jpg" },
 ];
 
 const whatsappLink =
@@ -217,7 +224,7 @@ export default function ProfilePage() {
                 <path d="M22 11.08V12a10 10 0 11-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
               </svg>
             </div>
-            <h2 className="font-heading text-2xl font-bold">Our Mission</h2>
+            <h2 className="font-heading text-2xl font-bold">The Mission</h2>
             <p className="mt-3 text-text-secondary leading-relaxed">
               {aboutContent.mission}
             </p>
@@ -229,7 +236,7 @@ export default function ProfilePage() {
                 <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
               </svg>
             </div>
-            <h2 className="font-heading text-2xl font-bold">Our Vision</h2>
+            <h2 className="font-heading text-2xl font-bold">The Vision</h2>
             <p className="mt-3 text-text-secondary leading-relaxed">
               {aboutContent.vision}
             </p>
@@ -259,8 +266,8 @@ export default function ProfilePage() {
       {/* ── Services ── */}
       <SectionWrapper>
         <SectionHeader
-          badge="What We Do"
-          title="Our Services"
+          badge="Services"
+          title="What Eclipse Delivers"
           subtitle="End-to-end creative and digital solutions for businesses across Saudi Arabia and the Gulf."
         />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -285,8 +292,8 @@ export default function ProfilePage() {
       <SectionWrapper dark>
         <SectionHeader
           badge="Showreel 2024"
-          title="Experience Our Work"
-          subtitle="A highlight of our best projects from the past year."
+          title="Experience the Work"
+          subtitle="A highlight of the best projects from the past year."
         />
         <div className="mx-auto max-w-4xl">
           <ShowreelPlayer
@@ -312,7 +319,7 @@ export default function ProfilePage() {
         <SectionHeader
           badge="Branding & Visual Identity"
           title="Brands We&apos;ve Built"
-          subtitle="A selection of complete brand identities designed and developed by our team."
+          subtitle="Complete brand identities designed and developed by the Eclipse team."
         />
         <div className="grid gap-5 grid-cols-2 md:grid-cols-4">
           {portfolioItems.map((project) => (
@@ -357,13 +364,22 @@ export default function ProfilePage() {
           title="Brands We Manage"
           subtitle="Active social media accounts we create content for and manage daily."
         />
-        <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-          {socialMediaProjects.map((name) => (
+        <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
+          {socialMediaProjects.map((project) => (
             <div
-              key={name}
-              className="flex items-center justify-center rounded-xl border border-border bg-bg-card p-4 text-center transition-colors hover:border-primary/30"
+              key={project.name}
+              className="group relative aspect-square overflow-hidden rounded-xl border border-border"
             >
-              <p className="text-sm font-medium text-text">{name}</p>
+              <Image
+                src={project.image}
+                alt={project.name}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-3">
+                <p className="text-xs font-bold text-white">{project.name}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -373,31 +389,40 @@ export default function ProfilePage() {
       <SectionWrapper dark>
         <SectionHeader
           badge="Web Development"
-          title="Websites & Platforms We&apos;ve Built"
-          subtitle="Custom-built websites, web applications, and SaaS platforms."
+          title="Websites & Platforms"
+          subtitle="Custom-built websites, web applications, and SaaS platforms delivered by Eclipse."
         />
         <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {[
-            { name: "Eclipse Cloud ERP", url: "eclipsecloud.io" },
-            { name: "Jobly Philippines", url: "jobly.ph" },
-            { name: "Eclipse Agency", url: "eclipseagency.net" },
-            { name: "SaudiKenz", url: "saudikenz.com" },
-            { name: "Faris Group", url: "farisgroup.net" },
-            { name: "MDD", url: "mdd.sa" },
-            { name: "OWL Bowling", url: "owlbowling.com" },
-            { name: "Granite & More", url: "graniteandmore.co.uk" },
+            { name: "Eclipse Cloud ERP", url: "eclipsecloud.io", image: "/images/profile/webdev/web-01.jpeg" },
+            { name: "Jobly Philippines", url: "jobly.ph", image: "/images/profile/webdev/web-02.jpeg" },
+            { name: "Eclipse Agency", url: "eclipseagency.net", image: "/images/profile/webdev/web-03.jpeg" },
+            { name: "SaudiKenz", url: "saudikenz.com", image: "/images/profile/webdev/web-04.jpeg" },
+            { name: "Faris Group", url: "farisgroup.net", image: "/images/profile/webdev/web-05.jpeg" },
+            { name: "MDD", url: "mdd.sa", image: "/images/profile/webdev/web-06.jpeg" },
+            { name: "OWL Bowling", url: "owlbowling.com", image: "/images/profile/webdev/web-07.jpeg" },
+            { name: "Granite & More", url: "graniteandmore.co.uk", image: "/images/profile/webdev/web-08.jpeg" },
           ].map((site) => (
             <a
               key={site.url}
               href={`https://${site.url}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="group rounded-xl border border-border bg-bg-card p-5 transition-colors hover:border-primary/30"
+              className="group relative aspect-square overflow-hidden rounded-xl border border-border"
             >
-              <p className="font-heading text-base font-bold group-hover:text-primary transition-colors">
-                {site.name}
-              </p>
-              <p className="mt-1 text-xs text-text-muted">{site.url}</p>
+              <Image
+                src={site.image}
+                alt={site.name}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                <p className="font-heading text-sm font-bold text-white">
+                  {site.name}
+                </p>
+                <p className="text-[11px] text-white/60">{site.url}</p>
+              </div>
             </a>
           ))}
         </div>
@@ -407,7 +432,7 @@ export default function ProfilePage() {
       <SectionWrapper>
         <SectionHeader
           badge="Trusted By"
-          title="Our Clients & Partners"
+          title="Clients & Partners"
         />
         <div className="grid grid-cols-3 gap-6 md:grid-cols-4 lg:grid-cols-6">
           {clientLogos.map((logo, i) => (
@@ -430,9 +455,9 @@ export default function ProfilePage() {
       {/* ── Our Office ── */}
       <SectionWrapper dark>
         <SectionHeader
-          badge="Our Office"
+          badge="The Office"
           title="Where the Magic Happens"
-          subtitle="30+ creative professionals working from our dedicated office — with daily standups, attendance tracking, and real accountability."
+          subtitle="30+ creative professionals working from a dedicated office — with daily standups, attendance tracking, and real accountability."
         />
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {officeImages.map((src, i) => (
@@ -452,86 +477,60 @@ export default function ProfilePage() {
         </div>
       </SectionWrapper>
 
-      {/* ── Motion Reel ── */}
-      <SectionWrapper>
-        <SectionHeader
-          badge="Motion & Animation"
-          title="Our Motion Reel"
-          subtitle="Logo animations, motion graphics, reels, and promotional videos."
-        />
-        <div className="mx-auto max-w-4xl">
-          <div className="relative overflow-hidden rounded-2xl border border-border">
-            <div className="relative" style={{ paddingTop: "56.25%" }}>
-              <video
-                src="/videos/motion-reel.mp4"
-                className="absolute inset-0 h-full w-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-              />
-            </div>
-          </div>
-        </div>
-      </SectionWrapper>
-
       {/* ── About the Founder ── */}
       <SectionWrapper dark>
-        <div className="grid items-center gap-10 md:grid-cols-2">
-          <div>
-            <span className="mb-4 inline-block rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.15em] text-primary">
-              The Founder
-            </span>
-            <h2 className="font-heading text-3xl font-bold leading-tight md:text-4xl">
-              Mustafa Halawa
-            </h2>
-            <p className="mt-5 text-text-secondary leading-relaxed">
-              Eclipse Agency was founded by Mustafa Halawa in Riyadh, Saudi
-              Arabia. With over 8 years of experience in creative and digital
-              marketing, Mustafa built Eclipse from the ground up — assembling a
-              team of 30+ specialists who deliver world-class work from a
-              dedicated office.
-            </p>
-            <p className="mt-4 text-text-secondary leading-relaxed">
-              His vision: make premium creative services accessible to businesses
-              across the Gulf, without the premium price tag. Today, Eclipse
-              serves 50+ clients across Saudi Arabia, UAE, and beyond.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href={siteConfig.social.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full border border-border bg-bg-card px-4 py-2 text-xs font-medium text-text-secondary hover:text-primary transition-colors"
-              >
-                LinkedIn
-              </a>
-              <a
-                href={siteConfig.social.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full border border-border bg-bg-card px-4 py-2 text-xs font-medium text-text-secondary hover:text-primary transition-colors"
-              >
-                Instagram
-              </a>
-              <a
-                href={siteConfig.social.behance}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full border border-border bg-bg-card px-4 py-2 text-xs font-medium text-text-secondary hover:text-primary transition-colors"
-              >
-                Behance
-              </a>
+        <div className="mx-auto max-w-3xl">
+          <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
+            <div className="relative h-28 w-28 flex-shrink-0 overflow-hidden rounded-2xl border border-border">
+              <Image
+                src="/images/team-office/mustafa.jpeg"
+                alt="Mustafa Halawa — Founder of Eclipse Agency"
+                fill
+                className="object-cover"
+                sizes="112px"
+              />
             </div>
-          </div>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border">
-            <Image
-              src="/images/team-office/mustafa.jpeg"
-              alt="Mustafa Halawa — Founder of Eclipse Agency"
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
+            <div>
+              <span className="mb-2 inline-block rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-primary">
+                Founder
+              </span>
+              <h2 className="font-heading text-2xl font-bold">
+                Mustafa Halawa
+              </h2>
+              <p className="mt-3 text-text-secondary leading-relaxed">
+                Eclipse Agency was founded in Riyadh, Saudi Arabia. With over 8 years
+                in creative and digital marketing, Mustafa built Eclipse from the
+                ground up — assembling a team of 30+ specialists who deliver
+                world-class work from a dedicated office. The vision: make premium
+                creative services accessible to businesses across the Gulf.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <a
+                  href={siteConfig.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-border bg-bg-card px-4 py-2 text-xs font-medium text-text-secondary hover:text-primary transition-colors"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href={siteConfig.social.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-border bg-bg-card px-4 py-2 text-xs font-medium text-text-secondary hover:text-primary transition-colors"
+                >
+                  Instagram
+                </a>
+                <a
+                  href={siteConfig.social.behance}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-border bg-bg-card px-4 py-2 text-xs font-medium text-text-secondary hover:text-primary transition-colors"
+                >
+                  Behance
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </SectionWrapper>
