@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
+import { useLocale } from "@/i18n/LocaleContext";
 
 interface FormData {
   name: string;
@@ -21,25 +22,26 @@ const initialState: FormData = {
   message: "",
 };
 
-const serviceOptions = [
-  "Branding & Identity",
-  "Digital Marketing",
-  "Web & App Development",
-  "Production",
-  "3D Creations",
-  "Animation",
-  "Multiple Services",
-];
+const serviceOptionKeys = [
+  "contact.opt.branding",
+  "contact.opt.marketing",
+  "contact.opt.web",
+  "contact.opt.production",
+  "contact.opt.3d",
+  "contact.opt.animation",
+  "contact.opt.multiple",
+] as const;
 
-const budgetOptions = [
-  "Under $5,000",
-  "$5,000 – $15,000",
-  "$15,000 – $50,000",
-  "$50,000+",
-  "Not sure yet",
-];
+const budgetOptionKeys = [
+  "contact.budget.under5k",
+  "contact.budget.5to15k",
+  "contact.budget.15to50k",
+  "contact.budget.50kPlus",
+  "contact.budget.notSure",
+] as const;
 
 export function ContactForm() {
+  const { t } = useLocale();
   const [form, setForm] = useState<FormData>(initialState);
   const [honeypot, setHoneypot] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -47,10 +49,10 @@ export function ContactForm() {
 
   function validate(): boolean {
     const e: Partial<Record<keyof FormData, string>> = {};
-    if (!form.name.trim()) e.name = "Name is required";
-    if (!form.email.trim()) e.email = "Email is required";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Enter a valid email";
-    if (!form.message.trim()) e.message = "Message is required";
+    if (!form.name.trim()) e.name = t("contact.nameRequired");
+    if (!form.email.trim()) e.email = t("contact.emailRequired");
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = t("contact.emailInvalid");
+    if (!form.message.trim()) e.message = t("contact.messageRequired");
     setErrors(e);
     return Object.keys(e).length === 0;
   }
@@ -93,12 +95,12 @@ export function ContactForm() {
             <polyline points="20 6 9 17 4 12" />
           </svg>
         </div>
-        <h3 className="mb-2 font-heading text-2xl font-bold">Message sent!</h3>
+        <h3 className="mb-2 font-heading text-2xl font-bold">{t("contact.successTitle")}</h3>
         <p className="text-sm text-text-secondary">
-          We&apos;ll get back to you within 24 hours.
+          {t("contact.successDesc")}
         </p>
         <Button className="mt-6" onClick={() => setStatus("idle")} size="sm" variant="outline">
-          Send another
+          {t("contact.sendAnother")}
         </Button>
       </div>
     );
@@ -123,13 +125,13 @@ export function ContactForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className="mb-1.5 block text-xs font-bold uppercase tracking-[0.15em] text-text-muted">
-            Name *
+            {t("contact.name")} *
           </label>
           <input
             id="name"
             type="text"
             className={inputClasses}
-            placeholder="Your name"
+            placeholder={t("contact.namePlaceholder")}
             value={form.name}
             onChange={(e) => update("name", e.target.value)}
           />
@@ -138,13 +140,13 @@ export function ContactForm() {
 
         <div>
           <label htmlFor="email" className="mb-1.5 block text-xs font-bold uppercase tracking-[0.15em] text-text-muted">
-            Email *
+            {t("contact.email")} *
           </label>
           <input
             id="email"
             type="email"
             className={inputClasses}
-            placeholder="you@company.com"
+            placeholder={t("contact.emailPlaceholder")}
             value={form.email}
             onChange={(e) => update("email", e.target.value)}
           />
@@ -153,13 +155,13 @@ export function ContactForm() {
 
         <div>
           <label htmlFor="company" className="mb-1.5 block text-xs font-bold uppercase tracking-[0.15em] text-text-muted">
-            Company
+            {t("contact.company")}
           </label>
           <input
             id="company"
             type="text"
             className={inputClasses}
-            placeholder="Your company"
+            placeholder={t("contact.companyPlaceholder")}
             value={form.company}
             onChange={(e) => update("company", e.target.value)}
           />
@@ -167,7 +169,7 @@ export function ContactForm() {
 
         <div>
           <label htmlFor="service" className="mb-1.5 block text-xs font-bold uppercase tracking-[0.15em] text-text-muted">
-            Service
+            {t("contact.service")}
           </label>
           <select
             id="service"
@@ -175,10 +177,10 @@ export function ContactForm() {
             value={form.service}
             onChange={(e) => update("service", e.target.value)}
           >
-            <option value="">Select a service</option>
-            {serviceOptions.map((opt) => (
-              <option key={opt} value={opt}>
-                {opt}
+            <option value="">{t("contact.service")}</option>
+            {serviceOptionKeys.map((key) => (
+              <option key={key} value={t(key)}>
+                {t(key)}
               </option>
             ))}
           </select>
@@ -186,7 +188,7 @@ export function ContactForm() {
 
         <div className="sm:col-span-2">
           <label htmlFor="budget" className="mb-1.5 block text-xs font-bold uppercase tracking-[0.15em] text-text-muted">
-            Budget Range
+            {t("contact.budget")}
           </label>
           <select
             id="budget"
@@ -194,10 +196,10 @@ export function ContactForm() {
             value={form.budget}
             onChange={(e) => update("budget", e.target.value)}
           >
-            <option value="">Select a range</option>
-            {budgetOptions.map((opt) => (
-              <option key={opt} value={opt}>
-                {opt}
+            <option value="">{t("contact.budget")}</option>
+            {budgetOptionKeys.map((key) => (
+              <option key={key} value={t(key)}>
+                {t(key)}
               </option>
             ))}
           </select>
@@ -205,13 +207,13 @@ export function ContactForm() {
 
         <div className="sm:col-span-2">
           <label htmlFor="message" className="mb-1.5 block text-xs font-bold uppercase tracking-[0.15em] text-text-muted">
-            Message *
+            {t("contact.message")} *
           </label>
           <textarea
             id="message"
             rows={5}
             className={inputClasses}
-            placeholder="Tell us about your project..."
+            placeholder={t("contact.messagePlaceholder")}
             value={form.message}
             onChange={(e) => update("message", e.target.value)}
           />
@@ -227,14 +229,14 @@ export function ContactForm() {
             <line x1="9" y1="9" x2="15" y2="15" />
           </svg>
           <p className="flex-1 text-sm text-red-400">
-            Something went wrong. Please try again.
+            {t("contact.error")}
           </p>
           <button
             type="button"
             onClick={() => setStatus("idle")}
             className="text-xs font-semibold uppercase tracking-wider text-red-400 transition-colors hover:text-red-300"
           >
-            Dismiss
+            {t("contact.dismiss")}
           </button>
         </div>
       )}
@@ -247,10 +249,10 @@ export function ContactForm() {
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
               </svg>
-              Sending...
+              {t("contact.sending")}
             </span>
           ) : (
-            "Send Message"
+            t("contact.send")
           )}
         </Button>
       </div>
