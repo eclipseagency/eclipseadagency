@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/sections/PageHero";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { PrivacyHero } from "./PrivacyHero";
 
 export const metadata: Metadata = {
   title: "Privacy Policy - Eclipse Agency",
@@ -22,11 +22,7 @@ const LAST_UPDATED = "March 16, 2026";
 export default function PrivacyPolicyPage() {
   return (
     <>
-      <PageHero
-        badge="Legal"
-        title="Privacy Policy"
-        subtitle="Your privacy matters to us. This policy explains how Eclipse Agency collects, uses, and safeguards your information."
-      />
+      <PrivacyHero />
 
       {/* ── Introduction ── */}
       <SectionWrapper dark>

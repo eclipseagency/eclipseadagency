@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/sections/PageHero";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { TermsHero } from "./TermsHero";
 
 export const metadata: Metadata = {
   title: "Terms of Service - Eclipse Agency",
@@ -22,11 +22,7 @@ const LAST_UPDATED = "March 16, 2026";
 export default function TermsOfServicePage() {
   return (
     <>
-      <PageHero
-        badge="Legal"
-        title="Terms of Service"
-        subtitle="Please read these terms carefully before using our website or engaging our services."
-      />
+      <TermsHero />
 
       {/* ── Introduction ── */}
       <SectionWrapper dark>
