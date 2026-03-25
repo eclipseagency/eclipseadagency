@@ -5,6 +5,8 @@ import { PageHero } from "@/components/sections/PageHero";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Button } from "@/components/ui/Button";
+import { ShowreelPlayer } from "@/components/ui/ShowreelPlayer";
+import { portfolioItems } from "@/data/site";
 
 export const metadata: Metadata = {
   title:
@@ -122,16 +124,7 @@ const teamRoles = [
   },
 ];
 
-const portfolioProjects = [
-  { name: "Noon Studio", image: "/images/portfolio/noon-studio.webp" },
-  { name: "Sparkle", image: "/images/portfolio/sparkle.webp" },
-  { name: "Volume", image: "/images/portfolio/volume.webp" },
-  { name: "Grano de Cafe", image: "/images/portfolio/granodecafe.webp" },
-  { name: "ForCup", image: "/images/portfolio/forcup.webp" },
-  { name: "QATF", image: "/images/portfolio/qatf.webp" },
-  { name: "WAF", image: "/images/portfolio/waf.webp" },
-  { name: "Sunny Beans", image: "/images/portfolio/sunny-beans.webp" },
-];
+// Uses portfolioItems from site.ts
 
 const comparisonRows = [
   {
@@ -351,7 +344,7 @@ export default function RetainerPage() {
       {/* ── The Real Office ── */}
       <SectionWrapper dark>
         <SectionHeader
-          badge="Our Office"
+          badge="The Office"
           title="See Where Your Team Works"
           subtitle="A real office with real people — attendance tracking, daily standups, and direct communication with you."
         />
@@ -397,29 +390,34 @@ export default function RetainerPage() {
       {/* ── Portfolio ── */}
       <SectionWrapper>
         <SectionHeader
-          badge="Our Work"
-          title="Brands We&apos;ve Built"
-          subtitle="A selection of branding and creative projects delivered by our team."
+          badge="Portfolio"
+          title="Brands Eclipse Has Built"
+          subtitle="A selection of branding and creative projects delivered by the team."
         />
-        <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
-          {portfolioProjects.map((project) => (
-            <div
-              key={project.name}
+        <div className="grid gap-5 grid-cols-2 md:grid-cols-4">
+          {portfolioItems.map((project) => (
+            <Link
+              key={project.id}
+              href={project.href || "#"}
+              target={project.target}
               className="group relative aspect-square overflow-hidden rounded-xl border border-border"
             >
               <Image
                 src={project.image}
-                alt={project.name}
+                alt={project.title}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
                 sizes="(max-width: 768px) 50vw, 25vw"
               />
-              <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/70 via-transparent to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <div className="absolute inset-0 flex flex-col items-start justify-end bg-gradient-to-t from-black/80 via-black/20 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <span className="mb-1 text-[10px] font-bold uppercase tracking-widest text-primary">
+                  {project.category}
+                </span>
                 <p className="font-heading text-sm font-bold text-white">
-                  {project.name}
+                  {project.title}
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         <div className="mt-8 text-center">
@@ -429,52 +427,101 @@ export default function RetainerPage() {
         </div>
       </SectionWrapper>
 
+      {/* ── Showreel ── */}
+      <SectionWrapper dark>
+        <SectionHeader
+          badge="Showreel"
+          title="See the Work in Action"
+        />
+        <div className="mx-auto max-w-4xl">
+          <ShowreelPlayer
+            videoUrl="/videos/showreel.mp4"
+            thumbnailUrl="/images/about/cover-4.webp"
+            title="Eclipse Agency — Showreel 2024"
+          />
+        </div>
+      </SectionWrapper>
+
+      {/* ── Clients ── */}
+      <SectionWrapper>
+        <SectionHeader
+          badge="Trusted By"
+          title="Clients & Partners"
+        />
+        <div className="grid grid-cols-3 gap-6 md:grid-cols-4 lg:grid-cols-6">
+          {[
+            { src: "/images/profile/clients/iq.png", alt: "IQ" },
+            { src: "/images/profile/clients/aramco.png", alt: "Aramco" },
+            { src: "/images/profile/clients/faris.png", alt: "Faris Group" },
+            { src: "/images/profile/clients/enter10.png", alt: "Enter10" },
+            { src: "/images/profile/clients/owl.png", alt: "OWL Bowling" },
+            { src: "/images/profile/clients/dual-sports.png", alt: "Dual Sports" },
+            { src: "/images/profile/clients/alphagraphics.png", alt: "AlphaGraphics" },
+            { src: "/images/profile/clients/unik.png", alt: "UNIK" },
+            { src: "/images/profile/clients/hni.webp", alt: "HNI" },
+            { src: "/images/profile/clients/rqeem.webp", alt: "Rqeem" },
+            { src: "/images/profile/clients/tips.webp", alt: "Tips on Pips" },
+            { src: "/images/profile/clients/koryo.webp", alt: "Koryo" },
+          ].map((logo, i) => (
+            <div
+              key={i}
+              className="flex items-center justify-center rounded-xl border border-border bg-bg-card p-5"
+            >
+              <Image
+                src={logo.src}
+                alt={logo.alt}
+                width={100}
+                height={60}
+                className="h-10 w-auto object-contain opacity-60 transition-opacity hover:opacity-100"
+              />
+            </div>
+          ))}
+        </div>
+      </SectionWrapper>
+
       {/* ── About Eclipse ── */}
       <SectionWrapper dark>
-        <div className="grid items-center gap-10 md:grid-cols-2">
-          <div>
-            <span className="mb-4 inline-block rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.15em] text-primary">
-              About Eclipse
-            </span>
-            <h2 className="font-heading text-3xl font-bold leading-tight md:text-4xl">
-              We Built This for Ourselves First
-            </h2>
-            <p className="mt-5 text-text-secondary leading-relaxed">
-              Eclipse Agency was founded by Mustafa Halawa in Riyadh, Saudi
-              Arabia. The entire company runs on the same model — a
-              dedicated team in Egypt delivering world-class creative and tech
-              work.
-            </p>
-            <p className="mt-4 text-text-secondary leading-relaxed">
-              This isn&apos;t a theory or an experiment. We&apos;ve delivered
-              200+ projects for 50+ clients across Saudi Arabia, UAE, and the
-              Gulf using this exact system. Our team of 30+ specialists works
-              from a real office with real accountability.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              {[
-                "Riyadh, Saudi Arabia",
-                "8+ Years",
-                "50+ Clients",
-                "200+ Projects",
-              ].map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-border bg-bg-card px-4 py-2 text-xs font-medium text-text-secondary"
-                >
-                  {tag}
-                </span>
-              ))}
+        <div className="mx-auto max-w-3xl">
+          <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
+            <div className="relative h-28 w-28 flex-shrink-0 overflow-hidden rounded-2xl border border-border">
+              <Image
+                src="/images/team-office/mustafa.jpeg"
+                alt="Mustafa Halawa — Founder of Eclipse Agency"
+                fill
+                className="object-cover"
+                sizes="112px"
+              />
             </div>
-          </div>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border">
-            <Image
-              src="/images/team-office/mustafa.jpeg"
-              alt="Mustafa Halawa — Founder of Eclipse Agency"
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
+            <div>
+              <span className="mb-2 inline-block rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-primary">
+                Founder
+              </span>
+              <h2 className="font-heading text-2xl font-bold">
+                Mustafa Halawa
+              </h2>
+              <p className="mt-3 text-text-secondary leading-relaxed">
+                Eclipse Agency was founded in Riyadh, Saudi Arabia. The entire
+                company runs on the same model — a dedicated team in Egypt
+                delivering world-class creative and tech work. 200+ projects
+                delivered, 50+ clients across Saudi Arabia, UAE, and the Gulf.
+                This isn&apos;t theory — it&apos;s a proven system.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                {[
+                  "Riyadh, Saudi Arabia",
+                  "8+ Years",
+                  "50+ Clients",
+                  "200+ Projects",
+                ].map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-border bg-bg-card px-4 py-2 text-xs font-medium text-text-secondary"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </SectionWrapper>
