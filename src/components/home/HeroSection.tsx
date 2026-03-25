@@ -1,15 +1,12 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { useLocale } from "@/i18n/LocaleContext";
 
 export function HeroSection() {
   const { t } = useLocale();
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(false);
-
   useEffect(() => {
     const tl = gsap.timeline({ delay: 0.15 });
     tl.fromTo(
@@ -49,12 +46,6 @@ export function HeroSection() {
       );
     return () => { tl.kill(); };
   }, []);
-
-  const handlePlay = () => {
-    if (!videoRef.current) return;
-    videoRef.current.play();
-    setPlaying(true);
-  };
 
   return (
     <section
@@ -137,41 +128,17 @@ export function HeroSection() {
           data-parallax="25"
           className="mt-14 w-full max-w-[900px] md:mt-20"
         >
-          <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] bg-black/50"
+          <div className="relative overflow-hidden rounded-2xl border border-white/[0.06]"
             style={{ aspectRatio: "16/9" }}
           >
             <video
-              ref={videoRef}
               src="/videos/showreel.mp4"
+              autoPlay
               muted
               loop
               playsInline
-              preload="metadata"
               className="absolute inset-0 h-full w-full object-cover"
             />
-            {!playing && (
-              <button
-                type="button"
-                onClick={handlePlay}
-                className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-black/40 transition-colors duration-300 hover:bg-black/25"
-                aria-label="Play showreel"
-              >
-                <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-sm transition-transform duration-300 hover:scale-110 md:h-20 md:w-20">
-                  <svg
-                    width="22"
-                    height="22"
-                    viewBox="0 0 24 24"
-                    fill="white"
-                    className="ml-1"
-                  >
-                    <polygon points="5 3 19 12 5 21 5 3" />
-                  </svg>
-                </div>
-                <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-white/40">
-                  Watch Showreel
-                </span>
-              </button>
-            )}
           </div>
         </div>
       </div>
