@@ -111,6 +111,50 @@ html.ar .text-right {
   text-align: left;
 }
 
+/* RTL spacing fixes */
+html.ar .ml-auto {
+  margin-left: unset;
+  margin-right: auto;
+}
+
+html.ar .mr-auto {
+  margin-right: unset;
+  margin-left: auto;
+}
+
+/* Keep horizontal scroll LTR in RTL mode */
+html.ar [data-h-track] {
+  direction: ltr;
+}
+
+/* RTL gradient text fix */
+html.ar .bg-gradient-to-r {
+  --tw-gradient-direction: to left;
+}
+
+/* Fix letter spacing for Arabic (too wide looks wrong) */
+html.ar [class*="tracking-["] {
+  letter-spacing: 0.05em;
+}
+
+html.ar [class*="tracking-tight"] {
+  letter-spacing: 0;
+}
+
+/* Arabic line height adjustment */
+html.ar h1, html.ar h2, html.ar h3 {
+  line-height: 1.3;
+}
+
+/* Fix border radius for RTL card hover effects */
+html.ar .rounded-l-xl {
+  border-radius: 0 0.75rem 0.75rem 0;
+}
+
+html.ar .rounded-r-xl {
+  border-radius: 0.75rem 0 0 0.75rem;
+}
+
 /* ── Glass card — frosted glassmorphism ── */
 .glass {
   background: rgba(255, 255, 255, 0.04);

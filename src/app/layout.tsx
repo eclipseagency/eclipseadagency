@@ -100,6 +100,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${plusJakartaSans.variable} ${tajawal.variable}`}>
       <head>
         <link rel="alternate" type="application/rss+xml" title="Eclipse Agency Blog" href="https://www.eclipseagency.net/feed.xml" />
+        <link rel="alternate" hrefLang="en" href="https://www.eclipseagency.net" />
+        <link rel="alternate" hrefLang="ar" href="https://www.eclipseagency.net?lang=ar" />
+        <link rel="alternate" hrefLang="x-default" href="https://www.eclipseagency.net" />
       </head>
       <body className="min-h-screen bg-bg font-body text-text antialiased">
         {/* Skip to content — accessibility for keyboard users */}

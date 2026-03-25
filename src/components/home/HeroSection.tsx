@@ -105,7 +105,7 @@ export function HeroSection() {
           data-hero-label
           className="mb-8 text-[10px] font-medium uppercase tracking-[0.5em] text-white/30 md:mb-10 md:text-[11px]"
         >
-          Creative Agency &mdash; Riyadh
+          {t("hero.label")}
         </p>
 
         {/* Headline — split into two lines for impact */}
@@ -115,7 +115,7 @@ export function HeroSection() {
             className="font-heading font-extrabold leading-[0.9] tracking-[-0.03em] text-white"
             style={{ fontSize: "clamp(3.5rem, 12vw, 10rem)" }}
           >
-            From Shadow
+            {t("hero.line1")}
           </h1>
         </div>
         <div className="overflow-hidden">
@@ -125,7 +125,7 @@ export function HeroSection() {
             style={{ fontSize: "clamp(3.5rem, 12vw, 10rem)" }}
           >
             <span className="bg-gradient-to-r from-[#ff6b35] to-[#f7931e] bg-clip-text text-transparent">
-              to Spotlight
+              {t("hero.line2")}
             </span>
           </h1>
         </div>
@@ -187,7 +187,7 @@ export function HeroSection() {
         className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2"
       >
         <span className="text-[9px] font-medium uppercase tracking-[0.3em] text-white/20">
-          Scroll
+          {t("hero.scroll")}
         </span>
         <div className="h-10 w-[1px] overflow-hidden bg-white/10">
           <div className="h-full w-full animate-[scrollLine_1.5s_ease-in-out_infinite] bg-gradient-to-b from-white/50 to-transparent" />
