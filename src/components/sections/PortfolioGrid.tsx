@@ -6,7 +6,7 @@ import Link from "next/link";
 import { portfolioItems } from "@/data/site";
 
 /* ═══════════════════════════════════════════════════════
-   Portfolio showcase items — bento grid layout
+   Portfolio showcase items
    ═══════════════════════════════════════════════════════ */
 const portfolioVideos = [
   { id: "v1", src: "/videos/portfolio-1.mp4", label: "Brand Identity" },
@@ -20,31 +20,22 @@ const portfolioVideos = [
 ];
 
 /* ═══════════════════════════════════════════════════════
-   Lazy Video Card with hover play & label
+   Video Card
    ═══════════════════════════════════════════════════════ */
 function VideoCard({
   video,
   index,
-  className = "",
-  aspect = "portrait",
+  tall = false,
 }: {
   video: (typeof portfolioVideos)[number];
   index: number;
-  className?: string;
-  aspect?: "portrait" | "landscape" | "square";
+  tall?: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
   const [visible, setVisible] = useState(false);
   const [playing, setPlaying] = useState(false);
-
-  const aspectClass =
-    aspect === "landscape"
-      ? "aspect-video"
-      : aspect === "square"
-        ? "aspect-square"
-        : "aspect-[4/5]";
 
   useEffect(() => {
     const el = cardRef.current;
@@ -63,7 +54,7 @@ function VideoCard({
           setPlaying(false);
         }
       },
-      { threshold: 0.1, rootMargin: "200px" }
+      { threshold: 0.05, rootMargin: "300px" }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -81,13 +72,16 @@ function VideoCard({
   return (
     <div
       ref={cardRef}
-      className={`group relative overflow-hidden rounded-2xl transition-all duration-700 ease-out cursor-pointer ${
-        visible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-6 scale-[0.97]"
-      } ${className}`}
+      className={`group relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-700 ease-out ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      }`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className={`relative overflow-hidden ${aspectClass}`}>
+      <div
+        className="relative overflow-hidden"
+        style={{ paddingTop: tall ? "130%" : "100%" }}
+      >
         <video
           ref={videoRef}
           src={loaded ? video.src : undefined}
@@ -98,10 +92,10 @@ function VideoCard({
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
         />
 
-        {/* Dark overlay — fades on play */}
+        {/* Dark overlay */}
         <div
-          className={`absolute inset-0 bg-black/40 transition-opacity duration-500 ${
-            playing ? "opacity-0" : "opacity-100"
+          className={`absolute inset-0 transition-opacity duration-500 ${
+            playing ? "bg-black/10" : "bg-black/40"
           }`}
         />
 
@@ -118,24 +112,21 @@ function VideoCard({
           </div>
         </div>
 
-        {/* Label badge */}
+        {/* Label */}
         <div className="absolute top-4 left-4 z-10">
           <span className="rounded-full bg-black/50 px-3 py-1 text-[11px] font-medium tracking-wide text-white/80 backdrop-blur-md border border-white/[0.08]">
             {video.label}
           </span>
         </div>
 
-        {/* Number index */}
-        <div className="absolute bottom-4 right-4 z-10">
-          <span className="font-heading text-[40px] font-bold leading-none text-white/[0.06] transition-all duration-500 group-hover:text-white/[0.12]">
+        {/* Number */}
+        <div className="absolute bottom-4 right-5 z-10">
+          <span className="font-heading text-[42px] font-bold leading-none text-white/[0.06] transition-colors duration-500 group-hover:text-white/[0.12]">
             {String(index + 1).padStart(2, "0")}
           </span>
         </div>
 
-        {/* Bottom gradient */}
-        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
-
-        {/* Hover glow border */}
+        {/* Border glow */}
         <div className="absolute inset-0 rounded-2xl border border-white/[0.06] transition-all duration-500 group-hover:border-[#ff6b35]/25 group-hover:shadow-[inset_0_0_40px_rgba(255,107,53,0.06)]" />
       </div>
     </div>
@@ -164,7 +155,7 @@ function BrandCard({
           setTimeout(() => setVisible(true), index * 70);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.05, rootMargin: "200px" }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -216,73 +207,9 @@ function BrandCard({
                 </svg>
               </div>
             </div>
-
-            {/* Hover glow */}
-            <div className="absolute inset-0 rounded-2xl border border-transparent transition-all duration-500 group-hover:border-[#ff6b35]/20" />
           </div>
         </div>
       </Wrapper>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════
-   Stat block for the bento grid
-   ═══════════════════════════════════════════════════════ */
-function StatBlock({ visible }: { visible: boolean }) {
-  return (
-    <div
-      className={`flex h-full flex-col justify-between rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 md:p-8 transition-all duration-700 ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-      }`}
-    >
-      <div>
-        <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#ff6b35]/60">
-          Since 2020
-        </span>
-        <h3 className="mt-3 font-heading text-3xl font-bold text-white md:text-4xl lg:text-5xl">
-          50+
-        </h3>
-        <p className="mt-1 text-sm text-white/30">Projects Delivered</p>
-      </div>
-      <div className="mt-6 space-y-4">
-        <div>
-          <div className="flex items-center justify-between text-xs text-white/40 mb-1.5">
-            <span>Branding</span>
-            <span>40%</span>
-          </div>
-          <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
-            <div className="h-full w-[40%] rounded-full bg-[#ff6b35]/60" />
-          </div>
-        </div>
-        <div>
-          <div className="flex items-center justify-between text-xs text-white/40 mb-1.5">
-            <span>Motion & Video</span>
-            <span>30%</span>
-          </div>
-          <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
-            <div className="h-full w-[30%] rounded-full bg-[#ff6b35]/40" />
-          </div>
-        </div>
-        <div>
-          <div className="flex items-center justify-between text-xs text-white/40 mb-1.5">
-            <span>Web & Apps</span>
-            <span>20%</span>
-          </div>
-          <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
-            <div className="h-full w-[20%] rounded-full bg-[#ff6b35]/30" />
-          </div>
-        </div>
-        <div>
-          <div className="flex items-center justify-between text-xs text-white/40 mb-1.5">
-            <span>Social Media</span>
-            <span>10%</span>
-          </div>
-          <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
-            <div className="h-full w-[10%] rounded-full bg-[#ff6b35]/20" />
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
@@ -296,58 +223,59 @@ interface PortfolioGridProps {
 }
 
 export function PortfolioGrid({ showCta = true }: PortfolioGridProps) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [headerVisible, setHeaderVisible] = useState(false);
-
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) setHeaderVisible(true);
-      },
-      { threshold: 0.05 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
   return (
-    <section ref={sectionRef} className="relative py-12 md:py-20">
+    <section className="relative py-12 md:py-20">
       <div className="mx-auto max-w-[1400px] px-4 md:px-8">
 
-        {/* ── Bento Grid: Row 1 — Featured hero row ── */}
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4 lg:gap-5">
-          {/* Big featured video — spans 2 cols, 2 rows on desktop */}
-          <div className="col-span-2 row-span-2">
-            <VideoCard
-              video={portfolioVideos[0]}
-              index={0}
-              aspect="portrait"
-              className="h-full [&>div]:!aspect-auto [&>div]:h-full"
-            />
+        {/* ── Row 1: 2-col featured + 2 stacked + stat block ── */}
+        <div className="grid grid-cols-2 gap-3 md:gap-4 lg:gap-5 md:grid-cols-12">
+          {/* Featured large video */}
+          <div className="col-span-2 md:col-span-5">
+            <VideoCard video={portfolioVideos[0]} index={0} tall />
           </div>
-
-          {/* Top-right video */}
-          <div className="col-span-1">
-            <VideoCard video={portfolioVideos[1]} index={1} aspect="square" />
+          {/* Two stacked squares */}
+          <div className="col-span-1 md:col-span-3 flex flex-col gap-3 md:gap-4 lg:gap-5">
+            <VideoCard video={portfolioVideos[1]} index={1} />
+            <VideoCard video={portfolioVideos[2]} index={2} />
           </div>
-
-          {/* Stat block */}
-          <div className="col-span-1">
-            <StatBlock visible={headerVisible} />
-          </div>
-
-          {/* Second row right videos */}
-          <div className="col-span-1">
-            <VideoCard video={portfolioVideos[2]} index={2} aspect="square" />
-          </div>
-          <div className="col-span-1">
-            <VideoCard video={portfolioVideos[3]} index={3} aspect="square" />
+          {/* Stat block + small video */}
+          <div className="col-span-1 md:col-span-4 flex flex-col gap-3 md:gap-4 lg:gap-5">
+            {/* Stats */}
+            <div className="flex-1 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 md:p-7">
+              <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#ff6b35]/60">
+                Since 2020
+              </span>
+              <h3 className="mt-2 font-heading text-4xl font-bold text-white md:text-5xl">
+                50+
+              </h3>
+              <p className="mt-1 text-sm text-white/30">Projects Delivered</p>
+              <div className="mt-5 space-y-3">
+                {[
+                  { name: "Branding", pct: 40 },
+                  { name: "Motion & Video", pct: 30 },
+                  { name: "Web & Apps", pct: 20 },
+                  { name: "Social Media", pct: 10 },
+                ].map((s) => (
+                  <div key={s.name}>
+                    <div className="flex items-center justify-between text-[11px] text-white/35 mb-1">
+                      <span>{s.name}</span>
+                      <span>{s.pct}%</span>
+                    </div>
+                    <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
+                      <div
+                        className="h-full rounded-full bg-[#ff6b35]"
+                        style={{ width: `${s.pct}%`, opacity: 0.3 + s.pct / 100 }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <VideoCard video={portfolioVideos[3]} index={3} />
           </div>
         </div>
 
-        {/* ── Marquee text divider ── */}
+        {/* ── Marquee divider ── */}
         <div className="my-8 md:my-12 overflow-hidden">
           <div className="flex items-center gap-8 animate-marquee whitespace-nowrap">
             {[...Array(3)].map((_, r) => (
@@ -355,7 +283,7 @@ export function PortfolioGrid({ showCta = true }: PortfolioGridProps) {
                 {["Branding", "Web Design", "Social Media", "Motion Graphics", "Digital Marketing", "3D Design", "Production", "Animation"].map((s) => (
                   <span key={`${r}-${s}`} className="flex items-center gap-4 text-white/[0.04] font-heading text-3xl md:text-5xl font-bold uppercase tracking-wider">
                     {s}
-                    <svg width="20" height="20" viewBox="0 0 20 20" className="text-[#ff6b35]/20">
+                    <svg width="16" height="16" viewBox="0 0 20 20" className="text-[#ff6b35]/20">
                       <circle cx="10" cy="10" r="4" fill="currentColor" />
                     </svg>
                   </span>
@@ -365,32 +293,15 @@ export function PortfolioGrid({ showCta = true }: PortfolioGridProps) {
           </div>
         </div>
 
-        {/* ── Row 2: Remaining videos ── */}
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4 lg:gap-5">
-          <div className="col-span-1">
-            <VideoCard video={portfolioVideos[4]} index={4} aspect="portrait" />
-          </div>
-          <div className="col-span-1">
-            <VideoCard video={portfolioVideos[5]} index={5} aspect="portrait" />
-          </div>
-          <div className="col-span-2 row-span-1">
-            <VideoCard
-              video={portfolioVideos[6]}
-              index={6}
-              aspect="landscape"
-              className="h-full [&>div]:!aspect-auto [&>div]:h-full"
-            />
-          </div>
-          <div className="col-span-2 md:col-span-4">
-            <VideoCard
-              video={portfolioVideos[7]}
-              index={7}
-              aspect="landscape"
-            />
-          </div>
+        {/* ── Row 2: 4-col grid ── */}
+        <div className="grid grid-cols-2 gap-3 md:gap-4 lg:gap-5 md:grid-cols-4">
+          <VideoCard video={portfolioVideos[4]} index={4} tall />
+          <VideoCard video={portfolioVideos[5]} index={5} />
+          <VideoCard video={portfolioVideos[6]} index={6} tall />
+          <VideoCard video={portfolioVideos[7]} index={7} />
         </div>
 
-        {/* ── Section divider with text ── */}
+        {/* ── Section divider ── */}
         <div className="my-14 md:my-20 flex items-center gap-6">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
           <div className="text-center">
@@ -404,8 +315,8 @@ export function PortfolioGrid({ showCta = true }: PortfolioGridProps) {
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
         </div>
 
-        {/* ── Brand case studies grid ── */}
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-4 md:gap-4 lg:gap-5">
+        {/* ── Brand case studies ── */}
+        <div className="grid grid-cols-2 gap-3 md:gap-4 lg:gap-5 lg:grid-cols-4">
           {portfolioItems.map((item, i) => (
             <BrandCard key={item.id} item={item} index={i} />
           ))}
