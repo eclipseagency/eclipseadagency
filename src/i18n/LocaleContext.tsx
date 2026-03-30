@@ -34,12 +34,11 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const [translations, setTranslations] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    // Priority: URL param > localStorage > browser language > default
+    // Read from localStorage or URL param
     const params = new URLSearchParams(window.location.search);
     const urlLang = params.get("lang") as Locale | null;
     const stored = localStorage.getItem("locale") as Locale | null;
-    const browserLang = navigator.language?.startsWith("ar") ? "ar" as Locale : null;
-    const initial = urlLang || stored || browserLang || defaultLocale;
+    const initial = urlLang || stored || defaultLocale;
     setLocaleState(initial);
   }, []);
 
