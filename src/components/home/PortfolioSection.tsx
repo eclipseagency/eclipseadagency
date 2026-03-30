@@ -64,7 +64,7 @@ export function PortfolioSection() {
       </div>
 
       {/* Horizontal scroll - GSAP driven */}
-      <div data-h-scroll className="relative h-[45vh] min-h-[280px] md:h-[75vh] md:min-h-[500px]">
+      <div data-h-scroll className="relative h-[70vh] min-h-[400px] md:h-[85vh] md:min-h-[600px]">
         <div data-h-track className="flex h-full items-center gap-3 md:gap-5 pl-4 md:pl-[max(2rem,calc((100vw-1100px)/2+1.25rem))] pr-[15vw] md:pr-[20vw]">
           {portfolioVideos.map((v, i) => (
             <VideoCard key={v.id} video={v} index={i} />
@@ -125,13 +125,13 @@ function VideoCard({ video, index }: { video: { id: string; src: string; feature
       className={`shrink-0 transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
       style={{
         width: video.featured
-          ? "clamp(280px, 85vw, 560px)"
-          : "clamp(240px, 75vw, 380px)",
+          ? "clamp(280px, 55vw, 420px)"
+          : "clamp(240px, 45vw, 340px)",
       }}
     >
       <div className="group relative overflow-hidden rounded-lg md:rounded-xl border border-white/[0.06] transition-all duration-500 hover:border-[#ff6b35]/25 hover:shadow-[0_20px_80px_rgba(255,107,53,0.08)]">
-        {/* 16:9 cinematic aspect */}
-        <div className="relative overflow-hidden bg-white/[0.02]" style={{ paddingTop: "56.25%" }}>
+        {/* 4:5 portrait aspect (1080x1350) */}
+        <div className="relative overflow-hidden bg-white/[0.02]" style={{ paddingTop: "125%" }}>
           <video
             ref={videoRef}
             src={loadSrc ? video.src : undefined}
