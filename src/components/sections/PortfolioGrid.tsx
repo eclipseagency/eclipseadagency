@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { portfolioItems } from "@/data/site";
@@ -34,7 +34,6 @@ function VideoCard({
   const videoRef = useRef<HTMLVideoElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
-  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
     const el = cardRef.current;
@@ -43,13 +42,9 @@ function VideoCard({
       ([e]) => {
         if (e.isIntersecting) {
           setLoaded(true);
-          if (window.matchMedia("(max-width: 768px)").matches) {
-            videoRef.current?.play().catch(() => {});
-            setPlaying(true);
-          }
+          videoRef.current?.play().catch(() => {});
         } else {
           videoRef.current?.pause();
-          setPlaying(false);
         }
       },
       { threshold: 0.01, rootMargin: "400px" }
@@ -58,21 +53,10 @@ function VideoCard({
     return () => obs.disconnect();
   }, []);
 
-  const handleMouseEnter = useCallback(() => {
-    videoRef.current?.play().catch(() => {});
-    setPlaying(true);
-  }, []);
-  const handleMouseLeave = useCallback(() => {
-    videoRef.current?.pause();
-    setPlaying(false);
-  }, []);
-
   return (
     <div
       ref={cardRef}
       className="group relative overflow-hidden rounded-2xl cursor-pointer"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     >
       <div
         className="relative overflow-hidden"
@@ -88,25 +72,8 @@ function VideoCard({
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
         />
 
-        {/* Dark overlay */}
-        <div
-          className={`absolute inset-0 transition-opacity duration-500 ${
-            playing ? "bg-black/10" : "bg-black/40"
-          }`}
-        />
-
-        {/* Play ring */}
-        <div
-          className={`absolute inset-0 flex items-center justify-center transition-all duration-400 ${
-            playing ? "opacity-0 scale-75" : "opacity-100 scale-100"
-          }`}
-        >
-          <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-white/30 bg-white/[0.08] backdrop-blur-md transition-all duration-300 group-hover:border-[#ff6b35]/60 group-hover:bg-[#ff6b35]/20 group-hover:scale-110">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="white" className="ml-0.5 drop-shadow-lg">
-              <polygon points="5,3 19,12 5,21" />
-            </svg>
-          </div>
-        </div>
+        {/* Subtle bottom vignette */}
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
 
         {/* Label */}
         <div className="absolute top-4 left-4 z-10">
@@ -211,33 +178,23 @@ export function PortfolioGrid({ showCta = true }: PortfolioGridProps) {
           </div>
           {/* Stats + video */}
           <div className="col-span-1 md:col-span-4 flex flex-col gap-3 md:gap-4 lg:gap-5">
-            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 md:p-7">
-              <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#ff6b35]/60">
-                Since 2020
-              </span>
-              <h3 className="mt-2 font-heading text-4xl font-bold text-white md:text-5xl">
-                50+
-              </h3>
-              <p className="mt-1 text-sm text-white/30">Projects Delivered</p>
-              <div className="mt-5 space-y-3">
-                {[
-                  { name: "Branding", pct: 40 },
-                  { name: "Motion & Video", pct: 30 },
-                  { name: "Web & Apps", pct: 20 },
-                  { name: "Social Media", pct: 10 },
-                ].map((s) => (
-                  <div key={s.name}>
-                    <div className="flex items-center justify-between text-[11px] text-white/35 mb-1">
-                      <span>{s.name}</span>
-                      <span>{s.pct}%</span>
-                    </div>
-                    <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
-                      <div
-                        className="h-full rounded-full bg-[#ff6b35]"
-                        style={{ width: `${s.pct}%`, opacity: 0.3 + s.pct / 100 }}
-                      />
-                    </div>
-                  </div>
+            <div className="flex flex-1 flex-col justify-between rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 md:p-7">
+              <div>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#ff6b35]/60">
+                  What We Do
+                </span>
+                <p className="mt-4 font-heading text-xl font-bold leading-snug text-white md:text-2xl">
+                  We turn bold ideas into unforgettable brand experiences.
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-white/30">
+                  Branding, motion, web, social media, and everything in between.
+                </p>
+              </div>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {["Branding", "Motion", "Web", "Social", "3D", "Marketing"].map((s) => (
+                  <span key={s} className="rounded-full border border-white/[0.06] bg-white/[0.03] px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-white/30">
+                    {s}
+                  </span>
                 ))}
               </div>
             </div>
