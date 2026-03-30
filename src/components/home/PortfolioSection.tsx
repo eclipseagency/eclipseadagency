@@ -10,13 +10,13 @@ import { useLocale } from "@/i18n/LocaleContext";
    SECTION: Portfolio - Cinematic horizontal scroll gallery
    ═══════════════════════════════════════════════════════════ */
 const portfolioVideos = [
-  { id: "showreel", src: "/videos/showreel.mp4", featured: true },
-  { id: "branding-1", src: "/videos/branding-1.mp4" },
-  { id: "branding-2", src: "/videos/branding-2.mp4" },
-  { id: "branding-3", src: "/videos/branding-3.mp4" },
-  { id: "webdev-1", src: "/videos/webdev-1.mp4" },
-  { id: "webdev-2", src: "/videos/webdev-2.mp4" },
-  { id: "webdev-3", src: "/videos/webdev-3.mp4" },
+  { id: "portfolio-1", src: "/videos/portfolio-1.mp4", featured: true },
+  { id: "portfolio-2", src: "/videos/portfolio-2.mp4" },
+  { id: "portfolio-3", src: "/videos/portfolio-3.mp4" },
+  { id: "portfolio-4", src: "/videos/portfolio-4.mp4" },
+  { id: "portfolio-5", src: "/videos/portfolio-5.mp4" },
+  { id: "portfolio-6", src: "/videos/portfolio-6.mp4" },
+  { id: "portfolio-7", src: "/videos/portfolio-7.mp4" },
 ];
 
 export function PortfolioSection() {
