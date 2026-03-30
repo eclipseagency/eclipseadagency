@@ -65,6 +65,7 @@ function VideoCard({
         <video
           ref={videoRef}
           src={loaded ? video.src : undefined}
+          autoPlay
           muted
           loop
           playsInline
