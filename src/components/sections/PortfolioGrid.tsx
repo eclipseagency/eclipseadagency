@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { portfolioItems } from "@/data/site";
@@ -30,22 +31,59 @@ function VideoCard({
   index: number;
   tall?: boolean;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setActive(true);
+          obs.unobserve(el);
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  // Play once video data is ready
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v || !active) return;
+    const tryPlay = () => v.play().catch(() => {});
+    if (v.readyState >= 2) {
+      tryPlay();
+    } else {
+      v.addEventListener("loadeddata", tryPlay, { once: true });
+      return () => v.removeEventListener("loadeddata", tryPlay);
+    }
+  }, [active]);
+
   return (
     <div
+      ref={ref}
       className="group relative overflow-hidden rounded-2xl cursor-pointer"
     >
       <div
         className="relative overflow-hidden"
         style={{ paddingTop: tall ? "130%" : "100%" }}
       >
-        <video
-          src={video.src}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
-        />
+        {active && (
+          <video
+            ref={videoRef}
+            src={video.src}
+            muted
+            loop
+            playsInline
+            preload="auto"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+          />
+        )}
 
         {/* Subtle bottom vignette */}
         <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
