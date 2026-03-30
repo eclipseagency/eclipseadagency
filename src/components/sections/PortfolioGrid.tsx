@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { portfolioItems } from "@/data/site";
@@ -31,31 +30,8 @@ function VideoCard({
   index: number;
   tall?: boolean;
 }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    const el = cardRef.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          setLoaded(true);
-          videoRef.current?.play().catch(() => {});
-        } else {
-          videoRef.current?.pause();
-        }
-      },
-      { threshold: 0.01, rootMargin: "400px" }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
   return (
     <div
-      ref={cardRef}
       className="group relative overflow-hidden rounded-2xl cursor-pointer"
     >
       <div
@@ -63,13 +39,11 @@ function VideoCard({
         style={{ paddingTop: tall ? "130%" : "100%" }}
       >
         <video
-          ref={videoRef}
-          src={loaded ? video.src : undefined}
+          src={video.src}
           autoPlay
           muted
           loop
           playsInline
-          preload="none"
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
         />
 
