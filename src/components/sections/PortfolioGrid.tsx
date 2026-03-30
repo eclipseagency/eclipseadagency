@@ -31,59 +31,46 @@ function VideoCard({
   index: number;
   tall?: boolean;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [active, setActive] = useState(false);
+  const [loadSrc, setLoadSrc] = useState(false);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          setActive(true);
-          obs.unobserve(el);
+    const card = cardRef.current;
+    if (!card) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!loadSrc) setLoadSrc(true);
+          videoRef.current?.play().catch(() => {});
+        } else {
+          videoRef.current?.pause();
         }
       },
-      { rootMargin: "200px" }
+      { threshold: 0.05, rootMargin: "200px" }
     );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  // Play once video data is ready
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v || !active) return;
-    const tryPlay = () => v.play().catch(() => {});
-    if (v.readyState >= 2) {
-      tryPlay();
-    } else {
-      v.addEventListener("loadeddata", tryPlay, { once: true });
-      return () => v.removeEventListener("loadeddata", tryPlay);
-    }
-  }, [active]);
+    observer.observe(card);
+    return () => observer.disconnect();
+  }, [loadSrc]);
 
   return (
     <div
-      ref={ref}
+      ref={cardRef}
       className="group relative overflow-hidden rounded-2xl cursor-pointer"
     >
       <div
         className="relative overflow-hidden"
         style={{ paddingTop: tall ? "130%" : "100%" }}
       >
-        {active && (
-          <video
-            ref={videoRef}
-            src={video.src}
-            muted
-            loop
-            playsInline
-            preload="auto"
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
-          />
-        )}
+        <video
+          ref={videoRef}
+          src={loadSrc ? video.src : undefined}
+          muted
+          loop
+          playsInline
+          preload="none"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+        />
 
         {/* Subtle bottom vignette */}
         <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
