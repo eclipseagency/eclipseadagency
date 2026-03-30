@@ -34,7 +34,6 @@ function VideoCard({
   const videoRef = useRef<HTMLVideoElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
-  const [visible, setVisible] = useState(false);
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
@@ -44,7 +43,6 @@ function VideoCard({
       ([e]) => {
         if (e.isIntersecting) {
           setLoaded(true);
-          if (!visible) setTimeout(() => setVisible(true), index * 60);
           if (window.matchMedia("(max-width: 768px)").matches) {
             videoRef.current?.play().catch(() => {});
             setPlaying(true);
@@ -54,11 +52,11 @@ function VideoCard({
           setPlaying(false);
         }
       },
-      { threshold: 0.05, rootMargin: "300px" }
+      { threshold: 0.01, rootMargin: "400px" }
     );
     obs.observe(el);
     return () => obs.disconnect();
-  }, [index, visible]);
+  }, []);
 
   const handleMouseEnter = useCallback(() => {
     videoRef.current?.play().catch(() => {});
@@ -72,9 +70,7 @@ function VideoCard({
   return (
     <div
       ref={cardRef}
-      className={`group relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-700 ease-out ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-      }`}
+      className="group relative overflow-hidden rounded-2xl cursor-pointer"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -138,29 +134,9 @@ function VideoCard({
    ═══════════════════════════════════════════════════════ */
 function BrandCard({
   item,
-  index,
 }: {
   item: (typeof portfolioItems)[number];
-  index: number;
 }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const el = cardRef.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting && !visible) {
-          setTimeout(() => setVisible(true), index * 70);
-        }
-      },
-      { threshold: 0.05, rootMargin: "200px" }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [index, visible]);
-
   const Wrapper = item.href ? Link : "div";
   const wrapperProps = item.href
     ? {
@@ -171,12 +147,7 @@ function BrandCard({
     : {};
 
   return (
-    <div
-      ref={cardRef}
-      className={`transition-all duration-700 ease-out ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-      }`}
-    >
+    <div>
       {/* @ts-expect-error -- dynamic tag union */}
       <Wrapper {...wrapperProps} className="group block">
         <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] transition-all duration-500 hover:border-[#ff6b35]/20 hover:shadow-[0_20px_60px_rgba(255,107,53,0.06)]">
@@ -227,21 +198,20 @@ export function PortfolioGrid({ showCta = true }: PortfolioGridProps) {
     <section className="relative py-12 md:py-20">
       <div className="mx-auto max-w-[1400px] px-4 md:px-8">
 
-        {/* ── Row 1: 2-col featured + 2 stacked + stat block ── */}
+        {/* ── Row 1: Featured + stacked + stats ── */}
         <div className="grid grid-cols-2 gap-3 md:gap-4 lg:gap-5 md:grid-cols-12">
-          {/* Featured large video */}
+          {/* Big featured */}
           <div className="col-span-2 md:col-span-5">
             <VideoCard video={portfolioVideos[0]} index={0} tall />
           </div>
-          {/* Two stacked squares */}
+          {/* Two stacked */}
           <div className="col-span-1 md:col-span-3 flex flex-col gap-3 md:gap-4 lg:gap-5">
             <VideoCard video={portfolioVideos[1]} index={1} />
             <VideoCard video={portfolioVideos[2]} index={2} />
           </div>
-          {/* Stat block + small video */}
+          {/* Stats + video */}
           <div className="col-span-1 md:col-span-4 flex flex-col gap-3 md:gap-4 lg:gap-5">
-            {/* Stats */}
-            <div className="flex-1 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 md:p-7">
+            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 md:p-7">
               <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#ff6b35]/60">
                 Since 2020
               </span>
@@ -293,7 +263,7 @@ export function PortfolioGrid({ showCta = true }: PortfolioGridProps) {
           </div>
         </div>
 
-        {/* ── Row 2: 4-col grid ── */}
+        {/* ── Row 2: Alternating tall/square ── */}
         <div className="grid grid-cols-2 gap-3 md:gap-4 lg:gap-5 md:grid-cols-4">
           <VideoCard video={portfolioVideos[4]} index={4} tall />
           <VideoCard video={portfolioVideos[5]} index={5} />
@@ -317,8 +287,8 @@ export function PortfolioGrid({ showCta = true }: PortfolioGridProps) {
 
         {/* ── Brand case studies ── */}
         <div className="grid grid-cols-2 gap-3 md:gap-4 lg:gap-5 lg:grid-cols-4">
-          {portfolioItems.map((item, i) => (
-            <BrandCard key={item.id} item={item} index={i} />
+          {portfolioItems.map((item) => (
+            <BrandCard key={item.id} item={item} />
           ))}
         </div>
 
