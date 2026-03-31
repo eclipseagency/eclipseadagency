@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#0a0a0b"/>
+  <circle cx="400" cy="220" r="200" fill="rgba(0,212,170,0.06)"/>
+  <rect x="330" y="160" width="140" height="140" rx="32" fill="rgba(0,212,170,0.15)"/>
+  <text x="400" y="255" text-anchor="middle" font-family="system-ui" font-size="72" font-weight="800" fill="#00d4aa">A</text>
+  <text x="400" y="360" text-anchor="middle" font-family="system-ui" font-size="48" font-weight="800" fill="white">Airpost</text>
+  <text x="400" y="400" text-anchor="middle" font-family="system-ui" font-size="18" fill="rgba(255,255,255,0.5)">AI Marketing Operating System</text>
+  <text x="400" y="440" text-anchor="middle" font-family="system-ui" font-size="14" fill="rgba(0,212,170,0.7)">12 AI Tools  |  3 Image Models  |  5 Platforms</text>
+</svg>

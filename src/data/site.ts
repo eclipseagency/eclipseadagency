@@ -307,6 +307,30 @@ export const portfolioItems: {
     href: "/waf/",
     target: "_blank",
   },
+  {
+    id: "airpost",
+    title: "Airpost",
+    category: "Web Development",
+    description:
+      "AI Marketing Operating System — 12 AI tools, 3 image models. Writes copy, designs posts, creates reels, publishes to 5 platforms. Built with Flask, Gemini, and FAL.AI.",
+    image:
+      "/images/portfolio/airpost.svg",
+    tags: ["SaaS Platform", "AI/ML", "Full-Stack Development"],
+    href: "https://airpost.agency",
+    target: "_blank",
+  },
+  {
+    id: "nick",
+    title: "NICK Automotive",
+    category: "Web Development",
+    description:
+      "Premium automotive protection website with full booking system, 20 services, bilingual AR/EN, and cinematic dark design for NICK RIYADH.",
+    image:
+      "/images/portfolio/nick.svg",
+    tags: ["Next.js", "Booking System", "Bilingual AR/EN"],
+    href: "https://nick-fawn.vercel.app",
+    target: "_blank",
+  },
 ];
 
 export const testimonials = [

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#050505"/>
+  <circle cx="400" cy="250" r="200" fill="rgba(246,190,0,0.04)"/>
+  <rect x="300" y="180" width="200" height="80" rx="16" fill="rgba(246,190,0,0.1)" stroke="rgba(246,190,0,0.2)" stroke-width="1"/>
+  <text x="400" y="232" text-anchor="middle" font-family="system-ui" font-size="40" font-weight="900" fill="#F6BE00">NICK</text>
+  <text x="400" y="320" text-anchor="middle" font-family="system-ui" font-size="20" fill="rgba(255,255,255,0.6)">Premium Automotive Protection</text>
+  <text x="400" y="360" text-anchor="middle" font-family="system-ui" font-size="14" fill="rgba(246,190,0,0.6)">PPF  |  Ceramic  |  Tinting  |  Wraps</text>
+  <text x="400" y="400" text-anchor="middle" font-family="system-ui" font-size="12" fill="rgba(255,255,255,0.3)">RIYADH, SAUDI ARABIA</text>
+</svg>
